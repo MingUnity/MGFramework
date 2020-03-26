@@ -1,0 +1,118 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{7F944004-69E9-420B-BF11-7962B955A568}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>MGFramework</RootNamespace>
+    <AssemblyName>MGFramework</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+    <TargetFrameworkProfile>Unity Full v3.5</TargetFrameworkProfile>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\..\..\MGFrameworkProject\Assets\MGFramework\Plugins\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>..\..\..\MGFrameworkProject\Assets\MGFramework\Plugins\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="UnityEngine">
+      <HintPath>..\..\Reference\UnityEngine.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.UI">
+      <HintPath>..\..\Reference\UnityEngine.UI.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Src\EventModule\Args\CommonCEventArgs.cs" />
+    <Compile Include="Src\EventModule\Args\CommonSEventArgs.cs" />
+    <Compile Include="Src\EventModule\Args\Extends.cs" />
+    <Compile Include="Src\EventModule\Args\IEventArgs.cs" />
+    <Compile Include="Src\EventModule\Args\SimpleEventArgs.cs" />
+    <Compile Include="Src\EventModule\Core\EventHub.cs" />
+    <Compile Include="Src\EventModule\Core\EventManager.cs" />
+    <Compile Include="Src\EventModule\Core\IEventHub.cs" />
+    <Compile Include="Src\EventModule\Core\IEventListener.cs" />
+    <Compile Include="Src\ObjectPool\IPoolObject.cs" />
+    <Compile Include="Src\ObjectPool\NormalPoolObject.cs" />
+    <Compile Include="Src\ObjectPool\ObjectPool.cs" />
+    <Compile Include="Src\ResourceModule\AssetBundle\AssetBundleLoader.cs" />
+    <Compile Include="Src\ResourceModule\AssetBundle\AssetBundleTask.cs" />
+    <Compile Include="Src\ResourceModule\AssetBundle\DepAssetBundleLoader.cs" />
+    <Compile Include="Src\ResourceModule\AssetBundle\IAssetBundleLoader.cs" />
+    <Compile Include="Src\ResourceModule\AssetBundle\IDependencyLoader.cs" />
+    <Compile Include="Src\ResourceModule\Core\Manager\ResManager.cs" />
+    <Compile Include="Src\ResourceModule\Core\Module\DepResModule.cs" />
+    <Compile Include="Src\ResourceModule\Core\Module\ResModule.cs" />
+    <Compile Include="Src\ResourceModule\ResLoader\IResLoader.cs" />
+    <Compile Include="Src\ResourceModule\ResLoader\ResInfoAttribute.cs" />
+    <Compile Include="Src\ResourceModule\ResLoader\ResLoaderExtends.cs" />
+    <Compile Include="Src\ResourceModule\ResLoader\ResLoaderParam.cs" />
+    <Compile Include="Src\SimpleData\DataExtends.cs" />
+    <Compile Include="Src\SimpleData\Float2.cs" />
+    <Compile Include="Src\SimpleData\Float3.cs" />
+    <Compile Include="Src\SimpleData\Int2.cs" />
+    <Compile Include="Src\SimpleData\Int3.cs" />
+    <Compile Include="Src\UIModule\Core\IUIModule.cs" />
+    <Compile Include="Src\UIModule\Core\UIManager.cs" />
+    <Compile Include="Src\UIModule\Core\UIModule.cs" />
+    <Compile Include="Src\UIModule\Extends\Components\ButtonEx.cs" />
+    <Compile Include="Src\UIModule\Extends\Components\EmptyGraphic.cs" />
+    <Compile Include="Src\UIModule\Extends\Components\ToggleEx.cs" />
+    <Compile Include="Src\UIModule\Extends\Effects\GradientMeshEffect.cs" />
+    <Compile Include="Src\UIModule\Extends\Effects\GradientMeshEffectAnim.cs" />
+    <Compile Include="Src\UIModule\Presenter\IPresenter.cs" />
+    <Compile Include="Src\UIModule\Presenter\MFPresenterBase.cs" />
+    <Compile Include="Src\UIModule\Property\ParentInfoAttribute.cs" />
+    <Compile Include="Src\UIModule\Property\ParentParam.cs" />
+    <Compile Include="Src\UIModule\Utility\Extends\ButtonExtends.cs" />
+    <Compile Include="Src\UIModule\Utility\Extends\CanvasGroupExtends.cs" />
+    <Compile Include="Src\UIModule\Utility\Extends\GraphicExtends.cs" />
+    <Compile Include="Src\UIModule\Utility\Extends\IPointerClickEffect.cs" />
+    <Compile Include="Src\UIModule\Utility\Extends\ToggleExtends.cs" />
+    <Compile Include="Src\UIModule\Utility\Extends\TransformExtends.cs" />
+    <Compile Include="Src\UIModule\Utility\IntGroup.cs" />
+    <Compile Include="Src\UIModule\Utility\NodeContainer.cs" />
+    <Compile Include="Src\UIModule\Utility\SpecialStack.cs" />
+    <Compile Include="Src\UIModule\Utility\UISetting.cs" />
+    <Compile Include="Src\UIModule\View\IView.cs" />
+    <Compile Include="Src\UIModule\View\ViewBase.cs" />
+    <Compile Include="Src\UIModule\View\ViewGroup.cs" />
+    <Compile Include="Src\Utility\Bezier.cs" />
+    <Compile Include="Src\Utility\CollectionsExtends.cs" />
+    <Compile Include="Src\Utility\Container.cs" />
+    <Compile Include="Src\Utility\EventTriggerExtends.cs" />
+    <Compile Include="Src\Utility\Loom.cs" />
+    <Compile Include="Src\Utility\MonoSingleton.cs" />
+    <Compile Include="Src\Utility\PlatformUtility.cs" />
+    <Compile Include="Src\Utility\SerializeUtility.cs" />
+    <Compile Include="Src\Utility\Singleton.cs" />
+    <Compile Include="Src\Utility\TaskManager.cs" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

@@ -1,2 +1,9 @@
 /MGFrameworkProject/Library
 /MGFrameworkProject/Logs
+/Src/MGFramework/.vs
+/Src/MGFramework/MGFramework/obj
+/Src/MGFramework/MGFramework/bin
+/Src/MGFrameworkEditor/.vs
+/Src/MGFrameworkEditor/MGFrameworkEditor/obj
+/Src/MGFrameworkEditor/MGFrameworkEditor/bin
+/MGFrameworkProject/Temp
