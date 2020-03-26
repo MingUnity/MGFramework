@@ -1,0 +1,6 @@
+using MGFramework.UIModule;
+
+public interface I[#]Presenter : IPresenter
+{
+}
+
