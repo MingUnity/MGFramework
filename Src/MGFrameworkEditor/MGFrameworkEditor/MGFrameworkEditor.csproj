@@ -18,7 +18,7 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>..\..\..\MGFrameworkProject\Assets\MGFramework\Plugins\Editor\</OutputPath>
+    <OutputPath>..\..\DllOutput\Editor\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -26,14 +26,14 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>..\..\..\MGFrameworkProject\Assets\MGFramework\Plugins\Editor\</OutputPath>
+    <OutputPath>..\..\DllOutput\Editor\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="MGFramework">
-      <HintPath>..\..\..\MGFrameworkProject\Assets\MGFramework\Plugins\MGFramework.dll</HintPath>
+      <HintPath>..\..\DllOutput\MGFramework.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="System" />
@@ -76,4 +76,7 @@
     <Compile Include="Src\UIModule\NodeSearcher\ViewNodeSeacher.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>copy /Y "$(TargetDir)$(ProjectName).dll" "$(SolutionDir)..\..\MGFrameworkProject\Assets\MGFramework\Plugins\Editor\"</PostBuildEvent>
+  </PropertyGroup>
 </Project>
