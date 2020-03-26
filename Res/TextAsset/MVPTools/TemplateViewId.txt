@@ -1,0 +1,7 @@
+/// <summary>
+/// 视图标识Id
+/// </summary>
+public static class ViewId
+{
+    //[AutoBuildPlaceHolder]#0
+}

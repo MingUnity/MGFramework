@@ -1,0 +1,7 @@
+using MGFramework.UIModule;
+using MGFramework;
+
+public class [#]Presenter : PresenterBase<I[#]View>, I[#]Presenter
+{
+}
+

@@ -1,0 +1,11 @@
+using MGFramework.UIModule;
+using UnityEngine.UI;
+using MGFramework;
+
+public class [#]View : ViewBase<I[#]Presenter>, I[#]View
+{
+    protected override void OnCreate()
+    {
+      
+    }
+}

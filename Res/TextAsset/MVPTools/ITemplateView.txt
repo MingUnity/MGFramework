@@ -1,0 +1,7 @@
+using MGFramework.UIModule;
+using MGFramework;
+
+public interface I[#]View : IView
+{
+
+}
