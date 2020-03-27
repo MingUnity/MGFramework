@@ -1,6 +1,6 @@
 ﻿namespace MGFramework.UIModule
 {
-    /// <summary>
+    /// <summary> 
     /// 交互
     /// </summary>
     public interface IPresenter
