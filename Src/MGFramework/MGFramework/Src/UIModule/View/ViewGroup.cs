@@ -10,7 +10,7 @@ namespace MGFramework.UIModule
     {
         protected IPresenter _presenter;
 
-        /// <summary>
+        /// <summary>   
         /// 交互控制
         /// </summary>
         public IPresenter Presenter

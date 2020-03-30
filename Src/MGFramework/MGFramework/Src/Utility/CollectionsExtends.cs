@@ -65,5 +65,18 @@ namespace MGFramework
 
             return t;
         }
+
+        /// <summary>
+        /// 获取值
+        /// 若不存在返回默认
+        /// </summary>
+        public static TValue GetValueAnyWay<TKey, TValue>(this IDictionary<TKey, TValue> dic, TKey key)
+        {
+            TValue val = default(TValue);
+
+            dic.TryGetValue(key, out val);
+
+            return val;
+        }
     }
 }
