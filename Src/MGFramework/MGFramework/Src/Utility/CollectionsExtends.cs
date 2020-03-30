@@ -70,7 +70,7 @@ namespace MGFramework
         /// 获取值
         /// 若不存在返回默认
         /// </summary>
-        public static TValue GetValueAnyWay<TKey, TValue>(this IDictionary<TKey, TValue> dic, TKey key)
+        public static TValue GetValueAnyway<TKey, TValue>(this IDictionary<TKey, TValue> dic, TKey key)
         {
             TValue val = default(TValue);
 
