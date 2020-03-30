@@ -52,5 +52,18 @@ namespace MGFramework
         {
             return arr != null && index >= 0 && index < arr.Count;
         }
+
+        /// <summary>
+        /// 获取数组值
+        /// 若不存在返回默认
+        /// </summary>
+        public static T GetValueAnyway<T>(this IList<T> arr, int index)
+        {
+            T t = default(T);
+
+            arr.TryGetValue(index, out t);
+
+            return t;
+        }
     }
 }
