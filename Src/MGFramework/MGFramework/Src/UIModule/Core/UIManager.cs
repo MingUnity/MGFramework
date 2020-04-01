@@ -153,8 +153,10 @@ namespace MGFramework.UIModule
         /// <summary>
         /// 弹出视图
         /// </summary>
-        public void Pop(Action callback = null)
+        public bool Pop(Action callback = null)
         {
+            bool res = false;
+
             IntGroup curId = IntGroup.Empty;
             IntGroup dstId = IntGroup.Empty;
 
@@ -162,12 +164,16 @@ namespace MGFramework.UIModule
             {
                 if (_viewStack.Pop(out curId) && _viewStack.Peek(out dstId))
                 {
+                    res = true;
+
                     Quit(curId, () =>
                     {
                         Enter(dstId, callback, false);
                     }, false);
                 }
             }
+
+            return res;
         }
 
         /// <summary>
