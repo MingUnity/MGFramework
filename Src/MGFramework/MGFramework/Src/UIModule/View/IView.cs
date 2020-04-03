@@ -28,6 +28,11 @@ namespace MGFramework.UIModule
         void Hide(Action callback = null);
 
         /// <summary>
+        /// 聚焦
+        /// </summary>
+        void Focus();
+
+        /// <summary>
         /// 销毁
         /// </summary>
         void Destroy();

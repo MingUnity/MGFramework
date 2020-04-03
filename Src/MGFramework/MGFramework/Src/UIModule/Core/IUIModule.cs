@@ -13,6 +13,11 @@ namespace MGFramework.UIModule
         void Enter(int viewId, Action callback = null);
 
         /// <summary>
+        /// 聚焦
+        /// </summary>
+        void Focus(int viewId);
+
+        /// <summary>
         /// 退出
         /// </summary>
         void Quit(int viewId, Action callback = null, bool destroy = false);

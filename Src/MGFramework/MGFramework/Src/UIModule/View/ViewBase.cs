@@ -187,6 +187,14 @@ namespace MGFramework.UIModule
         }
 
         /// <summary>
+        /// 聚焦
+        /// </summary>
+        public void Focus()
+        {
+            _presenter?.OnFocus();
+        }
+
+        /// <summary>
         /// 销毁
         /// </summary>
         public void Destroy()

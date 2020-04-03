@@ -158,5 +158,13 @@ namespace MGFramework.UIModule
                 }
             }
         }
+
+        public void Focus()
+        {
+            for (int i = 0; i < _subViews.Count; i++)
+            {
+                _subViews[i]?.Focus();
+            }
+        }
     }
 }

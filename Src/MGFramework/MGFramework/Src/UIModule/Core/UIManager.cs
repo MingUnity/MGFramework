@@ -41,7 +41,16 @@ namespace MGFramework.UIModule
 
                 _viewDic[viewId] = state;
 
-                _uiModule?.Enter(viewId, callback);
+                _uiModule?.Enter(viewId, ()=>
+                {
+                    callback?.Invoke();
+
+                    _uiModule?.Focus(viewId);
+                });
+            }
+            else
+            {
+                _uiModule?.Focus(viewId);
             }
 
             if (pushStack)

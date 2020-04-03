@@ -44,5 +44,10 @@
         /// 隐藏完成
         /// </summary>
         void OnHideCompleted();
+
+        /// <summary>
+        /// 聚焦
+        /// </summary>
+        void OnFocus();
     }
 }

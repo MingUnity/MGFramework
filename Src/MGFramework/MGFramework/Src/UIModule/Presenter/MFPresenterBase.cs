@@ -46,7 +46,7 @@
         /// </summary>
         public virtual void OnCreateCompleted()
         {
-            
+
         }
 
         /// <summary>
@@ -54,7 +54,7 @@
         /// </summary>
         public virtual void OnDestroy()
         {
-            
+
         }
 
         /// <summary>
@@ -62,7 +62,7 @@
         /// </summary>
         public virtual void OnHideCompleted()
         {
-            
+
         }
 
         /// <summary>
@@ -70,7 +70,7 @@
         /// </summary>
         public virtual void OnHideStart()
         {
-            
+
         }
 
         /// <summary>
@@ -78,13 +78,18 @@
         /// </summary>
         public virtual void OnShowCompleted()
         {
-            
+
         }
 
         /// <summary>
         /// 显示开始
         /// </summary>
         public virtual void OnShowStart()
+        {
+
+        }
+
+        public virtual void OnFocus()
         {
             
         }

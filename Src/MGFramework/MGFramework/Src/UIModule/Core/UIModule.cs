@@ -12,7 +12,7 @@ namespace MGFramework.UIModule
         /// UI对应字典
         /// </summary>
         private Dictionary<int, IView> _uiDic = new Dictionary<int, IView>();
-        
+
         private IView this[int viewId]
         {
             get
@@ -51,6 +51,14 @@ namespace MGFramework.UIModule
             {
                 view.Show(callback);
             }
+        }
+
+        /// <summary>
+        /// 聚焦
+        /// </summary>
+        public void Focus(int viewId)
+        {
+            this[viewId]?.Focus();
         }
 
         /// <summary>
