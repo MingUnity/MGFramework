@@ -103,7 +103,16 @@ namespace MGFramework.UIModule
 
                     _viewDic[viewId] = state;
 
-                    _uiModule?.Quit(viewId, callback, destroy);
+                    _uiModule?.Quit(viewId, ()=>
+                    {
+                        callback?.Invoke();
+
+                        _uiModule?.UnFocus(viewId);
+                    }, destroy);
+                }
+                else
+                {
+                    _uiModule?.UnFocus(viewId);
                 }
             }
 
@@ -112,8 +121,7 @@ namespace MGFramework.UIModule
                 _viewStack.Delete(IntGroup.Get(viewId));
             }
         }
-
-
+        
         /// <summary>
         /// 退出视图
         /// </summary>
@@ -142,6 +150,14 @@ namespace MGFramework.UIModule
             {
                 _viewStack.Delete(viewGroup);
             }
+        }
+
+        /// <summary>
+        /// 取消焦点
+        /// </summary>
+        public void UnFocus(int viewId)
+        {
+            _uiModule?.UnFocus(viewId);
         }
 
         /// <summary>

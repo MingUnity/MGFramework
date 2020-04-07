@@ -89,7 +89,18 @@
 
         }
 
+        /// <summary>
+        /// 聚焦
+        /// </summary>
         public virtual void OnFocus()
+        {
+            
+        }
+
+        /// <summary>
+        /// 失焦
+        /// </summary>
+        public virtual void OnUnFocus()
         {
             
         }

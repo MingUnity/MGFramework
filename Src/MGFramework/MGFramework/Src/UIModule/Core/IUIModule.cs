@@ -18,6 +18,11 @@ namespace MGFramework.UIModule
         void Focus(int viewId);
 
         /// <summary>
+        /// 失焦
+        /// </summary>
+        void UnFocus(int viewId);
+
+        /// <summary>
         /// 退出
         /// </summary>
         void Quit(int viewId, Action callback = null, bool destroy = false);

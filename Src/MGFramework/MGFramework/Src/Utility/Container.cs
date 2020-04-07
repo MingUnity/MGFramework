@@ -33,7 +33,7 @@ namespace MGFramework
         /// <summary>
         /// 注册单例
         /// </summary>
-        public static void RegistSingleton<T, V>(V obj = null, string name = null) where V : class, T, new()
+        public static void RegistSingleton<T, V>(V obj, string name) where V : class, T, new()
         {
             SingletonTypeNode node = null;
 
@@ -47,6 +47,16 @@ namespace MGFramework
             }
 
             Regist<T>(name, node);
+        }
+
+        /// <summary>
+        /// 注册单例
+        /// </summary>
+        public static void RegistSingleton<T, V>() where V : class, T, new()
+        {
+            SingletonTypeNode node = new SingletonTypeNode(typeof(V));
+
+            Regist<T>(string.Empty, node);
         }
 
         /// <summary>

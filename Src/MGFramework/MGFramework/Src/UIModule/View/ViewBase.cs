@@ -195,6 +195,14 @@ namespace MGFramework.UIModule
         }
 
         /// <summary>
+        /// 失焦
+        /// </summary>
+        public void UnFocus()
+        {
+            _presenter?.OnUnFocus();
+        }
+
+        /// <summary>
         /// 销毁
         /// </summary>
         public void Destroy()

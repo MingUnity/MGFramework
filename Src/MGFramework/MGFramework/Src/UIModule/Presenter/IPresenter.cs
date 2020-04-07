@@ -49,5 +49,10 @@
         /// 聚焦
         /// </summary>
         void OnFocus();
+
+        /// <summary>
+        /// 失焦
+        /// </summary>
+        void OnUnFocus();
     }
 }

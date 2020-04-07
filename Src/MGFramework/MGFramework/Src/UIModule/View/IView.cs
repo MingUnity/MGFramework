@@ -33,6 +33,11 @@ namespace MGFramework.UIModule
         void Focus();
 
         /// <summary>
+        /// 失焦
+        /// </summary>
+        void UnFocus();
+
+        /// <summary>
         /// 销毁
         /// </summary>
         void Destroy();

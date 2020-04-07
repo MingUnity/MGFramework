@@ -113,5 +113,10 @@ namespace MGFramework.UIModule
                 }, destroy);
             }
         }
+
+        public void UnFocus(int viewId)
+        {
+            this[viewId]?.UnFocus();
+        }
     }
 }
