@@ -38,5 +38,15 @@ namespace MGFrameworkEditor
         /// 创建MVP
         /// </summary>
         public const string CREATE_MVP = "Tools/MGFramework/UI/CreateMVP #M";
+
+        /// <summary>
+        /// 根节点为基点 搜索UI
+        /// </summary>
+        public const string SEARCH_UI_ROOT = "GameObject/MGFramework/UISearcher(UIRoot) #R";
+
+        /// <summary>
+        /// canvas为基点 搜索UI
+        /// </summary>
+        public const string SEARCH_UI_CANVAS = "GameObject/MGFramework/UISearcher(Canvas) #C";
     }
 }

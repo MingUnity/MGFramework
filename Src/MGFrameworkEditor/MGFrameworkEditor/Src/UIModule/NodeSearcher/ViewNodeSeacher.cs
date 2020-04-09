@@ -11,7 +11,7 @@ namespace MGFrameworkEditor.UIModule
         /// <summary>
         /// 查询UI节点路径(复制到剪切板) 相对UI根节点(不包括根节点)
         /// </summary>
-        [MenuItem("GameObject/JMEditor/UISearcher(UIRoot) #R", false, 11)]
+        [MenuItem(EditorStrDef.SEARCH_UI_ROOT, false, 11)]
         private static void SearchByRoot()
         {
             string path = Search();
@@ -30,7 +30,7 @@ namespace MGFrameworkEditor.UIModule
         /// <summary>
         /// 查询UI节点路径(复制到剪切板) 相对Canvas节点(包括Canvas节点)
         /// </summary>
-        [MenuItem("GameObject/JMEditor/UISearcher(Canvas) #C", false, 11)]
+        [MenuItem(EditorStrDef.SEARCH_UI_CANVAS, false, 11)]
         private static void SearchByCanvas()
         {
             string path = Search();
@@ -44,7 +44,7 @@ namespace MGFrameworkEditor.UIModule
                 Debug.Log("<color=yellow>## Uni Warning <Ming>## Path Empty</color>");
             }
         }
-        
+
         /// <summary>
         /// 搜索节点返回路径
         /// </summary>
