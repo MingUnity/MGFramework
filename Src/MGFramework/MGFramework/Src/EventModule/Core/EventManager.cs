@@ -1,30 +1,30 @@
-﻿using MGFramework;
-using MGFramework.EventModule;
-
-/// <summary>
-/// 事件管理
-/// </summary>
-public class EventManager : Singleton<EventManager>, IEventHub
+﻿namespace MGFramework.EventModule
 {
-    private IEventHub _eventHub;
-
-    public EventManager()
+    /// <summary>
+    /// 事件管理
+    /// </summary>
+    public class EventManager : Singleton<EventManager>, IEventHub
     {
-        _eventHub = new EventHub();
-    }
+        private IEventHub _eventHub;
 
-    public void AddListener(int eventId, IEventListener listener)
-    {
-        _eventHub.AddListener(eventId, listener);
-    }
+        public EventManager()
+        {
+            _eventHub = new EventHub();
+        }
 
-    public void Dispatch(int eventId, IEventArgs args)
-    {
-        _eventHub.Dispatch(eventId, args);
-    }
+        public void AddListener(int eventId, IEventListener listener)
+        {
+            _eventHub.AddListener(eventId, listener);
+        }
 
-    public void RemoveListener(int eventId, IEventListener listener)
-    {
-        _eventHub.RemoveListener(eventId, listener);
+        public void Dispatch(int eventId, IEventArgs args)
+        {
+            _eventHub.Dispatch(eventId, args);
+        }
+
+        public void RemoveListener(int eventId, IEventListener listener)
+        {
+            _eventHub.RemoveListener(eventId, listener);
+        }
     }
 }
