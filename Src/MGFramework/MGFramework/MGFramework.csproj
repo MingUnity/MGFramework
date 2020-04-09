@@ -93,7 +93,6 @@
     <Compile Include="Src\UIModule\Utility\Extends\ButtonExtends.cs" />
     <Compile Include="Src\UIModule\Utility\Extends\CanvasGroupExtends.cs" />
     <Compile Include="Src\UIModule\Utility\Extends\GraphicExtends.cs" />
-    <Compile Include="Src\UIModule\Utility\Extends\IPointerClickEffect.cs" />
     <Compile Include="Src\UIModule\Utility\Extends\ToggleExtends.cs" />
     <Compile Include="Src\UIModule\Utility\Extends\TransformExtends.cs" />
     <Compile Include="Src\UIModule\Utility\IntGroup.cs" />

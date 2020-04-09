@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
 
@@ -10,11 +9,6 @@ namespace MGFramework
     /// </summary>
     public static class EventTriggerExtends
     {
-        /// <summary>
-        /// 点击效果
-        /// </summary>
-        public static IPointerClickEffect pointerClickEffect;
-
         /// <summary>
         /// 添加监听
         /// </summary>
@@ -78,25 +72,6 @@ namespace MGFramework
             }
 
             return trigger;
-        }
-
-        /// <summary>
-        /// 添加点击监听
-        /// </summary>
-        public static EventTrigger AddClickListener(this EventTrigger trigger, Action onClick)
-        {
-            return trigger.AddListener(EventTriggerType.PointerClick, (data) =>
-            {
-                if (pointerClickEffect != null)
-                {
-                    pointerClickEffect.OnClickEffect(trigger);
-                }
-
-                if (onClick != null)
-                {
-                    onClick.Invoke();
-                }
-            });
         }
     }
 }

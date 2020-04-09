@@ -1,4 +1,4 @@
-﻿using System;
+﻿using UnityEngine.Events;
 using UnityEngine.UI;
 
 namespace MGFramework.UIModule
@@ -9,21 +9,21 @@ namespace MGFramework.UIModule
     public static class ButtonExtends
     {
         /// <summary>
-        /// 点击效果
-        /// </summary>
-        public static IPointerClickEffect pointerClickEffect;
-
-        /// <summary>
         /// 添加点击监听
         /// </summary>
-        public static Button AddClickListener(this Button button, Action onClick)
+        public static Button AddClickListener(this Button button, UnityAction onClick)
         {
-            button.onClick.AddListener(() =>
-            {
-                pointerClickEffect?.OnClickEffect(button);
+            button.onClick.AddListener(onClick);
 
-                onClick?.Invoke();
-            });
+            return button;
+        }
+
+        /// <summary>
+        /// 移除点击监听
+        /// </summary>
+        public static Button RemoveClickListener(this Button button,UnityAction onClick)
+        {
+            button.onClick.RemoveListener(onClick);
 
             return button;
         }
