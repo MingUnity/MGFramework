@@ -159,12 +159,12 @@ namespace MGFrameworkEditor.ResourceModule
 
             _outputDir = EditorGUILayout.TextField(_outputDir);
 
-            if (GUILayout.Button("...", GUILayout.Width(50)))
-            {
-                _outputDir = EditorUtility.SaveFolderPanel("OutputDirectory", _outputDir, string.Empty);
+            //if (GUILayout.Button("...", GUILayout.Width(50)))
+            //{
+            //    _outputDir = EditorUtility.SaveFolderPanel("OutputDirectory", _outputDir, string.Empty);
 
-                Repaint();
-            }
+            //    Repaint();
+            //}
 
             EditorGUILayout.EndHorizontal();
 

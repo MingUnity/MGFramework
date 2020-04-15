@@ -12,6 +12,7 @@ namespace MGFrameworkEditor.UIModule
         /// 查询UI节点路径(复制到剪切板) 相对UI根节点(不包括根节点)
         /// </summary>
         [MenuItem(EditorStrDef.SEARCH_UI_ROOT, false, 11)]
+
         private static void SearchByRoot()
         {
             string path = Search();

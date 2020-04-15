@@ -21,6 +21,11 @@ namespace MGFramework.UIModule
         /// </summary>
         private Dictionary<int, ViewState> _viewDic = new Dictionary<int, ViewState>();
 
+        /// <summary>
+        /// 临时退出全部列表
+        /// </summary>
+        private List<int> _tempQuitAllList = new List<int>();
+
         public UIManager()
         {
             _uiModule = new UIModule();
@@ -41,7 +46,7 @@ namespace MGFramework.UIModule
 
                 _viewDic[viewId] = state;
 
-                _uiModule?.Enter(viewId, ()=>
+                _uiModule?.Enter(viewId, () =>
                 {
                     callback?.Invoke();
 
@@ -103,16 +108,12 @@ namespace MGFramework.UIModule
 
                     _viewDic[viewId] = state;
 
-                    _uiModule?.Quit(viewId, ()=>
+                    _uiModule?.Quit(viewId, () =>
                     {
                         callback?.Invoke();
 
                         _uiModule?.UnFocus(viewId);
                     }, destroy);
-                }
-                else
-                {
-                    _uiModule?.UnFocus(viewId);
                 }
             }
 
@@ -121,7 +122,7 @@ namespace MGFramework.UIModule
                 _viewStack.Delete(IntGroup.Get(viewId));
             }
         }
-        
+
         /// <summary>
         /// 退出视图
         /// </summary>
@@ -165,13 +166,19 @@ namespace MGFramework.UIModule
         /// </summary>
         public void QuitAll(bool destroy = false)
         {
+            _tempQuitAllList.Clear();
+
             foreach (int id in _viewDic.Keys)
             {
-                _uiModule?.Quit(id, null, destroy);
+                _tempQuitAllList.Add(id);
+            }
+
+            for (int i = 0; i < _tempQuitAllList.Count; i++)
+            {
+                Quit(_tempQuitAllList[i], null, false, destroy);
             }
 
             _viewDic.Clear();
-
             ResetStack();
         }
 

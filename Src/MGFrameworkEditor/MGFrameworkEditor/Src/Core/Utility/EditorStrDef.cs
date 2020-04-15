@@ -31,8 +31,9 @@ namespace MGFrameworkEditor
 
         /// <summary>
         /// AB包默认输出目录
+        /// 相对于StreamingAssets
         /// </summary>
-        public static string ASSETBUNDLE_DEFAULT_OUTPUTDIR = Path.Combine(Application.streamingAssetsPath, "AssetBundle");
+        public static string ASSETBUNDLE_DEFAULT_OUTPUTDIR_STREAMINGASSETS = "AssetBundle";
 
         /// <summary>
         /// 创建MVP

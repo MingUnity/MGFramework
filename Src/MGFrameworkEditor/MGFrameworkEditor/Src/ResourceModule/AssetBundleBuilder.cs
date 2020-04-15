@@ -31,9 +31,11 @@ namespace MGFrameworkEditor.ResourceModule
         {
             LoadConfig((setting) =>
             {
-                if (!Directory.Exists(setting.outputDir))
+                string output = Path.Combine(Application.streamingAssetsPath, setting.outputDir);
+
+                if (!Directory.Exists(output))
                 {
-                    Directory.CreateDirectory(setting.outputDir);
+                    Directory.CreateDirectory(output);
                 }
 
                 BuildAssetBundleOptions options = BuildAssetBundleOptions.None;
@@ -50,7 +52,7 @@ namespace MGFrameworkEditor.ResourceModule
                     Debug.LogWarningFormat("<Ming> ## Uni Warning ## Cls:AssetBundleBuilder Func:BuildAssetBundles Info:AssetBundle buildTarget isn't current project's buildTarget.");
                 }
 
-                BuildPipeline.BuildAssetBundles(setting.outputDir, options, (BuildTarget)setting.targetPlatform);
+                BuildPipeline.BuildAssetBundles(output, options, (BuildTarget)setting.targetPlatform);
 
                 AssetDatabase.Refresh();
             });
@@ -164,7 +166,7 @@ namespace MGFrameworkEditor.ResourceModule
         {
             AssetBundleSetting res = new AssetBundleSetting()
             {
-                outputDir = EditorStrDef.ASSETBUNDLE_DEFAULT_OUTPUTDIR,
+                outputDir = EditorStrDef.ASSETBUNDLE_DEFAULT_OUTPUTDIR_STREAMINGASSETS,
 
                 options = new int[] { (int)BuildAssetBundleOptions.None },
 
