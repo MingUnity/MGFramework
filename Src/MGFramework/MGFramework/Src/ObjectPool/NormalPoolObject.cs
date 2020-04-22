@@ -27,6 +27,8 @@ namespace MGFramework.Pool
 
                 if (value)
                 {
+                    _root.SetAsLastSibling();
+
                     OnShow();
                 }
                 else
