@@ -1,0 +1,1624 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>MGFramework</name>
+    </assembly>
+    <members>
+        <member name="T:MGFramework.EventModule.CommonCEventArgs`1">
+            <summary>
+            通用事件参数(Class)
+            </summary>
+        </member>
+        <member name="T:MGFramework.EventModule.CommonSEventArgs`1">
+            <summary>
+            通用事件参数(Struct)
+            </summary>
+        </member>
+        <member name="T:MGFramework.EventModule.Extends">
+            <summary>
+            扩展
+            </summary>
+        </member>
+        <member name="M:MGFramework.EventModule.Extends.GetCValue``1(MGFramework.EventModule.IEventArgs)">
+            <summary>
+            获取值(Class)
+            </summary>
+        </member>
+        <member name="M:MGFramework.EventModule.Extends.GetSValue``1(MGFramework.EventModule.IEventArgs)">
+            <summary>
+            获取值(Struct)
+            </summary>
+        </member>
+        <member name="T:MGFramework.EventModule.IEventArgs">
+            <summary>
+            事件参数
+            </summary>
+        </member>
+        <member name="T:MGFramework.EventModule.SimpleEventArgs">
+            <summary>
+            简单事件参数
+            </summary>
+        </member>
+        <member name="P:MGFramework.EventModule.SimpleEventArgs.Args">
+            <summary>
+            参数集
+            </summary>
+        </member>
+        <member name="T:MGFramework.EventModule.EventHub">
+            <summary>
+            事件系统
+            </summary>
+        </member>
+        <member name="M:MGFramework.EventModule.EventHub.AddListener(System.Int32,MGFramework.EventModule.IEventListener)">
+            <summary>
+            添加监听
+            </summary>
+        </member>
+        <member name="M:MGFramework.EventModule.EventHub.RemoveListener(System.Int32,MGFramework.EventModule.IEventListener)">
+            <summary>
+            移除监听
+            </summary>
+        </member>
+        <member name="M:MGFramework.EventModule.EventHub.Dispatch(System.Int32,MGFramework.EventModule.IEventArgs)">
+            <summary>
+            分发
+            </summary>
+        </member>
+        <member name="T:MGFramework.EventModule.EventManager">
+            <summary>
+            事件管理
+            </summary>
+        </member>
+        <member name="T:MGFramework.EventModule.IEventHub">
+            <summary>
+            事件中心接口
+            </summary>
+        </member>
+        <member name="M:MGFramework.EventModule.IEventHub.AddListener(System.Int32,MGFramework.EventModule.IEventListener)">
+            <summary>
+            添加监听
+            </summary>
+        </member>
+        <member name="M:MGFramework.EventModule.IEventHub.RemoveListener(System.Int32,MGFramework.EventModule.IEventListener)">
+            <summary>
+            移除监听
+            </summary>
+        </member>
+        <member name="M:MGFramework.EventModule.IEventHub.Dispatch(System.Int32,MGFramework.EventModule.IEventArgs)">
+            <summary>
+            分发
+            </summary>
+        </member>
+        <member name="T:MGFramework.EventModule.IEventListener">
+            <summary>
+            事件监听
+            </summary>
+        </member>
+        <member name="M:MGFramework.EventModule.IEventListener.HandleEvent(System.Int32,MGFramework.EventModule.IEventArgs)">
+            <summary>
+            处理事件
+            </summary>
+        </member>
+        <member name="T:MGFramework.Pool.IPoolObject">
+            <summary>
+            池中对象
+            </summary>
+        </member>
+        <member name="P:MGFramework.Pool.IPoolObject.Active">
+            <summary>
+            激活
+            </summary>
+        </member>
+        <member name="M:MGFramework.Pool.IPoolObject.Create(UnityEngine.Transform)">
+            <summary>
+            创建
+            </summary>
+        </member>
+        <member name="M:MGFramework.Pool.IPoolObject.Reset">
+            <summary>
+            重置
+            </summary>
+        </member>
+        <member name="T:MGFramework.Pool.NormalPoolObject">
+            <summary>
+            通用池中对象
+            </summary>
+        </member>
+        <member name="F:MGFramework.Pool.NormalPoolObject._root">
+            <summary>
+            根节点
+            </summary>
+        </member>
+        <member name="P:MGFramework.Pool.NormalPoolObject.Active">
+            <summary>
+            激活
+            </summary>
+        </member>
+        <member name="M:MGFramework.Pool.NormalPoolObject.Create(UnityEngine.Transform)">
+            <summary>
+            创建
+            </summary>
+        </member>
+        <member name="M:MGFramework.Pool.NormalPoolObject.Reset">
+            <summary>
+            重置
+            </summary>
+        </member>
+        <member name="M:MGFramework.Pool.NormalPoolObject.OnCreate">
+            <summary>
+            创建
+            </summary>
+        </member>
+        <member name="M:MGFramework.Pool.NormalPoolObject.OnShow">
+            <summary>
+            显示
+            </summary>
+        </member>
+        <member name="M:MGFramework.Pool.NormalPoolObject.OnHide">
+            <summary>
+            隐藏
+            </summary>
+        </member>
+        <member name="T:MGFramework.Pool.ObjectPool`1">
+            <summary>
+            对象池
+            </summary>
+        </member>
+        <member name="F:MGFramework.Pool.ObjectPool`1._template">
+            <summary>
+            模板
+            </summary>
+        </member>
+        <member name="F:MGFramework.Pool.ObjectPool`1._name">
+            <summary>
+            名字
+            用于DI
+            </summary>
+        </member>
+        <member name="F:MGFramework.Pool.ObjectPool`1._stack">
+            <summary>
+            栈
+            </summary>
+        </member>
+        <member name="M:MGFramework.Pool.ObjectPool`1.Get">
+            <summary>
+            获取
+            </summary>
+        </member>
+        <member name="M:MGFramework.Pool.ObjectPool`1.Remove(`0)">
+            <summary>
+            移除
+            </summary>
+        </member>
+        <member name="T:MGFramework.ResourceModule.AssetBundles.AssetBundleLoader">
+            <summary>
+            AB包加载
+            </summary>
+        </member>
+        <member name="M:MGFramework.ResourceModule.AssetBundles.AssetBundleLoader.LoadAssetBundle(System.String)">
+            <summary>
+            加载AB包
+            </summary>
+        </member>
+        <member name="M:MGFramework.ResourceModule.AssetBundles.AssetBundleLoader.LoadAssetBundleAsync(System.String,System.Action{UnityEngine.AssetBundle},System.Action{System.Single})">
+            <summary>
+            异步加载AB包
+            </summary>
+        </member>
+        <member name="M:MGFramework.ResourceModule.AssetBundles.AssetBundleLoader.GetAsset``1(System.String,System.String)">
+            <summary>
+            获取资源
+            </summary>
+        </member>
+        <member name="M:MGFramework.ResourceModule.AssetBundles.AssetBundleLoader.GetAssetAsync``1(System.String,System.String,System.Action{``0},System.Action{System.Single})">
+            <summary>
+            异步获取资源
+            </summary>
+        </member>
+        <member name="M:MGFramework.ResourceModule.AssetBundles.AssetBundleLoader.GetTask(System.String,System.Boolean)">
+            <summary>
+            获取任务
+            </summary>
+        </member>
+        <member name="M:MGFramework.ResourceModule.AssetBundles.AssetBundleLoader.GetAssetAsync(UnityEngine.AssetBundle,System.String,System.Action{UnityEngine.Object},System.Action{System.Single})">
+            <summary>
+            异步获取资源
+            </summary>
+        </member>
+        <member name="M:MGFramework.ResourceModule.AssetBundles.AssetBundleLoader.Unload(System.String,System.Boolean)">
+            <summary>
+            卸载
+            </summary>
+        </member>
+        <member name="M:MGFramework.ResourceModule.AssetBundles.AssetBundleLoader.UnloadAll(System.Boolean)">
+            <summary>
+            卸载全部
+            </summary>
+        </member>
+        <member name="M:MGFramework.ResourceModule.AssetBundles.AssetBundleLoader.GetAbKey(System.String)">
+            <summary>
+            获取AB包key值 
+            </summary>
+        </member>
+        <member name="T:MGFramework.ResourceModule.AssetBundles.AssetBundleTask">
+            <summary>
+            AB包任务
+            </summary>
+        </member>
+        <member name="F:MGFramework.ResourceModule.AssetBundles.AssetBundleTask._loadTask">
+            <summary>
+            加载任务
+            </summary>
+        </member>
+        <member name="F:MGFramework.ResourceModule.AssetBundles.AssetBundleTask._assetbundle">
+            <summary>
+            AB包
+            </summary>
+        </member>
+        <member name="F:MGFramework.ResourceModule.AssetBundles.AssetBundleTask._cacheCallback">
+            <summary>
+            回调缓存
+            </summary>
+        </member>
+        <member name="F:MGFramework.ResourceModule.AssetBundles.AssetBundleTask._loading">
+            <summary>
+            加载中标识
+            </summary>
+        </member>
+        <member name="F:MGFramework.ResourceModule.AssetBundles.AssetBundleTask._abPath">
+            <summary>
+            ab包路径
+            </summary>
+        </member>
+        <member name="F:MGFramework.ResourceModule.AssetBundles.AssetBundleTask._async">
+            <summary>
+            异步任务
+            </summary>
+        </member>
+        <member name="M:MGFramework.ResourceModule.AssetBundles.AssetBundleTask.Load(System.Action{UnityEngine.AssetBundle},System.Action{System.Single})">
+            <summary>
+            加载
+            </summary>
+        </member>
+        <member name="M:MGFramework.ResourceModule.AssetBundles.AssetBundleTask.Unload(System.Boolean)">
+            <summary>
+            卸载
+            </summary>
+        </member>
+        <member name="M:MGFramework.ResourceModule.AssetBundles.AssetBundleTask.LoadABAsync(System.String,System.Action{UnityEngine.AssetBundle},System.Action{System.Single})">
+            <summary>
+            异步加载AB包
+            </summary>
+        </member>
+        <member name="M:MGFramework.ResourceModule.AssetBundles.AssetBundleTask.InvokeCache">
+            <summary>
+            执行缓存动作
+            </summary>
+        </member>
+        <member name="T:MGFramework.ResourceModule.AssetBundles.DepAssetBundleLoader">
+            <summary>
+            AB包加载
+            自动加载依赖项
+            </summary>
+        </member>
+        <member name="F:MGFramework.ResourceModule.AssetBundles.DepAssetBundleLoader._coreManifest">
+            <summary>
+            AB包总依赖清单
+            </summary>
+        </member>
+        <member name="F:MGFramework.ResourceModule.AssetBundles.DepAssetBundleLoader._manifestLoaded">
+            <summary>
+            清单加载标识
+            </summary>
+        </member>
+        <member name="F:MGFramework.ResourceModule.AssetBundles.DepAssetBundleLoader._coreManifestDir">
+            <summary>
+            清单目录
+            </summary>
+        </member>
+        <member name="M:MGFramework.ResourceModule.AssetBundles.DepAssetBundleLoader.LoadDepAssetBundle(System.String)">
+            <summary>
+            加载依赖AB包
+            </summary>
+        </member>
+        <member name="M:MGFramework.ResourceModule.AssetBundles.DepAssetBundleLoader.LoadDepAssetBundleAsync(System.String,System.Action,System.Action{System.Single})">
+            <summary>
+            异步加载依赖AB包
+            </summary>
+        </member>
+        <member name="M:MGFramework.ResourceModule.AssetBundles.DepAssetBundleLoader.Average(System.Single[])">
+            <summary>
+            求平均数
+            </summary>
+        </member>
+        <member name="T:MGFramework.ResourceModule.AssetBundles.ResModule">
+            <summary>
+            资源模块
+            </summary>
+        </member>
+        <member name="T:MGFramework.ResourceModule.IAssetBundleLoader">
+            <summary>
+            AB包加载接口
+            </summary>
+        </member>
+        <member name="M:MGFramework.ResourceModule.IAssetBundleLoader.LoadAssetBundle(System.String)">
+            <summary>
+            加载AB包
+            </summary>
+        </member>
+        <member name="M:MGFramework.ResourceModule.IAssetBundleLoader.LoadAssetBundleAsync(System.String,System.Action{UnityEngine.AssetBundle},System.Action{System.Single})">
+            <summary>
+            异步加载AB包
+            </summary>
+            <param name="abPath"></param>
+        </member>
+        <member name="M:MGFramework.ResourceModule.IAssetBundleLoader.GetAsset``1(System.String,System.String)">
+            <summary>
+            获取资源
+            </summary>
+        </member>
+        <member name="M:MGFramework.ResourceModule.IAssetBundleLoader.GetAssetAsync``1(System.String,System.String,System.Action{``0},System.Action{System.Single})">
+            <summary>
+            异步获取资源
+            </summary>
+        </member>
+        <member name="M:MGFramework.ResourceModule.IAssetBundleLoader.Unload(System.String,System.Boolean)">
+            <summary>
+            卸载
+            </summary>
+        </member>
+        <member name="M:MGFramework.ResourceModule.IAssetBundleLoader.UnloadAll(System.Boolean)">
+            <summary>
+            卸载全部
+            </summary>
+        </member>
+        <member name="T:MGFramework.ResourceModule.IDependencyLoader">
+            <summary>
+            依赖加载
+            </summary>
+        </member>
+        <member name="M:MGFramework.ResourceModule.IDependencyLoader.LoadManifestAssetBundle(System.String)">
+            <summary>
+            加载manifest
+            </summary>
+        </member>
+        <member name="M:MGFramework.ResourceModule.IDependencyLoader.LoadManifestAssetBundleAsync(System.String,System.Action,System.Action{System.Single})">
+            <summary>
+            异步加载manifest
+            </summary>
+        </member>
+        <member name="T:MGFramework.ResourceModule.ResManager">
+            <summary>
+            资源管理
+            </summary>
+        </member>
+        <member name="M:MGFramework.ResourceModule.ResManager.GetAssetRelative``1(System.String,System.String,MGFramework.ResourceModule.AssetLocation)">
+            <summary>
+            获取资源
+            相对路径
+            </summary>
+            <param name="relativeAbPath">AB包相对路径</param>
+            <param name="assetName">资源名</param>
+            <param name="dir">根目录</param>
+        </member>
+        <member name="M:MGFramework.ResourceModule.ResManager.GetAssetAsyncRelative``1(System.String,System.String,System.Action{``0},System.Action{System.Single},MGFramework.ResourceModule.AssetLocation)">
+            <summary>
+            异步获取资源
+            相对路径
+            </summary>
+            <param name="relativeAbPath">AB包相对路径</param>
+            <param name="assetName">资源名</param>
+            <param name="callback">完成回调</param>
+            <param name="progressCallback">进度回调</param>
+            <param name="dir">根目录</param>
+        </member>
+        <member name="M:MGFramework.ResourceModule.ResManager.LoadAssetBundleRelative(System.String,MGFramework.ResourceModule.AssetLocation)">
+            <summary>
+            加载AB包
+            相对路径
+            </summary>
+            <param name="relativeAbPath">AB包相对路径</param>
+            <param name="dir">根目录</param>
+        </member>
+        <member name="M:MGFramework.ResourceModule.ResManager.LoadAssetBundleAsyncRelative(System.String,System.Action{UnityEngine.AssetBundle},System.Action{System.Single},MGFramework.ResourceModule.AssetLocation)">
+            <summary>
+            异步加载AB包
+            相对路径
+            </summary>
+            <param name="relativeAbPath">AB包相对路径</param>
+            <param name="callback">完成回调</param>
+            <param name="progressCallback">进度回调</param>
+            <param name="dir">根目录</param>
+        </member>
+        <member name="M:MGFramework.ResourceModule.ResManager.CombineRelativePath(System.String,MGFramework.ResourceModule.AssetLocation,System.Boolean)">
+            <summary>
+            组合相对路径
+            </summary>
+        </member>
+        <member name="T:MGFramework.ResourceModule.DepResModule">
+            <summary>
+            依赖项资源模块
+            </summary>
+        </member>
+        <member name="M:MGFramework.ResourceModule.DepResModule.SetupLoader">
+            <summary>
+            装载加载器
+            </summary>
+        </member>
+        <member name="T:MGFramework.ResourceModule.IResLoader">
+            <summary>
+            资源加载接口
+            </summary>
+        </member>
+        <member name="P:MGFramework.ResourceModule.IResLoader.AssetBundleLoader">
+            <summary>
+            AB包加载
+            </summary>
+        </member>
+        <member name="T:MGFramework.ResourceModule.ResInfoAttribute">
+            <summary>
+            资源特性
+            </summary>
+        </member>
+        <member name="F:MGFramework.ResourceModule.ResInfoAttribute.abPath">
+            <summary>
+            AB包路径
+            </summary>
+        </member>
+        <member name="F:MGFramework.ResourceModule.ResInfoAttribute.assetName">
+            <summary>
+            资源名
+            </summary>
+        </member>
+        <member name="F:MGFramework.ResourceModule.ResInfoAttribute.async">
+            <summary>
+            是否异步
+            </summary>
+        </member>
+        <member name="F:MGFramework.ResourceModule.ResInfoAttribute.location">
+            <summary>
+            资源位置
+            </summary>
+        </member>
+        <member name="M:MGFramework.ResourceModule.ResLoaderExtends.GetObjByResInfo(MGFramework.ResourceModule.IResLoader,System.Action{System.String,System.String,UnityEngine.GameObject},MGFramework.ResourceModule.ResLoadParam)">
+            <summary>
+            通过资源信息创建对象
+            </summary>
+        </member>
+        <member name="M:MGFramework.ResourceModule.ResLoaderExtends.ParseResInfo(MGFramework.ResourceModule.IResLoader,System.String@,System.String@,System.Boolean@,MGFramework.ResourceModule.ResLoadParam)">
+            <summary>
+            解析资源信息
+            </summary>
+        </member>
+        <member name="M:MGFramework.ResourceModule.ResLoaderExtends.GenerateDefaultResInfo(MGFramework.ResourceModule.IResLoader,System.String@,System.String@)">
+            <summary>
+            生成默认资源信息
+            </summary>
+        </member>
+        <member name="T:MGFramework.ResourceModule.ResLoadParam">
+            <summary>
+            资源加载参数
+            </summary>
+        </member>
+        <member name="F:MGFramework.ResourceModule.ResLoadParam.async">
+            <summary>
+            是否为异步
+            </summary>
+        </member>
+        <member name="F:MGFramework.ResourceModule.ResLoadParam.location">
+            <summary>
+            资源所在目录
+            </summary>
+        </member>
+        <member name="P:MGFramework.ResourceModule.ResLoadParam.Default">
+            <summary>
+            默认
+            </summary>
+        </member>
+        <member name="T:MGFramework.UIModule.IUIModule">
+            <summary>
+            UI模块
+            </summary>
+        </member>
+        <member name="M:MGFramework.UIModule.IUIModule.Enter(System.Int32,System.Action)">
+            <summary>
+            进入
+            </summary>
+        </member>
+        <member name="M:MGFramework.UIModule.IUIModule.Focus(System.Int32)">
+            <summary>
+            聚焦
+            </summary>
+        </member>
+        <member name="M:MGFramework.UIModule.IUIModule.UnFocus(System.Int32)">
+            <summary>
+            失焦
+            </summary>
+        </member>
+        <member name="M:MGFramework.UIModule.IUIModule.Quit(System.Int32,System.Action,System.Boolean)">
+            <summary>
+            退出
+            </summary>
+        </member>
+        <member name="M:MGFramework.UIModule.IUIModule.QuitAll(System.Action,System.Boolean)">
+            <summary>
+            退出全部
+            </summary>
+        </member>
+        <member name="T:MGFramework.UIModule.UIManager">
+            <summary>
+            UI管理
+            </summary>
+        </member>
+        <member name="F:MGFramework.UIModule.UIManager._viewStack">
+            <summary>
+            视图栈
+            用于存储需要入栈的视图
+            </summary>
+        </member>
+        <member name="F:MGFramework.UIModule.UIManager._viewDic">
+            <summary>
+            所有激活过视图字典
+            </summary>
+        </member>
+        <member name="F:MGFramework.UIModule.UIManager._tempQuitAllList">
+            <summary>
+            临时退出全部列表
+            </summary>
+        </member>
+        <member name="M:MGFramework.UIModule.UIManager.Enter(System.Int32,System.Action,System.Boolean)">
+            <summary>
+            进入视图
+            </summary>
+        </member>
+        <member name="M:MGFramework.UIModule.UIManager.Enter(IntGroup,System.Action,System.Boolean)">
+            <summary>
+            进入视图
+            </summary>
+            <param name="viewGroup">视图组</param>
+            <param name="callback">完成回调</param>
+            <param name="pushStack">入栈</param>
+        </member>
+        <member name="M:MGFramework.UIModule.UIManager.Quit(System.Int32,System.Action,System.Boolean,System.Boolean)">
+            <summary>
+             退出视图
+            </summary>
+        </member>
+        <member name="M:MGFramework.UIModule.UIManager.Quit(IntGroup,System.Action,System.Boolean,System.Boolean)">
+            <summary>
+            退出视图
+            </summary>
+            <param name="viewGroup">视图组</param>
+            <param name="callback">完成回调</param>
+            <param name="leaveStack">出栈</param>
+            <param name="destroy">销毁</param>
+        </member>
+        <member name="M:MGFramework.UIModule.UIManager.UnFocus(System.Int32)">
+            <summary>
+            取消焦点
+            </summary>
+        </member>
+        <member name="M:MGFramework.UIModule.UIManager.UnFocus(IntGroup)">
+            <summary>
+            取消焦点
+            </summary>
+        </member>
+        <member name="M:MGFramework.UIModule.UIManager.QuitAll(System.Boolean)">
+            <summary>
+            退出所有页面
+            </summary>
+        </member>
+        <member name="M:MGFramework.UIModule.UIManager.Pop(System.Action)">
+            <summary>
+            弹出视图
+            </summary>
+        </member>
+        <member name="M:MGFramework.UIModule.UIManager.ResetStack">
+            <summary>
+            清空栈
+            </summary>
+        </member>
+        <member name="T:MGFramework.UIModule.UIManager.ViewState">
+            <summary>
+            视图状态
+            </summary>
+        </member>
+        <member name="F:MGFramework.UIModule.UIManager.ViewState.active">
+            <summary>
+            激活
+            </summary>
+        </member>
+        <member name="T:MGFramework.UIModule.UIModule">
+            <summary>
+            UI模块
+            </summary>
+        </member>
+        <member name="F:MGFramework.UIModule.UIModule._uiDic">
+            <summary>
+            UI对应字典
+            </summary>
+        </member>
+        <member name="M:MGFramework.UIModule.UIModule.Enter(System.Int32,System.Action)">
+            <summary>
+            进入
+            </summary>
+        </member>
+        <member name="M:MGFramework.UIModule.UIModule.Focus(System.Int32)">
+            <summary>
+            聚焦
+            </summary>
+        </member>
+        <member name="M:MGFramework.UIModule.UIModule.Quit(System.Int32,System.Action,System.Boolean)">
+            <summary>
+            退出
+            </summary>
+        </member>
+        <member name="M:MGFramework.UIModule.UIModule.QuitAll(System.Action,System.Boolean)">
+            <summary>
+            退出全部
+            </summary>
+        </member>
+        <member name="T:MGFramework.UIModule.ButtonEx">
+            <summary>
+            UGUI按钮扩展
+            </summary>
+        </member>
+        <member name="F:MGFramework.UIModule.ButtonEx.text">
+            <summary>
+            文本
+            </summary>
+        </member>
+        <member name="F:MGFramework.UIModule.ButtonEx.normalTextColor">
+            <summary>
+            普通态 文本颜色
+            </summary>
+        </member>
+        <member name="F:MGFramework.UIModule.ButtonEx.highlightedTextColor">
+            <summary>
+            高亮态 文本颜色
+            </summary>
+        </member>
+        <member name="F:MGFramework.UIModule.ButtonEx.pressedTextColor">
+            <summary>
+            点击态 文本颜色
+            </summary>
+        </member>
+        <member name="F:MGFramework.UIModule.ButtonEx.disabledTextColor">
+            <summary>
+            禁用态 文本颜色
+            </summary>
+        </member>
+        <member name="T:MGFramework.UIModule.EmptyGraphic">
+            <summary>
+            空图
+            仅用于拦截事件 不渲染
+            </summary>
+        </member>
+        <member name="T:MGFramework.UIModule.ToggleEx">
+            <summary>
+            Toggle扩展
+            </summary>
+        </member>
+        <member name="F:MGFramework.UIModule.ToggleEx.text">
+            <summary>
+            文本
+            </summary>
+        </member>
+        <member name="F:MGFramework.UIModule.ToggleEx.normalTextColor">
+            <summary>
+            普通态 文本颜色
+            </summary>
+        </member>
+        <member name="F:MGFramework.UIModule.ToggleEx.highlightedTextColor">
+            <summary>
+            悬浮态 文本颜色
+            </summary>
+        </member>
+        <member name="F:MGFramework.UIModule.ToggleEx.pressedTextColor">
+            <summary>
+            点击态 文本颜色
+            </summary>
+        </member>
+        <member name="F:MGFramework.UIModule.ToggleEx.disabledTextColor">
+            <summary>
+            禁用态 文本颜色
+            </summary>
+        </member>
+        <member name="F:MGFramework.UIModule.ToggleEx.isOnTextColor">
+            <summary>
+            选中态 文本颜色
+            </summary>
+        </member>
+        <member name="F:MGFramework.UIModule.GradientMeshEffect.direction">
+            <summary>
+            方向
+            </summary>
+        </member>
+        <member name="F:MGFramework.UIModule.GradientMeshEffect.topColor">
+            <summary>
+            顶部颜色
+            </summary>
+        </member>
+        <member name="F:MGFramework.UIModule.GradientMeshEffect.bottomColor">
+            <summary>
+            底部颜色
+            </summary>
+        </member>
+        <member name="F:MGFramework.UIModule.GradientMeshEffect._cacheVertexList">
+            <summary>
+            顶点缓存列表
+            </summary>
+        </member>
+        <member name="M:MGFramework.UIModule.GradientMeshEffect.Apply">
+            <summary>
+            应用
+            </summary>
+        </member>
+        <member name="M:MGFramework.UIModule.GradientMeshEffect.Distance(System.Single,System.Single,System.Single,System.Single)">
+            <summary>
+            求距离
+            </summary>
+        </member>
+        <member name="T:MGFramework.UIModule.GradientMeshEffect.Direction">
+            <summary>
+            方向
+            </summary>
+        </member>
+        <member name="F:MGFramework.UIModule.GradientMeshEffect.Direction.BottomToTop">
+            <summary>
+            底->顶
+            </summary>
+        </member>
+        <member name="F:MGFramework.UIModule.GradientMeshEffect.Direction.LeftToRight">
+            <summary>
+            左->右
+            </summary>
+        </member>
+        <member name="F:MGFramework.UIModule.GradientMeshEffect.Direction.RightBottomToLeftTop">
+            <summary>
+            右下->左上
+            </summary>
+        </member>
+        <member name="F:MGFramework.UIModule.GradientMeshEffect.Direction.LeftBottomToRightTop">
+            <summary>
+            左下->右上
+            </summary>
+        </member>
+        <member name="T:MGFramework.UIModule.GradientMeshEffectAnim">
+            <summary>
+            渐变色动画
+            </summary>
+        </member>
+        <member name="F:MGFramework.UIModule.GradientMeshEffectAnim._effect">
+            <summary>
+            渐变色特效
+            </summary>
+        </member>
+        <member name="F:MGFramework.UIModule.GradientMeshEffectAnim._dstTopColor">
+            <summary>
+            顶部动画结束颜色
+            </summary>
+        </member>
+        <member name="F:MGFramework.UIModule.GradientMeshEffectAnim._dstBottomColor">
+            <summary>
+            底部动画结束颜色
+            </summary>
+        </member>
+        <member name="F:MGFramework.UIModule.GradientMeshEffectAnim._duration">
+            <summary>
+            时长
+            </summary>
+        </member>
+        <member name="F:MGFramework.UIModule.GradientMeshEffectAnim._oriTopColor">
+            <summary>
+            原始顶部颜色
+            </summary>
+        </member>
+        <member name="F:MGFramework.UIModule.GradientMeshEffectAnim._oriBottomColor">
+            <summary>
+            原始底部颜色
+            </summary>
+        </member>
+        <member name="F:MGFramework.UIModule.GradientMeshEffectAnim._working">
+            <summary>
+            工作中
+            </summary>
+        </member>
+        <member name="F:MGFramework.UIModule.GradientMeshEffectAnim._timer">
+            <summary>
+            计时器
+            </summary>
+        </member>
+        <member name="M:MGFramework.UIModule.GradientMeshEffectAnim.StartAnim">
+            <summary>
+            开始动画
+            </summary>
+        </member>
+        <member name="M:MGFramework.UIModule.GradientMeshEffectAnim.StopAnim">
+            <summary>
+            结束动画
+            </summary>
+        </member>
+        <member name="T:MGFramework.UIModule.IPresenter">
+            <summary> 
+            交互
+            </summary>
+        </member>
+        <member name="P:MGFramework.UIModule.IPresenter.View">
+            <summary>
+            视图
+            </summary>
+        </member>
+        <member name="M:MGFramework.UIModule.IPresenter.Install">
+            <summary>
+            装载
+            </summary>
+        </member>
+        <member name="M:MGFramework.UIModule.IPresenter.Uninstall">
+            <summary>
+            卸载
+            </summary>
+        </member>
+        <member name="M:MGFramework.UIModule.IPresenter.OnCreateCompleted">
+            <summary>
+            创建完成
+            </summary>
+        </member>
+        <member name="M:MGFramework.UIModule.IPresenter.OnShowStart">
+            <summary>
+            显示开始
+            </summary>
+        </member>
+        <member name="M:MGFramework.UIModule.IPresenter.OnShowCompleted">
+            <summary>
+            显示完成
+            </summary>
+        </member>
+        <member name="M:MGFramework.UIModule.IPresenter.OnHideStart">
+            <summary>
+            隐藏开始
+            </summary>
+        </member>
+        <member name="M:MGFramework.UIModule.IPresenter.OnHideCompleted">
+            <summary>
+            隐藏完成
+            </summary>
+        </member>
+        <member name="M:MGFramework.UIModule.IPresenter.OnFocus">
+            <summary>
+            聚焦
+            </summary>
+        </member>
+        <member name="M:MGFramework.UIModule.IPresenter.OnUnFocus">
+            <summary>
+            失焦
+            </summary>
+        </member>
+        <member name="T:MGFramework.UIModule.PresenterBase`1">
+            <summary>
+            交互基类
+            </summary>
+        </member>
+        <member name="F:MGFramework.UIModule.PresenterBase`1._view">
+            <summary>
+            视图
+            </summary>
+        </member>
+        <member name="P:MGFramework.UIModule.PresenterBase`1.View">
+            <summary>
+            视图
+            </summary>
+        </member>
+        <member name="M:MGFramework.UIModule.PresenterBase`1.Install">
+            <summary>
+            装载
+            </summary>
+        </member>
+        <member name="M:MGFramework.UIModule.PresenterBase`1.Uninstall">
+            <summary>
+            卸载
+            </summary>
+        </member>
+        <member name="M:MGFramework.UIModule.PresenterBase`1.OnCreateCompleted">
+            <summary>
+            创建完成
+            </summary>
+        </member>
+        <member name="M:MGFramework.UIModule.PresenterBase`1.OnDestroy">
+            <summary>
+            销毁
+            </summary>
+        </member>
+        <member name="M:MGFramework.UIModule.PresenterBase`1.OnHideCompleted">
+            <summary>
+            隐藏完成
+            </summary>
+        </member>
+        <member name="M:MGFramework.UIModule.PresenterBase`1.OnHideStart">
+            <summary>
+            隐藏开始
+            </summary>
+        </member>
+        <member name="M:MGFramework.UIModule.PresenterBase`1.OnShowCompleted">
+            <summary>
+            显示完成
+            </summary>
+        </member>
+        <member name="M:MGFramework.UIModule.PresenterBase`1.OnShowStart">
+            <summary>
+            显示开始
+            </summary>
+        </member>
+        <member name="M:MGFramework.UIModule.PresenterBase`1.OnFocus">
+            <summary>
+            聚焦
+            </summary>
+        </member>
+        <member name="M:MGFramework.UIModule.PresenterBase`1.OnUnFocus">
+            <summary>
+            失焦
+            </summary>
+        </member>
+        <member name="T:MGFramework.UIModule.ParentInfoAttribute">
+            <summary>
+            父节点信息
+            </summary>
+        </member>
+        <member name="F:MGFramework.UIModule.ParentInfoAttribute.type">
+            <summary>
+            搜索父节点类型
+            </summary>
+        </member>
+        <member name="F:MGFramework.UIModule.ParentInfoAttribute.param">
+            <summary>
+            参数
+            </summary>
+        </member>
+        <member name="T:MGFramework.UIModule.FindType">
+            <summary>
+            寻找节点信息类型
+            </summary>
+        </member>
+        <member name="F:MGFramework.UIModule.FindType.None">
+            <summary>
+            无
+            </summary>
+        </member>
+        <member name="F:MGFramework.UIModule.FindType.FindWithTag">
+            <summary>
+            tag搜寻
+            </summary>
+        </member>
+        <member name="F:MGFramework.UIModule.FindType.FindWithName">
+            <summary>
+            name搜寻
+            </summary>
+        </member>
+        <member name="T:MGFramework.UIModule.ParentParam">
+            <summary>
+            父节点参数
+            </summary>
+        </member>
+        <member name="F:MGFramework.UIModule.ParentParam.findType">
+            <summary>
+            搜索类型
+            </summary>
+        </member>
+        <member name="F:MGFramework.UIModule.ParentParam.param">
+            <summary>
+            参数
+            </summary>
+        </member>
+        <member name="P:MGFramework.UIModule.ParentParam.Default">
+            <summary>
+            默认值
+            </summary>
+        </member>
+        <member name="T:MGFramework.UIModule.ButtonExtends">
+            <summary>
+            按钮扩展
+            </summary>
+        </member>
+        <member name="M:MGFramework.UIModule.ButtonExtends.AddClickListener(UnityEngine.UI.Button,UnityEngine.Events.UnityAction)">
+            <summary>
+            添加点击监听
+            </summary>
+        </member>
+        <member name="M:MGFramework.UIModule.ButtonExtends.RemoveClickListener(UnityEngine.UI.Button,UnityEngine.Events.UnityAction)">
+            <summary>
+            移除点击监听
+            </summary>
+        </member>
+        <member name="T:MGFramework.UIModule.CanvasGroupExtends">
+            <summary>
+            CanvasGroup扩展
+            </summary>
+        </member>
+        <member name="M:MGFramework.UIModule.CanvasGroupExtends.SetActive(UnityEngine.CanvasGroup,System.Boolean)">
+            <summary>
+            显示隐藏
+            </summary>
+        </member>
+        <member name="M:MGFramework.UIModule.CanvasGroupExtends.IsActive(UnityEngine.CanvasGroup)">
+            <summary>
+            是否激活
+            </summary>
+        </member>
+        <member name="T:MGFramework.UIModule.GraphicExtends">
+            <summary>
+            UI图形组件扩展
+            </summary>
+        </member>
+        <member name="M:MGFramework.UIModule.GraphicExtends.SetAlpha(UnityEngine.UI.Graphic,System.Single)">
+            <summary>
+            设置不透明度
+            </summary>
+        </member>
+        <member name="M:MGFramework.UIModule.GraphicExtends.GetAlpha(UnityEngine.UI.Graphic)">
+            <summary>
+            获取不透明度
+            </summary>
+        </member>
+        <member name="T:MGFramework.UIModule.ToggleExtends">
+            <summary>
+            选择框扩展
+            </summary>
+        </member>
+        <member name="M:MGFramework.UIModule.ToggleExtends.AddValueChangedListener(UnityEngine.UI.Toggle,System.Action{System.Boolean})">
+            <summary>
+            添加值改变监听
+            </summary>
+        </member>
+        <member name="T:MGFramework.UIModule.NodeContainer">
+            <summary>
+            节点容器
+            </summary>
+        </member>
+        <member name="F:MGFramework.UIModule.NodeContainer._tagDic">
+            <summary>
+            tag搜寻节点字典
+            </summary>
+        </member>
+        <member name="F:MGFramework.UIModule.NodeContainer._nameDic">
+            <summary>
+            名字搜寻节点字典
+            </summary>
+        </member>
+        <member name="M:MGFramework.UIModule.NodeContainer.FindNodeWithTag(System.String)">
+            <summary>
+            通过tag找节点
+            </summary>
+        </member>
+        <member name="M:MGFramework.UIModule.NodeContainer.FindNodeWithName(System.String)">
+            <summary>
+            通过名字找节点
+            </summary>
+        </member>
+        <member name="T:MGFramework.UIModule.SpecialStack`1">
+            <summary>
+            特殊堆栈
+            可删除
+            </summary>
+        </member>
+        <member name="F:MGFramework.UIModule.SpecialStack`1._list">
+            <summary>
+            列表
+            </summary>
+        </member>
+        <member name="P:MGFramework.UIModule.SpecialStack`1.Count">
+            <summary>
+            数量
+            </summary>
+        </member>
+        <member name="M:MGFramework.UIModule.SpecialStack`1.Push(`0)">
+            <summary>
+            入栈
+            </summary>
+            <param name="item"></param>
+        </member>
+        <member name="M:MGFramework.UIModule.SpecialStack`1.Pop(`0@)">
+            <summary>
+            出栈
+            </summary>
+        </member>
+        <member name="M:MGFramework.UIModule.SpecialStack`1.Peek(`0@)">
+            <summary>
+            取栈顶
+            </summary>
+        </member>
+        <member name="M:MGFramework.UIModule.SpecialStack`1.Delete(`0)">
+            <summary>
+            删除
+            </summary>
+        </member>
+        <member name="M:MGFramework.UIModule.SpecialStack`1.Clear">
+            <summary>
+            清理
+            </summary>
+        </member>
+        <member name="T:MGFramework.UIModule.UISetting">
+            <summary>
+            全局UI设置
+            </summary>
+        </member>
+        <member name="F:MGFramework.UIModule.UISetting.DefaultAssetBundleLoader">
+            <summary>
+            UI资源默认AB包加载器
+            </summary>
+        </member>
+        <member name="F:MGFramework.UIModule.UISetting.DefaultAssetLocation">
+            <summary>
+            UI资源默认目录
+            </summary>
+        </member>
+        <member name="F:MGFramework.UIModule.UISetting.DefaultAssetLoadParam">
+            <summary>
+            UI资源默认加载方式
+            </summary>
+        </member>
+        <member name="F:MGFramework.UIModule.UISetting.DefaultParentParam">
+            <summary>
+            UI资源默认父节点参数
+            </summary>
+        </member>
+        <member name="T:MGFramework.UIModule.IView">
+            <summary>
+            视图接口
+            </summary>
+        </member>
+        <member name="P:MGFramework.UIModule.IView.Presenter">
+            <summary>
+            交互
+            </summary>
+        </member>
+        <member name="M:MGFramework.UIModule.IView.Create(System.Action)">
+            <summary>
+            创建
+            </summary>
+        </member>
+        <member name="M:MGFramework.UIModule.IView.Show(System.Action)">
+            <summary>
+            显示
+            </summary>
+        </member>
+        <member name="M:MGFramework.UIModule.IView.Hide(System.Action)">
+            <summary>
+            隐藏
+            </summary>
+        </member>
+        <member name="M:MGFramework.UIModule.IView.Focus">
+            <summary>
+            聚焦
+            </summary>
+        </member>
+        <member name="M:MGFramework.UIModule.IView.UnFocus">
+            <summary>
+            失焦
+            </summary>
+        </member>
+        <member name="M:MGFramework.UIModule.IView.Destroy">
+            <summary>
+            销毁
+            </summary>
+        </member>
+        <member name="T:MGFramework.UIModule.ViewBase`1">
+            <summary>
+            视图基类
+            根节点必须有CanvasGroup组件
+            属性ResInfo:设置AB包路径以及资源名,默认ResInfo(abPath="AssetBundle/[小写类名].assetbundle",assetName="[类名]",async=false)
+            属性CanvasInfo:设置父节点,默认CanvasInfo(type=CanvasType.FindWithTag,param="MainCanvas")
+            </summary>
+        </member>
+        <member name="F:MGFramework.UIModule.ViewBase`1._root">
+            <summary>
+            根节点
+            </summary>
+        </member>
+        <member name="F:MGFramework.UIModule.ViewBase`1._rootCanvas">
+            <summary>
+            根节点CanvasGroup组件
+            </summary>
+        </member>
+        <member name="F:MGFramework.UIModule.ViewBase`1._presenter">
+            <summary>
+            交互
+            </summary>
+        </member>
+        <member name="F:MGFramework.UIModule.ViewBase`1._created">
+            <summary>
+            已创建标识
+            </summary>
+        </member>
+        <member name="P:MGFramework.UIModule.ViewBase`1.AssetBundleLoader">
+            <summary>
+            AB包加载
+            </summary>
+        </member>
+        <member name="P:MGFramework.UIModule.ViewBase`1.Active">
+            <summary>
+            激活
+            </summary>
+        </member>
+        <member name="P:MGFramework.UIModule.ViewBase`1.Presenter">
+            <summary>
+            交互
+            </summary>
+        </member>
+        <member name="M:MGFramework.UIModule.ViewBase`1.Create(System.Action)">
+            <summary>
+            创建
+            </summary>
+        </member>
+        <member name="M:MGFramework.UIModule.ViewBase`1.Show(System.Action)">
+            <summary>
+            显示
+            </summary>
+        </member>
+        <member name="M:MGFramework.UIModule.ViewBase`1.Hide(System.Action)">
+            <summary>
+            隐藏
+            </summary>
+            <param name="callback"></param>
+        </member>
+        <member name="M:MGFramework.UIModule.ViewBase`1.Focus">
+            <summary>
+            聚焦
+            </summary>
+        </member>
+        <member name="M:MGFramework.UIModule.ViewBase`1.UnFocus">
+            <summary>
+            失焦
+            </summary>
+        </member>
+        <member name="M:MGFramework.UIModule.ViewBase`1.Destroy">
+            <summary>
+            销毁
+            </summary>
+        </member>
+        <member name="M:MGFramework.UIModule.ViewBase`1.OnCreate">
+            <summary>
+            完成创建
+            </summary>
+        </member>
+        <member name="M:MGFramework.UIModule.ViewBase`1.OnShow(System.Action)">
+            <summary>
+            显示中
+            </summary>
+        </member>
+        <member name="M:MGFramework.UIModule.ViewBase`1.OnHide(System.Action)">
+            <summary>
+            隐藏中
+            </summary>
+        </member>
+        <member name="M:MGFramework.UIModule.ViewBase`1.OnDestroy">
+            <summary>
+            销毁中
+            </summary>
+        </member>
+        <member name="M:MGFramework.UIModule.ViewBase`1.ParseParentAttr">
+            <summary>
+            解析父节点属性
+            </summary>
+        </member>
+        <member name="M:MGFramework.UIModule.ViewBase`1.GenerateDefaultParentInfo(MGFramework.UIModule.FindType@,System.String@)">
+            <summary>
+            构建默认信息
+            </summary>
+        </member>
+        <member name="T:MGFramework.UIModule.ViewGroup">
+            <summary>
+            视图组
+            </summary>
+        </member>
+        <member name="P:MGFramework.UIModule.ViewGroup.Presenter">
+            <summary>   
+            交互控制
+            </summary>
+        </member>
+        <member name="F:MGFramework.UIModule.ViewGroup._subViews">
+            <summary>
+            子视图集合
+            </summary>
+        </member>
+        <member name="T:MGFramework.TransformExtends">
+            <summary>
+            Transform 扩展
+            </summary>
+        </member>
+        <member name="M:MGFramework.TransformExtends.Find``1(UnityEngine.Transform,System.String)">
+            <summary>
+            根据路径寻找
+            </summary>
+        </member>
+        <member name="T:MGFramework.Bezier">
+            <summary>
+            贝塞尔曲线
+            </summary>
+        </member>
+        <member name="M:MGFramework.Bezier.CubicLerp(System.Single,UnityEngine.Vector3,UnityEngine.Vector3,UnityEngine.Vector3)">
+            <summary>
+            二次贝塞尔公式
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:MGFramework.CollectionsExtends">
+            <summary>
+            集合扩展
+            </summary>
+        </member>
+        <member name="M:MGFramework.CollectionsExtends.TryGetValue``1(System.Collections.Generic.IList{``0},System.Int32,``0@)">
+            <summary>
+            尝试获取数组中的值
+            </summary>
+        </member>
+        <member name="M:MGFramework.CollectionsExtends.TrySetValue``1(System.Collections.Generic.IList{``0},System.Int32,``0)">
+            <summary>
+            尝试设置数组中的值
+            </summary>
+        </member>
+        <member name="M:MGFramework.CollectionsExtends.IsValid``1(System.Collections.Generic.IList{``0},System.Int32)">
+            <summary>
+            是否合法的索引
+            </summary>
+        </member>
+        <member name="M:MGFramework.CollectionsExtends.GetValueAnyway``1(System.Collections.Generic.IList{``0},System.Int32)">
+            <summary>
+            获取数组值
+            若不存在返回默认
+            </summary>
+        </member>
+        <member name="M:MGFramework.CollectionsExtends.GetValueAnyway``2(System.Collections.Generic.IDictionary{``0,``1},``0)">
+            <summary>
+            获取值
+            若不存在返回默认
+            </summary>
+        </member>
+        <member name="T:MGFramework.Container">
+            <summary>
+            简易IOC容器
+            </summary>
+        </member>
+        <member name="F:MGFramework.Container._dic">
+            <summary>
+            类型节点字典
+            </summary>
+        </member>
+        <member name="M:MGFramework.Container.Regist``2(System.String)">
+            <summary>
+            注册
+            </summary>
+        </member>
+        <member name="M:MGFramework.Container.Regist``2(System.Object)">
+            <summary>
+            注册
+            </summary>
+        </member>
+        <member name="M:MGFramework.Container.RegistSingleton``2(``1,System.String)">
+            <summary>
+            注册单例
+            </summary>
+        </member>
+        <member name="M:MGFramework.Container.RegistSingleton``2">
+            <summary>
+            注册单例
+            </summary>
+        </member>
+        <member name="M:MGFramework.Container.RegistSingleton``2(System.String)">
+            <summary>
+            注册单例
+            </summary>
+        </member>
+        <member name="M:MGFramework.Container.RegistSingleton``2(System.Object)">
+            <summary>
+            注册单例
+            </summary>
+        </member>
+        <member name="M:MGFramework.Container.Resolve``1(System.String)">
+            <summary>
+            解析
+            </summary>
+        </member>
+        <member name="M:MGFramework.Container.Resolve``1(System.Object)">
+            <summary>
+            解析
+            </summary>
+        </member>
+        <member name="M:MGFramework.Container.Regist``1(System.String,MGFramework.Container.ITypeNode)">
+            <summary>
+            注册节点
+            </summary>
+        </member>
+        <member name="T:MGFramework.Container.ITypeNode">
+            <summary>
+            类型节点
+            </summary>
+        </member>
+        <member name="T:MGFramework.Container.SingletonTypeNode">
+            <summary>
+            单例类型节点
+            </summary>
+        </member>
+        <member name="F:MGFramework.Container.SingletonTypeNode._type">
+            <summary>
+            类型
+            </summary>
+        </member>
+        <member name="P:MGFramework.Container.SingletonTypeNode.Obj">
+            <summary>
+            对象
+            </summary>
+        </member>
+        <member name="T:MGFramework.Container.NormalTypeNode">
+            <summary>
+            简单类型节点
+            </summary>
+        </member>
+        <member name="F:MGFramework.Container.NormalTypeNode.objType">
+            <summary>
+            实例对象类型
+            </summary>
+        </member>
+        <member name="T:MGFramework.EventTriggerExtends">
+            <summary>
+            事件触发器扩展
+            </summary>
+        </member>
+        <member name="M:MGFramework.EventTriggerExtends.AddListener(UnityEngine.EventSystems.EventTrigger,UnityEngine.EventSystems.EventTriggerType,UnityEngine.Events.UnityAction{UnityEngine.EventSystems.BaseEventData})">
+            <summary>
+            添加监听
+            </summary>
+        </member>
+        <member name="M:MGFramework.EventTriggerExtends.RemoveListener(UnityEngine.EventSystems.EventTrigger,UnityEngine.EventSystems.EventTriggerType,UnityEngine.Events.UnityAction{UnityEngine.EventSystems.BaseEventData})">
+            <summary>
+            移除监听
+            </summary>
+        </member>
+        <member name="M:MGFramework.Loom.Initialize">
+            <summary>
+            初始化
+            </summary>
+        </member>
+        <member name="T:MGFramework.MonoSingleton`1">
+            <summary>
+            Mono单例
+            </summary>
+        </member>
+        <member name="T:MGFramework.PlatformUtility">
+            <summary>
+            平台通用
+            </summary>
+        </member>
+        <member name="P:MGFramework.PlatformUtility.CurPlatform">
+            <summary>
+            当前平台
+            </summary>
+        </member>
+        <member name="M:MGFramework.PlatformUtility.InitPlatform">
+            <summary>
+            初始化运行平台数据
+            </summary>
+        </member>
+        <member name="M:MGFramework.PlatformUtility.GetResStreamingAssets(System.Boolean)">
+            <summary>
+            获取加载资源时streamingAssets路径
+            </summary>
+        </member>
+        <member name="M:MGFramework.PlatformUtility.GetResPersistentDataPath">
+            <summary>
+            获取加载资源时persistentDataPath路径
+            </summary>
+        </member>
+        <member name="F:MGFramework.MPlatform.UnKnown">
+            <summary>
+            未知
+            </summary>
+        </member>
+        <member name="F:MGFramework.MPlatform.Editor">
+            <summary>
+            编辑态
+            </summary>
+        </member>
+        <member name="F:MGFramework.MPlatform.Windows">
+            <summary>
+            windows
+            </summary>
+        </member>
+        <member name="F:MGFramework.MPlatform.Android">
+            <summary>
+            安卓
+            </summary>
+        </member>
+        <member name="F:MGFramework.MPlatform.IOS">
+            <summary>
+            IOS
+            </summary>
+        </member>
+        <member name="T:MGFramework.SerializeUtility">
+            <summary>
+            序列化工具
+            </summary>
+        </member>
+        <member name="M:MGFramework.SerializeUtility.Serialize(System.Object)">
+            <summary>
+            序列化
+            </summary>
+        </member>
+        <member name="M:MGFramework.SerializeUtility.DeSerialize``1(System.Byte[])">
+            <summary>
+            反序列化
+            </summary>
+        </member>
+        <member name="T:MGFramework.Singleton`1">
+            <summary>
+            单例
+            </summary>
+        </member>
+        <member name="T:MGFramework.Task">
+            A Task object represents a coroutine.  Tasks can be started, paused, and stopped.  
+            It is an error to attempt to start a task that has been stopped or which has  
+            naturally terminated.  
+        </member>
+        <member name="P:MGFramework.Task.Running">
+            Returns true if and only if the coroutine is running.  Paused tasks  
+            are considered to be running.  
+        </member>
+        <member name="P:MGFramework.Task.Paused">
+            Returns true if and only if the coroutine is currently paused.  
+        </member>
+        <member name="T:MGFramework.Task.FinishedHandler">
+            Delegate for termination subscribers.  manual is true if and only if  
+            the coroutine was stopped with an explicit call to Stop().  
+        </member>
+        <member name="E:MGFramework.Task.Finished">
+            Termination event.  Triggered when the coroutine completes execution.  
+        </member>
+        <member name="M:MGFramework.Task.#ctor(System.Collections.IEnumerator,System.Boolean)">
+            Creates a new Task object for the given coroutine.  
+             
+            If autoStart is true (default) the task is automatically started  
+            upon construction.  
+        </member>
+        <member name="M:MGFramework.Task.Start">
+            Begins execution of the coroutine  
+        </member>
+        <member name="M:MGFramework.Task.Stop">
+            Discontinues execution of the coroutine at its next yield.  
+        </member>
+        <member name="T:MGFramework.TaskQueue">
+            <summary>
+            任务队列
+            在某个时间点最多只有一个协程在执行，先加入队列中的先执行，后加入的后执行
+            </summary>
+        </member>
+        <member name="T:IntGroup">
+            <summary>
+            int组
+            </summary>
+        </member>
+        <member name="F:IntGroup._ints">
+            <summary>
+            整形数组
+            </summary>
+        </member>
+        <member name="P:IntGroup.Item(System.Int32)">
+            <summary>
+            获取某索引对应的值
+            </summary>
+        </member>
+        <member name="P:IntGroup.Empty">
+            <summary>
+            空组
+            </summary>
+        </member>
+        <member name="P:IntGroup.Count">
+            <summary>
+            数量
+            </summary>
+        </member>
+        <member name="M:IntGroup.Get(System.Int32[])">
+            <summary>
+            获取
+            </summary>
+        </member>
+    </members>
+</doc>

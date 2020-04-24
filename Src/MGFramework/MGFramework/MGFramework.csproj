@@ -30,6 +30,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <DocumentationFile>..\..\DllOutput\MGFramework.xml</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -115,6 +116,7 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>copy /Y "$(TargetDir)$(ProjectName).dll" "$(SolutionDir)..\..\MGFrameworkProject\Assets\MGFramework\Plugins\"</PostBuildEvent>
+    <PostBuildEvent>copy /Y "$(TargetDir)$(ProjectName).dll" "$(SolutionDir)..\..\MGFrameworkProject\Assets\MGFramework\Plugins\"
+copy /Y "$(TargetDir)$(ProjectName).xml" "$(SolutionDir)..\..\MGFrameworkProject\Assets\MGFramework\Plugins\"</PostBuildEvent>
   </PropertyGroup>
 </Project>
