@@ -1,9 +1,9 @@
 ﻿using UnityEngine;
 
-namespace MGFramework.Pool
+namespace MGFramework
 {
     /// <summary>
-    /// 池中对象
+    /// 对象池中的对象
     /// </summary>
     public interface IPoolObject
     {
@@ -15,6 +15,7 @@ namespace MGFramework.Pool
         /// <summary>
         /// 创建
         /// </summary>
+        /// <param name="root">根节点</param>
         void Create(Transform root);
 
         /// <summary>

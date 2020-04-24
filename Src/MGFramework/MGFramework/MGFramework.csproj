@@ -60,7 +60,7 @@
     <Compile Include="Src\EventModule\Core\IEventHub.cs" />
     <Compile Include="Src\EventModule\Core\IEventListener.cs" />
     <Compile Include="Src\ObjectPool\IPoolObject.cs" />
-    <Compile Include="Src\ObjectPool\NormalPoolObject.cs" />
+    <Compile Include="Src\ObjectPool\BasicPoolObject.cs" />
     <Compile Include="Src\ObjectPool\ObjectPool.cs" />
     <Compile Include="Src\ResourceModule\AssetBundle\AssetBundleLoader.cs" />
     <Compile Include="Src\ResourceModule\AssetBundle\AssetBundleTask.cs" />

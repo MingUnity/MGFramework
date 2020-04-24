@@ -7,6 +7,9 @@
     {
         private readonly static SimpleEventArgs _empty = new SimpleEventArgs();
 
+        /// <summary>
+        /// 空参数
+        /// </summary>
         public static SimpleEventArgs Empty
         {
             get
@@ -18,7 +21,7 @@
         private object[] _args;
 
         /// <summary>
-        /// 参数集
+        /// 参数集合
         /// </summary>
         public object[] Args
         {

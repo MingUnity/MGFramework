@@ -6,7 +6,7 @@
     public static class Extends
     {
         /// <summary>
-        /// 获取值(Class)
+        /// 快捷获取 引用类型通用事件参数的值(CommonCEventArgs)
         /// </summary>
         public static T GetCValue<T>(this IEventArgs args) where T : class
         {
@@ -23,7 +23,7 @@
         }
 
         /// <summary>
-        /// 获取值(Struct)
+        /// 快捷获取 值类型通用事件参数的值(CommonSEventArgs)
         /// </summary>
         public static T GetSValue<T>(this IEventArgs args) where T : struct
         {

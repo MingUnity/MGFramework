@@ -3,9 +3,9 @@
 namespace MGFramework.Pool
 {
     /// <summary>
-    /// 通用池中对象
+    /// 基础对象池中的对象
     /// </summary>
-    public abstract class NormalPoolObject : IPoolObject
+    public abstract class BasicPoolObject : IPoolObject
     {
         /// <summary>
         /// 根节点

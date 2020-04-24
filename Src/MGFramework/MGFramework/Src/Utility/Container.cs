@@ -5,7 +5,7 @@ using UnityEngine;
 namespace MGFramework
 {
     /// <summary>
-    /// 简易IOC容器
+    /// IOC容器
     /// </summary>
     public static class Container
     {
@@ -15,24 +15,34 @@ namespace MGFramework
         private static Dictionary<Type, Dictionary<string, ITypeNode>> _dic = new Dictionary<Type, Dictionary<string, ITypeNode>>();
 
         /// <summary>
-        /// 注册
+        /// 注册对象
         /// </summary>
+        /// <typeparam name="T">接口</typeparam>
+        /// <typeparam name="V">实现</typeparam>
+        /// <param name="name">名字</param>
         public static void Regist<T, V>(string name = null) where V : class, T, new()
         {
             Regist<T>(name, new NormalTypeNode(typeof(V)));
         }
 
         /// <summary>
-        /// 注册
+        /// 注册对象
         /// </summary>
+        /// <typeparam name="T">接口</typeparam>
+        /// <typeparam name="V">实现</typeparam>
+        /// <param name="name">名字</param>
         public static void Regist<T, V>(object name) where V : class, T, new()
         {
             Regist<T, V>(name?.ToString());
         }
 
         /// <summary>
-        /// 注册单例
+        /// 注册单例对象
         /// </summary>
+        /// <typeparam name="T">接口</typeparam>
+        /// <typeparam name="V">实现</typeparam>
+        /// <param name="obj">已实例化对象</param>
+        /// <param name="name">名字</param>
         public static void RegistSingleton<T, V>(V obj, string name) where V : class, T, new()
         {
             SingletonTypeNode node = null;
@@ -50,8 +60,10 @@ namespace MGFramework
         }
 
         /// <summary>
-        /// 注册单例
+        /// 注册单例对象
         /// </summary>
+        /// <typeparam name="T">接口</typeparam>
+        /// <typeparam name="V">实现</typeparam>
         public static void RegistSingleton<T, V>() where V : class, T, new()
         {
             SingletonTypeNode node = new SingletonTypeNode(typeof(V));
@@ -60,16 +72,22 @@ namespace MGFramework
         }
 
         /// <summary>
-        /// 注册单例
+        /// 注册单例对象
         /// </summary>
+        /// <typeparam name="T">接口</typeparam>
+        /// <typeparam name="V">实现</typeparam>
+        /// <param name="name">名字</param>
         public static void RegistSingleton<T, V>(string name) where V : class, T, new()
         {
             RegistSingleton<T, V>(null, name);
         }
 
         /// <summary>
-        /// 注册单例
+        /// 注册单例对象
         /// </summary>
+        /// <typeparam name="T">接口</typeparam>
+        /// <typeparam name="V">实现</typeparam>
+        /// <param name="name">名字</param>
         public static void RegistSingleton<T, V>(object name) where V : class, T, new()
         {
             RegistSingleton<T, V>(name?.ToString());
@@ -77,8 +95,11 @@ namespace MGFramework
 
 
         /// <summary>
-        /// 解析
+        /// 解析对象
         /// </summary>
+        /// <typeparam name="T">接口</typeparam>
+        /// <param name="name">名字</param>
+        /// <returns>对应实例化对象</returns>
         public static T Resolve<T>(string name = null)
         {
             name = string.IsNullOrEmpty(name) ? string.Empty : name;
@@ -117,8 +138,11 @@ namespace MGFramework
         }
 
         /// <summary>
-        /// 解析
+        /// 解析对象
         /// </summary>
+        /// <typeparam name="T">接口</typeparam>
+        /// <param name="name">名字</param>
+        /// <returns>对应实例化对象</returns>
         public static T Resolve<T>(object name)
         {
             return Resolve<T>(name?.ToString());

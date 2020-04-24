@@ -34,7 +34,10 @@ namespace MGFramework.UIModule
         /// <summary>
         /// 进入视图
         /// </summary>
-        public void Enter(int viewId, Action callback = null, bool pushStack = true)
+        /// <param name="viewId">视图id</param>
+        /// <param name="pushStack">是否入视图栈</param>
+        /// <param name="callback">进入完成回调</param>
+        public void Enter(int viewId, bool pushStack = true, Action callback = null)
         {
             ViewState state;
 
@@ -68,23 +71,23 @@ namespace MGFramework.UIModule
         /// 进入视图
         /// </summary>
         /// <param name="viewGroup">视图组</param>
-        /// <param name="callback">完成回调</param>
-        /// <param name="pushStack">入栈</param>
-        public void Enter(IntGroup viewGroup, Action callback = null, bool pushStack = true)
+        /// <param name="pushStack">是否入视图栈</param>
+        /// <param name="callback">进入完成回调</param>
+        public void Enter(IntGroup viewGroup, bool pushStack = true, Action callback = null)
         {
             int all = viewGroup.Count;
             int done = 0;
 
             for (int i = 0; i < all; i++)
             {
-                Enter(viewGroup[i], () =>
-                {
-                    done++;
-                    if (done >= all)
-                    {
-                        callback?.Invoke();
-                    }
-                }, false);
+                Enter(viewGroup[i], false, () =>
+               {
+                   done++;
+                   if (done >= all)
+                   {
+                       callback?.Invoke();
+                   }
+               });
             }
 
             if (pushStack)
@@ -94,9 +97,13 @@ namespace MGFramework.UIModule
         }
 
         /// <summary>
-        ///  退出视图
+        /// 退出视图
         /// </summary>
-        public void Quit(int viewId, Action callback = null, bool leaveStack = false, bool destroy = false)
+        /// <param name="viewId">视图id</param>
+        /// <param name="leaveStack">是否出视图栈</param>
+        /// <param name="callback">退出完成回调</param>
+        /// <param name="destroy">是否销毁视图</param>
+        public void Quit(int viewId, bool leaveStack = false, Action callback = null, bool destroy = false)
         {
             ViewState state;
 
@@ -127,24 +134,24 @@ namespace MGFramework.UIModule
         /// 退出视图
         /// </summary>
         /// <param name="viewGroup">视图组</param>
+        /// <param name="leaveStack">出视图栈</param>
         /// <param name="callback">完成回调</param>
-        /// <param name="leaveStack">出栈</param>
         /// <param name="destroy">销毁</param>
-        public void Quit(IntGroup viewGroup, Action callback = null, bool leaveStack = false, bool destroy = false)
+        public void Quit(IntGroup viewGroup, bool leaveStack = false, Action callback = null, bool destroy = false)
         {
             int all = viewGroup.Count;
             int done = 0;
 
             for (int i = 0; i < all; i++)
             {
-                Quit(viewGroup[i], () =>
-                {
-                    done++;
-                    if (done >= all)
-                    {
-                        callback?.Invoke();
-                    }
-                }, false, destroy);
+                Quit(viewGroup[i], false, () =>
+               {
+                   done++;
+                   if (done >= all)
+                   {
+                       callback?.Invoke();
+                   }
+               }, destroy);
             }
 
             if (leaveStack)
@@ -152,10 +159,11 @@ namespace MGFramework.UIModule
                 _viewStack.Delete(viewGroup);
             }
         }
-        
+
         /// <summary>
         /// 取消焦点
         /// </summary>
+        /// <param name="viewId">视图id</param>
         public void UnFocus(int viewId)
         {
             _uiModule?.UnFocus(viewId);
@@ -164,6 +172,7 @@ namespace MGFramework.UIModule
         /// <summary>
         /// 取消焦点
         /// </summary>
+        /// <param name="viewGroup">视图组</param>
         public void UnFocus(IntGroup viewGroup)
         {
             for (int i = 0; i < viewGroup.Count; i++)
@@ -173,8 +182,9 @@ namespace MGFramework.UIModule
         }
 
         /// <summary>
-        /// 退出所有页面
+        /// 退出所有视图
         /// </summary>
+        /// <param name="destroy">是否销毁</param>
         public void QuitAll(bool destroy = false)
         {
             _tempQuitAllList.Clear();
@@ -186,7 +196,7 @@ namespace MGFramework.UIModule
 
             for (int i = 0; i < _tempQuitAllList.Count; i++)
             {
-                Quit(_tempQuitAllList[i], null, false, destroy);
+                Quit(_tempQuitAllList[i], false, null, destroy);
             }
 
             _viewDic.Clear();
@@ -195,7 +205,10 @@ namespace MGFramework.UIModule
 
         /// <summary>
         /// 弹出视图
+        /// 回到上一级视图
         /// </summary>
+        /// <param name="callback">完成回调</param>
+        /// <returns>是否弹出成功</returns>
         public bool Pop(Action callback = null)
         {
             bool res = false;
@@ -209,10 +222,10 @@ namespace MGFramework.UIModule
                 {
                     res = true;
 
-                    Quit(curId, () =>
+                    Quit(curId, false, () =>
                     {
-                        Enter(dstId, callback, false);
-                    }, false);
+                        Enter(dstId, false, callback);
+                    });
                 }
             }
 
@@ -220,7 +233,7 @@ namespace MGFramework.UIModule
         }
 
         /// <summary>
-        /// 清空栈
+        /// 清空视图栈
         /// </summary>
         public void ResetStack()
         {
