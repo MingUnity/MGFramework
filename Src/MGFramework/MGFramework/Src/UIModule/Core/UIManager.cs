@@ -152,13 +152,24 @@ namespace MGFramework.UIModule
                 _viewStack.Delete(viewGroup);
             }
         }
-
+        
         /// <summary>
         /// 取消焦点
         /// </summary>
         public void UnFocus(int viewId)
         {
             _uiModule?.UnFocus(viewId);
+        }
+
+        /// <summary>
+        /// 取消焦点
+        /// </summary>
+        public void UnFocus(IntGroup viewGroup)
+        {
+            for (int i = 0; i < viewGroup.Count; i++)
+            {
+                UnFocus(viewGroup[i]);
+            }
         }
 
         /// <summary>
