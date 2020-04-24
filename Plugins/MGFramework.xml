@@ -6,13 +6,27 @@
     <members>
         <member name="T:MGFramework.EventModule.CommonCEventArgs`1">
             <summary>
-            通用事件参数(Class)
+            通用事件参数
+            基于引用类型 class
             </summary>
+        </member>
+        <member name="M:MGFramework.EventModule.CommonCEventArgs`1.Get(`0)">
+            <summary>
+            快捷获取参数对象
+            </summary>
+            <param name="val">值</param>
         </member>
         <member name="T:MGFramework.EventModule.CommonSEventArgs`1">
             <summary>
-            通用事件参数(Struct)
+            通用事件参数
+            基于值类型 struct
             </summary>
+        </member>
+        <member name="M:MGFramework.EventModule.CommonSEventArgs`1.Get(`0)">
+            <summary>
+            快捷获取对象
+            </summary>
+            <param name="val">值</param>
         </member>
         <member name="T:MGFramework.EventModule.Extends">
             <summary>
@@ -21,12 +35,12 @@
         </member>
         <member name="M:MGFramework.EventModule.Extends.GetCValue``1(MGFramework.EventModule.IEventArgs)">
             <summary>
-            获取值(Class)
+            快捷获取 引用类型通用事件参数的值(CommonCEventArgs)
             </summary>
         </member>
         <member name="M:MGFramework.EventModule.Extends.GetSValue``1(MGFramework.EventModule.IEventArgs)">
             <summary>
-            获取值(Struct)
+            快捷获取 值类型通用事件参数的值(CommonSEventArgs)
             </summary>
         </member>
         <member name="T:MGFramework.EventModule.IEventArgs">
@@ -39,9 +53,14 @@
             简单事件参数
             </summary>
         </member>
+        <member name="P:MGFramework.EventModule.SimpleEventArgs.Empty">
+            <summary>
+            空参数
+            </summary>
+        </member>
         <member name="P:MGFramework.EventModule.SimpleEventArgs.Args">
             <summary>
-            参数集
+            参数集合
             </summary>
         </member>
         <member name="T:MGFramework.EventModule.EventHub">
@@ -68,6 +87,27 @@
             <summary>
             事件管理
             </summary>
+        </member>
+        <member name="M:MGFramework.EventModule.EventManager.AddListener(System.Int32,MGFramework.EventModule.IEventListener)">
+            <summary>
+            添加事件监听
+            </summary>
+            <param name="eventId">事件id</param>
+            <param name="listener">监听对象接口</param>
+        </member>
+        <member name="M:MGFramework.EventModule.EventManager.Dispatch(System.Int32,MGFramework.EventModule.IEventArgs)">
+            <summary>
+            事件执行
+            </summary>
+            <param name="eventId">事件id</param>
+            <param name="args">事件参数</param>
+        </member>
+        <member name="M:MGFramework.EventModule.EventManager.RemoveListener(System.Int32,MGFramework.EventModule.IEventListener)">
+            <summary>
+            移除事件监听
+            </summary>
+            <param name="eventId">事件id</param>
+            <param name="listener">监听对象接口</param>
         </member>
         <member name="T:MGFramework.EventModule.IEventHub">
             <summary>
@@ -98,63 +138,66 @@
             <summary>
             处理事件
             </summary>
+            <param name="eventId">事件id</param>
+            <param name="args">事件参数</param>
         </member>
-        <member name="T:MGFramework.Pool.IPoolObject">
+        <member name="T:MGFramework.IPoolObject">
             <summary>
-            池中对象
+            对象池中的对象
             </summary>
         </member>
-        <member name="P:MGFramework.Pool.IPoolObject.Active">
+        <member name="P:MGFramework.IPoolObject.Active">
             <summary>
             激活
             </summary>
         </member>
-        <member name="M:MGFramework.Pool.IPoolObject.Create(UnityEngine.Transform)">
+        <member name="M:MGFramework.IPoolObject.Create(UnityEngine.Transform)">
             <summary>
             创建
             </summary>
+            <param name="root">根节点</param>
         </member>
-        <member name="M:MGFramework.Pool.IPoolObject.Reset">
+        <member name="M:MGFramework.IPoolObject.Reset">
             <summary>
             重置
             </summary>
         </member>
-        <member name="T:MGFramework.Pool.NormalPoolObject">
+        <member name="T:MGFramework.Pool.BasicPoolObject">
             <summary>
-            通用池中对象
+            基础对象池中的对象
             </summary>
         </member>
-        <member name="F:MGFramework.Pool.NormalPoolObject._root">
+        <member name="F:MGFramework.Pool.BasicPoolObject._root">
             <summary>
             根节点
             </summary>
         </member>
-        <member name="P:MGFramework.Pool.NormalPoolObject.Active">
+        <member name="P:MGFramework.Pool.BasicPoolObject.Active">
             <summary>
             激活
             </summary>
         </member>
-        <member name="M:MGFramework.Pool.NormalPoolObject.Create(UnityEngine.Transform)">
+        <member name="M:MGFramework.Pool.BasicPoolObject.Create(UnityEngine.Transform)">
             <summary>
             创建
             </summary>
         </member>
-        <member name="M:MGFramework.Pool.NormalPoolObject.Reset">
+        <member name="M:MGFramework.Pool.BasicPoolObject.Reset">
             <summary>
             重置
             </summary>
         </member>
-        <member name="M:MGFramework.Pool.NormalPoolObject.OnCreate">
+        <member name="M:MGFramework.Pool.BasicPoolObject.OnCreate">
             <summary>
             创建
             </summary>
         </member>
-        <member name="M:MGFramework.Pool.NormalPoolObject.OnShow">
+        <member name="M:MGFramework.Pool.BasicPoolObject.OnShow">
             <summary>
             显示
             </summary>
         </member>
-        <member name="M:MGFramework.Pool.NormalPoolObject.OnHide">
+        <member name="M:MGFramework.Pool.BasicPoolObject.OnHide">
             <summary>
             隐藏
             </summary>
@@ -392,6 +435,51 @@
             资源管理
             </summary>
         </member>
+        <member name="M:MGFramework.ResourceModule.ResManager.GetAsset``1(System.String,System.String)">
+            <summary>
+            同步获取资源
+            </summary>
+            <typeparam name="T">资源类型</typeparam>
+            <param name="abPath">资源ab包路径</param>
+            <param name="assetName">资源名</param>
+        </member>
+        <member name="M:MGFramework.ResourceModule.ResManager.GetAssetAsync``1(System.String,System.String,System.Action{``0},System.Action{System.Single})">
+            <summary>
+            异步获取资源
+            </summary>
+            <typeparam name="T">资源类型</typeparam>
+            <param name="abPath">资源ab包路径</param>
+            <param name="assetName">资源名</param>
+            <param name="callback">资源回调</param>
+            <param name="progressCallback">进度回调</param>
+        </member>
+        <member name="M:MGFramework.ResourceModule.ResManager.LoadAssetBundle(System.String)">
+            <summary>
+            同步加载AB包
+            </summary>
+            <param name="abPath">ab包路径</param>
+        </member>
+        <member name="M:MGFramework.ResourceModule.ResManager.LoadAssetBundleAsync(System.String,System.Action{UnityEngine.AssetBundle},System.Action{System.Single})">
+            <summary>
+            异步加载AB包
+            </summary>
+            <param name="abPath">ab包路径</param>
+            <param name="callback">ab包加载回调</param>
+            <param name="progressCallback">进度回调</param>
+        </member>
+        <member name="M:MGFramework.ResourceModule.ResManager.Unload(System.String,System.Boolean)">
+            <summary>
+            卸载AB包
+            </summary>
+            <param name="abPath">ab包路径</param>
+            <param name="unloadAllLoadedObjects">是否卸载全部已加载对象</param>
+        </member>
+        <member name="M:MGFramework.ResourceModule.ResManager.UnloadAll(System.Boolean)">
+            <summary>
+            卸载全部AB包
+            </summary>
+            <param name="unloadAllLoadedObjects">是否卸载全部已加载对象</param>
+        </member>
         <member name="M:MGFramework.ResourceModule.ResManager.GetAssetRelative``1(System.String,System.String,MGFramework.ResourceModule.AssetLocation)">
             <summary>
             获取资源
@@ -566,56 +654,69 @@
             临时退出全部列表
             </summary>
         </member>
-        <member name="M:MGFramework.UIModule.UIManager.Enter(System.Int32,System.Action,System.Boolean)">
+        <member name="M:MGFramework.UIModule.UIManager.Enter(System.Int32,System.Boolean,System.Action)">
             <summary>
             进入视图
             </summary>
+            <param name="viewId">视图id</param>
+            <param name="pushStack">是否入视图栈</param>
+            <param name="callback">进入完成回调</param>
         </member>
-        <member name="M:MGFramework.UIModule.UIManager.Enter(IntGroup,System.Action,System.Boolean)">
+        <member name="M:MGFramework.UIModule.UIManager.Enter(IntGroup,System.Boolean,System.Action)">
             <summary>
             进入视图
             </summary>
             <param name="viewGroup">视图组</param>
-            <param name="callback">完成回调</param>
-            <param name="pushStack">入栈</param>
+            <param name="pushStack">是否入视图栈</param>
+            <param name="callback">进入完成回调</param>
         </member>
-        <member name="M:MGFramework.UIModule.UIManager.Quit(System.Int32,System.Action,System.Boolean,System.Boolean)">
+        <member name="M:MGFramework.UIModule.UIManager.Quit(System.Int32,System.Boolean,System.Action,System.Boolean)">
             <summary>
-             退出视图
+            退出视图
             </summary>
+            <param name="viewId">视图id</param>
+            <param name="leaveStack">是否出视图栈</param>
+            <param name="callback">退出完成回调</param>
+            <param name="destroy">是否销毁视图</param>
         </member>
-        <member name="M:MGFramework.UIModule.UIManager.Quit(IntGroup,System.Action,System.Boolean,System.Boolean)">
+        <member name="M:MGFramework.UIModule.UIManager.Quit(IntGroup,System.Boolean,System.Action,System.Boolean)">
             <summary>
             退出视图
             </summary>
             <param name="viewGroup">视图组</param>
+            <param name="leaveStack">出视图栈</param>
             <param name="callback">完成回调</param>
-            <param name="leaveStack">出栈</param>
             <param name="destroy">销毁</param>
         </member>
         <member name="M:MGFramework.UIModule.UIManager.UnFocus(System.Int32)">
             <summary>
             取消焦点
             </summary>
+            <param name="viewId">视图id</param>
         </member>
         <member name="M:MGFramework.UIModule.UIManager.UnFocus(IntGroup)">
             <summary>
             取消焦点
             </summary>
+            <param name="viewGroup">视图组</param>
         </member>
         <member name="M:MGFramework.UIModule.UIManager.QuitAll(System.Boolean)">
             <summary>
-            退出所有页面
+            退出所有视图
             </summary>
+            <param name="destroy">是否销毁</param>
         </member>
         <member name="M:MGFramework.UIModule.UIManager.Pop(System.Action)">
             <summary>
             弹出视图
+            回到上一级视图
             </summary>
+            <param name="callback">完成回调</param>
+            <returns>是否弹出成功</returns>
         </member>
         <member name="M:MGFramework.UIModule.UIManager.ResetStack">
             <summary>
-            清空栈
+            清空视图栈
             </summary>
         </member>
         <member name="T:MGFramework.UIModule.UIManager.ViewState">
@@ -1375,7 +1476,7 @@
         </member>
         <member name="T:MGFramework.Container">
             <summary>
-            简易IOC容器
+            IOC容器
             </summary>
         </member>
         <member name="F:MGFramework.Container._dic">
@@ -1385,43 +1486,67 @@
         </member>
         <member name="M:MGFramework.Container.Regist``2(System.String)">
             <summary>
-            注册
+            注册对象
             </summary>
+            <typeparam name="T">接口</typeparam>
+            <typeparam name="V">实现</typeparam>
+            <param name="name">名字</param>
         </member>
         <member name="M:MGFramework.Container.Regist``2(System.Object)">
             <summary>
-            注册
+            注册对象
             </summary>
+            <typeparam name="T">接口</typeparam>
+            <typeparam name="V">实现</typeparam>
+            <param name="name">名字</param>
         </member>
         <member name="M:MGFramework.Container.RegistSingleton``2(``1,System.String)">
             <summary>
-            注册单例
+            注册单例对象
             </summary>
+            <typeparam name="T">接口</typeparam>
+            <typeparam name="V">实现</typeparam>
+            <param name="obj">已实例化对象</param>
+            <param name="name">名字</param>
         </member>
         <member name="M:MGFramework.Container.RegistSingleton``2">
             <summary>
-            注册单例
+            注册单例对象
             </summary>
+            <typeparam name="T">接口</typeparam>
+            <typeparam name="V">实现</typeparam>
         </member>
         <member name="M:MGFramework.Container.RegistSingleton``2(System.String)">
             <summary>
-            注册单例
+            注册单例对象
             </summary>
+            <typeparam name="T">接口</typeparam>
+            <typeparam name="V">实现</typeparam>
+            <param name="name">名字</param>
         </member>
         <member name="M:MGFramework.Container.RegistSingleton``2(System.Object)">
             <summary>
-            注册单例
+            注册单例对象
             </summary>
+            <typeparam name="T">接口</typeparam>
+            <typeparam name="V">实现</typeparam>
+            <param name="name">名字</param>
         </member>
         <member name="M:MGFramework.Container.Resolve``1(System.String)">
             <summary>
-            解析
+            解析对象
             </summary>
+            <typeparam name="T">接口</typeparam>
+            <param name="name">名字</param>
+            <returns>对应实例化对象</returns>
         </member>
         <member name="M:MGFramework.Container.Resolve``1(System.Object)">
             <summary>
-            解析
+            解析对象
             </summary>
+            <typeparam name="T">接口</typeparam>
+            <param name="name">名字</param>
+            <returns>对应实例化对象</returns>
         </member>
         <member name="M:MGFramework.Container.Regist``1(System.String,MGFramework.Container.ITypeNode)">
             <summary>
