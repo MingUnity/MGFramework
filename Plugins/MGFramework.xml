@@ -162,73 +162,73 @@
             重置
             </summary>
         </member>
-        <member name="T:MGFramework.Pool.BasicPoolObject">
+        <member name="T:MGFramework.BasicPoolObject">
             <summary>
             基础对象池中的对象
             </summary>
         </member>
-        <member name="F:MGFramework.Pool.BasicPoolObject._root">
+        <member name="F:MGFramework.BasicPoolObject._root">
             <summary>
             根节点
             </summary>
         </member>
-        <member name="P:MGFramework.Pool.BasicPoolObject.Active">
+        <member name="P:MGFramework.BasicPoolObject.Active">
             <summary>
             激活
             </summary>
         </member>
-        <member name="M:MGFramework.Pool.BasicPoolObject.Create(UnityEngine.Transform)">
+        <member name="M:MGFramework.BasicPoolObject.Create(UnityEngine.Transform)">
             <summary>
             创建
             </summary>
         </member>
-        <member name="M:MGFramework.Pool.BasicPoolObject.Reset">
+        <member name="M:MGFramework.BasicPoolObject.Reset">
             <summary>
             重置
             </summary>
         </member>
-        <member name="M:MGFramework.Pool.BasicPoolObject.OnCreate">
+        <member name="M:MGFramework.BasicPoolObject.OnCreate">
             <summary>
             创建
             </summary>
         </member>
-        <member name="M:MGFramework.Pool.BasicPoolObject.OnShow">
+        <member name="M:MGFramework.BasicPoolObject.OnShow">
             <summary>
             显示
             </summary>
         </member>
-        <member name="M:MGFramework.Pool.BasicPoolObject.OnHide">
+        <member name="M:MGFramework.BasicPoolObject.OnHide">
             <summary>
             隐藏
             </summary>
         </member>
-        <member name="T:MGFramework.Pool.ObjectPool`1">
+        <member name="T:MGFramework.ObjectPool`1">
             <summary>
             对象池
             </summary>
         </member>
-        <member name="F:MGFramework.Pool.ObjectPool`1._template">
+        <member name="F:MGFramework.ObjectPool`1._template">
             <summary>
             模板
             </summary>
         </member>
-        <member name="F:MGFramework.Pool.ObjectPool`1._name">
+        <member name="F:MGFramework.ObjectPool`1._name">
             <summary>
             名字
             用于DI
             </summary>
         </member>
-        <member name="F:MGFramework.Pool.ObjectPool`1._stack">
+        <member name="F:MGFramework.ObjectPool`1._stack">
             <summary>
             栈
             </summary>
         </member>
-        <member name="M:MGFramework.Pool.ObjectPool`1.Get">
+        <member name="M:MGFramework.ObjectPool`1.Get">
             <summary>
             获取
             </summary>
         </member>
-        <member name="M:MGFramework.Pool.ObjectPool`1.Remove(`0)">
+        <member name="M:MGFramework.ObjectPool`1.Remove(`0)">
             <summary>
             移除
             </summary>
