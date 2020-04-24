@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace MGFramework.Pool
+namespace MGFramework
 {
     /// <summary>
     /// 基础对象池中的对象

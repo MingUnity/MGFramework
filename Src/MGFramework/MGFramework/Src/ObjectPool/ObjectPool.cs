@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace MGFramework.Pool
+namespace MGFramework
 {
     /// <summary>
     /// 对象池
