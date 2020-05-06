@@ -37,7 +37,7 @@ namespace MGFrameworkEditor.UIModule
             CreateMVPView view = GetWindow<CreateMVPView>();
 
             view.titleContent = new GUIContent("MVPCreator");
-            view.position = new Rect(Screen.width * 0.5f, Screen.height * 0.5f, 400, 100);
+            view.position = new Rect(Screen.width * 0.5f, Screen.height * 0.5f, 400, 110);
             view.Show();
         }
 
@@ -49,6 +49,14 @@ namespace MGFrameworkEditor.UIModule
         private void OnGUI()
         {
             EditorGUILayout.BeginVertical();
+
+            EditorGUILayout.Space();
+            
+            EditorGUILayout.LabelField("自动生成View/Presenter文件");
+            
+            EditorGUILayout.Space();
+
+            EditorGUILayout.LabelField("请输入关键字");
 
             EditorGUILayout.Space();
 
