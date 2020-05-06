@@ -633,25 +633,105 @@
             退出全部
             </summary>
         </member>
-        <member name="T:MGFramework.UIModule.UIManager">
+        <member name="T:MGFramework.UIModule.PopUIModule">
             <summary>
-            UI管理
+            弹出UI模块
             </summary>
         </member>
-        <member name="F:MGFramework.UIModule.UIManager._viewStack">
+        <member name="F:MGFramework.UIModule.PopUIModule._viewStack">
             <summary>
             视图栈
             用于存储需要入栈的视图
             </summary>
         </member>
-        <member name="F:MGFramework.UIModule.UIManager._viewDic">
+        <member name="F:MGFramework.UIModule.PopUIModule._viewDic">
             <summary>
             所有激活过视图字典
             </summary>
         </member>
-        <member name="F:MGFramework.UIModule.UIManager._tempQuitAllList">
+        <member name="F:MGFramework.UIModule.PopUIModule._tempQuitAllList">
             <summary>
             临时退出全部列表
+            </summary>
+        </member>
+        <member name="M:MGFramework.UIModule.PopUIModule.Enter(System.Int32,System.Boolean,System.Action)">
+            <summary>
+            进入视图
+            </summary>
+            <param name="viewId">视图id</param>
+            <param name="pushStack">是否入视图栈</param>
+            <param name="callback">进入完成回调</param>
+        </member>
+        <member name="M:MGFramework.UIModule.PopUIModule.Enter(IntGroup,System.Boolean,System.Action)">
+            <summary>
+            进入视图
+            </summary>
+            <param name="viewGroup">视图组</param>
+            <param name="pushStack">是否入视图栈</param>
+            <param name="callback">进入完成回调</param>
+        </member>
+        <member name="M:MGFramework.UIModule.PopUIModule.Quit(System.Int32,System.Boolean,System.Action,System.Boolean)">
+            <summary>
+            退出视图
+            </summary>
+            <param name="viewId">视图id</param>
+            <param name="leaveStack">是否出视图栈</param>
+            <param name="callback">退出完成回调</param>
+            <param name="destroy">是否销毁视图</param>
+        </member>
+        <member name="M:MGFramework.UIModule.PopUIModule.Quit(IntGroup,System.Boolean,System.Action,System.Boolean)">
+            <summary>
+            退出视图
+            </summary>
+            <param name="viewGroup">视图组</param>
+            <param name="leaveStack">出视图栈</param>
+            <param name="callback">完成回调</param>
+            <param name="destroy">销毁</param>
+        </member>
+        <member name="M:MGFramework.UIModule.PopUIModule.UnFocus(System.Int32)">
+            <summary>
+            取消焦点
+            </summary>
+            <param name="viewId">视图id</param>
+        </member>
+        <member name="M:MGFramework.UIModule.PopUIModule.UnFocus(IntGroup)">
+            <summary>
+            取消焦点
+            </summary>
+            <param name="viewGroup">视图组</param>
+        </member>
+        <member name="M:MGFramework.UIModule.PopUIModule.QuitAll(System.Boolean)">
+            <summary>
+            退出所有视图
+            </summary>
+            <param name="destroy">是否销毁</param>
+        </member>
+        <member name="M:MGFramework.UIModule.PopUIModule.Pop(System.Action)">
+            <summary>
+            弹出视图
+            回到上一级视图
+            </summary>
+            <param name="callback">完成回调</param>
+            <returns>是否弹出成功</returns>
+        </member>
+        <member name="M:MGFramework.UIModule.PopUIModule.ResetStack">
+            <summary>
+            清空视图栈
+            </summary>
+        </member>
+        <member name="T:MGFramework.UIModule.PopUIModule.ViewState">
+            <summary>
+            视图状态
+            </summary>
+        </member>
+        <member name="F:MGFramework.UIModule.PopUIModule.ViewState.active">
+            <summary>
+            激活
+            </summary>
+        </member>
+        <member name="T:MGFramework.UIModule.UIManager">
+            <summary>
+            UI管理
             </summary>
         </member>
         <member name="M:MGFramework.UIModule.UIManager.Enter(System.Int32,System.Boolean,System.Action)">
@@ -717,16 +797,6 @@
         <member name="M:MGFramework.UIModule.UIManager.ResetStack">
             <summary>
             清空视图栈
-            </summary>
-        </member>
-        <member name="T:MGFramework.UIModule.UIManager.ViewState">
-            <summary>
-            视图状态
-            </summary>
-        </member>
-        <member name="F:MGFramework.UIModule.UIManager.ViewState.active">
-            <summary>
-            激活
             </summary>
         </member>
         <member name="T:MGFramework.UIModule.UIModule">

@@ -6,29 +6,13 @@ namespace MGFramework.UIModule
     /// <summary>
     /// UI管理
     /// </summary>
-    public sealed class UIManager : Singleton<UIManager>
+    public sealed class UIManager : Singleton<UIManager>, IPopUIModule
     {
-        private IUIModule _uiModule;
-
-        /// <summary>
-        /// 视图栈
-        /// 用于存储需要入栈的视图
-        /// </summary>
-        private SpecialStack<IntGroup> _viewStack = new SpecialStack<IntGroup>();
-
-        /// <summary>
-        /// 所有激活过视图字典
-        /// </summary>
-        private Dictionary<int, ViewState> _viewDic = new Dictionary<int, ViewState>();
-
-        /// <summary>
-        /// 临时退出全部列表
-        /// </summary>
-        private List<int> _tempQuitAllList = new List<int>();
+        private IPopUIModule _module;
 
         public UIManager()
         {
-            _uiModule = new UIModule();
+            _module = new PopUIModule();
         }
 
         /// <summary>
@@ -39,32 +23,7 @@ namespace MGFramework.UIModule
         /// <param name="callback">进入完成回调</param>
         public void Enter(int viewId, bool pushStack = true, Action callback = null)
         {
-            ViewState state;
-
-            _viewDic.TryGetValue(viewId, out state);
-
-            if (!state.active)
-            {
-                state.active = true;
-
-                _viewDic[viewId] = state;
-
-                _uiModule?.Enter(viewId, () =>
-                {
-                    callback?.Invoke();
-
-                    _uiModule?.Focus(viewId);
-                });
-            }
-            else
-            {
-                _uiModule?.Focus(viewId);
-            }
-
-            if (pushStack)
-            {
-                _viewStack.Push(IntGroup.Get(viewId));
-            }
+            _module.Enter(viewId, pushStack, callback);
         }
 
         /// <summary>
@@ -75,25 +34,7 @@ namespace MGFramework.UIModule
         /// <param name="callback">进入完成回调</param>
         public void Enter(IntGroup viewGroup, bool pushStack = true, Action callback = null)
         {
-            int all = viewGroup.Count;
-            int done = 0;
-
-            for (int i = 0; i < all; i++)
-            {
-                Enter(viewGroup[i], false, () =>
-               {
-                   done++;
-                   if (done >= all)
-                   {
-                       callback?.Invoke();
-                   }
-               });
-            }
-
-            if (pushStack)
-            {
-                _viewStack.Push(viewGroup);
-            }
+            _module.Enter(viewGroup, pushStack, callback);
         }
 
         /// <summary>
@@ -105,29 +46,7 @@ namespace MGFramework.UIModule
         /// <param name="destroy">是否销毁视图</param>
         public void Quit(int viewId, bool leaveStack = false, Action callback = null, bool destroy = false)
         {
-            ViewState state;
-
-            if (_viewDic.TryGetValue(viewId, out state))
-            {
-                if (state.active)
-                {
-                    state.active = false;
-
-                    _viewDic[viewId] = state;
-
-                    _uiModule?.Quit(viewId, () =>
-                    {
-                        callback?.Invoke();
-
-                        _uiModule?.UnFocus(viewId);
-                    }, destroy);
-                }
-            }
-
-            if (leaveStack)
-            {
-                _viewStack.Delete(IntGroup.Get(viewId));
-            }
+            _module.Quit(viewId, leaveStack, callback, destroy);
         }
 
         /// <summary>
@@ -139,25 +58,7 @@ namespace MGFramework.UIModule
         /// <param name="destroy">销毁</param>
         public void Quit(IntGroup viewGroup, bool leaveStack = false, Action callback = null, bool destroy = false)
         {
-            int all = viewGroup.Count;
-            int done = 0;
-
-            for (int i = 0; i < all; i++)
-            {
-                Quit(viewGroup[i], false, () =>
-               {
-                   done++;
-                   if (done >= all)
-                   {
-                       callback?.Invoke();
-                   }
-               }, destroy);
-            }
-
-            if (leaveStack)
-            {
-                _viewStack.Delete(viewGroup);
-            }
+            _module.Quit(viewGroup, leaveStack, callback, destroy);
         }
 
         /// <summary>
@@ -166,7 +67,7 @@ namespace MGFramework.UIModule
         /// <param name="viewId">视图id</param>
         public void UnFocus(int viewId)
         {
-            _uiModule?.UnFocus(viewId);
+            _module.UnFocus(viewId);
         }
 
         /// <summary>
@@ -175,10 +76,7 @@ namespace MGFramework.UIModule
         /// <param name="viewGroup">视图组</param>
         public void UnFocus(IntGroup viewGroup)
         {
-            for (int i = 0; i < viewGroup.Count; i++)
-            {
-                UnFocus(viewGroup[i]);
-            }
+            _module.UnFocus(viewGroup);
         }
 
         /// <summary>
@@ -187,20 +85,7 @@ namespace MGFramework.UIModule
         /// <param name="destroy">是否销毁</param>
         public void QuitAll(bool destroy = false)
         {
-            _tempQuitAllList.Clear();
-
-            foreach (int id in _viewDic.Keys)
-            {
-                _tempQuitAllList.Add(id);
-            }
-
-            for (int i = 0; i < _tempQuitAllList.Count; i++)
-            {
-                Quit(_tempQuitAllList[i], false, null, destroy);
-            }
-
-            _viewDic.Clear();
-            ResetStack();
+            _module.QuitAll(destroy);
         }
 
         /// <summary>
@@ -211,25 +96,7 @@ namespace MGFramework.UIModule
         /// <returns>是否弹出成功</returns>
         public bool Pop(Action callback = null)
         {
-            bool res = false;
-
-            IntGroup curId = IntGroup.Empty;
-            IntGroup dstId = IntGroup.Empty;
-
-            if (_viewStack.Count > 1)
-            {
-                if (_viewStack.Pop(out curId) && _viewStack.Peek(out dstId))
-                {
-                    res = true;
-
-                    Quit(curId, false, () =>
-                    {
-                        Enter(dstId, false, callback);
-                    });
-                }
-            }
-
-            return res;
+            return _module.Pop(callback);
         }
 
         /// <summary>
@@ -237,18 +104,7 @@ namespace MGFramework.UIModule
         /// </summary>
         public void ResetStack()
         {
-            _viewStack.Clear();
-        }
-
-        /// <summary>
-        /// 视图状态
-        /// </summary>
-        private struct ViewState
-        {
-            /// <summary>
-            /// 激活
-            /// </summary>
-            public bool active;
+            _module.ResetStack();
         }
     }
 }

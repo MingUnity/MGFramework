@@ -79,7 +79,9 @@
     <Compile Include="Src\SimpleData\Float3.cs" />
     <Compile Include="Src\SimpleData\Int2.cs" />
     <Compile Include="Src\SimpleData\Int3.cs" />
+    <Compile Include="Src\UIModule\Core\IPopUIModule.cs" />
     <Compile Include="Src\UIModule\Core\IUIModule.cs" />
+    <Compile Include="Src\UIModule\Core\PopUIModule.cs" />
     <Compile Include="Src\UIModule\Core\UIManager.cs" />
     <Compile Include="Src\UIModule\Core\UIModule.cs" />
     <Compile Include="Src\UIModule\Extends\Components\ButtonEx.cs" />
