@@ -16,6 +16,8 @@ namespace MGFramework.UIModule
         [SerializeField]
         private float _radius = 100;
 
+        private DrivenRectTransformTracker _tracker;
+
         /// <summary>
         /// 半径
         /// </summary>
@@ -36,9 +38,14 @@ namespace MGFramework.UIModule
             }
         }
 
-        private void Start()
+        private void OnEnable()
         {
             Refresh();
+        }
+
+        private void OnDisable()
+        {
+            _tracker.Clear();
         }
 
         private void OnValidate()
@@ -58,15 +65,22 @@ namespace MGFramework.UIModule
         /// </summary>
         private void Refresh()
         {
+            _tracker.Clear();
+
             int childCount = this.transform.childCount;
-            
+
             if (childCount > 0)
             {
                 RectTransform[] children = new RectTransform[childCount];
 
                 for (int i = 0; i < childCount; i++)
                 {
-                    children[i] = this.transform.GetChild(i) as RectTransform;
+                    RectTransform trans = this.transform.GetChild(i) as RectTransform;
+                    _tracker.Add(this, trans, DrivenTransformProperties.AnchoredPosition | DrivenTransformProperties.Anchors);
+                    trans.anchorMax = 0.5f * Vector2.one;
+                    trans.anchorMin = 0.5f * Vector2.one;
+
+                    children[i] = trans;
                 }
 
                 float delta = 2 * Mathf.PI / childCount;
