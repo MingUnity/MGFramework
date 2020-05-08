@@ -50,7 +50,7 @@ namespace MGFrameworkEditor.UIModule
         {
             EditorGUILayout.BeginVertical();
 
-            EditorGUILayout.Space();
+            EditorGUILayout.Space(); 
             
             EditorGUILayout.LabelField("自动生成View/Presenter文件");
             
@@ -62,7 +62,7 @@ namespace MGFrameworkEditor.UIModule
 
             _keyword = EditorGUILayout.TextField(_keyword);
 
-            EditorGUILayout.Space();
+            EditorGUILayout.Space(); 
 
             if (GUILayout.Button("Create"))
             {
