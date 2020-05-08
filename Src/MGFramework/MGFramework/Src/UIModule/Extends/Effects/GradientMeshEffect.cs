@@ -4,7 +4,10 @@ using UnityEngine.UI;
 
 namespace MGFramework.UIModule
 {
-    [AddComponentMenu("UI/Effects/Gradient")]
+    /// <summary>
+    /// 渐变色效果
+    /// </summary>
+    [AddComponentMenu("MGFramework/Gradient")]
     [RequireComponent(typeof(Graphic))]
     public class GradientMeshEffect : BaseMeshEffect
     {

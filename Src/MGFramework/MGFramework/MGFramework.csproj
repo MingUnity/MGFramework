@@ -85,6 +85,7 @@
     <Compile Include="Src\UIModule\Core\UIManager.cs" />
     <Compile Include="Src\UIModule\Core\UIModule.cs" />
     <Compile Include="Src\UIModule\Extends\Components\ButtonEx.cs" />
+    <Compile Include="Src\UIModule\Extends\Components\CircleLayoutGroup.cs" />
     <Compile Include="Src\UIModule\Extends\Components\EmptyGraphic.cs" />
     <Compile Include="Src\UIModule\Extends\Components\ToggleEx.cs" />
     <Compile Include="Src\UIModule\Extends\Effects\GradientMeshEffect.cs" />

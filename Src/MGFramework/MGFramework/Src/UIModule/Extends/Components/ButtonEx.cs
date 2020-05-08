@@ -6,6 +6,7 @@ namespace MGFramework.UIModule
     /// <summary>
     /// UGUI按钮扩展
     /// </summary>
+    [AddComponentMenu("MGFramework/ButtonEx")]
     public class ButtonEx : Button
     {
         /// <summary>

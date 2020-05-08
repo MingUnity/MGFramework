@@ -1,6 +1,4 @@
 ﻿using UnityEngine;
-using UnityEngine.Events;
-using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 namespace MGFramework.UIModule
@@ -8,6 +6,7 @@ namespace MGFramework.UIModule
     /// <summary>
     /// Toggle扩展
     /// </summary>
+    [AddComponentMenu("MGFramework/ToggleEx")] 
     public class ToggleEx : Toggle
     {
         /// <summary>

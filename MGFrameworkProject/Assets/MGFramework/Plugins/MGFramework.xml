@@ -859,6 +859,21 @@
             禁用态 文本颜色
             </summary>
         </member>
+        <member name="T:MGFramework.UIModule.CircleLayoutGroup">
+            <summary>
+            圆形布局
+            </summary>
+        </member>
+        <member name="P:MGFramework.UIModule.CircleLayoutGroup.Radius">
+            <summary>
+            半径
+            </summary>
+        </member>
+        <member name="M:MGFramework.UIModule.CircleLayoutGroup.Refresh">
+            <summary>
+            刷新
+            </summary>
+        </member>
         <member name="T:MGFramework.UIModule.EmptyGraphic">
             <summary>
             空图
@@ -898,6 +913,11 @@
         <member name="F:MGFramework.UIModule.ToggleEx.isOnTextColor">
             <summary>
             选中态 文本颜色
+            </summary>
+        </member>
+        <member name="T:MGFramework.UIModule.GradientMeshEffect">
+            <summary>
+            渐变色效果
             </summary>
         </member>
         <member name="F:MGFramework.UIModule.GradientMeshEffect.direction">
