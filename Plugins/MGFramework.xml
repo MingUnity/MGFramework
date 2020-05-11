@@ -603,6 +603,31 @@
             默认
             </summary>
         </member>
+        <member name="T:MGFramework.UIModule.RoundedRect">
+            <summary>
+            圆角矩形
+            </summary>
+        </member>
+        <member name="F:MGFramework.UIModule.RoundedRect._graphic">
+            <summary>
+            当前gameobject图形组件
+            </summary>
+        </member>
+        <member name="F:MGFramework.UIModule.RoundedRect._roundedPixel">
+            <summary>
+            圆角像素值
+            </summary>
+        </member>
+        <member name="F:MGFramework.UIModule.RoundedRect._matCache">
+            <summary>
+            材质缓存
+            </summary>
+        </member>
+        <member name="M:MGFramework.UIModule.RoundedRect.Refresh">
+            <summary>
+            设置圆角矩形shader数据
+            </summary>
+        </member>
         <member name="T:MGFramework.UIModule.IUIModule">
             <summary>
             UI模块
