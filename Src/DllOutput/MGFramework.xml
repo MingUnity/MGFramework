@@ -633,6 +633,11 @@
             退出全部
             </summary>
         </member>
+        <member name="M:MGFramework.UIModule.IUIModule.Preload(System.Int32)">
+            <summary>
+            预加载
+            </summary>
+        </member>
         <member name="T:MGFramework.UIModule.PopUIModule">
             <summary>
             弹出UI模块
@@ -719,6 +724,16 @@
             清空视图栈
             </summary>
         </member>
+        <member name="M:MGFramework.UIModule.PopUIModule.Preload(System.Int32)">
+            <summary>
+            预加载
+            </summary>
+        </member>
+        <member name="M:MGFramework.UIModule.PopUIModule.Preload(IntGroup)">
+            <summary>
+            预加载
+            </summary>
+        </member>
         <member name="T:MGFramework.UIModule.PopUIModule.ViewState">
             <summary>
             视图状态
@@ -799,6 +814,16 @@
             清空视图栈
             </summary>
         </member>
+        <member name="M:MGFramework.UIModule.UIManager.Preload(System.Int32)">
+            <summary>
+            预加载
+            </summary>
+        </member>
+        <member name="M:MGFramework.UIModule.UIManager.Preload(IntGroup)">
+            <summary>
+            预加载
+            </summary>
+        </member>
         <member name="T:MGFramework.UIModule.UIModule">
             <summary>
             UI模块
@@ -819,6 +844,11 @@
             聚焦
             </summary>
         </member>
+        <member name="M:MGFramework.UIModule.UIModule.Preload(System.Int32)">
+            <summary>
+            预加载
+            </summary>
+        </member>
         <member name="M:MGFramework.UIModule.UIModule.Quit(System.Int32,System.Action,System.Boolean)">
             <summary>
             退出
@@ -827,6 +857,11 @@
         <member name="M:MGFramework.UIModule.UIModule.QuitAll(System.Action,System.Boolean)">
             <summary>
             退出全部
+            </summary>
+        </member>
+        <member name="M:MGFramework.UIModule.UIModule.UnFocus(System.Int32)">
+            <summary>
+            失焦
             </summary>
         </member>
         <member name="T:MGFramework.UIModule.ButtonEx">
@@ -1362,6 +1397,11 @@
             交互
             </summary>
         </member>
+        <member name="P:MGFramework.UIModule.IView.Active">
+            <summary>
+            激活
+            </summary>
+        </member>
         <member name="M:MGFramework.UIModule.IView.Create(System.Action)">
             <summary>
             创建
@@ -1504,6 +1544,11 @@
         <member name="P:MGFramework.UIModule.ViewGroup.Presenter">
             <summary>   
             交互控制
+            </summary>
+        </member>
+        <member name="P:MGFramework.UIModule.ViewGroup.Active">
+            <summary>
+            激活
             </summary>
         </member>
         <member name="F:MGFramework.UIModule.ViewGroup._subViews">

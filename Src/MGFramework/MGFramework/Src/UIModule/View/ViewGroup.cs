@@ -38,6 +38,35 @@ namespace MGFramework.UIModule
         }
 
         /// <summary>
+        /// 激活
+        /// </summary>
+        public bool Active
+        {
+            get
+            {
+                bool res = false;
+
+                for (int i = 0; i < _subViews.Count; i++)
+                {
+                    if (_subViews[i].Active)
+                    {
+                        res = true;
+                        break;
+                    }
+                }
+
+                return res;
+            }
+            set
+            {
+                for (int i = 0; i < _subViews.Count; i++)
+                {
+                    _subViews[i].Active = value;
+                }
+            }
+        }
+
+        /// <summary>
         /// 子视图集合
         /// </summary>
         protected List<IView> _subViews = new List<IView>();

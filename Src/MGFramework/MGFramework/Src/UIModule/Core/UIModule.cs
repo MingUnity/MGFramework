@@ -62,6 +62,26 @@ namespace MGFramework.UIModule
         }
 
         /// <summary>
+        /// 预加载
+        /// </summary>
+        public void Preload(int viewId)
+        {
+            IView view = this[viewId];
+
+            if (view == null)
+            {
+                view = Container.Resolve<IView>(viewId);
+
+                view?.Create(() =>
+                {
+                    this[viewId] = view;
+
+                    view.Active = false;
+                });
+            }
+        }
+
+        /// <summary>
         /// 退出
         /// </summary>
         public void Quit(int viewId, Action callback = null, bool destroy = false)
@@ -114,6 +134,9 @@ namespace MGFramework.UIModule
             }
         }
 
+        /// <summary>
+        /// 失焦
+        /// </summary>
         public void UnFocus(int viewId)
         {
             this[viewId]?.UnFocus();

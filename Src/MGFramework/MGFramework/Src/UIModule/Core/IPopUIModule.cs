@@ -11,6 +11,8 @@ namespace MGFramework.UIModule
         void Quit(IntGroup viewGroup, bool leaveStack = false, Action callback = null, bool destroy = false);
         void QuitAll(bool destroy = false);
         void ResetStack();
+        void Preload(int viewId);
+        void Preload(IntGroup viewGroup);
         void UnFocus(int viewId);
         void UnFocus(IntGroup viewGroup);
     }

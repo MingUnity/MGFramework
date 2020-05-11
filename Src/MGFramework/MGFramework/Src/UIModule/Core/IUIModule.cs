@@ -31,5 +31,10 @@ namespace MGFramework.UIModule
         /// 退出全部
         /// </summary>
         void QuitAll(Action callback = null, bool destroy = false);
+
+        /// <summary>
+        /// 预加载
+        /// </summary>
+        void Preload(int viewId);
     }
 }

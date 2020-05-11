@@ -13,6 +13,11 @@ namespace MGFramework.UIModule
         IPresenter Presenter { get; set; }
 
         /// <summary>
+        /// 激活
+        /// </summary>
+        bool Active { get; set; }
+
+        /// <summary>
         /// 创建
         /// </summary>
         void Create(Action callback = null);

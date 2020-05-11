@@ -106,5 +106,21 @@ namespace MGFramework.UIModule
         {
             _module.ResetStack();
         }
+
+        /// <summary>
+        /// 预加载
+        /// </summary>
+        public void Preload(int viewId)
+        {
+            _module.Preload(viewId);
+        }
+
+        /// <summary>
+        /// 预加载
+        /// </summary>
+        public void Preload(IntGroup viewGroup)
+        {
+            _module.Preload(viewGroup);
+        }
     }
 }

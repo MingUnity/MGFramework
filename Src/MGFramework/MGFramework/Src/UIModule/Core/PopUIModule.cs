@@ -241,6 +241,33 @@ namespace MGFramework.UIModule
         }
 
         /// <summary>
+        /// 预加载
+        /// </summary>
+        public void Preload(int viewId)
+        {
+            if (!_viewDic.ContainsKey(viewId))
+            {
+                _uiModule.Preload(viewId);
+
+                _viewDic[viewId] = new ViewState()
+                {
+                    active = false
+                };
+            }
+        }
+
+        /// <summary>
+        /// 预加载
+        /// </summary>
+        public void Preload(IntGroup viewGroup)
+        {
+            for (int i = 0; i < viewGroup.Count; i++)
+            {
+                Preload(viewGroup[i]);
+            }
+        }
+
+        /// <summary>
         /// 视图状态
         /// </summary>
         private struct ViewState

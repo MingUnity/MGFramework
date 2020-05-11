@@ -8,3 +8,7 @@
 /Src/MGFrameworkEditor/MGFrameworkEditor/bin
 /MGFrameworkProject/Temp
 /Src/MGFramework/MGFramework/*.user
+/MGFrameworkProject/obj
+/MGFrameworkProject/.vs
+/MGFrameworkProject/MGFrameworkProject.sln
+/MGFrameworkProject/Assembly-CSharp.csproj

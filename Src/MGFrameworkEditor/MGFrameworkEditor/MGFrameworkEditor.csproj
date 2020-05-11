@@ -68,6 +68,7 @@
     <Compile Include="Src\ResourceModule\AssetBundleBuilder.cs" />
     <Compile Include="Src\ResourceModule\AssetBundleSettingModel.cs" />
     <Compile Include="Src\ResourceModule\AssetBundleSettingView.cs" />
+    <Compile Include="Src\ResourceModule\EditorResManager.cs" />
     <Compile Include="Src\UIModule\ExtendCompl\ButtonExEditor.cs" />
     <Compile Include="Src\UIModule\ExtendCompl\ToggleExEditor.cs" />
     <Compile Include="Src\UIModule\MVPTools\CreateMVPModel.cs" />
