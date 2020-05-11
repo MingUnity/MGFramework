@@ -3,7 +3,9 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - UILayer_01
+  - UILayer_02
   layers:
   - Default
   - TransparentFX

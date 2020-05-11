@@ -1,0 +1,10 @@
+ManifestFileVersion: 0
+CRC: 2006367007
+AssetBundleManifest:
+  AssetBundleInfos:
+    Info_0:
+      Name: b.ab
+      Dependencies: {}
+    Info_1:
+      Name: sampleaview.assetbundle
+      Dependencies: {}
