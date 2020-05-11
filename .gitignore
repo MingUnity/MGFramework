@@ -12,3 +12,5 @@
 /MGFrameworkProject/.vs
 /MGFrameworkProject/MGFrameworkProject.sln
 /MGFrameworkProject/Assembly-CSharp.csproj
+/MGFrameworkProject/*.csproj
+/MGFrameworkProject/*.apk

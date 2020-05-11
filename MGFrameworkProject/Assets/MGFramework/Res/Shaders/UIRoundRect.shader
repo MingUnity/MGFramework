@@ -1,4 +1,4 @@
-﻿Shader "Custom/UIRoundRect"
+﻿Shader "MGFramework/UIRoundRect"
 {
     Properties
     {
