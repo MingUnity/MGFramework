@@ -924,6 +924,11 @@
             圆形布局
             </summary>
         </member>
+        <member name="F:MGFramework.UIModule.CircleLayoutGroup._children">
+            <summary>
+            子节点
+            </summary>
+        </member>
         <member name="P:MGFramework.UIModule.CircleLayoutGroup.Radius">
             <summary>
             半径
