@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace MGFramework.UIModule
@@ -17,6 +18,11 @@ namespace MGFramework.UIModule
         private float _radius = 100;
 
         private DrivenRectTransformTracker _tracker;
+
+        /// <summary>
+        /// 子节点
+        /// </summary>
+        private List<RectTransform> _children = new List<RectTransform>();
 
         /// <summary>
         /// 半径
@@ -65,27 +71,28 @@ namespace MGFramework.UIModule
         /// </summary>
         private void Refresh()
         {
+            _children.Clear();
             _tracker.Clear();
 
             int childCount = this.transform.childCount;
 
             if (childCount > 0)
             {
-                RectTransform[] children = new RectTransform[childCount];
-
                 for (int i = 0; i < childCount; i++)
                 {
                     RectTransform trans = this.transform.GetChild(i) as RectTransform;
-                    _tracker.Add(this, trans, DrivenTransformProperties.AnchoredPosition | DrivenTransformProperties.Anchors);
-                    trans.anchorMax = 0.5f * Vector2.one;
-                    trans.anchorMin = 0.5f * Vector2.one;
-
-                    children[i] = trans;
+                    if (trans.gameObject.activeSelf)
+                    {
+                        _tracker.Add(this, trans, DrivenTransformProperties.AnchoredPosition | DrivenTransformProperties.Anchors);
+                        trans.anchorMax = 0.5f * Vector2.one;
+                        trans.anchorMin = 0.5f * Vector2.one;
+                        _children.Add(trans);
+                    }
                 }
 
-                float delta = 2 * Mathf.PI / childCount;
+                float delta = 2 * Mathf.PI / _children.Count;
 
-                for (int i = 0; i < childCount; i++)
+                for (int i = 0; i < _children.Count; i++)
                 {
                     float angle = i * delta;
 
@@ -93,7 +100,7 @@ namespace MGFramework.UIModule
 
                     float deltaY = _radius * -Mathf.Sin(angle - 0.5f * Mathf.PI);
 
-                    children[i].anchoredPosition = new Vector2(deltaX, deltaY);
+                    _children[i].anchoredPosition = new Vector2(deltaX, deltaY);
                 }
             }
         }
