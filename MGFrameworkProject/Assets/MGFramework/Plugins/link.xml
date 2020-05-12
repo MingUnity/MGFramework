@@ -1,0 +1,4 @@
+
+<linker>
+       <assembly fullname="MGFramework" preserve="all"/>
+</linker>
