@@ -101,14 +101,20 @@ namespace MGFramework.UIModule
 
         private Material CreateMat(float width, float height)
         {
-            Material mat = Material.Instantiate<Material>(Graphic.defaultGraphicMaterial);
-            mat.name = "RoundedRectMaterial";
-            mat.shader = Shader.Find("MGFramework/UIRoundRect");
-            mat.SetFloat("_Width", width);
-            mat.SetFloat("_Height", height);
-            mat.SetFloat("_RoundedRadius", _roundedPixel);
-
-            return mat;
+            try
+            {
+                Material mat = Material.Instantiate<Material>(Graphic.defaultGraphicMaterial);
+                mat.name = "RoundedRectMaterial";
+                mat.shader = Shader.Find("MGFramework/UIRoundRect");
+                mat.SetFloat("_Width", width);
+                mat.SetFloat("_Height", height);
+                mat.SetFloat("_RoundedRadius", _roundedPixel);
+                return mat;
+            }
+            catch
+            {
+                return Graphic.defaultGraphicMaterial;
+            }
         }
 
         private struct Param : IEquatable<Param>
