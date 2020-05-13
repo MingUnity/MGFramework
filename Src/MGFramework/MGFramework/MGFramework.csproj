@@ -59,6 +59,11 @@
     <Compile Include="Src\EventModule\Core\EventManager.cs" />
     <Compile Include="Src\EventModule\Core\IEventHub.cs" />
     <Compile Include="Src\EventModule\Core\IEventListener.cs" />
+    <Compile Include="Src\FSMSystem\Core\IFSMState.cs" />
+    <Compile Include="Src\FSMSystem\Core\IFSMSystem.cs" />
+    <Compile Include="Src\FSMSystem\Domain\AnyState.cs" />
+    <Compile Include="Src\FSMSystem\Domain\FSMState.cs" />
+    <Compile Include="Src\FSMSystem\Domain\FSMSystem.cs" />
     <Compile Include="Src\ObjectPool\IPoolObject.cs" />
     <Compile Include="Src\ObjectPool\BasicPoolObject.cs" />
     <Compile Include="Src\ObjectPool\ObjectPool.cs" />

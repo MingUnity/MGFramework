@@ -141,6 +141,146 @@
             <param name="eventId">事件id</param>
             <param name="args">事件参数</param>
         </member>
+        <member name="T:MGFramework.FSM.IFSMState">
+            <summary>
+            状态接口
+            </summary>
+        </member>
+        <member name="P:MGFramework.FSM.IFSMState.Item(System.Int32)">
+            <summary>
+            获取目标状态
+            </summary>
+        </member>
+        <member name="M:MGFramework.FSM.IFSMState.OnEnter(System.Object[])">
+            <summary>
+            进入
+            </summary>
+        </member>
+        <member name="M:MGFramework.FSM.IFSMState.OnExit">
+            <summary>
+            退出
+            </summary>
+        </member>
+        <member name="M:MGFramework.FSM.IFSMState.OnStay">
+            <summary>
+            驻留
+            </summary>
+        </member>
+        <member name="T:MGFramework.FSM.IFSMSystem">
+            <summary>
+            有限状态机接口
+            </summary>
+        </member>
+        <member name="P:MGFramework.FSM.IFSMSystem.AnyState">
+            <summary>
+            任意状态
+            </summary>
+        </member>
+        <member name="M:MGFramework.FSM.IFSMSystem.AddState(MGFramework.FSM.IFSMState,System.Boolean)">
+            <summary>
+            添加状态
+            </summary>
+        </member>
+        <member name="M:MGFramework.FSM.IFSMSystem.SetTransition(System.Int32,System.Object[])">
+            <summary>
+            设置过渡
+            </summary>
+        </member>
+        <member name="M:MGFramework.FSM.IFSMSystem.TurnDefault">
+            <summary>
+            跳转默认状态
+            </summary>
+        </member>
+        <member name="M:MGFramework.FSM.IFSMSystem.Update">
+            <summary>
+            刷新
+            </summary>
+        </member>
+        <member name="T:MGFramework.FSM.AnyState">
+            <summary>
+            任意状态
+            </summary>
+        </member>
+        <member name="T:MGFramework.FSM.FSMState">
+            <summary>
+            FSM状态
+            </summary>
+        </member>
+        <member name="P:MGFramework.FSM.FSMState.Item(System.Int32)">
+            <summary>
+            获取目标状态
+            </summary>
+        </member>
+        <member name="M:MGFramework.FSM.FSMState.OnEnter(System.Object[])">
+            <summary>
+            进入
+            </summary>
+        </member>
+        <member name="M:MGFramework.FSM.FSMState.OnExit">
+            <summary>
+            退出
+            </summary>
+        </member>
+        <member name="M:MGFramework.FSM.FSMState.OnStay">
+            <summary>
+            驻留
+            </summary>
+        </member>
+        <member name="T:MGFramework.FSM.FSMSystem">
+            <summary>
+            有限状态机
+            </summary>
+        </member>
+        <member name="F:MGFramework.FSM.FSMSystem._stateList">
+            <summary>
+            状态列表
+            </summary>
+        </member>
+        <member name="F:MGFramework.FSM.FSMSystem._curState">
+            <summary>
+            当前状态
+            </summary>
+        </member>
+        <member name="F:MGFramework.FSM.FSMSystem._defaultState">
+            <summary>
+            默认状态
+            </summary>
+        </member>
+        <member name="F:MGFramework.FSM.FSMSystem._anyState">
+            <summary>
+            任意状态
+            </summary>
+        </member>
+        <member name="P:MGFramework.FSM.FSMSystem.AnyState">
+            <summary>
+            任意状态
+            </summary>
+        </member>
+        <member name="M:MGFramework.FSM.FSMSystem.AddState(MGFramework.FSM.IFSMState,System.Boolean)">
+            <summary>
+            添加状态
+            </summary>
+        </member>
+        <member name="M:MGFramework.FSM.FSMSystem.TurnDefault">
+            <summary>
+            跳转默认状态
+            </summary>
+        </member>
+        <member name="M:MGFramework.FSM.FSMSystem.SetTransition(System.Int32,System.Object[])">
+            <summary>
+            设置过渡
+            </summary>
+        </member>
+        <member name="M:MGFramework.FSM.FSMSystem.Update">
+            <summary>
+            刷新
+            </summary>
+        </member>
+        <member name="M:MGFramework.FSM.FSMSystem.TurnState(MGFramework.FSM.IFSMState,MGFramework.FSM.IFSMState,System.Object[])">
+            <summary>
+            跳转状态
+            </summary>
+        </member>
         <member name="T:MGFramework.IPoolObject">
             <summary>
             对象池中的对象
