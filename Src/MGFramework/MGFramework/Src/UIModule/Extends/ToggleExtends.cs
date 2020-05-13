@@ -1,4 +1,5 @@
 ﻿using System;
+using UnityEngine.Events;
 using UnityEngine.UI;
 
 namespace MGFramework.UIModule
@@ -11,9 +12,19 @@ namespace MGFramework.UIModule
         /// <summary>
         /// 添加值改变监听
         /// </summary>
-        public static Toggle AddValueChangedListener(this Toggle toggle, Action<bool> onValueChanged)
+        public static Toggle AddValueChangedListener(this Toggle toggle, UnityAction<bool> onValueChanged)
         {
-            toggle.onValueChanged.AddListener((val) => onValueChanged?.Invoke(val));
+            toggle.onValueChanged.AddListener(onValueChanged);
+
+            return toggle;
+        }
+
+        /// <summary>
+        /// 移除值改变监听
+        /// </summary>
+        public static Toggle RemoveValueChangedListener(this Toggle toggle,UnityAction<bool> onValueChanged)
+        {
+            toggle.onValueChanged.RemoveListener(onValueChanged);
 
             return toggle;
         }

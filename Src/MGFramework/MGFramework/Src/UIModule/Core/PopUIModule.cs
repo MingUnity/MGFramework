@@ -45,16 +45,16 @@ namespace MGFramework.UIModule
 
             if (!state.active)
             {
-                state.active = true;
-
-                _viewDic[viewId] = state;
-
                 _uiModule?.Enter(viewId, () =>
                 {
                     callback?.Invoke();
 
                     _uiModule?.Focus(viewId);
                 });
+
+                state.active = true;
+
+                _viewDic[viewId] = state;
             }
             else
             {
@@ -111,16 +111,16 @@ namespace MGFramework.UIModule
             {
                 if (state.active)
                 {
-                    state.active = false;
-
-                    _viewDic[viewId] = state;
-
                     _uiModule?.Quit(viewId, () =>
                     {
                         callback?.Invoke();
 
                         _uiModule?.UnFocus(viewId);
                     }, destroy);
+
+                    state.active = false;
+
+                    _viewDic[viewId] = state;
                 }
             }
 

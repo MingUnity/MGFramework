@@ -1320,9 +1320,14 @@
             选择框扩展
             </summary>
         </member>
-        <member name="M:MGFramework.UIModule.ToggleExtends.AddValueChangedListener(UnityEngine.UI.Toggle,System.Action{System.Boolean})">
+        <member name="M:MGFramework.UIModule.ToggleExtends.AddValueChangedListener(UnityEngine.UI.Toggle,UnityEngine.Events.UnityAction{System.Boolean})">
             <summary>
             添加值改变监听
+            </summary>
+        </member>
+        <member name="M:MGFramework.UIModule.ToggleExtends.RemoveValueChangedListener(UnityEngine.UI.Toggle,UnityEngine.Events.UnityAction{System.Boolean})">
+            <summary>
+            移除值改变监听
             </summary>
         </member>
         <member name="T:MGFramework.UIModule.NodeContainer">
