@@ -10,6 +10,7 @@ namespace MGFramework.UIModule
     /// 圆角矩形
     /// </summary>
     [ExecuteInEditMode]
+    [AddComponentMenu("MGFramework/RoundedRect")]
     [RequireComponent(typeof(Graphic))]
     public class RoundedRect : MonoBehaviour
     {

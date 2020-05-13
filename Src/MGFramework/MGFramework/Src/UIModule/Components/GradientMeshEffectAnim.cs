@@ -5,6 +5,7 @@ namespace MGFramework.UIModule
     /// <summary>
     /// 渐变色动画
     /// </summary>
+    [AddComponentMenu("MGFramework/GradientAnim")]
     [RequireComponent(typeof(GradientMeshEffect))]
     public class GradientMeshEffectAnim : MonoBehaviour
     {
