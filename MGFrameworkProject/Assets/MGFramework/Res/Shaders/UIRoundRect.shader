@@ -142,10 +142,10 @@
 				float dis = xrVal * yrVal * lb_dis + xrVal * (1 - yhrVal) * lt_dis + (1 - xwrVal) * yrVal * rb_dis + (1 - xwrVal) * (1 - yhrVal) * rt_dis ;
 
 				//标准边缘的距离对比
-				float nor = step(dis,r * r);
-				float low = step(dis,r * r - antiAliasingVal);
-				float high = step(dis,r * r + antiAliasingVal);
-				float max = step(dis,r * r + 2 * antiAliasingVal);
+				float nor = step(dis, r * r - 3 * antiAliasingVal);
+				float low = step(dis, r * r - 2 * antiAliasingVal);
+				float high = step(dis, r * r - antiAliasingVal);
+				float max = step(dis, r * r);
 
 				//赋值透明度渐变像素(圆角+抗锯齿)
 				color.a = (nor * (1 - low) * 0.8 + (1 - nor) * high * 0.5 + (1 - high) * max * 0.2 + (1 - max) * 0 + low) * color.a;
