@@ -115,7 +115,14 @@ namespace MGFramework.UIModule
 
             if (!Application.isPlaying)
             {
-                _graphic.material = CreateMat(width, height);
+                if (_graphic.material == Graphic.defaultGraphicMaterial)
+                {
+                    _graphic.material = CreateMat(width, height);
+                }
+                else
+                {
+                    MatSetting(_graphic.material, width, height);
+                }
             }
             else
             {
