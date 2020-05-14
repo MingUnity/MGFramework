@@ -26,6 +26,30 @@ namespace MGFramework.UIModule
         private float _roundedPixel = 8;
 
         /// <summary>
+        /// 左上角圆角
+        /// </summary>
+        [SerializeField]
+        private bool _leftTop = true;
+
+        /// <summary>
+        /// 左上角圆角
+        /// </summary>
+        [SerializeField]
+        private bool _rightTop = true;
+
+        /// <summary>
+        /// 左上角圆角
+        /// </summary>
+        [SerializeField]
+        private bool _leftBottom = true;
+
+        /// <summary>
+        /// 左上角圆角
+        /// </summary>
+        [SerializeField]
+        private bool _rightBottom = true;
+
+        /// <summary>
         /// 材质缓存
         /// </summary>
         private static Dictionary<Param, Material> _matCache = new Dictionary<Param, Material>();
@@ -110,6 +134,10 @@ namespace MGFramework.UIModule
                 mat.SetFloat("_Width", width);
                 mat.SetFloat("_Height", height);
                 mat.SetFloat("_RoundedRadius", _roundedPixel);
+                mat.SetInt("_LeftTop", _leftTop ? 1 : 0);
+                mat.SetInt("_RightTop", _rightTop ? 1 : 0);
+                mat.SetInt("_LeftBottom", _leftBottom ? 1 : 0);
+                mat.SetInt("_RightBottom", _rightBottom ? 1 : 0);
                 return mat;
             }
             catch
@@ -123,17 +151,31 @@ namespace MGFramework.UIModule
             public float width;
             public float height;
             public float roundedRadius;
+            public bool leftTop;
+            public bool rightTop;
+            public bool leftBottom;
+            public bool rightButtom;
 
-            public Param(float width, float height, float roundedRadius)
+            public Param(float width, float height, float roundedRadius, bool leftTop = true, bool rightTop = true, bool leftBottom = true, bool rightBottom = true)
             {
                 this.width = width;
                 this.height = height;
                 this.roundedRadius = roundedRadius;
+                this.leftTop = leftTop;
+                this.rightTop = rightTop;
+                this.leftBottom = leftBottom;
+                this.rightButtom = rightBottom;
             }
 
             public bool Equals(Param other)
             {
-                return width == other.width && height == other.height && roundedRadius == other.roundedRadius;
+                return width == other.width
+                    && height == other.height
+                    && roundedRadius == other.roundedRadius
+                    && leftTop == other.leftTop
+                    && rightTop == other.rightTop
+                    && leftBottom == other.leftBottom
+                    && rightButtom == other.rightButtom;
             }
         }
     }

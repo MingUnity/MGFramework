@@ -758,6 +758,26 @@
             圆角像素值
             </summary>
         </member>
+        <member name="F:MGFramework.UIModule.RoundedRect._leftTop">
+            <summary>
+            左上角圆角
+            </summary>
+        </member>
+        <member name="F:MGFramework.UIModule.RoundedRect._rightTop">
+            <summary>
+            左上角圆角
+            </summary>
+        </member>
+        <member name="F:MGFramework.UIModule.RoundedRect._leftBottom">
+            <summary>
+            左上角圆角
+            </summary>
+        </member>
+        <member name="F:MGFramework.UIModule.RoundedRect._rightBottom">
+            <summary>
+            左上角圆角
+            </summary>
+        </member>
         <member name="F:MGFramework.UIModule.RoundedRect._matCache">
             <summary>
             材质缓存
