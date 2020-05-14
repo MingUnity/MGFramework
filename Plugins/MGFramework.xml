@@ -778,6 +778,18 @@
             左上角圆角
             </summary>
         </member>
+        <member name="F:MGFramework.UIModule.RoundedRect._static">
+            <summary>
+            静态元素
+            不常改变元素的可设置为true 可降drawcall
+            常改变的元素需设置为false
+            </summary>
+        </member>
+        <member name="F:MGFramework.UIModule.RoundedRect._matCreated">
+            <summary>
+            材质创建标识
+            </summary>
+        </member>
         <member name="F:MGFramework.UIModule.RoundedRect._matCache">
             <summary>
             材质缓存
@@ -786,6 +798,16 @@
         <member name="M:MGFramework.UIModule.RoundedRect.Refresh">
             <summary>
             设置圆角矩形shader数据
+            </summary>
+        </member>
+        <member name="M:MGFramework.UIModule.RoundedRect.CreateMat(System.Single,System.Single)">
+            <summary>
+            创建材质
+            </summary>
+        </member>
+        <member name="M:MGFramework.UIModule.RoundedRect.MatSetting(UnityEngine.Material,System.Single,System.Single)">
+            <summary>
+            材质设置
             </summary>
         </member>
         <member name="T:MGFramework.UIModule.IUIModule">
