@@ -170,7 +170,7 @@ namespace MGFramework.UIModule
             try
             {
                 Material mat = Material.Instantiate<Material>(Graphic.defaultGraphicMaterial);
-                mat.name = "RoundedRectMaterial";
+                mat.name = $"RoundedRect_{mat.GetInstanceID()}";
                 mat.shader = Shader.Find("MGFramework/UIRoundRect");
                 MatSetting(mat, width, height);
                 return mat;
