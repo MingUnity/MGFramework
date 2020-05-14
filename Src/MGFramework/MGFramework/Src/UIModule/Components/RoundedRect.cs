@@ -50,6 +50,19 @@ namespace MGFramework.UIModule
         private bool _rightBottom = true;
 
         /// <summary>
+        /// 静态元素
+        /// 不常改变元素的可设置为true 可降drawcall
+        /// 常改变的元素需设置为false
+        /// </summary>
+        [SerializeField]
+        private bool _static = true;
+
+        /// <summary>
+        /// 材质创建标识
+        /// </summary>
+        private bool _matCreated = false;
+
+        /// <summary>
         /// 材质缓存
         /// </summary>
         private static Dictionary<Param, Material> _matCache = new Dictionary<Param, Material>();
@@ -71,7 +84,10 @@ namespace MGFramework.UIModule
 
         private void OnValidate()
         {
-            Refresh();
+            if (!Application.isPlaying)
+            {
+                Refresh();
+            }
         }
 
         private void OnDestroy()
@@ -103,27 +119,45 @@ namespace MGFramework.UIModule
             }
             else
             {
-                Param param = new Param(width, height, _roundedPixel);
-
-                Material mat = _matCache.GetValueAnyway(param);
-
-                if (mat != null)
+                if (!_static)
                 {
-                    _graphic.material = mat;
+                    if (_matCreated)
+                    {
+                        MatSetting(_graphic.material, width, height);
+                    }
+                    else
+                    {
+                        _graphic.material = CreateMat(width, height);
+                        _matCreated = true;
+                    }
                 }
                 else
                 {
-                    mat = CreateMat(width, height);
+                    Param param = new Param(width, height, _roundedPixel);
+
+                    Material mat = _matCache.GetValueAnyway(param);
 
                     if (mat != null)
                     {
                         _graphic.material = mat;
-                        _matCache[param] = mat;
+                    }
+                    else
+                    {
+                        mat = CreateMat(width, height);
+
+                        if (mat != null)
+                        {
+                            _graphic.material = mat;
+                            _matCache[param] = mat;
+                        }
                     }
                 }
             }
         }
 
+        /// <summary>
+        /// 创建材质
+        /// </summary>
         private Material CreateMat(float width, float height)
         {
             try
@@ -131,19 +165,32 @@ namespace MGFramework.UIModule
                 Material mat = Material.Instantiate<Material>(Graphic.defaultGraphicMaterial);
                 mat.name = "RoundedRectMaterial";
                 mat.shader = Shader.Find("MGFramework/UIRoundRect");
-                mat.SetFloat("_Width", width);
-                mat.SetFloat("_Height", height);
-                mat.SetFloat("_RoundedRadius", _roundedPixel);
-                mat.SetInt("_LeftTop", _leftTop ? 1 : 0);
-                mat.SetInt("_RightTop", _rightTop ? 1 : 0);
-                mat.SetInt("_LeftBottom", _leftBottom ? 1 : 0);
-                mat.SetInt("_RightBottom", _rightBottom ? 1 : 0);
+                MatSetting(mat, width, height);
                 return mat;
             }
             catch
             {
                 return Graphic.defaultGraphicMaterial;
             }
+        }
+
+        /// <summary>
+        /// 材质设置
+        /// </summary>
+        private void MatSetting(Material mat, float width, float height)
+        {
+            if (mat == null)
+            {
+                return;
+            }
+
+            mat.SetFloat("_Width", width);
+            mat.SetFloat("_Height", height);
+            mat.SetFloat("_RoundedRadius", _roundedPixel);
+            mat.SetInt("_LeftTop", _leftTop ? 1 : 0);
+            mat.SetInt("_RightTop", _rightTop ? 1 : 0);
+            mat.SetInt("_LeftBottom", _leftBottom ? 1 : 0);
+            mat.SetInt("_RightBottom", _rightBottom ? 1 : 0);
         }
 
         private struct Param : IEquatable<Param>

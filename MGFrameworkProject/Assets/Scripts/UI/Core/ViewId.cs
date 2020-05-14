@@ -5,5 +5,6 @@ public static class ViewId
 {
     public const int SampleAView = 0;
     public const int SampleBView = 1;
-    //[AutoBuildPlaceHolder]#2
+    public const int EmptyView = 2;
+    //[AutoBuildPlaceHolder]#3
 }

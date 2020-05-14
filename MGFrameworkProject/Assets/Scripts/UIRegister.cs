@@ -16,5 +16,8 @@ public static class UIRegister
         Container.Regist<ISampleBPresenter, SampleBPresenter>();
         Container.RegistSingleton<ISampleBModel, SampleBModel>();
         Container.Regist<IBNode, BNode>();
+
+        Container.Regist<IView, EmptyView>(ViewId.EmptyView);
+        Container.Regist<IEmptyPresenter, EmptyPresenter>();
     }
 }

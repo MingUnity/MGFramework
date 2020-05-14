@@ -218,14 +218,34 @@ namespace MGFramework.UIModule
 
             if (_viewStack.Count > 1)
             {
-                if (_viewStack.Pop(out curId) && _viewStack.Peek(out dstId))
+                if (_viewStack.Peek(out curId))
                 {
-                    res = true;
+                    //当前视图组 是否有视图激活
+                    bool curActive = false;
 
-                    Quit(curId, false, () =>
+                    for (int i = 0; i < curId.Count; i++)
                     {
-                        Enter(dstId, false, callback);
-                    });
+                        ViewState state = _viewDic.GetValueAnyway(curId[i]);
+
+                        if (state.active)
+                        {
+                            curActive = true;
+                            break;
+                        }
+                    }
+
+                    if (curActive)
+                    {
+                        if (_viewStack.Pop(out curId) && _viewStack.Peek(out dstId))
+                        {
+                            res = true;
+
+                            Quit(curId, false, () =>
+                            {
+                                Enter(dstId, false, callback);
+                            });
+                        }
+                    }
                 }
             }
 
