@@ -1,0 +1,16 @@
+using MGFramework;
+using MGFramework.UIModule;
+
+/// <summary>
+/// UI注册器
+/// </summary>
+public static class UIRegister
+{
+    /// <summary>
+    /// 注册容器内容
+    /// 不允许在此类再添加方法(以便自动化构建)
+    /// </summary>
+    public static void RegistAll()
+    {
+    }
+}

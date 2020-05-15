@@ -1,4 +1,5 @@
 ﻿using MGFrameworkEditor.Core;
+using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using UnityEditor;
@@ -95,6 +96,47 @@ namespace MGFrameworkEditor.UIModule
                                 string replace = $"    public const int {viewId} = {num};\r\n    //[AutoBuildPlaceHolder]#{num + 1}";
                                 curContent = curContent.Replace(line, replace);
                                 File.WriteAllText(output, curContent, Encoding.UTF8);
+                                break;
+                            }
+                        }
+                    }
+                }
+                else if (filename == "TemplateUIRegister.txt")
+                {
+                    string content = File.ReadAllText(template);
+
+                    string output = Path.Combine(Application.dataPath, "Scripts/UI/Core/UIRegister.cs");
+                    string dir = Path.GetDirectoryName(output);
+                    if (!Directory.Exists(dir))
+                    {
+                        Directory.CreateDirectory(dir);
+                    }
+
+                    if (!File.Exists(output))
+                    {
+                        File.WriteAllText(output, content);
+                    }
+
+                    string[] curContents = File.ReadAllLines(output);
+
+                    List<string> outputContents = new List<string>(curContents);
+
+                    int keyCount = 0;
+
+                    for (int l = curContents.Length - 1; l >= 0; l--)
+                    {
+                        string lineContent = curContents[l];
+
+                        if (lineContent.Trim() == "}")
+                        {
+                            keyCount++;
+
+                            if (keyCount >= 2)
+                            {
+                                string inputContent = $"\r\n        Container.Regist<IView, {keyword}View>(ViewId.{keyword}View);\r\n        Container.Regist<I{keyword}Presenter, {keyword}Presenter>();";
+                                outputContents.Insert(l, inputContent);
+
+                                File.WriteAllLines(output, outputContents.ToArray());
                                 break;
                             }
                         }

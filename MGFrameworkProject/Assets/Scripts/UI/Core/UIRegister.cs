@@ -1,4 +1,4 @@
-﻿using MGFramework;
+using MGFramework;
 using MGFramework.UIModule;
 using System.Collections;
 using System.Collections.Generic;
