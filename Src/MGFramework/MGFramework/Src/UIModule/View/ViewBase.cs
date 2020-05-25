@@ -191,6 +191,7 @@ namespace MGFramework.UIModule
         /// </summary>
         public void Focus()
         {
+            _rootCanvas.interactable = true;
             _presenter?.OnFocus();
         }
 
@@ -199,6 +200,7 @@ namespace MGFramework.UIModule
         /// </summary>
         public void UnFocus()
         {
+            _rootCanvas.interactable = false;
             _presenter?.OnUnFocus();
         }
 
