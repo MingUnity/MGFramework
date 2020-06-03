@@ -67,6 +67,36 @@ namespace MGFramework.UIModule
         /// </summary>
         private static Dictionary<Param, Material> _matCache = new Dictionary<Param, Material>();
 
+        /// <summary>
+        /// 圆角位置
+        /// </summary>
+        private RoundedPos _roundedPos;
+
+        /// <summary>
+        /// 圆角位置
+        /// </summary>
+        public RoundedPos RoundedPosition
+        {
+            get
+            {
+                return _roundedPos;
+            }
+            set
+            {
+                if (_roundedPos != value)
+                {
+                    _roundedPos = value;
+
+                    _leftTop = _roundedPos.HasFlag(RoundedPos.LeftTop);
+                    _leftBottom = _roundedPos.HasFlag(RoundedPos.LeftBottom);
+                    _rightTop = _roundedPos.HasFlag(RoundedPos.RightTop);
+                    _rightBottom = _roundedPos.HasFlag(RoundedPos.RightBottom);
+
+                    Refresh();
+                }
+            }
+        }
+
         private void Awake()
         {
             _graphic = this.GetComponent<Graphic>();
@@ -140,7 +170,7 @@ namespace MGFramework.UIModule
                 }
                 else
                 {
-                    Param param = new Param(width, height, _roundedPixel);
+                    Param param = new Param(width, height, _roundedPixel, _leftTop, _rightTop, _leftBottom, _rightBottom);
 
                     Material mat = _matCache.GetValueAnyway(param);
 
@@ -231,6 +261,38 @@ namespace MGFramework.UIModule
                     && leftBottom == other.leftBottom
                     && rightButtom == other.rightButtom;
             }
+        }
+
+        /// <summary>
+        /// 圆角位置
+        /// </summary>
+        [Flags]
+        public enum RoundedPos
+        {
+            /// <summary>
+            /// 无圆角
+            /// </summary>
+            None = 0,
+
+            /// <summary>
+            /// 左上
+            /// </summary>
+            LeftTop = 1,
+
+            /// <summary>
+            /// 右上
+            /// </summary>
+            RightTop = 2,
+
+            /// <summary>
+            /// 左下
+            /// </summary>
+            LeftBottom = 4,
+
+            /// <summary>
+            /// 右下
+            /// </summary>
+            RightBottom = 8
         }
     }
 }
