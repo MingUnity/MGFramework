@@ -1823,6 +1823,22 @@
             根据路径寻找
             </summary>
         </member>
+        <member name="M:MGFramework.TransformExtends.Contains(UnityEngine.RectTransform,UnityEngine.RectTransform)">
+            <summary>
+            包含某元素
+            只要有一个角在容器内即返回true
+            </summary>
+            <param name="container">容器</param>
+            <param name="trans">检测对象</param>
+        </member>
+        <member name="M:MGFramework.TransformExtends.TotalContains(UnityEngine.RectTransform,UnityEngine.RectTransform)">
+            <summary>
+            全部包含某元素
+            被检测对象全部包含在容器中
+            </summary>
+            <param name="container">容器</param>
+            <param name="trans">检测对象</param>
+        </member>
         <member name="T:MGFramework.Bezier">
             <summary>
             贝塞尔曲线
