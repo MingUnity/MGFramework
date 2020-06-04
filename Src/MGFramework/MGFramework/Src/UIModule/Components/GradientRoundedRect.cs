@@ -11,9 +11,9 @@ namespace MGFramework.UIModule
     /// </summary>
     [ExecuteInEditMode]
     [DisallowMultipleComponent]
-    [AddComponentMenu("MGFramework/RoundedRect")]
+    [AddComponentMenu("MGFramework/GradientRoundedRect")]
     [RequireComponent(typeof(Graphic))]
-    public class RoundedRect : MonoBehaviour
+    public class GradientRoundedRect : MonoBehaviour
     {
         /// <summary>
         /// 当前gameobject图形组件
@@ -72,6 +72,24 @@ namespace MGFramework.UIModule
         /// 圆角位置
         /// </summary>
         private RoundedPos _roundedPos;
+
+        /// <summary>
+        /// 渐变色方向
+        /// </summary>
+        [SerializeField]
+        private GradientDir _gradientDir;
+
+        /// <summary>
+        /// 顶部颜色
+        /// </summary>
+        [SerializeField]
+        private Color _topColor = Color.white;
+
+        /// <summary>
+        /// 底部颜色
+        /// </summary>
+        [SerializeField]
+        private Color _bottomColor = Color.white;
 
         /// <summary>
         /// 圆角位置
@@ -171,7 +189,7 @@ namespace MGFramework.UIModule
                 }
                 else
                 {
-                    Param param = new Param(width, height, _roundedPixel, _leftTop, _rightTop, _leftBottom, _rightBottom);
+                    Param param = new Param(width, height, _roundedPixel, _leftTop, _rightTop, _leftBottom, _rightBottom, _gradientDir, _topColor, _bottomColor);
 
                     Material mat = _matCache.GetValueAnyway(param);
 
@@ -202,7 +220,7 @@ namespace MGFramework.UIModule
             {
                 Material mat = Material.Instantiate<Material>(Graphic.defaultGraphicMaterial);
                 mat.name = $"RoundedRect_{mat.GetInstanceID()}";
-                mat.shader = Shader.Find("MGFramework/UIRoundRect");
+                mat.shader = Shader.Find("MGFramework/UIGradientRoundRect");
                 MatSetting(mat, width, height);
                 return mat;
             }
@@ -229,6 +247,22 @@ namespace MGFramework.UIModule
             mat.SetInt("_RightTop", _rightTop ? 1 : 0);
             mat.SetInt("_LeftBottom", _leftBottom ? 1 : 0);
             mat.SetInt("_RightBottom", _rightBottom ? 1 : 0);
+
+            switch (_gradientDir)
+            {
+                case GradientDir.BottomToTop:
+                    mat.SetInt("_BottomToTop", 1);
+                    mat.SetInt("_LeftToRight", 0);
+
+                    break;
+                case GradientDir.LeftToRight:
+                    mat.SetInt("_BottomToTop", 0);
+                    mat.SetInt("_LeftToRight", 1);
+                    break;
+            }
+
+            mat.SetColor("_TopColor", _topColor);
+            mat.SetColor("_BottomColor", _bottomColor);
         }
 
         private struct Param
@@ -240,8 +274,20 @@ namespace MGFramework.UIModule
             public bool rightTop;
             public bool leftBottom;
             public bool rightButtom;
+            public GradientDir dir;
+            public Color topColor;
+            public Color bottomColor;
 
-            public Param(float width, float height, float roundedRadius, bool leftTop = true, bool rightTop = true, bool leftBottom = true, bool rightBottom = true)
+            public Param(float width,
+                        float height,
+                        float roundedRadius, 
+                        bool leftTop, 
+                        bool rightTop, 
+                        bool leftBottom, 
+                        bool rightBottom, 
+                        GradientDir dir, 
+                        Color top, 
+                        Color bottom)
             {
                 this.width = width;
                 this.height = height;
@@ -250,17 +296,9 @@ namespace MGFramework.UIModule
                 this.rightTop = rightTop;
                 this.leftBottom = leftBottom;
                 this.rightButtom = rightBottom;
-            }
-
-            public bool Equals(Param other)
-            {
-                return width == other.width
-                    && height == other.height
-                    && roundedRadius == other.roundedRadius
-                    && leftTop == other.leftTop
-                    && rightTop == other.rightTop
-                    && leftBottom == other.leftBottom
-                    && rightButtom == other.rightButtom;
+                this.dir = dir;
+                this.topColor = top;
+                this.bottomColor = bottom;
             }
         }
 
@@ -294,6 +332,22 @@ namespace MGFramework.UIModule
             /// 右下
             /// </summary>
             RightBottom = 8
+        }
+
+        /// <summary>
+        /// 渐变方向
+        /// </summary>
+        public enum GradientDir
+        {
+            /// <summary>
+            /// 下上
+            /// </summary>
+            BottomToTop = 0,
+
+            /// <summary>
+            /// 左右
+            /// </summary>
+            LeftToRight
         }
     }
 }

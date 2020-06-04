@@ -87,6 +87,8 @@
     <Compile Include="Src\SimpleData\Float3.cs" />
     <Compile Include="Src\SimpleData\Int2.cs" />
     <Compile Include="Src\SimpleData\Int3.cs" />
+    <Compile Include="Src\UIModule\Components\Gradient.cs" />
+    <Compile Include="Src\UIModule\Components\GradientRoundedRect.cs" />
     <Compile Include="Src\UIModule\Components\RoundedRect.cs" />
     <Compile Include="Src\UIModule\Core\IPopUIModule.cs" />
     <Compile Include="Src\UIModule\Core\IUIModule.cs" />
