@@ -13,7 +13,7 @@ namespace MGFramework.ResourceModule
 
         public ResManager()
         {
-            _loader = new DepResModule(Path.Combine(PlatformUtility.GetResStreamingAssets(), "AssetBundle/AssetBundle"));
+            _loader = new DepResModule(Path.Combine(EngineDir.StreamingAssets, "AssetBundle/AssetBundle"));
         }
 
         /// <summary>
@@ -140,11 +140,11 @@ namespace MGFramework.ResourceModule
             {
                 case AssetLocation.StreamingAssets:
                 default:
-                    dirPath = PlatformUtility.GetResStreamingAssets(sync);
+                    dirPath = sync ? EngineDir.StreamingAssets : EngineDir.StreamingAssetsAsync;
                     break;
 
                 case AssetLocation.PersistentDataPath:
-                    dirPath = PlatformUtility.GetResPersistentDataPath();
+                    dirPath = EngineDir.PersistentData;
                     break;
             }
 

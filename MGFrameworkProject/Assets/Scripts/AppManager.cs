@@ -10,6 +10,6 @@ public class AppManager
     {
         UIRegister.RegistAll();
 
-        UIManager.Instance.Enter(ViewId.SampleAView,true);
+        UIManager.Instance.Enter(ViewId.SampleAView, true);
     }
 }

@@ -11,8 +11,9 @@ namespace MGFramework
     {
         /// <summary>
         /// 类型节点字典
+        /// 默认16个类型
         /// </summary>
-        private static Dictionary<Type, Dictionary<string, ITypeNode>> _dic = new Dictionary<Type, Dictionary<string, ITypeNode>>();
+        private static readonly Dictionary<Type, Dictionary<string, ITypeNode>> _dic = new Dictionary<Type, Dictionary<string, ITypeNode>>(16);
 
         /// <summary>
         /// 注册对象

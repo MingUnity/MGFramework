@@ -743,201 +743,59 @@
             默认
             </summary>
         </member>
-        <member name="T:MGFramework.UIModule.Gradient">
+        <member name="T:MGFramework.UIModule.MobileGraphicRaycaster">
             <summary>
-            渐变色
+            A derived BaseRaycaster to raycast against Graphic elements.
+            Ming Modify 优化GraphicRayCaster，用于移动端节省时耗
+            1、修改部分常用变量的取值逻辑
+            2、去除不常用的2 3D物体遮挡逻辑
+            3、去除多屏适配，移动端默认单屏
+            4、去除忽略翻转判断，默认可响应翻转
             </summary>
         </member>
-        <member name="F:MGFramework.UIModule.Gradient._graphic">
+        <member name="P:MGFramework.UIModule.MobileGraphicRaycaster.sortOrderPriority">
             <summary>
-            当前gameobject图形组件
+            Priority of the raycaster based upon sort order.
+            </summary>
+            <returns>
+            The sortOrder priority.
+            </returns>
+        </member>
+        <member name="P:MGFramework.UIModule.MobileGraphicRaycaster.renderOrderPriority">
+            <summary>
+            Priority of the raycaster based upon render order.
+            </summary>
+            <returns>
+            The renderOrder priority.
+            </returns>
+        </member>
+        <member name="P:MGFramework.UIModule.MobileGraphicRaycaster.eventCamera">
+            <summary>
+            The camera that will generate rays for this raycaster.
+            </summary>
+            <returns>
+            - Null if Camera mode is ScreenSpaceOverlay or ScreenSpaceCamera and has no camera.
+            - canvas.worldCanvas if not null
+            - Camera.main.
+            - Ming Modify 只在初始化的时候赋值，节省获取Camera.main的时耗，提供一个刷新方法以供动态改变摄像机
+            </returns>
+        </member>
+        <member name="M:MGFramework.UIModule.MobileGraphicRaycaster.Refresh">
+            <summary>
+            刷新参数
             </summary>
         </member>
-        <member name="F:MGFramework.UIModule.Gradient._matCache">
+        <member name="M:MGFramework.UIModule.MobileGraphicRaycaster.Raycast(UnityEngine.EventSystems.PointerEventData,System.Collections.Generic.List{UnityEngine.EventSystems.RaycastResult})">
             <summary>
-            材质缓存
+            Perform the raycast against the list of graphics associated with the Canvas.
             </summary>
+            <param name="eventData">Current event data</param>
+            <param name="resultAppendList">List of hit objects to append new results to.</param>
         </member>
-        <member name="F:MGFramework.UIModule.Gradient._gradientDir">
+        <member name="M:MGFramework.UIModule.MobileGraphicRaycaster.Raycast(UnityEngine.Canvas,UnityEngine.Camera,UnityEngine.Vector2,System.Collections.Generic.IList{UnityEngine.UI.Graphic},UnityEngine.Ray,System.Single@)">
             <summary>
-            渐变色方向
-            </summary>
-        </member>
-        <member name="F:MGFramework.UIModule.Gradient._topColor">
-            <summary>
-            顶部颜色
-            </summary>
-        </member>
-        <member name="F:MGFramework.UIModule.Gradient._bottomColor">
-            <summary>
-            底部颜色
-            </summary>
-        </member>
-        <member name="M:MGFramework.UIModule.Gradient.Refresh">
-            <summary>
-            设置圆角矩形shader数据
-            </summary>
-        </member>
-        <member name="M:MGFramework.UIModule.Gradient.CreateMat">
-            <summary>
-            创建材质
-            </summary>
-        </member>
-        <member name="M:MGFramework.UIModule.Gradient.MatSetting(UnityEngine.Material)">
-            <summary>
-            材质设置
-            </summary>
-        </member>
-        <member name="T:MGFramework.UIModule.Gradient.GradientDir">
-            <summary>
-            渐变方向
-            </summary>
-        </member>
-        <member name="F:MGFramework.UIModule.Gradient.GradientDir.BottomToTop">
-            <summary>
-            下上
-            </summary>
-        </member>
-        <member name="F:MGFramework.UIModule.Gradient.GradientDir.LeftToRight">
-            <summary>
-            左右
-            </summary>
-        </member>
-        <member name="T:MGFramework.UIModule.GradientRoundedRect">
-            <summary>
-            圆角矩形
-            </summary>
-        </member>
-        <member name="F:MGFramework.UIModule.GradientRoundedRect._graphic">
-            <summary>
-            当前gameobject图形组件
-            </summary>
-        </member>
-        <member name="F:MGFramework.UIModule.GradientRoundedRect._roundedPixel">
-            <summary>
-            圆角像素值
-            </summary>
-        </member>
-        <member name="F:MGFramework.UIModule.GradientRoundedRect._leftTop">
-            <summary>
-            左上角圆角
-            </summary>
-        </member>
-        <member name="F:MGFramework.UIModule.GradientRoundedRect._rightTop">
-            <summary>
-            左上角圆角
-            </summary>
-        </member>
-        <member name="F:MGFramework.UIModule.GradientRoundedRect._leftBottom">
-            <summary>
-            左上角圆角
-            </summary>
-        </member>
-        <member name="F:MGFramework.UIModule.GradientRoundedRect._rightBottom">
-            <summary>
-            左上角圆角
-            </summary>
-        </member>
-        <member name="F:MGFramework.UIModule.GradientRoundedRect._static">
-            <summary>
-            静态元素
-            不常改变元素的可设置为true 可降drawcall
-            常改变的元素需设置为false
-            </summary>
-        </member>
-        <member name="F:MGFramework.UIModule.GradientRoundedRect._matCreated">
-            <summary>
-            材质创建标识
-            </summary>
-        </member>
-        <member name="F:MGFramework.UIModule.GradientRoundedRect._matCache">
-            <summary>
-            材质缓存
-            </summary>
-        </member>
-        <member name="F:MGFramework.UIModule.GradientRoundedRect._roundedPos">
-            <summary>
-            圆角位置
-            </summary>
-        </member>
-        <member name="F:MGFramework.UIModule.GradientRoundedRect._gradientDir">
-            <summary>
-            渐变色方向
-            </summary>
-        </member>
-        <member name="F:MGFramework.UIModule.GradientRoundedRect._topColor">
-            <summary>
-            顶部颜色
-            </summary>
-        </member>
-        <member name="F:MGFramework.UIModule.GradientRoundedRect._bottomColor">
-            <summary>
-            底部颜色
-            </summary>
-        </member>
-        <member name="P:MGFramework.UIModule.GradientRoundedRect.RoundedPosition">
-            <summary>
-            圆角位置
-            </summary>
-        </member>
-        <member name="M:MGFramework.UIModule.GradientRoundedRect.Refresh">
-            <summary>
-            设置圆角矩形shader数据
-            </summary>
-        </member>
-        <member name="M:MGFramework.UIModule.GradientRoundedRect.CreateMat(System.Single,System.Single)">
-            <summary>
-            创建材质
-            </summary>
-        </member>
-        <member name="M:MGFramework.UIModule.GradientRoundedRect.MatSetting(UnityEngine.Material,System.Single,System.Single)">
-            <summary>
-            材质设置
-            </summary>
-        </member>
-        <member name="T:MGFramework.UIModule.GradientRoundedRect.RoundedPos">
-            <summary>
-            圆角位置
-            </summary>
-        </member>
-        <member name="F:MGFramework.UIModule.GradientRoundedRect.RoundedPos.None">
-            <summary>
-            无圆角
-            </summary>
-        </member>
-        <member name="F:MGFramework.UIModule.GradientRoundedRect.RoundedPos.LeftTop">
-            <summary>
-            左上
-            </summary>
-        </member>
-        <member name="F:MGFramework.UIModule.GradientRoundedRect.RoundedPos.RightTop">
-            <summary>
-            右上
-            </summary>
-        </member>
-        <member name="F:MGFramework.UIModule.GradientRoundedRect.RoundedPos.LeftBottom">
-            <summary>
-            左下
-            </summary>
-        </member>
-        <member name="F:MGFramework.UIModule.GradientRoundedRect.RoundedPos.RightBottom">
-            <summary>
-            右下
-            </summary>
-        </member>
-        <member name="T:MGFramework.UIModule.GradientRoundedRect.GradientDir">
-            <summary>
-            渐变方向
-            </summary>
-        </member>
-        <member name="F:MGFramework.UIModule.GradientRoundedRect.GradientDir.BottomToTop">
-            <summary>
-            下上
-            </summary>
-        </member>
-        <member name="F:MGFramework.UIModule.GradientRoundedRect.GradientDir.LeftToRight">
-            <summary>
-            左右
+            Ming Modify
+            1、返回最上层图形
             </summary>
         </member>
         <member name="T:MGFramework.UIModule.RoundedRect">
@@ -2087,6 +1945,7 @@
         <member name="F:MGFramework.Container._dic">
             <summary>
             类型节点字典
+            默认16个类型
             </summary>
         </member>
         <member name="M:MGFramework.Container.Regist``2(System.String)">
@@ -2213,54 +2072,27 @@
             Mono单例
             </summary>
         </member>
-        <member name="T:MGFramework.PlatformUtility">
+        <member name="T:MGFramework.EngineDir">
             <summary>
-            平台通用
+            引擎相关路径
+            根据不同平台指定不同路径
             </summary>
         </member>
-        <member name="P:MGFramework.PlatformUtility.CurPlatform">
+        <member name="P:MGFramework.EngineDir.StreamingAssets">
             <summary>
-            当前平台
+            streamingAssets路径
+            常用于同步加载资源
             </summary>
         </member>
-        <member name="M:MGFramework.PlatformUtility.InitPlatform">
+        <member name="P:MGFramework.EngineDir.StreamingAssetsAsync">
             <summary>
-            初始化运行平台数据
+            streamingAssets路径
+            常用于异步加载资源
             </summary>
         </member>
-        <member name="M:MGFramework.PlatformUtility.GetResStreamingAssets(System.Boolean)">
-            <summary>
-            获取加载资源时streamingAssets路径
-            </summary>
-        </member>
-        <member name="M:MGFramework.PlatformUtility.GetResPersistentDataPath">
+        <member name="P:MGFramework.EngineDir.PersistentData">
             <summary>
             获取加载资源时persistentDataPath路径
-            </summary>
-        </member>
-        <member name="F:MGFramework.MPlatform.UnKnown">
-            <summary>
-            未知
-            </summary>
-        </member>
-        <member name="F:MGFramework.MPlatform.Editor">
-            <summary>
-            编辑态
-            </summary>
-        </member>
-        <member name="F:MGFramework.MPlatform.Windows">
-            <summary>
-            windows
-            </summary>
-        </member>
-        <member name="F:MGFramework.MPlatform.Android">
-            <summary>
-            安卓
-            </summary>
-        </member>
-        <member name="F:MGFramework.MPlatform.IOS">
-            <summary>
-            IOS
             </summary>
         </member>
         <member name="T:MGFramework.SerializeUtility">

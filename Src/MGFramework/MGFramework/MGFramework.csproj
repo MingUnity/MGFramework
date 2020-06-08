@@ -87,8 +87,7 @@
     <Compile Include="Src\SimpleData\Float3.cs" />
     <Compile Include="Src\SimpleData\Int2.cs" />
     <Compile Include="Src\SimpleData\Int3.cs" />
-    <Compile Include="Src\UIModule\Components\Gradient.cs" />
-    <Compile Include="Src\UIModule\Components\GradientRoundedRect.cs" />
+    <Compile Include="Src\UIModule\Components\MobileGraphicRaycaster.cs" />
     <Compile Include="Src\UIModule\Components\RoundedRect.cs" />
     <Compile Include="Src\UIModule\Core\IPopUIModule.cs" />
     <Compile Include="Src\UIModule\Core\IUIModule.cs" />
@@ -123,7 +122,7 @@
     <Compile Include="Src\Utility\EventTriggerExtends.cs" />
     <Compile Include="Src\Utility\Loom.cs" />
     <Compile Include="Src\Utility\MonoSingleton.cs" />
-    <Compile Include="Src\Utility\PlatformUtility.cs" />
+    <Compile Include="Src\Utility\EngineDir.cs" />
     <Compile Include="Src\Utility\SerializeUtility.cs" />
     <Compile Include="Src\Utility\Singleton.cs" />
     <Compile Include="Src\Utility\TaskManager.cs" />
