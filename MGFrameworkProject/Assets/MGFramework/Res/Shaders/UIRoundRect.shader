@@ -153,8 +153,8 @@
 								_RightTop * (1 - xwrVal) * (1 - yhrVal) * rt_dis;
 
 					//标准边缘的距离对比
-					float nor = step(dis, r * r - 3 * antiAliasingVal);
-					float low = step(dis, r * r - 2 * antiAliasingVal);
+					float low = step(dis, r * r - 3 * antiAliasingVal);
+					float nor = step(dis, r * r - 2 * antiAliasingVal);
 					float high = step(dis, r * r - antiAliasingVal);
 					float max = step(dis, r * r);
 
