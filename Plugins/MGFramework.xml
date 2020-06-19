@@ -1492,6 +1492,26 @@
             失焦
             </summary>
         </member>
+        <member name="M:MGFramework.UIModule.PresenterBase`1.SetInterfaceField(System.Type)">
+            <summary>
+            设置接口变量
+            </summary>
+        </member>
+        <member name="T:MGFramework.UIModule.PresenterAutoAttribute">
+            <summary>
+            presenter接口 标记自动化构建
+            </summary>
+        </member>
+        <member name="F:MGFramework.UIModule.PresenterAutoAttribute.name">
+            <summary>
+            构建名
+            </summary>
+        </member>
+        <member name="T:MGFramework.UIModule.PresenterNonAutoAttribute">
+            <summary>
+            presenter接口 标记不自动化构建
+            </summary>
+        </member>
         <member name="T:MGFramework.UIModule.ParentInfoAttribute">
             <summary>
             父节点信息
@@ -2009,6 +2029,14 @@
             解析对象
             </summary>
             <typeparam name="T">接口</typeparam>
+            <param name="name">名字</param>
+            <returns>对应实例化对象</returns>
+        </member>
+        <member name="M:MGFramework.Container.Resolve(System.Type,System.String)">
+            <summary>
+            解析对象
+            </summary>
+            <param name="type">对象类型</param>
             <param name="name">名字</param>
             <returns>对应实例化对象</returns>
         </member>
