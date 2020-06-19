@@ -4,12 +4,11 @@ using System;
 
 public class SampleAPresenter : PresenterBase<ISampleAView>, ISampleAPresenter
 {
+    [PresenterAuto(name = "1")]
     private ISampleAModel _aModel;
 
-    public SampleAPresenter()
-    {
-        _aModel = Container.Resolve<ISampleAModel>();
-    }
+    [PresenterNonAuto]
+    private ISampleBModel _bModel;
 
     public void OnConfirm()
     {
@@ -17,11 +16,11 @@ public class SampleAPresenter : PresenterBase<ISampleAView>, ISampleAPresenter
 
         int.TryParse(_view.Count, out count);
 
-        ISampleBModel bModel = Container.Resolve<ISampleBModel>();
-        bModel.Count = count;
+        _bModel = Container.Resolve<ISampleBModel>();
+        _bModel.Count = count;
 
         UIManager.Instance.Quit(ViewId.SampleAView);
-        UIManager.Instance.Enter(ViewId.SampleBView,true);
+        UIManager.Instance.Enter(ViewId.SampleBView, true);
     }
 
     public override void OnShowStart()

@@ -6,11 +6,6 @@ public class SampleBPresenter : PresenterBase<ISampleBView>, ISampleBPresenter
 {
     private ISampleBModel _model;
 
-    public SampleBPresenter()
-    {
-        _model = Container.Resolve<ISampleBModel>();
-    }
-
     public void OnBack()
     {
         UIManager.Instance.Pop();

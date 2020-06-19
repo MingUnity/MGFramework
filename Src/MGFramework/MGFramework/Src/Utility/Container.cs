@@ -103,39 +103,7 @@ namespace MGFramework
         /// <returns>对应实例化对象</returns>
         public static T Resolve<T>(string name = null)
         {
-            name = string.IsNullOrEmpty(name) ? string.Empty : name;
-
-            T t = default(T);
-
-            Dictionary<string, ITypeNode> dic = null;
-
-            if (_dic.TryGetValue(typeof(T), out dic))
-            {
-                ITypeNode node = null;
-
-                dic?.TryGetValue(name, out node);
-
-                if (node is NormalTypeNode)
-                {
-                    NormalTypeNode norNode = node as NormalTypeNode;
-
-                    t = (T)Activator.CreateInstance(norNode.objType);
-                }
-                else if (node is SingletonTypeNode)
-                {
-                    SingletonTypeNode singleNode = node as SingletonTypeNode;
-
-                    t = (T)singleNode.Obj;
-                }
-            }
-
-            if (t == null)
-            {
-                Debug.LogErrorFormat("<Ming> ## Uni Error ## Cls:Container Func:Resolve Type:{0}{1} Info:Unregistered", typeof(T), !string.IsNullOrEmpty(name) ? $" Name:{name}" : string.Empty);
-                throw new InvalidOperationException();
-            }
-
-            return t;
+            return (T)Resolve(typeof(T), name);
         }
 
         /// <summary>
@@ -147,6 +115,49 @@ namespace MGFramework
         public static T Resolve<T>(object name)
         {
             return Resolve<T>(name?.ToString());
+        }
+
+        /// <summary>
+        /// 解析对象
+        /// </summary>
+        /// <param name="type">对象类型</param>
+        /// <param name="name">名字</param>
+        /// <returns>对应实例化对象</returns>
+        public static object Resolve(Type type, string name = null)
+        {
+            object res = null;
+
+            name = string.IsNullOrEmpty(name) ? string.Empty : name;
+
+            Dictionary<string, ITypeNode> dic = null;
+
+            if (_dic.TryGetValue(type, out dic))
+            {
+                ITypeNode node = null;
+
+                dic?.TryGetValue(name, out node);
+
+                if (node is NormalTypeNode)
+                {
+                    NormalTypeNode norNode = node as NormalTypeNode;
+
+                    res = Activator.CreateInstance(norNode.objType);
+                }
+                else if (node is SingletonTypeNode)
+                {
+                    SingletonTypeNode singleNode = node as SingletonTypeNode;
+
+                    res = singleNode.Obj;
+                }
+            }
+
+            if (res == null)
+            {
+                Debug.LogErrorFormat("<Ming> ## Uni Error ## Cls:Container Func:Resolve Type:{0}{1} Info:Unregistered", type, !string.IsNullOrEmpty(name) ? $" Name:{name}" : string.Empty);
+                throw new InvalidOperationException();
+            }
+
+            return res;
         }
 
         /// <summary>

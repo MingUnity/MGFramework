@@ -29,7 +29,7 @@ namespace MGFramework.UIModule
 
             if (node == null)
             {
-                node = GameObject.FindGameObjectWithTag(tag).transform;
+                node = GameObject.FindWithTag(tag).transform;
 
                 _tagDic[tag] = node;
             }

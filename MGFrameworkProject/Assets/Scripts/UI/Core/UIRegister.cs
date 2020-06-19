@@ -10,7 +10,7 @@ public static class UIRegister
     {
         Container.Regist<IView, SampleAView>(ViewId.SampleAView);
         Container.Regist<ISampleAPresenter, SampleAPresenter>();
-        Container.Regist<ISampleAModel, SampleAModel>();
+        Container.Regist<ISampleAModel, SampleAModel>(1);
 
         Container.Regist<IView, SampleBView>(ViewId.SampleBView);
         Container.Regist<ISampleBPresenter, SampleBPresenter>();
