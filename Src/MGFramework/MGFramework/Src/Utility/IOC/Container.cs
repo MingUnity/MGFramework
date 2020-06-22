@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Reflection;
 using UnityEngine;
 
 namespace MGFramework
@@ -142,6 +143,8 @@ namespace MGFramework
                     NormalTypeNode norNode = node as NormalTypeNode;
 
                     res = Activator.CreateInstance(norNode.objType);
+
+                    GenerateInterfaceField(res);
                 }
                 else if (node is SingletonTypeNode)
                 {
@@ -184,6 +187,59 @@ namespace MGFramework
         }
 
         /// <summary>
+        /// 构建接口字段
+        /// </summary>
+        private static void GenerateInterfaceField(object target)
+        {
+            GenerateInterfaceField(target, target?.GetType());
+        }
+
+        /// <summary>
+        /// 构建接口字段
+        /// </summary>
+        private static void GenerateInterfaceField(object target, Type type)
+        {
+            if (target == null || type == null)
+            {
+                return;
+            }
+
+            FieldInfo[] fieldInfos = type.GetFields(BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
+
+            if (fieldInfos != null && fieldInfos.Length > 0)
+            {
+                for (int i = 0; i < fieldInfos.Length; i++)
+                {
+                    FieldInfo fieldInfo = fieldInfos[i];
+
+                    if (fieldInfo != null && fieldInfo.FieldType.IsInterface)
+                    {
+                        object[] autoAttrs = fieldInfo.GetCustomAttributes(typeof(AutoBuildAttribute), true);
+
+                        string name = null;
+
+                        //含有autoBuild属性 可以自动实例化对象
+                        if (autoAttrs != null && autoAttrs.Length > 0)
+                        {
+                            foreach (AutoBuildAttribute attr in autoAttrs)
+                            {
+                                if (attr != null)
+                                {
+                                    name = attr.name;
+                                    break;
+                                }
+                            }
+
+                            fieldInfo.SetValue(target, Resolve(fieldInfo.FieldType, name));
+                        }
+                    }
+                }
+            }
+
+            GenerateInterfaceField(target, type.BaseType);
+        }
+
+        /// <summary>
         /// 类型节点
         /// </summary>
         private interface ITypeNode
@@ -212,6 +268,8 @@ namespace MGFramework
                     if (_obj == null)
                     {
                         _obj = Activator.CreateInstance(_type);
+                        
+                        GenerateInterfaceField(_obj);
                     }
 
                     return _obj;

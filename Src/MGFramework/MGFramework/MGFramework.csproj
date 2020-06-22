@@ -118,7 +118,8 @@
     <Compile Include="Src\UIModule\View\ViewGroup.cs" />
     <Compile Include="Src\Utility\Bezier.cs" />
     <Compile Include="Src\Utility\CollectionsExtends.cs" />
-    <Compile Include="Src\Utility\Container.cs" />
+    <Compile Include="Src\Utility\IOC\AutoBuildAttribute.cs" />
+    <Compile Include="Src\Utility\IOC\Container.cs" />
     <Compile Include="Src\Utility\EventTriggerExtends.cs" />
     <Compile Include="Src\Utility\Loom.cs" />
     <Compile Include="Src\Utility\MonoSingleton.cs" />

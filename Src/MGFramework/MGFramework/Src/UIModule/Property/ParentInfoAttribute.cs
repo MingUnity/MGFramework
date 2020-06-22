@@ -17,6 +17,17 @@ namespace MGFramework.UIModule
         /// 参数
         /// </summary>
         public string param = string.Empty;
+
+        public ParentInfoAttribute()
+        {
+
+        }
+
+        public ParentInfoAttribute(FindType type,string param)
+        {
+            this.type = type;
+            this.param = param;
+        }
     }
 
     /// <summary>

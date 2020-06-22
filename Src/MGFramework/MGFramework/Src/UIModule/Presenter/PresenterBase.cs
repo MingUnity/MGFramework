@@ -28,11 +28,6 @@ namespace MGFramework.UIModule
             }
         }
 
-        public PresenterBase()
-        {
-            SetInterfaceField(this.GetType());
-        }
-
         /// <summary>
         /// 装载
         /// </summary>
@@ -112,75 +107,5 @@ namespace MGFramework.UIModule
         {
 
         }
-
-        /// <summary>
-        /// 设置接口变量
-        /// </summary>
-        private void SetInterfaceField(Type type)
-        {
-            if (type == null)
-            {
-                return;
-            }
-
-            FieldInfo[] fieldInfos = type.GetFields(BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
-
-            if (fieldInfos != null)
-            {
-                for (int i = 0; i < fieldInfos.Length; i++)
-                {
-                    FieldInfo fieldInfo = fieldInfos[i];
-
-                    if (fieldInfo != null && fieldInfo.FieldType.IsInterface && fieldInfo.FieldType != typeof(TView))
-                    {
-                        object[] nonAutoAttrs = fieldInfo.GetCustomAttributes(typeof(PresenterNonAutoAttribute), true);
-
-                        if (nonAutoAttrs == null || nonAutoAttrs.Length <= 0)
-                        {
-                            object[] autoAttrs = fieldInfo.GetCustomAttributes(typeof(PresenterAutoAttribute), true);
-
-                            string name = null;
-
-                            if (autoAttrs != null && autoAttrs.Length > 0)
-                            {
-                                foreach (PresenterAutoAttribute attr in autoAttrs)
-                                {
-                                    if (attr != null)
-                                    {
-                                        name = attr.name;
-                                        break;
-                                    }
-                                }
-                            }
-
-                            fieldInfo.SetValue(this, Container.Resolve(fieldInfo.FieldType, name));
-                        }
-                    }
-                }
-            }
-
-            SetInterfaceField(type.BaseType);
-        }
-    }
-
-    /// <summary>
-    /// presenter接口 标记自动化构建
-    /// </summary>
-    [AttributeUsage(AttributeTargets.Field)]
-    public class PresenterAutoAttribute : Attribute
-    {
-        /// <summary>
-        /// 构建名
-        /// </summary>
-        public string name = null;
-    }
-
-    /// <summary>
-    /// presenter接口 标记不自动化构建
-    /// </summary>
-    [AttributeUsage(AttributeTargets.Field)]
-    public class PresenterNonAutoAttribute : Attribute
-    {
-
     }
 }

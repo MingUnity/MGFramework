@@ -4,6 +4,7 @@ using System;
 
 public class SampleBPresenter : PresenterBase<ISampleBView>, ISampleBPresenter
 {
+    [AutoBuild]
     private ISampleBModel _model;
 
     public void OnBack()

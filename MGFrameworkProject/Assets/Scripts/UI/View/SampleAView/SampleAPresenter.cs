@@ -4,10 +4,10 @@ using System;
 
 public class SampleAPresenter : PresenterBase<ISampleAView>, ISampleAPresenter
 {
-    [PresenterAuto(name = "1")]
+    [AutoBuild("1")]
     private ISampleAModel _aModel;
 
-    [PresenterNonAuto]
+    [AutoBuild]
     private ISampleBModel _bModel;
 
     public void OnConfirm()

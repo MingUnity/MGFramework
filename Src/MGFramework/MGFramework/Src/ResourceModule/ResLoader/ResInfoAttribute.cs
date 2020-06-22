@@ -27,6 +27,25 @@ namespace MGFramework.ResourceModule
         /// 资源位置
         /// </summary>
         public AssetLocation location = AssetLocation.StreamingAssets;
+
+        public ResInfoAttribute()
+        {
+
+        }
+
+        public ResInfoAttribute(string abPath, string assetName)
+        {
+            this.abPath = abPath;
+            this.assetName = assetName;
+        }
+
+        public ResInfoAttribute(string abPath, string assetName, bool async, AssetLocation location)
+        {
+            this.abPath = abPath;
+            this.assetName = assetName;
+            this.async = async;
+            this.location = location;
+        }
     }
 
     public enum AssetLocation
