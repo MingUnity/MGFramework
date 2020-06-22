@@ -1492,26 +1492,6 @@
             失焦
             </summary>
         </member>
-        <member name="M:MGFramework.UIModule.PresenterBase`1.SetInterfaceField(System.Type)">
-            <summary>
-            设置接口变量
-            </summary>
-        </member>
-        <member name="T:MGFramework.UIModule.PresenterAutoAttribute">
-            <summary>
-            presenter接口 标记自动化构建
-            </summary>
-        </member>
-        <member name="F:MGFramework.UIModule.PresenterAutoAttribute.name">
-            <summary>
-            构建名
-            </summary>
-        </member>
-        <member name="T:MGFramework.UIModule.PresenterNonAutoAttribute">
-            <summary>
-            presenter接口 标记不自动化构建
-            </summary>
-        </member>
         <member name="T:MGFramework.UIModule.ParentInfoAttribute">
             <summary>
             父节点信息
@@ -1957,6 +1937,16 @@
             若不存在返回默认
             </summary>
         </member>
+        <member name="T:MGFramework.AutoBuildAttribute">
+            <summary>
+            自动实例化接口
+            </summary>
+        </member>
+        <member name="F:MGFramework.AutoBuildAttribute.name">
+            <summary>
+            名字
+            </summary>
+        </member>
         <member name="T:MGFramework.Container">
             <summary>
             IOC容器
@@ -2043,6 +2033,16 @@
         <member name="M:MGFramework.Container.Regist``1(System.String,MGFramework.Container.ITypeNode)">
             <summary>
             注册节点
+            </summary>
+        </member>
+        <member name="M:MGFramework.Container.GenerateInterfaceField(System.Object)">
+            <summary>
+            构建接口字段
+            </summary>
+        </member>
+        <member name="M:MGFramework.Container.GenerateInterfaceField(System.Object,System.Type)">
+            <summary>
+            构建接口字段
             </summary>
         </member>
         <member name="T:MGFramework.Container.ITypeNode">
