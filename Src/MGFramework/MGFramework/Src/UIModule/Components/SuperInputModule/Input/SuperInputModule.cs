@@ -22,7 +22,7 @@ namespace MGFramework.UIModule
         /// <summary>
         /// 使用自定义射线
         /// </summary>
-        public bool useCustomRay;
+        public bool useCustomRay = true;
 
         public override void Process()
         {
@@ -106,7 +106,7 @@ namespace MGFramework.UIModule
                 HandlePointerExitAndEnter(pointerEventData, currentOverGo);
                 pointerEventData.pointerEnter = currentOverGo;
             }
-            
+
             if (pressed)
             {
                 pointerEventData.eligibleForClick = true;
@@ -117,14 +117,14 @@ namespace MGFramework.UIModule
                 pointerEventData.pointerPressRaycast = pointerEventData.pointerCurrentRaycast;
 
                 DeselectIfSelectionChanged(currentOverGo, pointerEventData);
-                
+
                 var newPressed = ExecuteEvents.ExecuteHierarchy(currentOverGo, pointerEventData, ExecuteEvents.pointerDownHandler);
 
                 if (newPressed == null)
                 {
                     newPressed = ExecuteEvents.GetEventHandler<IPointerClickHandler>(currentOverGo);
                 }
-                
+
                 float time = Time.unscaledTime;
 
                 if (newPressed == pointerEventData.lastPress)
@@ -156,13 +156,13 @@ namespace MGFramework.UIModule
                     ExecuteEvents.Execute(pointerEventData.pointerDrag, pointerEventData, ExecuteEvents.initializePotentialDrag);
                 }
             }
-            
+
             if (released)
             {
                 ExecuteEvents.Execute(pointerEventData.pointerPress, pointerEventData, ExecuteEvents.pointerUpHandler);
-                
+
                 GameObject pointerUpHandler = ExecuteEvents.GetEventHandler<IPointerClickHandler>(currentOverGo);
-                
+
                 if (pointerEventData.pointerPress == pointerUpHandler && pointerEventData.eligibleForClick)
                 {
                     ExecuteEvents.Execute(pointerEventData.pointerPress, pointerEventData, ExecuteEvents.pointerClickHandler);
@@ -183,7 +183,7 @@ namespace MGFramework.UIModule
 
                 pointerEventData.dragging = false;
                 pointerEventData.pointerDrag = null;
-                
+
                 ExecuteEvents.ExecuteHierarchy(pointerEventData.pointerEnter, pointerEventData, ExecuteEvents.pointerExitHandler);
                 pointerEventData.pointerEnter = null;
             }
