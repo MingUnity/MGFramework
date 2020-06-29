@@ -9,7 +9,7 @@ namespace MGFramework.UIModule
     [AddComponentMenu("MGFramework/ToggleEx")] 
     public class ToggleEx : Toggle
     {
-        /// <summary>
+        /// <summary> 
         /// 文本
         /// </summary>
         public Text text;

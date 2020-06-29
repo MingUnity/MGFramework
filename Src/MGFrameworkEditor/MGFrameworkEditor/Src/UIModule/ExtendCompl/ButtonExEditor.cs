@@ -7,7 +7,7 @@ using UnityEngine.UI;
 namespace MGFrameworkEditor.UIModule
 {
     [CanEditMultipleObjects]
-    [CustomEditor(typeof(ButtonEx), true)]
+    [CustomEditor(typeof(ButtonEx), true)] 
     public class ButtonExEditor : ButtonEditor
     {
         private ButtonEx _src;

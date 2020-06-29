@@ -35,11 +35,6 @@
     <DocumentationFile>..\..\DllOutput\MGFramework.xml</DocumentationFile>
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Unity2019.2.4f1|AnyCPU'">
-    <OutputPath>bin\Unity2019.2.4f1\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <Optimize>true</Optimize>
-  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -49,6 +44,7 @@
     <Reference Include="System.Xml" />
     <Reference Include="UnityEngine">
       <HintPath>..\..\Reference\Unity2018.4.1f1\UnityEngine.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="UnityEngine.UI">
       <HintPath>..\..\Reference\Unity2018.4.1f1\UnityEngine.UI.dll</HintPath>
