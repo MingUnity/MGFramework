@@ -19,7 +19,7 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>..\..\DllOutput\</OutputPath>
+    <OutputPath>..\..\..\MGFrameworkProject\Assets\MGFramework\Plugins\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -89,6 +89,15 @@
     <Compile Include="Src\SimpleData\Int3.cs" />
     <Compile Include="Src\UIModule\Components\MobileGraphicRaycaster.cs" />
     <Compile Include="Src\UIModule\Components\RoundedRect.cs" />
+    <Compile Include="Src\UIModule\Components\SuperInputModule\CustomRay\ICustomRay.cs" />
+    <Compile Include="Src\UIModule\Components\SuperInputModule\CustomRay\MonoForwardRay.cs" />
+    <Compile Include="Src\UIModule\Components\SuperInputModule\CustomRay\RayManager.cs" />
+    <Compile Include="Src\UIModule\Components\SuperInputModule\Input\IInputKeyHandler.cs" />
+    <Compile Include="Src\UIModule\Components\SuperInputModule\Input\InputManager.cs" />
+    <Compile Include="Src\UIModule\Components\SuperInputModule\Input\SuperInputListener.cs" />
+    <Compile Include="Src\UIModule\Components\SuperInputModule\Input\SuperInputModule.cs" />
+    <Compile Include="Src\UIModule\Components\SuperInputModule\Raycaster\SuperGraphicRaycaster.cs" />
+    <Compile Include="Src\UIModule\Components\SuperInputModule\Raycaster\SuperPhysicsRaycaster.cs" />
     <Compile Include="Src\UIModule\Core\IPopUIModule.cs" />
     <Compile Include="Src\UIModule\Core\IUIModule.cs" />
     <Compile Include="Src\UIModule\Core\PopUIModule.cs" />
@@ -122,12 +131,14 @@
     <Compile Include="Src\Utility\IOC\Container.cs" />
     <Compile Include="Src\Utility\EventTriggerExtends.cs" />
     <Compile Include="Src\Utility\Loom.cs" />
+    <Compile Include="Src\Utility\MathHelper.cs" />
     <Compile Include="Src\Utility\MonoSingleton.cs" />
     <Compile Include="Src\Utility\EngineDir.cs" />
     <Compile Include="Src\Utility\SerializeUtility.cs" />
     <Compile Include="Src\Utility\Singleton.cs" />
     <Compile Include="Src\Utility\TaskManager.cs" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>copy /Y "$(TargetDir)$(ProjectName).dll" "$(SolutionDir)..\..\MGFrameworkProject\Assets\MGFramework\Plugins\"

@@ -3,13 +3,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AppManager
+public class AppManager : MonoBehaviour
 {
-    [RuntimeInitializeOnLoadMethod]
-    public static void Entry()
+    private void Awake()
     {
         UIRegister.RegistAll();
+    }
 
+    private void Start()
+    {
         UIManager.Instance.Enter(ViewId.SampleAView, true);
     }
 }
