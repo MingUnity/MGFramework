@@ -34,8 +34,8 @@ namespace MGFramework.UIModule
 
                 _pointerEventData.Reset();
                 CastRay();
-                DispatchPointerHover(prevObject);
                 DispatchTrigger();
+                DispatchPointerHover(prevObject);
 
                 if (eventSystem.sendNavigationEvents)
                 {
@@ -217,6 +217,7 @@ namespace MGFramework.UIModule
 
             RaycastResult raycastResult = FindFirstRaycast(m_RaycastResultCache);
 
+            _pointerEventData.position = raycastResult.screenPosition;
             _pointerEventData.pointerCurrentRaycast = raycastResult;
             _pointerEventData.delta = _pointerEventData.position - prevPosition;
         }
@@ -228,9 +229,8 @@ namespace MGFramework.UIModule
         /// <returns></returns>
         private bool GetInteractive(GameObject obj)
         {
-            return _pointerEventData.pointerPress != null
-                               || ExecuteEvents.GetEventHandler<IPointerClickHandler>(obj) != null
-                               || ExecuteEvents.GetEventHandler<IDragHandler>(obj) != null;
+            return ExecuteEvents.GetEventHandler<IPointerClickHandler>(obj) != null
+                || ExecuteEvents.GetEventHandler<IDragHandler>(obj) != null;
         }
     }
 }
