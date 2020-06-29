@@ -31,24 +31,6 @@ namespace MGFramework.UIModule
         }
 
         /// <summary>
-        /// 长按
-        /// </summary>
-        internal static bool Trigger
-        {
-            get
-            {
-                bool res = false;
-
-                for (int i = 0; i < _inputKeyHandlerList.Count; i++)
-                {
-                    res |= _inputKeyHandlerList[i].Trigger;
-                }
-
-                return res;
-            }
-        }
-
-        /// <summary>
         /// 抬起
         /// </summary>
         internal static bool TriggerUp

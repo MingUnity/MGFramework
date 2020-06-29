@@ -11,11 +11,6 @@
         bool TriggerDown { get; }
 
         /// <summary>
-        /// 长按
-        /// </summary>
-        bool Trigger { get; }
-
-        /// <summary>
         /// 抬起
         /// </summary>
         bool TriggerUp { get; }

@@ -995,11 +995,6 @@
             按下
             </summary>
         </member>
-        <member name="P:MGFramework.UIModule.IInputKeyHandler.Trigger">
-            <summary>
-            长按
-            </summary>
-        </member>
         <member name="P:MGFramework.UIModule.IInputKeyHandler.TriggerUp">
             <summary>
             抬起
@@ -1018,11 +1013,6 @@
         <member name="P:MGFramework.UIModule.InputManager.TriggerDown">
             <summary>
             按下
-            </summary>
-        </member>
-        <member name="P:MGFramework.UIModule.InputManager.Trigger">
-            <summary>
-            长按
             </summary>
         </member>
         <member name="P:MGFramework.UIModule.InputManager.TriggerUp">

@@ -67,28 +67,20 @@ namespace MGFramework.UIModule
         private void DispatchTrigger()
         {
             bool triggerDown = InputManager.TriggerDown;
-            bool triggering = InputManager.Trigger;
             bool triggerUp = InputManager.TriggerUp;
 
-            bool pressed = (triggerDown || triggering) && !triggerUp;
-            bool released = triggerUp || (!triggerDown && !triggering);
-
-            ProcessPress(_pointerEventData, pressed, released);
-
-            if (!released)
-            {
-                ProcessMove(_pointerEventData);
-                ProcessDrag(_pointerEventData);
-            }
+            ProcessPress(_pointerEventData, triggerDown, triggerUp);
+            ProcessMove(_pointerEventData);
+            ProcessDrag(_pointerEventData);
 
             bool interactive = GetInteractive(_pointerEventData.pointerCurrentRaycast.gameObject);
 
-            if (triggerDown && !triggering && !triggerUp)
+            if (triggerDown)
             {
                 SuperInputListener.InvokePointerDown(_pointerEventData.pointerCurrentRaycast, interactive);
             }
 
-            if (!triggerDown && !triggering && triggerUp)
+            if (triggerUp)
             {
                 SuperInputListener.InvokePointerUp(_pointerEventData.pointerCurrentRaycast, interactive);
             }
@@ -99,14 +91,8 @@ namespace MGFramework.UIModule
         /// </summary>
         private void ProcessPress(PointerEventData pointerEventData, bool pressed, bool released)
         {
-            GameObject currentOverGo = pointerEventData.pointerCurrentRaycast.gameObject;
-
-            if (pointerEventData.pointerEnter != currentOverGo)
-            {
-                HandlePointerExitAndEnter(pointerEventData, currentOverGo);
-                pointerEventData.pointerEnter = currentOverGo;
-            }
-
+            GameObject curObject = pointerEventData.pointerCurrentRaycast.gameObject;
+            
             if (pressed)
             {
                 pointerEventData.eligibleForClick = true;
@@ -116,20 +102,20 @@ namespace MGFramework.UIModule
                 pointerEventData.pressPosition = pointerEventData.position;
                 pointerEventData.pointerPressRaycast = pointerEventData.pointerCurrentRaycast;
 
-                DeselectIfSelectionChanged(currentOverGo, pointerEventData);
-
-                var newPressed = ExecuteEvents.ExecuteHierarchy(currentOverGo, pointerEventData, ExecuteEvents.pointerDownHandler);
+                DeselectIfSelectionChanged(curObject, pointerEventData);
+                
+                var newPressed = ExecuteEvents.ExecuteHierarchy(curObject, pointerEventData, ExecuteEvents.pointerDownHandler);
 
                 if (newPressed == null)
                 {
-                    newPressed = ExecuteEvents.GetEventHandler<IPointerClickHandler>(currentOverGo);
+                    newPressed = ExecuteEvents.GetEventHandler<IPointerClickHandler>(curObject);
                 }
-
+                
                 float time = Time.unscaledTime;
 
                 if (newPressed == pointerEventData.lastPress)
                 {
-                    var diffTime = time - pointerEventData.clickTime;
+                    float diffTime = time - pointerEventData.clickTime;
                     if (diffTime < 0.3f)
                     {
                         ++pointerEventData.clickCount;
@@ -138,7 +124,7 @@ namespace MGFramework.UIModule
                     {
                         pointerEventData.clickCount = 1;
                     }
-
+                    
                     pointerEventData.clickTime = time;
                 }
                 else
@@ -147,29 +133,29 @@ namespace MGFramework.UIModule
                 }
 
                 pointerEventData.pointerPress = newPressed;
-                pointerEventData.rawPointerPress = currentOverGo;
+                pointerEventData.rawPointerPress = curObject;
                 pointerEventData.clickTime = time;
-                pointerEventData.pointerDrag = ExecuteEvents.GetEventHandler<IDragHandler>(currentOverGo);
+                pointerEventData.pointerDrag = ExecuteEvents.GetEventHandler<IDragHandler>(curObject);
 
                 if (pointerEventData.pointerDrag != null)
                 {
                     ExecuteEvents.Execute(pointerEventData.pointerDrag, pointerEventData, ExecuteEvents.initializePotentialDrag);
                 }
             }
-
+            
             if (released)
             {
                 ExecuteEvents.Execute(pointerEventData.pointerPress, pointerEventData, ExecuteEvents.pointerUpHandler);
 
-                GameObject pointerUpHandler = ExecuteEvents.GetEventHandler<IPointerClickHandler>(currentOverGo);
-
+                var pointerUpHandler = ExecuteEvents.GetEventHandler<IPointerClickHandler>(curObject);
+                
                 if (pointerEventData.pointerPress == pointerUpHandler && pointerEventData.eligibleForClick)
                 {
                     ExecuteEvents.Execute(pointerEventData.pointerPress, pointerEventData, ExecuteEvents.pointerClickHandler);
                 }
                 else if (pointerEventData.pointerDrag != null && pointerEventData.dragging)
                 {
-                    ExecuteEvents.ExecuteHierarchy(currentOverGo, pointerEventData, ExecuteEvents.dropHandler);
+                    ExecuteEvents.ExecuteHierarchy(curObject, pointerEventData, ExecuteEvents.dropHandler);
                 }
 
                 pointerEventData.eligibleForClick = false;
@@ -184,8 +170,11 @@ namespace MGFramework.UIModule
                 pointerEventData.dragging = false;
                 pointerEventData.pointerDrag = null;
 
-                ExecuteEvents.ExecuteHierarchy(pointerEventData.pointerEnter, pointerEventData, ExecuteEvents.pointerExitHandler);
-                pointerEventData.pointerEnter = null;
+                if (curObject != pointerEventData.pointerEnter)
+                {
+                    HandlePointerExitAndEnter(pointerEventData, null);
+                    HandlePointerExitAndEnter(pointerEventData, curObject);
+                }
             }
         }
 
