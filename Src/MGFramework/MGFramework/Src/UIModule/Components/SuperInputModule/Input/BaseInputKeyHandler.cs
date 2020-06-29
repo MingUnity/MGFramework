@@ -5,7 +5,7 @@ namespace MGFramework.UIModule
     /// <summary>
     /// 基于mono的输入处理
     /// </summary>
-    public abstract class BaseMonoInputKeyHandler : MonoBehaviour, IInputKeyHandler
+    public abstract class BaseInputKeyHandler : MonoBehaviour, IInputKeyHandler
     {
         private void OnEnable()
         {

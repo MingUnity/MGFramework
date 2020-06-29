@@ -5,7 +5,7 @@ namespace MGFramework.UIModule
     /// <summary>
     /// 输入管理
     /// </summary>
-    public static class InputManager
+    internal static class InputManager
     {
         /// <summary>
         /// 输入键处理器
@@ -34,7 +34,7 @@ namespace MGFramework.UIModule
         /// <summary>
         /// 输入更新
         /// </summary>
-        internal static void InputUpdate(out bool pointerDown,out bool pointerUp)
+        public static void InputUpdate(out bool pointerDown,out bool pointerUp)
         {
             pointerDown = false;
             pointerUp = false;

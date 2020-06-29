@@ -985,12 +985,12 @@
             排序
             </summary>
         </member>
-        <member name="T:MGFramework.UIModule.BaseMonoInputKeyHandler">
+        <member name="T:MGFramework.UIModule.BaseInputKeyHandler">
             <summary>
             基于mono的输入处理
             </summary>
         </member>
-        <member name="M:MGFramework.UIModule.BaseMonoInputKeyHandler.InputUpdate(System.Boolean@,System.Boolean@)">
+        <member name="M:MGFramework.UIModule.BaseInputKeyHandler.InputUpdate(System.Boolean@,System.Boolean@)">
             <summary>
             输入更新
             </summary>

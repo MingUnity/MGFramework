@@ -5,7 +5,7 @@ namespace MGFramework.UIModule
     /// <summary>
     /// unity输入处理
     /// </summary>
-    public sealed class UnityInputKeyHandler : BaseMonoInputKeyHandler
+    public sealed class UnityInputKeyHandler : BaseInputKeyHandler
     {
         /// <summary>
         /// 输入更新
