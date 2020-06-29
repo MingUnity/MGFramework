@@ -6,13 +6,8 @@
     public interface IInputKeyHandler
     {
         /// <summary>
-        /// 按下
+        /// 输入更新
         /// </summary>
-        bool TriggerDown { get; }
-
-        /// <summary>
-        /// 抬起
-        /// </summary>
-        bool TriggerUp { get; }
+        void InputUpdate(out bool pointerDown, out bool pointerUp);
     }
 }

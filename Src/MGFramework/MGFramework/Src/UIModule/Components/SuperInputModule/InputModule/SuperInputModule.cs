@@ -15,11 +15,6 @@ namespace MGFramework.UIModule
         private PointerEventData _pointerEventData;
 
         /// <summary>
-        /// 指针悬浮中
-        /// </summary>
-        private bool _pointerHovering;
-
-        /// <summary>
         /// 使用自定义射线
         /// </summary>
         public bool useCustomRay = true;
@@ -66,8 +61,10 @@ namespace MGFramework.UIModule
         /// </summary>
         private void DispatchTrigger()
         {
-            bool triggerDown = InputManager.TriggerDown;
-            bool triggerUp = InputManager.TriggerUp;
+            bool triggerDown = false;
+            bool triggerUp = false;
+
+            InputManager.InputUpdate(out triggerDown, out triggerUp);
 
             ProcessPress(_pointerEventData, triggerDown, triggerUp);
             ProcessMove(_pointerEventData);
@@ -92,7 +89,7 @@ namespace MGFramework.UIModule
         private void ProcessPress(PointerEventData pointerEventData, bool pressed, bool released)
         {
             GameObject curObject = pointerEventData.pointerCurrentRaycast.gameObject;
-            
+
             if (pressed)
             {
                 pointerEventData.eligibleForClick = true;
@@ -103,14 +100,14 @@ namespace MGFramework.UIModule
                 pointerEventData.pointerPressRaycast = pointerEventData.pointerCurrentRaycast;
 
                 DeselectIfSelectionChanged(curObject, pointerEventData);
-                
+
                 var newPressed = ExecuteEvents.ExecuteHierarchy(curObject, pointerEventData, ExecuteEvents.pointerDownHandler);
 
                 if (newPressed == null)
                 {
                     newPressed = ExecuteEvents.GetEventHandler<IPointerClickHandler>(curObject);
                 }
-                
+
                 float time = Time.unscaledTime;
 
                 if (newPressed == pointerEventData.lastPress)
@@ -124,7 +121,7 @@ namespace MGFramework.UIModule
                     {
                         pointerEventData.clickCount = 1;
                     }
-                    
+
                     pointerEventData.clickTime = time;
                 }
                 else
@@ -142,13 +139,13 @@ namespace MGFramework.UIModule
                     ExecuteEvents.Execute(pointerEventData.pointerDrag, pointerEventData, ExecuteEvents.initializePotentialDrag);
                 }
             }
-            
+
             if (released)
             {
                 ExecuteEvents.Execute(pointerEventData.pointerPress, pointerEventData, ExecuteEvents.pointerUpHandler);
 
                 var pointerUpHandler = ExecuteEvents.GetEventHandler<IPointerClickHandler>(curObject);
-                
+
                 if (pointerEventData.pointerPress == pointerUpHandler && pointerEventData.eligibleForClick)
                 {
                     ExecuteEvents.Execute(pointerEventData.pointerPress, pointerEventData, ExecuteEvents.pointerClickHandler);
@@ -187,22 +184,20 @@ namespace MGFramework.UIModule
 
             bool interactive = GetInteractive(curObject);
 
-            if (_pointerHovering && curObject != null && curObject == prevObject)
+            if (curObject != null && curObject == prevObject)
             {
                 SuperInputListener.InvokePointerHover(_pointerEventData.pointerCurrentRaycast, interactive);
             }
             else
             {
-                if (prevObject != null || (curObject == null && _pointerHovering))
+                if (prevObject != null)
                 {
                     SuperInputListener.InvokePointerExit(prevObject);
-                    _pointerHovering = false;
                 }
 
                 if (curObject != null)
                 {
                     SuperInputListener.InvokePointerEnter(_pointerEventData.pointerCurrentRaycast, interactive);
-                    _pointerHovering = true;
                 }
             }
         }

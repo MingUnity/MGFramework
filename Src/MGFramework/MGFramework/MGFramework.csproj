@@ -92,10 +92,12 @@
     <Compile Include="Src\UIModule\Components\SuperInputModule\CustomRay\ICustomRay.cs" />
     <Compile Include="Src\UIModule\Components\SuperInputModule\CustomRay\MonoForwardRay.cs" />
     <Compile Include="Src\UIModule\Components\SuperInputModule\CustomRay\RayManager.cs" />
+    <Compile Include="Src\UIModule\Components\SuperInputModule\Input\BaseMonoInputKeyHandler.cs" />
     <Compile Include="Src\UIModule\Components\SuperInputModule\Input\IInputKeyHandler.cs" />
     <Compile Include="Src\UIModule\Components\SuperInputModule\Input\InputManager.cs" />
-    <Compile Include="Src\UIModule\Components\SuperInputModule\Input\SuperInputListener.cs" />
-    <Compile Include="Src\UIModule\Components\SuperInputModule\Input\SuperInputModule.cs" />
+    <Compile Include="Src\UIModule\Components\SuperInputModule\InputModule\SuperInputListener.cs" />
+    <Compile Include="Src\UIModule\Components\SuperInputModule\InputModule\SuperInputModule.cs" />
+    <Compile Include="Src\UIModule\Components\SuperInputModule\Input\UnityInputKeyHandler.cs" />
     <Compile Include="Src\UIModule\Components\SuperInputModule\Raycaster\SuperGraphicRaycaster.cs" />
     <Compile Include="Src\UIModule\Components\SuperInputModule\Raycaster\SuperPhysicsRaycaster.cs" />
     <Compile Include="Src\UIModule\Core\IPopUIModule.cs" />
