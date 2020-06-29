@@ -985,19 +985,24 @@
             排序
             </summary>
         </member>
+        <member name="T:MGFramework.UIModule.BaseMonoInputKeyHandler">
+            <summary>
+            基于mono的输入处理
+            </summary>
+        </member>
+        <member name="M:MGFramework.UIModule.BaseMonoInputKeyHandler.InputUpdate(System.Boolean@,System.Boolean@)">
+            <summary>
+            输入更新
+            </summary>
+        </member>
         <member name="T:MGFramework.UIModule.IInputKeyHandler">
             <summary>
             输入键处理
             </summary>
         </member>
-        <member name="P:MGFramework.UIModule.IInputKeyHandler.TriggerDown">
+        <member name="M:MGFramework.UIModule.IInputKeyHandler.InputUpdate(System.Boolean@,System.Boolean@)">
             <summary>
-            按下
-            </summary>
-        </member>
-        <member name="P:MGFramework.UIModule.IInputKeyHandler.TriggerUp">
-            <summary>
-            抬起
+            输入更新
             </summary>
         </member>
         <member name="T:MGFramework.UIModule.InputManager">
@@ -1010,16 +1015,6 @@
             输入键处理器
             </summary>
         </member>
-        <member name="P:MGFramework.UIModule.InputManager.TriggerDown">
-            <summary>
-            按下
-            </summary>
-        </member>
-        <member name="P:MGFramework.UIModule.InputManager.TriggerUp">
-            <summary>
-            抬起
-            </summary>
-        </member>
         <member name="M:MGFramework.UIModule.InputManager.Add(MGFramework.UIModule.IInputKeyHandler)">
             <summary>
             添加
@@ -1028,6 +1023,11 @@
         <member name="M:MGFramework.UIModule.InputManager.Remove(MGFramework.UIModule.IInputKeyHandler)">
             <summary>
             移除
+            </summary>
+        </member>
+        <member name="M:MGFramework.UIModule.InputManager.InputUpdate(System.Boolean@,System.Boolean@)">
+            <summary>
+            输入更新
             </summary>
         </member>
         <member name="T:MGFramework.UIModule.SuperInputListener">
@@ -1043,11 +1043,6 @@
         <member name="F:MGFramework.UIModule.SuperInputModule._pointerEventData">
             <summary>
             当前pointerEventData
-            </summary>
-        </member>
-        <member name="F:MGFramework.UIModule.SuperInputModule._pointerHovering">
-            <summary>
-            指针悬浮中
             </summary>
         </member>
         <member name="F:MGFramework.UIModule.SuperInputModule.useCustomRay">
@@ -1081,6 +1076,21 @@
             </summary>
             <param name="obj"></param>
             <returns></returns>
+        </member>
+        <member name="T:MGFramework.UIModule.UnityInputKeyHandler">
+            <summary>
+            unity输入处理
+            </summary>
+        </member>
+        <member name="M:MGFramework.UIModule.UnityInputKeyHandler.InputUpdate(System.Boolean@,System.Boolean@)">
+            <summary>
+            输入更新
+            </summary>
+        </member>
+        <member name="M:MGFramework.UIModule.UnityInputKeyHandler.GetFirstTouchPhase(UnityEngine.TouchPhase@)">
+            <summary>
+            获取第一个手指触碰的phase
+            </summary>
         </member>
         <member name="T:MGFramework.UIModule.SuperGraphicRaycaster">
             <summary>
