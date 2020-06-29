@@ -56,10 +56,5 @@ namespace MGFramework.UIModule
         {
             RayManager.RemoveRay(this);
         }
-
-        private void OnDestroy()
-        {
-            RayManager.RemoveRay(this);
-        }
     }
 }
