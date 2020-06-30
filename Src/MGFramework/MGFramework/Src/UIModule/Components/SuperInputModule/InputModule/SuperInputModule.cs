@@ -33,9 +33,10 @@ namespace MGFramework.UIModule
                 GameObject prevObject = _pointerEventData.pointerCurrentRaycast.gameObject;
 
                 _pointerEventData.Reset();
-                CastRay();
-                DispatchTrigger();
-                DispatchPointerHover(prevObject);
+
+                CastRay(_pointerEventData);
+                DispatchTrigger(_pointerEventData);
+                DispatchPointerHover(_pointerEventData, prevObject);
 
                 if (eventSystem.sendNavigationEvents)
                 {
@@ -59,27 +60,27 @@ namespace MGFramework.UIModule
         /// <summary>
         /// 交互输入响应处理
         /// </summary>
-        private void DispatchTrigger()
+        private void DispatchTrigger(PointerEventData eventData)
         {
             bool triggerDown = false;
             bool triggerUp = false;
 
             InputManager.InputUpdate(out triggerDown, out triggerUp);
 
-            ProcessPress(_pointerEventData, triggerDown, triggerUp);
-            ProcessMove(_pointerEventData);
-            ProcessDrag(_pointerEventData);
+            ProcessPress(eventData, triggerDown, triggerUp);
+            ProcessMove(eventData);
+            ProcessDrag(eventData);
 
-            bool interactive = GetInteractive(_pointerEventData.pointerCurrentRaycast.gameObject);
+            bool interactive = GetInteractive(eventData.pointerCurrentRaycast.gameObject);
 
             if (triggerDown)
             {
-                SuperInputListener.InvokePointerDown(_pointerEventData.pointerCurrentRaycast, interactive);
+                SuperInputListener.InvokePointerDown(eventData.pointerCurrentRaycast, interactive);
             }
 
             if (triggerUp)
             {
-                SuperInputListener.InvokePointerUp(_pointerEventData.pointerCurrentRaycast, interactive);
+                SuperInputListener.InvokePointerUp(eventData.pointerCurrentRaycast, interactive);
             }
         }
 
@@ -178,15 +179,15 @@ namespace MGFramework.UIModule
         /// <summary>
         /// 指针悬浮处理
         /// </summary>
-        private void DispatchPointerHover(GameObject prevObject)
+        private void DispatchPointerHover(PointerEventData eventData, GameObject prevObject)
         {
-            GameObject curObject = _pointerEventData.pointerCurrentRaycast.gameObject;
+            GameObject curObject = eventData.pointerCurrentRaycast.gameObject;
 
             bool interactive = GetInteractive(curObject);
 
             if (curObject != null && curObject == prevObject)
             {
-                SuperInputListener.InvokePointerHover(_pointerEventData.pointerCurrentRaycast, interactive);
+                SuperInputListener.InvokePointerHover(eventData.pointerCurrentRaycast, interactive);
             }
             else
             {
@@ -197,7 +198,7 @@ namespace MGFramework.UIModule
 
                 if (curObject != null)
                 {
-                    SuperInputListener.InvokePointerEnter(_pointerEventData.pointerCurrentRaycast, interactive);
+                    SuperInputListener.InvokePointerEnter(eventData.pointerCurrentRaycast, interactive);
                 }
             }
         }
@@ -205,21 +206,21 @@ namespace MGFramework.UIModule
         /// <summary>
         /// 射线检测
         /// </summary>
-        private void CastRay()
+        private void CastRay(PointerEventData eventData)
         {
-            Vector2 prevPosition = _pointerEventData.position;
+            Vector2 prevPosition = eventData.position;
 
             m_RaycastResultCache.Clear();
 
-            _pointerEventData.position = new Vector2(Screen.width, Screen.height) * 0.5f;
+            eventData.position = new Vector2(Screen.width, Screen.height) * 0.5f;
 
-            eventSystem.RaycastAll(_pointerEventData, m_RaycastResultCache);
+            eventSystem.RaycastAll(eventData, m_RaycastResultCache);
 
             RaycastResult raycastResult = FindFirstRaycast(m_RaycastResultCache);
 
-            _pointerEventData.position = raycastResult.screenPosition;
-            _pointerEventData.pointerCurrentRaycast = raycastResult;
-            _pointerEventData.delta = _pointerEventData.position - prevPosition;
+            eventData.position = raycastResult.screenPosition;
+            eventData.pointerCurrentRaycast = raycastResult;
+            eventData.delta = eventData.position - prevPosition;
         }
 
         /// <summary>

@@ -12,6 +12,250 @@ namespace MGFramework.UIModule
     /// </summary>
     public class SuperScrollView : ScrollRect
     {
+        #region Enum
+
+        /// <summary>
+        /// 方向
+        /// </summary>
+        public enum Dir
+        {
+            /// <summary>
+            /// 上
+            /// </summary>
+            Top,
+
+            /// <summary>
+            /// 下
+            /// </summary>
+            Bottom,
+
+            /// <summary>
+            /// 左
+            /// </summary>
+            Left,
+
+            /// <summary>
+            /// 右
+            /// </summary>
+            Right
+        }
+
+        /// <summary>
+        /// 滚动状态
+        /// </summary>
+        private enum ScrollStatus
+        {
+            /// <summary>
+            /// 竖屏
+            /// </summary>
+            Horizontal,
+
+            /// <summary>
+            /// 垂直
+            /// </summary>
+            Vertical
+        }
+
+        #endregion
+
+        #region Internal Class
+
+        /// <summary>
+        /// 滚动任务
+        /// </summary>
+        private struct ScrollTask
+        {
+            /// <summary>
+            /// 计时器
+            /// </summary>
+            public float timer;
+
+            /// <summary>
+            /// 标识
+            /// </summary>
+            public bool move;
+
+            /// <summary>
+            /// 目标
+            /// </summary>
+            public float target;
+
+            /// <summary>
+            /// 总耗时
+            /// </summary>
+            public float totalTime;
+
+            /// <summary>
+            /// 开始滚动位置
+            /// </summary>
+            public float startPos;
+
+            /// <summary>
+            /// 完成回调
+            /// </summary>
+            public Action onCompleted;
+
+            /// <summary>
+            /// 滚动中回调
+            /// </summary>
+            public Action<float> onScrolling;
+
+            /// <summary>
+            /// 重置
+            /// </summary>
+            public void Reset()
+            {
+                timer = 0;
+                move = false;
+                target = 0;
+                totalTime = 0;
+                startPos = 0;
+                onCompleted = null;
+                onScrolling = null;
+            }
+        }
+
+        /// <summary>
+        /// 滚动处理
+        /// </summary>
+        private interface IScrollHandler
+        {
+            /// <summary>
+            /// 位置
+            /// </summary>
+            float NormalizedPosition { get; set; }
+
+            /// <summary>
+            /// 可操作
+            /// </summary>
+            bool Operation { get; set; }
+
+            /// <summary>
+            /// 运动方向一边的长度
+            /// </summary>
+            float MainSideLength { get; }
+
+            /// <summary>
+            /// 初始化
+            /// </summary>
+            void Init(SuperScrollView scrollView);
+
+            /// <summary>
+            /// 指针位置
+            /// </summary>
+            float GetPointerPosition(PointerEventData eventData);
+
+            /// <summary>
+            /// 获取位置变化方向
+            /// </summary>
+            Dir GetPosDir(float deltaPos);
+
+            /// <summary>
+            /// 获取目标页数
+            /// </summary>
+            bool GetTargetPage(float deltaPos, int curPageIndex, int totalPageCount, out int targetIndex);
+        }
+
+        /// <summary>
+        /// 水平滚动
+        /// </summary>
+        private class HorizontalScroller : IScrollHandler
+        {
+            private SuperScrollView _scrollView;
+
+            public float NormalizedPosition { get => _scrollView.horizontalNormalizedPosition; set => _scrollView.horizontalNormalizedPosition = value; }
+            public bool Operation { get => _scrollView.horizontal; set => _scrollView.horizontal = value; }
+            public float MainSideLength => _scrollView.viewport.rect.width;
+
+            public void Init(SuperScrollView scrollView)
+            {
+                this._scrollView = scrollView;
+
+                _scrollView.horizontal = true;
+                _scrollView.vertical = false;
+            }
+
+            public float GetPointerPosition(PointerEventData eventData)
+            {
+                return eventData.position.x;
+            }
+
+            public Dir GetPosDir(float deltaPos)
+            {
+                return deltaPos > 0 ? Dir.Left : Dir.Right;
+            }
+
+            public bool GetTargetPage(float deltaPos, int curPageIndex, int totalPageCount, out int targetIndex)
+            {
+                if (deltaPos < 0)
+                {
+                    targetIndex = curPageIndex + 1;
+                    return curPageIndex < totalPageCount - 1;
+                }
+                else if (deltaPos > 0)
+                {
+                    targetIndex = curPageIndex - 1;
+                    return curPageIndex > 0;
+                }
+                else
+                {
+                    targetIndex = curPageIndex;
+                    return false;
+                }
+            }
+        }
+
+        /// <summary>
+        /// 垂直滚动
+        /// </summary>
+        private class VerticalScroller : IScrollHandler
+        {
+            private SuperScrollView _scrollView;
+
+            public float NormalizedPosition { get => _scrollView.verticalNormalizedPosition; set => _scrollView.verticalNormalizedPosition = value; }
+            public bool Operation { get => _scrollView.vertical; set => _scrollView.vertical = value; }
+            public float MainSideLength => _scrollView.viewport.rect.height;
+
+            public void Init(SuperScrollView scrollView)
+            {
+                this._scrollView = scrollView;
+
+                _scrollView.horizontal = false;
+                _scrollView.vertical = true;
+            }
+
+            public float GetPointerPosition(PointerEventData eventData)
+            {
+                return eventData.position.y;
+            }
+
+            public Dir GetPosDir(float deltaPos)
+            {
+                return deltaPos > 0 ? Dir.Bottom : Dir.Top;
+            }
+
+            public bool GetTargetPage(float deltaPos, int curPageIndex, int totalPageCount, out int targetIndex)
+            {
+                if (deltaPos < 0)
+                {
+                    targetIndex = curPageIndex - 1;
+                    return curPageIndex > 0;
+                }
+                else if (deltaPos > 0)
+                {
+                    targetIndex = curPageIndex + 1;
+                    return curPageIndex < totalPageCount - 1;
+                }
+                else
+                {
+                    targetIndex = curPageIndex;
+                    return false;
+                }
+            }
+        }
+
+        #endregion
+
         #region Private Variable
 
         /// <summary>
@@ -542,250 +786,6 @@ namespace MGFramework.UIModule
 
                 default:
                     return 0;
-            }
-        }
-
-        #endregion
-
-        #region Enum
-
-        /// <summary>
-        /// 方向
-        /// </summary>
-        public enum Dir
-        {
-            /// <summary>
-            /// 上
-            /// </summary>
-            Top,
-
-            /// <summary>
-            /// 下
-            /// </summary>
-            Bottom,
-
-            /// <summary>
-            /// 左
-            /// </summary>
-            Left,
-
-            /// <summary>
-            /// 右
-            /// </summary>
-            Right
-        }
-
-        /// <summary>
-        /// 滚动状态
-        /// </summary>
-        private enum ScrollStatus
-        {
-            /// <summary>
-            /// 竖屏
-            /// </summary>
-            Horizontal,
-
-            /// <summary>
-            /// 垂直
-            /// </summary>
-            Vertical
-        }
-
-        #endregion
-
-        #region Additive Class
-
-        /// <summary>
-        /// 滚动任务
-        /// </summary>
-        private struct ScrollTask
-        {
-            /// <summary>
-            /// 计时器
-            /// </summary>
-            public float timer;
-
-            /// <summary>
-            /// 标识
-            /// </summary>
-            public bool move;
-
-            /// <summary>
-            /// 目标
-            /// </summary>
-            public float target;
-
-            /// <summary>
-            /// 总耗时
-            /// </summary>
-            public float totalTime;
-
-            /// <summary>
-            /// 开始滚动位置
-            /// </summary>
-            public float startPos;
-
-            /// <summary>
-            /// 完成回调
-            /// </summary>
-            public Action onCompleted;
-
-            /// <summary>
-            /// 滚动中回调
-            /// </summary>
-            public Action<float> onScrolling;
-
-            /// <summary>
-            /// 重置
-            /// </summary>
-            public void Reset()
-            {
-                timer = 0;
-                move = false;
-                target = 0;
-                totalTime = 0;
-                startPos = 0;
-                onCompleted = null;
-                onScrolling = null;
-            }
-        }
-
-        /// <summary>
-        /// 滚动处理
-        /// </summary>
-        private interface IScrollHandler
-        {
-            /// <summary>
-            /// 位置
-            /// </summary>
-            float NormalizedPosition { get; set; }
-
-            /// <summary>
-            /// 可操作
-            /// </summary>
-            bool Operation { get; set; }
-
-            /// <summary>
-            /// 运动方向一边的长度
-            /// </summary>
-            float MainSideLength { get; }
-
-            /// <summary>
-            /// 初始化
-            /// </summary>
-            void Init(SuperScrollView scrollView);
-
-            /// <summary>
-            /// 指针位置
-            /// </summary>
-            float GetPointerPosition(PointerEventData eventData);
-
-            /// <summary>
-            /// 获取位置变化方向
-            /// </summary>
-            Dir GetPosDir(float deltaPos);
-
-            /// <summary>
-            /// 获取目标页数
-            /// </summary>
-            bool GetTargetPage(float deltaPos, int curPageIndex, int totalPageCount, out int targetIndex);
-        }
-
-        /// <summary>
-        /// 水平滚动
-        /// </summary>
-        private class HorizontalScroller : IScrollHandler
-        {
-            private SuperScrollView _scrollView;
-
-            public float NormalizedPosition { get => _scrollView.horizontalNormalizedPosition; set => _scrollView.horizontalNormalizedPosition = value; }
-            public bool Operation { get => _scrollView.horizontal; set => _scrollView.horizontal = value; }
-            public float MainSideLength => _scrollView.viewport.rect.width;
-
-            public void Init(SuperScrollView scrollView)
-            {
-                this._scrollView = scrollView;
-
-                _scrollView.horizontal = true;
-                _scrollView.vertical = false;
-            }
-
-            public float GetPointerPosition(PointerEventData eventData)
-            {
-                return eventData.position.x;
-            }
-
-            public Dir GetPosDir(float deltaPos)
-            {
-                return deltaPos > 0 ? Dir.Left : Dir.Right;
-            }
-
-            public bool GetTargetPage(float deltaPos, int curPageIndex, int totalPageCount, out int targetIndex)
-            {
-                if (deltaPos < 0)
-                {
-                    targetIndex = curPageIndex + 1;
-                    return curPageIndex < totalPageCount - 1;
-                }
-                else if (deltaPos > 0)
-                {
-                    targetIndex = curPageIndex - 1;
-                    return curPageIndex > 0;
-                }
-                else
-                {
-                    targetIndex = curPageIndex;
-                    return false;
-                }
-            }
-        }
-
-        /// <summary>
-        /// 垂直滚动
-        /// </summary>
-        private class VerticalScroller : IScrollHandler
-        {
-            private SuperScrollView _scrollView;
-
-            public float NormalizedPosition { get => _scrollView.verticalNormalizedPosition; set => _scrollView.verticalNormalizedPosition = value; }
-            public bool Operation { get => _scrollView.vertical; set => _scrollView.vertical = value; }
-            public float MainSideLength => _scrollView.viewport.rect.height;
-
-            public void Init(SuperScrollView scrollView)
-            {
-                this._scrollView = scrollView;
-
-                _scrollView.horizontal = false;
-                _scrollView.vertical = true;
-            }
-
-            public float GetPointerPosition(PointerEventData eventData)
-            {
-                return eventData.position.y;
-            }
-
-            public Dir GetPosDir(float deltaPos)
-            {
-                return deltaPos > 0 ? Dir.Bottom : Dir.Top;
-            }
-
-            public bool GetTargetPage(float deltaPos, int curPageIndex, int totalPageCount, out int targetIndex)
-            {
-                if (deltaPos < 0)
-                {
-                    targetIndex = curPageIndex - 1;
-                    return curPageIndex > 0;
-                }
-                else if (deltaPos > 0)
-                {
-                    targetIndex = curPageIndex + 1;
-                    return curPageIndex < totalPageCount - 1;
-                }
-                else
-                {
-                    targetIndex = curPageIndex;
-                    return false;
-                }
             }
         }
 
