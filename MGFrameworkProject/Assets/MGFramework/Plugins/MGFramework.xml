@@ -1157,6 +1157,347 @@
             缓存碰撞数组
             </summary>
         </member>
+        <member name="T:MGFramework.UIModule.ISuperNodeFactory">
+            <summary>
+            滚动列表节点工厂
+            </summary>
+        </member>
+        <member name="M:MGFramework.UIModule.ISuperNodeFactory.Create">
+            <summary>
+            创建节点
+            </summary>
+        </member>
+        <member name="M:MGFramework.UIModule.ISuperNodeFactory.Recycle(MGFramework.UIModule.ISuperScrollNode)">
+            <summary>
+            回收节点
+            </summary>
+        </member>
+        <member name="T:MGFramework.UIModule.ISuperScrollNode">
+            <summary>
+            滚动节点
+            </summary>
+        </member>
+        <member name="M:MGFramework.UIModule.ISuperScrollNode.Refresh(MGFramework.UIModule.ISuperScrollNodeData)">
+            <summary>
+            更新数据
+            </summary>
+        </member>
+        <member name="T:MGFramework.UIModule.ISuperScrollNodeData">
+            <summary>
+            滚动列表节点数据
+            </summary>
+        </member>
+        <member name="T:MGFramework.UIModule.SuperScrollView">
+            <summary>
+            优化版滚动列表
+            基于页的滚动列表
+            </summary>
+        </member>
+        <member name="F:MGFramework.UIModule.SuperScrollView._datas">
+            <summary>
+            节点数据
+            </summary>
+        </member>
+        <member name="F:MGFramework.UIModule.SuperScrollView._interactive">
+            <summary>
+            可交互
+            </summary>
+        </member>
+        <member name="F:MGFramework.UIModule.SuperScrollView._scrollStatus">
+            <summary>
+            滚动方向状态
+            </summary>
+        </member>
+        <member name="F:MGFramework.UIModule.SuperScrollView._curPageIndex">
+            <summary>
+            当前页码
+            </summary>
+        </member>
+        <member name="F:MGFramework.UIModule.SuperScrollView._nodes">
+            <summary>
+            已实例化节点列表
+            </summary>
+        </member>
+        <member name="F:MGFramework.UIModule.SuperScrollView._factory">
+            <summary>
+            节点工厂
+            </summary>
+        </member>
+        <member name="F:MGFramework.UIModule.SuperScrollView._scrollHandler">
+            <summary>
+            滚动处理
+            </summary>
+        </member>
+        <member name="F:MGFramework.UIModule.SuperScrollView._autoSwipeDuration">
+            <summary>
+            自划动耗时
+            </summary>
+        </member>
+        <member name="F:MGFramework.UIModule.SuperScrollView._swipeDirectTimeThreshold">
+            <summary>
+            划页直接切换临界时间
+            </summary>
+        </member>
+        <member name="F:MGFramework.UIModule.SuperScrollView._startSwipeTime">
+            <summary>
+            开始划动时间
+            </summary>
+        </member>
+        <member name="F:MGFramework.UIModule.SuperScrollView._slowSwipeThreshold">
+            <summary>
+            缓慢划动切页临界值
+            </summary>
+        </member>
+        <member name="F:MGFramework.UIModule.SuperScrollView._slowSwipeThresholdRatio">
+            <summary>
+            缓慢划动切页临界值比例
+            </summary>
+        </member>
+        <member name="F:MGFramework.UIModule.SuperScrollView._startSwipePos">
+            <summary>
+            开始划动的位置
+            </summary>
+        </member>
+        <member name="F:MGFramework.UIModule.SuperScrollView._limitThreshold">
+            <summary>
+            极限状态下临界值
+            </summary>
+        </member>
+        <member name="F:MGFramework.UIModule.SuperScrollView._limitThresholdRatio">
+            <summary>
+            极限状态下临界值比例
+            </summary>
+        </member>
+        <member name="F:MGFramework.UIModule.SuperScrollView._scrollTask">
+            <summary>
+            滚动任务
+            </summary>
+        </member>
+        <member name="P:MGFramework.UIModule.SuperScrollView.PageCount">
+            <summary>
+            总页数
+            </summary>
+        </member>
+        <member name="P:MGFramework.UIModule.SuperScrollView.RealCount">
+            <summary>
+            实际创建数量
+            </summary>
+        </member>
+        <member name="P:MGFramework.UIModule.SuperScrollView.Interactive">
+            <summary>
+            可交互性
+            </summary>
+        </member>
+        <member name="P:MGFramework.UIModule.SuperScrollView.CurPageIndex">
+            <summary>
+            当前页码
+            </summary>
+        </member>
+        <member name="E:MGFramework.UIModule.SuperScrollView.OnSwipeCompletedEvent">
+            <summary>
+            划动完成事件
+            </summary>
+        </member>
+        <member name="E:MGFramework.UIModule.SuperScrollView.OnSwipeStartEvent">
+            <summary>
+            划动开始事件
+            </summary>
+        </member>
+        <member name="E:MGFramework.UIModule.SuperScrollView.OnLimitationEvent">
+            <summary>
+            极限划动事件
+            </summary>
+        </member>
+        <member name="M:MGFramework.UIModule.SuperScrollView.Generate(MGFramework.UIModule.ISuperScrollNodeData[],MGFramework.UIModule.ISuperNodeFactory)">
+            <summary>
+            构建
+            </summary>
+        </member>
+        <member name="M:MGFramework.UIModule.SuperScrollView.RefreshNode(System.Int32,MGFramework.UIModule.ISuperScrollNodeData)">
+            <summary>
+            更新节点
+            </summary>
+        </member>
+        <member name="M:MGFramework.UIModule.SuperScrollView.ScrollNext(System.Single,System.Action,System.Action{System.Single})">
+            <summary>
+            滚动到下一页
+            </summary>
+        </member>
+        <member name="M:MGFramework.UIModule.SuperScrollView.ScrollLast(System.Single,System.Action,System.Action{System.Single})">
+            <summary>
+            滚动到上一页
+            </summary>
+        </member>
+        <member name="M:MGFramework.UIModule.SuperScrollView.JumpTo(System.Int32)">
+            <summary>
+            直接跳转到指定索引
+            </summary>
+        </member>
+        <member name="M:MGFramework.UIModule.SuperScrollView.ScrollTo(System.Int32,System.Single,System.Action,System.Action{System.Single})">
+            <summary>
+            滚动至指定索引
+            </summary>
+        </member>
+        <member name="M:MGFramework.UIModule.SuperScrollView.Refresh">
+            <summary>
+            刷新
+            </summary>
+        </member>
+        <member name="M:MGFramework.UIModule.SuperScrollView.SetNormalizedPosition(System.Single)">
+            <summary>
+            设置位置
+            </summary>
+        </member>
+        <member name="M:MGFramework.UIModule.SuperScrollView.ConvertDataIndexToViewIndex(System.Int32)">
+            <summary>
+            转化数据索引到视图索引
+            </summary>
+        </member>
+        <member name="M:MGFramework.UIModule.SuperScrollView.ConvertViewIndexToDataIndex(System.Int32)">
+            <summary>
+            转化视图索引到数据索引
+            </summary>
+        </member>
+        <member name="M:MGFramework.UIModule.SuperScrollView.GetNormalizedPosition(System.Int32)">
+            <summary>
+            转化数据索引到位置
+            </summary>
+        </member>
+        <member name="T:MGFramework.UIModule.SuperScrollView.Dir">
+            <summary>
+            方向
+            </summary>
+        </member>
+        <member name="F:MGFramework.UIModule.SuperScrollView.Dir.Top">
+            <summary>
+            上
+            </summary>
+        </member>
+        <member name="F:MGFramework.UIModule.SuperScrollView.Dir.Bottom">
+            <summary>
+            下
+            </summary>
+        </member>
+        <member name="F:MGFramework.UIModule.SuperScrollView.Dir.Left">
+            <summary>
+            左
+            </summary>
+        </member>
+        <member name="F:MGFramework.UIModule.SuperScrollView.Dir.Right">
+            <summary>
+            右
+            </summary>
+        </member>
+        <member name="T:MGFramework.UIModule.SuperScrollView.ScrollStatus">
+            <summary>
+            滚动状态
+            </summary>
+        </member>
+        <member name="F:MGFramework.UIModule.SuperScrollView.ScrollStatus.Horizontal">
+            <summary>
+            竖屏
+            </summary>
+        </member>
+        <member name="F:MGFramework.UIModule.SuperScrollView.ScrollStatus.Vertical">
+            <summary>
+            垂直
+            </summary>
+        </member>
+        <member name="T:MGFramework.UIModule.SuperScrollView.ScrollTask">
+            <summary>
+            滚动任务
+            </summary>
+        </member>
+        <member name="F:MGFramework.UIModule.SuperScrollView.ScrollTask.timer">
+            <summary>
+            计时器
+            </summary>
+        </member>
+        <member name="F:MGFramework.UIModule.SuperScrollView.ScrollTask.move">
+            <summary>
+            标识
+            </summary>
+        </member>
+        <member name="F:MGFramework.UIModule.SuperScrollView.ScrollTask.target">
+            <summary>
+            目标
+            </summary>
+        </member>
+        <member name="F:MGFramework.UIModule.SuperScrollView.ScrollTask.totalTime">
+            <summary>
+            总耗时
+            </summary>
+        </member>
+        <member name="F:MGFramework.UIModule.SuperScrollView.ScrollTask.startPos">
+            <summary>
+            开始滚动位置
+            </summary>
+        </member>
+        <member name="F:MGFramework.UIModule.SuperScrollView.ScrollTask.onCompleted">
+            <summary>
+            完成回调
+            </summary>
+        </member>
+        <member name="F:MGFramework.UIModule.SuperScrollView.ScrollTask.onScrolling">
+            <summary>
+            滚动中回调
+            </summary>
+        </member>
+        <member name="M:MGFramework.UIModule.SuperScrollView.ScrollTask.Reset">
+            <summary>
+            重置
+            </summary>
+        </member>
+        <member name="T:MGFramework.UIModule.SuperScrollView.IScrollHandler">
+            <summary>
+            滚动处理
+            </summary>
+        </member>
+        <member name="P:MGFramework.UIModule.SuperScrollView.IScrollHandler.NormalizedPosition">
+            <summary>
+            位置
+            </summary>
+        </member>
+        <member name="P:MGFramework.UIModule.SuperScrollView.IScrollHandler.Operation">
+            <summary>
+            可操作
+            </summary>
+        </member>
+        <member name="P:MGFramework.UIModule.SuperScrollView.IScrollHandler.MainSideLength">
+            <summary>
+            运动方向一边的长度
+            </summary>
+        </member>
+        <member name="M:MGFramework.UIModule.SuperScrollView.IScrollHandler.Init(MGFramework.UIModule.SuperScrollView)">
+            <summary>
+            初始化
+            </summary>
+        </member>
+        <member name="M:MGFramework.UIModule.SuperScrollView.IScrollHandler.GetPointerPosition(UnityEngine.EventSystems.PointerEventData)">
+            <summary>
+            指针位置
+            </summary>
+        </member>
+        <member name="M:MGFramework.UIModule.SuperScrollView.IScrollHandler.GetPosDir(System.Single)">
+            <summary>
+            获取位置变化方向
+            </summary>
+        </member>
+        <member name="M:MGFramework.UIModule.SuperScrollView.IScrollHandler.GetTargetPage(System.Single,System.Int32,System.Int32,System.Int32@)">
+            <summary>
+            获取目标页数
+            </summary>
+        </member>
+        <member name="T:MGFramework.UIModule.SuperScrollView.HorizontalScroller">
+            <summary>
+            水平滚动
+            </summary>
+        </member>
+        <member name="T:MGFramework.UIModule.SuperScrollView.VerticalScroller">
+            <summary>
+            垂直滚动
+            </summary>
+        </member>
         <member name="T:MGFramework.UIModule.IUIModule">
             <summary>
             UI模块

@@ -100,6 +100,10 @@
     <Compile Include="Src\UIModule\Components\SuperInputModule\Input\UnityInputKeyHandler.cs" />
     <Compile Include="Src\UIModule\Components\SuperInputModule\Raycaster\SuperGraphicRaycaster.cs" />
     <Compile Include="Src\UIModule\Components\SuperInputModule\Raycaster\SuperPhysicsRaycaster.cs" />
+    <Compile Include="Src\UIModule\Components\SuperScrollView\ISuperNodeFactory.cs" />
+    <Compile Include="Src\UIModule\Components\SuperScrollView\ISuperScrollNode.cs" />
+    <Compile Include="Src\UIModule\Components\SuperScrollView\ISuperScrollNodeData.cs" />
+    <Compile Include="Src\UIModule\Components\SuperScrollView\SuperScrollView.cs" />
     <Compile Include="Src\UIModule\Core\IPopUIModule.cs" />
     <Compile Include="Src\UIModule\Core\IUIModule.cs" />
     <Compile Include="Src\UIModule\Core\PopUIModule.cs" />
