@@ -43,6 +43,14 @@ namespace MGFramework.UIModule
         }
 
         /// <summary>
+        /// 刷新
+        /// </summary>
+        public static void Refresh()
+        {
+            Sort();
+        }
+
+        /// <summary>
         /// 排序
         /// </summary>
         private static void Sort()

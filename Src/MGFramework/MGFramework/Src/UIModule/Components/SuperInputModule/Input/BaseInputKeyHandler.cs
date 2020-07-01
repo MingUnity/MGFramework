@@ -7,12 +7,12 @@ namespace MGFramework.UIModule
     /// </summary>
     public abstract class BaseInputKeyHandler : MonoBehaviour, IInputKeyHandler
     {
-        private void OnEnable()
+        protected virtual void OnEnable()
         {
             InputManager.Add(this);
         }
 
-        private void OnDisable()
+        protected virtual void OnDisable()
         {
             InputManager.Remove(this);
         }

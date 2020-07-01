@@ -26,7 +26,25 @@ namespace MGFramework.UIModule
         /// <summary>
         /// 优先级
         /// </summary>
-        public int Priority => _priority;
+        public int Priority
+        {
+            get
+            {
+                return _priority;
+            }
+            set
+            {
+                if (_priority != value)
+                {
+                    _priority = value;
+
+                    if (isActiveAndEnabled)
+                    {
+                        RayManager.Refresh();
+                    }
+                }
+            }
+        }
 
         /// <summary>
         /// 射线

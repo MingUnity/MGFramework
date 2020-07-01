@@ -980,6 +980,11 @@
             销毁当前自定义射线
             </summary>
         </member>
+        <member name="M:MGFramework.UIModule.RayManager.Refresh">
+            <summary>
+            刷新
+            </summary>
+        </member>
         <member name="M:MGFramework.UIModule.RayManager.Sort">
             <summary>
             排序
@@ -1097,6 +1102,16 @@
             自定义UI Raycaster
             </summary>
         </member>
+        <member name="F:MGFramework.UIModule.SuperGraphicRaycaster._canvas">
+            <summary>
+            画布
+            </summary>
+        </member>
+        <member name="F:MGFramework.UIModule.SuperGraphicRaycaster._raycastResults">
+            <summary>
+            射线检测结果列表
+            </summary>
+        </member>
         <member name="P:MGFramework.UIModule.SuperGraphicRaycaster.sortOrderPriority">
             <summary>
             Priority of the raycaster based upon sort order.
@@ -1121,13 +1136,7 @@
             - Null if Camera mode is ScreenSpaceOverlay or ScreenSpaceCamera and has no camera.
             - canvas.worldCanvas if not null
             - Camera.main.
-            - Ming Modify 只在初始化的时候赋值，节省获取Camera.main的时耗，提供一个刷新方法以供动态改变摄像机
             </returns>
-        </member>
-        <member name="M:MGFramework.UIModule.SuperGraphicRaycaster.Refresh">
-            <summary>
-            刷新参数
-            </summary>
         </member>
         <member name="M:MGFramework.UIModule.SuperGraphicRaycaster.Raycast(UnityEngine.EventSystems.PointerEventData,System.Collections.Generic.List{UnityEngine.EventSystems.RaycastResult})">
             <summary>
@@ -1142,7 +1151,7 @@
             1、返回最上层图形
             </summary>
         </member>
-        <member name="M:MGFramework.UIModule.SuperGraphicRaycaster.GetEventPosition(UnityEngine.EventSystems.PointerEventData)">
+        <member name="M:MGFramework.UIModule.SuperGraphicRaycaster.GetEventPosition(UnityEngine.Ray,UnityEngine.EventSystems.PointerEventData)">
             <summary>
             获取事件位置
             </summary>
