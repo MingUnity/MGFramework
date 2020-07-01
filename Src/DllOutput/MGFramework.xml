@@ -1151,7 +1151,7 @@
             1、返回最上层图形
             </summary>
         </member>
-        <member name="M:MGFramework.UIModule.SuperGraphicRaycaster.GetEventPosition(UnityEngine.Ray,UnityEngine.EventSystems.PointerEventData)">
+        <member name="M:MGFramework.UIModule.SuperGraphicRaycaster.GetEventPosition(UnityEngine.Ray,UnityEngine.Camera,UnityEngine.EventSystems.PointerEventData)">
             <summary>
             获取事件位置
             </summary>

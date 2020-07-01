@@ -103,6 +103,8 @@ namespace MGFramework.UIModule
             //if (_canvas == null)
             //    return;
 
+            Camera cacheCamera = eventCamera;
+
             var canvasGraphics = GraphicRegistry.GetGraphicsForCanvas(_canvas);
 
             if (canvasGraphics == null || canvasGraphics.Count == 0)
@@ -114,12 +116,13 @@ namespace MGFramework.UIModule
 
             if (customRay != null)
             {
-                eventPosition = GetEventPosition(customRay.Ray, eventData);
+                eventPosition = GetEventPosition(customRay.Ray, cacheCamera, eventData);
             }
 
             // Convert to view space
             Vector2 pos;
-            if (eventCamera == null)
+
+            if (cacheCamera == null)
             {
                 float w = Screen.width;
                 float h = Screen.height;
@@ -128,7 +131,7 @@ namespace MGFramework.UIModule
             }
             else
             {
-                pos = eventCamera.ScreenToViewportPoint(eventPosition);
+                pos = cacheCamera.ScreenToViewportPoint(eventPosition);
             }
 
             // If it's outside the camera's viewport, do nothing
@@ -137,16 +140,16 @@ namespace MGFramework.UIModule
 
             Ray ray = new Ray();
 
-            if (eventCamera != null)
+            if (cacheCamera != null)
             {
-                ray = eventCamera.ScreenPointToRay(eventPosition);
+                ray = cacheCamera.ScreenPointToRay(eventPosition);
             }
 
             _raycastResults.Clear();
 
             float distance = 0;
 
-            Graphic graphic = Raycast(_canvas, eventCamera, eventPosition, canvasGraphics, ray, out distance);
+            Graphic graphic = Raycast(_canvas, cacheCamera, eventPosition, canvasGraphics, ray, out distance);
 
             if (graphic != null)
             {
@@ -203,7 +206,7 @@ namespace MGFramework.UIModule
                 if (graphic.Raycast(pointerPosition, eventCamera))
                 {
                     //判断距离
-                    if (this.eventCamera == null || _canvas.renderMode == RenderMode.ScreenSpaceOverlay)
+                    if (eventCamera == null || _canvas.renderMode == RenderMode.ScreenSpaceOverlay)
                     {
                         distance = 0;
                     }
@@ -228,7 +231,7 @@ namespace MGFramework.UIModule
         /// <summary>
         /// 获取事件位置
         /// </summary>
-        protected virtual Vector2 GetEventPosition(Ray ray, PointerEventData eventData)
+        protected virtual Vector2 GetEventPosition(Ray ray, Camera eventCamera, PointerEventData eventData)
         {
             Vector3 worldEventPos = MathHelper.GetIntersectWithLineAndPlane(ray.origin, ray.direction, _canvas.transform.forward, _canvas.transform.position);
 
