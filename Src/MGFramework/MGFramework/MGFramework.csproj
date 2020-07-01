@@ -95,7 +95,7 @@
     <Compile Include="Src\UIModule\Components\SuperInputModule\Input\BaseInputKeyHandler.cs" />
     <Compile Include="Src\UIModule\Components\SuperInputModule\Input\IInputKeyHandler.cs" />
     <Compile Include="Src\UIModule\Components\SuperInputModule\Input\InputManager.cs" />
-    <Compile Include="Src\UIModule\Components\SuperInputModule\InputModule\SuperInputListener.cs" />
+    <Compile Include="Src\UIModule\Components\SuperInputModule\InputModule\SuperPointerListener.cs" />
     <Compile Include="Src\UIModule\Components\SuperInputModule\InputModule\SuperInputModule.cs" />
     <Compile Include="Src\UIModule\Components\SuperInputModule\Input\UnityInputKeyHandler.cs" />
     <Compile Include="Src\UIModule\Components\SuperInputModule\Raycaster\SuperGraphicRaycaster.cs" />

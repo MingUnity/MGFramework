@@ -1035,9 +1035,9 @@
             输入更新
             </summary>
         </member>
-        <member name="T:MGFramework.UIModule.SuperInputListener">
+        <member name="T:MGFramework.UIModule.SuperPointerListener">
             <summary>
-            输入模块事件监听
+            指针模块事件监听
             </summary>
         </member>
         <member name="T:MGFramework.UIModule.SuperInputModule">

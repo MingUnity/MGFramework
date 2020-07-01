@@ -75,12 +75,12 @@ namespace MGFramework.UIModule
 
             if (triggerDown)
             {
-                SuperInputListener.InvokePointerDown(eventData.pointerCurrentRaycast, interactive);
+                SuperPointerListener.InvokePointerDown(eventData.pointerCurrentRaycast, interactive);
             }
 
             if (triggerUp)
             {
-                SuperInputListener.InvokePointerUp(eventData.pointerCurrentRaycast, interactive);
+                SuperPointerListener.InvokePointerUp(eventData.pointerCurrentRaycast, interactive);
             }
         }
 
@@ -187,18 +187,15 @@ namespace MGFramework.UIModule
 
             if (curObject != null && curObject == prevObject)
             {
-                SuperInputListener.InvokePointerHover(eventData.pointerCurrentRaycast, interactive);
+                SuperPointerListener.InvokePointerHover(eventData.pointerCurrentRaycast, interactive);
             }
             else
             {
-                if (prevObject != null)
-                {
-                    SuperInputListener.InvokePointerExit(prevObject);
-                }
+                SuperPointerListener.InvokePointerExit(prevObject);
 
                 if (curObject != null)
                 {
-                    SuperInputListener.InvokePointerEnter(eventData.pointerCurrentRaycast, interactive);
+                    SuperPointerListener.InvokePointerEnter(eventData.pointerCurrentRaycast, interactive);
                 }
             }
         }

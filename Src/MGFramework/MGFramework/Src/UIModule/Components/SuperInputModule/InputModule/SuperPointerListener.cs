@@ -5,9 +5,9 @@ using UnityEngine.EventSystems;
 namespace MGFramework.UIModule
 {
     /// <summary>
-    /// 输入模块事件监听
+    /// 指针模块事件监听
     /// </summary>
-    public static class SuperInputListener
+    public static class SuperPointerListener
     {
         public delegate void OnPointerEnterDelegate(RaycastResult raycastResult, bool interactive);
         public delegate void OnPointerHoverDelegate(RaycastResult raycastResult, bool interactive);
