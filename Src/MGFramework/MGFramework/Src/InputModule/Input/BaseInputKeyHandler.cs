@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace MGFramework.UIModule
+namespace MGFramework.InputModule
 {
     /// <summary>
     /// 基于mono的输入处理

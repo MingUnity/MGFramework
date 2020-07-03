@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace MGFramework.UIModule
+namespace MGFramework.InputModule
 {
     /// <summary>
     /// 射线管理

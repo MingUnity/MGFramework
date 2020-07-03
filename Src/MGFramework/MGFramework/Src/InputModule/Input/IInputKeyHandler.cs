@@ -1,4 +1,4 @@
-﻿namespace MGFramework.UIModule
+﻿namespace MGFramework.InputModule
 {
     /// <summary>
     /// 输入键处理

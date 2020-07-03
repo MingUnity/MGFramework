@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace MGFramework.UIModule
+namespace MGFramework.InputModule
 {
     /// <summary>
     /// 输入管理

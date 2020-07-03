@@ -1,28 +1,27 @@
-﻿using System;
+﻿using MGFramework;
+using System;
 using System.Collections.Generic;
-using System.Text;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using UnityEngine.Serialization;
 using UnityEngine.UI;
 
-namespace MGFramework.UIModule
+namespace MGFramework.InputModule
 {
     /// <summary>
-    /// A derived BaseRaycaster to raycast against Graphic elements.
-    /// Ming Modify 优化GraphicRayCaster，用于移动端节省时耗
-    /// 1、修改部分常用变量的取值逻辑
-    /// 2、去除不常用的2 3D物体遮挡逻辑
-    /// 3、去除多屏适配，移动端默认单屏
-    /// 4、去除忽略翻转判断，默认可响应翻转
+    /// 自定义UI Raycaster
     /// </summary>
-    [AddComponentMenu("MGFramework/MobileGraphicRaycaster")]
     [RequireComponent(typeof(Canvas))]
-    public class MobileGraphicRaycaster : BaseRaycaster
+    public class SuperGraphicRaycaster : BaseRaycaster
     {
-        private Canvas _canvas;
-        private Camera _eventCamera;
-        [NonSerialized] private readonly List<Graphic> _raycastResults = new List<Graphic>();
+        /// <summary>
+        /// 画布
+        /// </summary>
+        protected Canvas _canvas;
+
+        /// <summary>
+        /// 射线检测结果列表
+        /// </summary>
+        private readonly List<Graphic> _raycastResults = new List<Graphic>();
 
         /// <summary>
         /// Priority of the raycaster based upon sort order.
@@ -67,33 +66,30 @@ namespace MGFramework.UIModule
         /// - Null if Camera mode is ScreenSpaceOverlay or ScreenSpaceCamera and has no camera.
         /// - canvas.worldCanvas if not null
         /// - Camera.main.
-        /// - Ming Modify 只在初始化的时候赋值，节省获取Camera.main的时耗，提供一个刷新方法以供动态改变摄像机
         /// </returns>
-        public override Camera eventCamera => _eventCamera;
+        public override Camera eventCamera
+        {
+            get
+            {
+                Camera result = null;
+
+                if (_canvas.renderMode == RenderMode.ScreenSpaceOverlay || (_canvas.renderMode == RenderMode.ScreenSpaceCamera && _canvas.worldCamera == null))
+                {
+                    result = null;
+                }
+                else
+                {
+                    result = _canvas.worldCamera != null ? _canvas.worldCamera : Camera.main;
+                }
+                
+                return result;
+            }
+        }
 
         protected override void Awake()
         {
             base.Awake();
-            Refresh();
-        }
-
-        /// <summary>
-        /// 刷新参数
-        /// </summary>
-        public void Refresh()
-        {
-            //画布赋值
             _canvas = this.GetComponent<Canvas>();
-
-            //摄像机赋值
-            if (_canvas.renderMode == RenderMode.ScreenSpaceOverlay || (_canvas.renderMode == RenderMode.ScreenSpaceCamera && _canvas.worldCamera == null))
-            {
-                _eventCamera = null;
-            }
-            else
-            {
-                _eventCamera = _canvas.worldCamera != null ? _canvas.worldCamera : Camera.main;
-            }
         }
 
         /// <summary>
@@ -107,6 +103,8 @@ namespace MGFramework.UIModule
             //if (_canvas == null)
             //    return;
 
+            Camera cacheCamera = eventCamera;
+
             var canvasGraphics = GraphicRegistry.GetGraphicsForCanvas(_canvas);
 
             if (canvasGraphics == null || canvasGraphics.Count == 0)
@@ -114,9 +112,17 @@ namespace MGFramework.UIModule
 
             Vector2 eventPosition = eventData.position;
 
+            ICustomRay customRay = RayManager.CurrentRay;
+
+            if (customRay != null)
+            {
+                eventPosition = GetEventPosition(customRay.Ray, cacheCamera, eventData);
+            }
+
             // Convert to view space
             Vector2 pos;
-            if (_eventCamera == null)
+
+            if (cacheCamera == null)
             {
                 float w = Screen.width;
                 float h = Screen.height;
@@ -125,7 +131,7 @@ namespace MGFramework.UIModule
             }
             else
             {
-                pos = _eventCamera.ScreenToViewportPoint(eventPosition);
+                pos = cacheCamera.ScreenToViewportPoint(eventPosition);
             }
 
             // If it's outside the camera's viewport, do nothing
@@ -134,16 +140,16 @@ namespace MGFramework.UIModule
 
             Ray ray = new Ray();
 
-            if (_eventCamera != null)
+            if (cacheCamera != null)
             {
-                ray = _eventCamera.ScreenPointToRay(eventPosition);
+                ray = cacheCamera.ScreenPointToRay(eventPosition);
             }
 
             _raycastResults.Clear();
 
             float distance = 0;
 
-            Graphic graphic = Raycast(_canvas, _eventCamera, eventPosition, canvasGraphics, ray, out distance);
+            Graphic graphic = Raycast(_canvas, cacheCamera, eventPosition, canvasGraphics, ray, out distance);
 
             if (graphic != null)
             {
@@ -200,7 +206,7 @@ namespace MGFramework.UIModule
                 if (graphic.Raycast(pointerPosition, eventCamera))
                 {
                     //判断距离
-                    if (_eventCamera == null || _canvas.renderMode == RenderMode.ScreenSpaceOverlay)
+                    if (eventCamera == null || _canvas.renderMode == RenderMode.ScreenSpaceOverlay)
                     {
                         distance = 0;
                     }
@@ -220,6 +226,23 @@ namespace MGFramework.UIModule
             }
 
             return output;
+        }
+
+        /// <summary>
+        /// 获取事件位置
+        /// </summary>
+        protected virtual Vector2 GetEventPosition(Ray ray, Camera eventCamera, PointerEventData eventData)
+        {
+            Vector3 worldEventPos = MathHelper.GetIntersectWithLineAndPlane(ray.origin, ray.direction, _canvas.transform.forward, _canvas.transform.position);
+
+            if (eventCamera != null)
+            {
+                return eventCamera.WorldToScreenPoint(worldEventPos);
+            }
+            else
+            {
+                return eventData.position;
+            }
         }
     }
 }

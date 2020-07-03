@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace MGFramework.UIModule
+namespace MGFramework.InputModule
 {
     /// <summary>
     /// 前向射线
