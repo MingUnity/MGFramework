@@ -2,8 +2,14 @@
 
 namespace MGFramework.UIModule
 {
+    public delegate void OnViewSwitchDelegate(int viewId);
+
     public interface IPopUIModule
     {
+        event OnViewSwitchDelegate OnViewEnterStartEvent;
+        event OnViewSwitchDelegate OnViewEnterCompletedEvent;
+        event OnViewSwitchDelegate OnViewQuitStartEvent;
+        event OnViewSwitchDelegate OnViewQuitCompletedEvent;
         void Enter(int viewId, bool pushStack = true, Action callback = null);
         void Enter(IntGroup viewGroup, bool pushStack = true, Action callback = null);
         bool Pop(Action callback = null);

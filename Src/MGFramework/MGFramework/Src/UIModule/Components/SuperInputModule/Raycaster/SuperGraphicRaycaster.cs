@@ -81,7 +81,7 @@ namespace MGFramework.UIModule
                 {
                     result = _canvas.worldCamera != null ? _canvas.worldCamera : Camera.main;
                 }
-
+                
                 return result;
             }
         }

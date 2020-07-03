@@ -10,6 +10,66 @@ namespace MGFramework.UIModule
     {
         private IPopUIModule _module;
 
+        /// <summary>
+        /// 进入视图开始事件
+        /// </summary>
+        public event OnViewSwitchDelegate OnViewEnterStartEvent
+        {
+            add
+            {
+                _module.OnViewEnterStartEvent += value;
+            }
+            remove
+            {
+                _module.OnViewEnterStartEvent -= value;
+            }
+        }
+
+        /// <summary>
+        /// 进入视图完成事件
+        /// </summary>
+        public event OnViewSwitchDelegate OnViewEnterCompletedEvent
+        {
+            add
+            {
+                _module.OnViewEnterCompletedEvent += value;
+            }
+            remove
+            {
+                _module.OnViewEnterCompletedEvent -= value;
+            }
+        }
+
+        /// <summary>
+        /// 退出视图开始事件
+        /// </summary>
+        public event OnViewSwitchDelegate OnViewQuitStartEvent
+        {
+            add
+            {
+                _module.OnViewQuitStartEvent += value;
+            }
+            remove
+            {
+                _module.OnViewQuitStartEvent -= value;
+            }
+        }
+
+        /// <summary>
+        /// 退出视图完成事件
+        /// </summary>
+        public event OnViewSwitchDelegate OnViewQuitCompletedEvent
+        {
+            add
+            {
+                _module.OnViewQuitCompletedEvent += value;
+            }
+            remove
+            {
+                _module.OnViewQuitCompletedEvent -= value;
+            }
+        }
+
         public UIManager()
         {
             _module = new PopUIModule();

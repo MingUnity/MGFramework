@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using UnityEngine;
 
 namespace MGFramework.UIModule
 {
@@ -26,6 +27,26 @@ namespace MGFramework.UIModule
         /// </summary>
         private List<int> _tempQuitAllList = new List<int>();
 
+        /// <summary>
+        /// 进入视图开始事件
+        /// </summary>
+        public event OnViewSwitchDelegate OnViewEnterStartEvent;
+
+        /// <summary>
+        /// 进入视图完成事件
+        /// </summary>
+        public event OnViewSwitchDelegate OnViewEnterCompletedEvent;
+
+        /// <summary>
+        /// 退出视图开始事件
+        /// </summary>
+        public event OnViewSwitchDelegate OnViewQuitStartEvent;
+
+        /// <summary>
+        /// 退出视图完成事件
+        /// </summary>
+        public event OnViewSwitchDelegate OnViewQuitCompletedEvent;
+
         public PopUIModule()
         {
             _uiModule = new UIModule();
@@ -45,11 +66,43 @@ namespace MGFramework.UIModule
 
             if (!state.active)
             {
+                try
+                {
+                    OnViewEnterStartEvent?.Invoke(viewId);
+                }
+                catch (Exception e)
+                {
+                    Debug.LogException(e);
+                }
+
                 _uiModule?.Enter(viewId, () =>
                 {
-                    callback?.Invoke();
+                    try
+                    {
+                        callback?.Invoke();
+                    }
+                    catch (Exception e)
+                    {
+                        Debug.LogException(e);
+                    }
 
-                    _uiModule?.Focus(viewId);
+                    try
+                    {
+                        _uiModule?.Focus(viewId);
+                    }
+                    catch (Exception e)
+                    {
+                        Debug.LogException(e);
+                    }
+
+                    try
+                    {
+                        OnViewEnterCompletedEvent?.Invoke(viewId);
+                    }
+                    catch (Exception e)
+                    {
+                        Debug.LogException(e);
+                    }
                 });
 
                 state.active = true;
@@ -58,7 +111,14 @@ namespace MGFramework.UIModule
             }
             else
             {
-                _uiModule?.Focus(viewId);
+                try
+                {
+                    _uiModule?.Focus(viewId);
+                }
+                catch (Exception e)
+                {
+                    Debug.LogException(e);
+                }
             }
 
             if (pushStack)
@@ -111,11 +171,43 @@ namespace MGFramework.UIModule
             {
                 if (state.active)
                 {
+                    try
+                    {
+                        OnViewQuitStartEvent?.Invoke(viewId);
+                    }
+                    catch (Exception e)
+                    {
+                        Debug.LogException(e);
+                    }
+
                     _uiModule?.Quit(viewId, () =>
                     {
-                        callback?.Invoke();
+                        try
+                        {
+                            callback?.Invoke();
+                        }
+                        catch (Exception e)
+                        {
+                            Debug.LogException(e);
+                        }
 
-                        _uiModule?.UnFocus(viewId);
+                        try
+                        {
+                            _uiModule?.UnFocus(viewId);
+                        }
+                        catch (Exception e)
+                        {
+                            Debug.LogException(e);
+                        }
+
+                        try
+                        {
+                            OnViewQuitCompletedEvent?.Invoke(viewId);
+                        }
+                        catch (Exception e)
+                        {
+                            Debug.LogException(e);
+                        }
                     }, destroy);
 
                     state.active = false;
@@ -166,7 +258,14 @@ namespace MGFramework.UIModule
         /// <param name="viewId">视图id</param>
         public void UnFocus(int viewId)
         {
-            _uiModule?.UnFocus(viewId);
+            try
+            {
+                _uiModule?.UnFocus(viewId);
+            }
+            catch (Exception e)
+            {
+                Debug.LogException(e);
+            }
         }
 
         /// <summary>
