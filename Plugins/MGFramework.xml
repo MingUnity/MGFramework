@@ -1166,6 +1166,16 @@
             右下
             </summary>
         </member>
+        <member name="T:MGFramework.UIModule.SliderEx">
+            <summary>
+            Slider扩展
+            </summary>
+        </member>
+        <member name="M:MGFramework.UIModule.SliderEx.SetValueWithoutNotify(System.Single)">
+            <summary>
+            设置值且不抛出事件
+            </summary>
+        </member>
         <member name="T:MGFramework.UIModule.SpriteContainer">
             <summary>
             精灵图片的载体
@@ -1573,9 +1583,9 @@
             所有激活过视图字典
             </summary>
         </member>
-        <member name="F:MGFramework.UIModule.PopUIModule._tempQuitAllList">
+        <member name="F:MGFramework.UIModule.PopUIModule._tempQuitList">
             <summary>
-            临时退出全部列表
+            临时需要退出的列表集合
             </summary>
         </member>
         <member name="E:MGFramework.UIModule.PopUIModule.OnViewEnterStartEvent">
@@ -1648,6 +1658,20 @@
             <summary>
             退出所有视图
             </summary>
+            <param name="destroy">是否销毁</param>
+        </member>
+        <member name="M:MGFramework.UIModule.PopUIModule.QuitOtherAll(IntGroup,System.Boolean)">
+            <summary>
+            退出其他全部视图
+            </summary>
+            <param name="stayViewGroup">保留的视图组</param>
+            <param name="destroy">是否销毁</param>
+        </member>
+        <member name="M:MGFramework.UIModule.PopUIModule.QuitOtherAll(System.Int32,System.Boolean)">
+            <summary>
+            退出其他全部视图
+            </summary>
+            <param name="stayViewId">保留的视图</param>
             <param name="destroy">是否销毁</param>
         </member>
         <member name="M:MGFramework.UIModule.PopUIModule.Pop(System.Action)">
@@ -1758,6 +1782,20 @@
             <summary>
             退出所有视图
             </summary>
+            <param name="destroy">是否销毁</param>
+        </member>
+        <member name="M:MGFramework.UIModule.UIManager.QuitOtherAll(IntGroup,System.Boolean)">
+            <summary>
+            退出其他全部视图
+            </summary>
+            <param name="stayViewGroup">保留的视图组</param>
+            <param name="destroy">是否销毁</param>
+        </member>
+        <member name="M:MGFramework.UIModule.UIManager.QuitOtherAll(System.Int32,System.Boolean)">
+            <summary>
+            退出其他全部视图
+            </summary>
+            <param name="stayViewId">保留的视图</param>
             <param name="destroy">是否销毁</param>
         </member>
         <member name="M:MGFramework.UIModule.UIManager.Pop(System.Action)">
@@ -2874,6 +2912,11 @@
         <member name="P:IntGroup.Count">
             <summary>
             数量
+            </summary>
+        </member>
+        <member name="M:IntGroup.Contains(System.Int32)">
+            <summary>
+            包含
             </summary>
         </member>
         <member name="M:IntGroup.Get(System.Int32[])">
