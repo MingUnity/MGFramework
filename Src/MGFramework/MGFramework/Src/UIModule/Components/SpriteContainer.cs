@@ -11,6 +11,18 @@ namespace MGFramework.UIModule
         /// <summary>
         /// 图片集合
         /// </summary>
-        public Sprite[] sprites;
+        [SerializeField]
+        private Sprite[] _sprites;
+
+        /// <summary>
+        /// 根据索引取对应图片
+        /// </summary>
+        public Sprite this[int index]
+        {
+            get
+            {
+                return _sprites?.GetValueAnyway(index);
+            }
+        }
     }
 }

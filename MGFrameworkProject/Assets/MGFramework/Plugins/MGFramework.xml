@@ -1171,9 +1171,14 @@
             精灵图片的载体
             </summary>
         </member>
-        <member name="F:MGFramework.UIModule.SpriteContainer.sprites">
+        <member name="F:MGFramework.UIModule.SpriteContainer._sprites">
             <summary>
             图片集合
+            </summary>
+        </member>
+        <member name="P:MGFramework.UIModule.SpriteContainer.Item(System.Int32)">
+            <summary>
+            根据索引取对应图片
             </summary>
         </member>
         <member name="T:MGFramework.UIModule.ISuperNodeFactory">
