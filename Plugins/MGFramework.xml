@@ -1563,6 +1563,26 @@
             临时退出全部列表
             </summary>
         </member>
+        <member name="E:MGFramework.UIModule.PopUIModule.OnViewEnterStartEvent">
+            <summary>
+            进入视图开始事件
+            </summary>
+        </member>
+        <member name="E:MGFramework.UIModule.PopUIModule.OnViewEnterCompletedEvent">
+            <summary>
+            进入视图完成事件
+            </summary>
+        </member>
+        <member name="E:MGFramework.UIModule.PopUIModule.OnViewQuitStartEvent">
+            <summary>
+            退出视图开始事件
+            </summary>
+        </member>
+        <member name="E:MGFramework.UIModule.PopUIModule.OnViewQuitCompletedEvent">
+            <summary>
+            退出视图完成事件
+            </summary>
+        </member>
         <member name="M:MGFramework.UIModule.PopUIModule.Enter(System.Int32,System.Boolean,System.Action)">
             <summary>
             进入视图
@@ -1651,6 +1671,26 @@
         <member name="T:MGFramework.UIModule.UIManager">
             <summary>
             UI管理
+            </summary>
+        </member>
+        <member name="E:MGFramework.UIModule.UIManager.OnViewEnterStartEvent">
+            <summary>
+            进入视图开始事件
+            </summary>
+        </member>
+        <member name="E:MGFramework.UIModule.UIManager.OnViewEnterCompletedEvent">
+            <summary>
+            进入视图完成事件
+            </summary>
+        </member>
+        <member name="E:MGFramework.UIModule.UIManager.OnViewQuitStartEvent">
+            <summary>
+            退出视图开始事件
+            </summary>
+        </member>
+        <member name="E:MGFramework.UIModule.UIManager.OnViewQuitCompletedEvent">
+            <summary>
+            退出视图完成事件
             </summary>
         </member>
         <member name="M:MGFramework.UIModule.UIManager.Enter(System.Int32,System.Boolean,System.Action)">
