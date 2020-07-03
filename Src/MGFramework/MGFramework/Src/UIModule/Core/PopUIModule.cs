@@ -23,9 +23,9 @@ namespace MGFramework.UIModule
         private Dictionary<int, ViewState> _viewDic = new Dictionary<int, ViewState>();
 
         /// <summary>
-        /// 临时退出全部列表
+        /// 临时需要退出的列表集合
         /// </summary>
-        private List<int> _tempQuitAllList = new List<int>();
+        private List<int> _tempQuitList = new List<int>();
 
         /// <summary>
         /// 进入视图开始事件
@@ -286,20 +286,66 @@ namespace MGFramework.UIModule
         /// <param name="destroy">是否销毁</param>
         public void QuitAll(bool destroy = false)
         {
-            _tempQuitAllList.Clear();
+            _tempQuitList.Clear();
 
             foreach (int id in _viewDic.Keys)
             {
-                _tempQuitAllList.Add(id);
+                _tempQuitList.Add(id);
             }
 
-            for (int i = 0; i < _tempQuitAllList.Count; i++)
+            for (int i = 0; i < _tempQuitList.Count; i++)
             {
-                Quit(_tempQuitAllList[i], false, null, destroy);
+                Quit(_tempQuitList[i], false, null, destroy);
             }
 
             _viewDic.Clear();
             ResetStack();
+        }
+
+        /// <summary>
+        /// 退出其他全部视图
+        /// </summary>
+        /// <param name="stayViewGroup">保留的视图组</param>
+        /// <param name="destroy">是否销毁</param>
+        public void QuitOtherAll(IntGroup stayViewGroup, bool destroy = false)
+        {
+            _tempQuitList.Clear();
+
+            foreach (int id in _viewDic.Keys)
+            {
+                if (!stayViewGroup.Contains(id))
+                {
+                    _tempQuitList.Add(id);
+                }
+            }
+
+            for (int i = 0; i < _tempQuitList.Count; i++)
+            {
+                Quit(_tempQuitList[i], true, null, destroy);
+            }
+        }
+
+        /// <summary>
+        /// 退出其他全部视图
+        /// </summary>
+        /// <param name="stayViewId">保留的视图</param>
+        /// <param name="destroy">是否销毁</param>
+        public void QuitOtherAll(int stayViewId, bool destroy = false)
+        {
+            _tempQuitList.Clear();
+
+            foreach (int id in _viewDic.Keys)
+            {
+                if (stayViewId != id)
+                {
+                    _tempQuitList.Add(id);
+                }
+            }
+
+            for (int i = 0; i < _tempQuitList.Count; i++)
+            {
+                Quit(_tempQuitList[i], true, null, destroy);
+            }
         }
 
         /// <summary>

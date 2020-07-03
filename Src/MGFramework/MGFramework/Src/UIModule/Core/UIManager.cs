@@ -149,6 +149,26 @@ namespace MGFramework.UIModule
         }
 
         /// <summary>
+        /// 退出其他全部视图
+        /// </summary>
+        /// <param name="stayViewGroup">保留的视图组</param>
+        /// <param name="destroy">是否销毁</param>
+        public void QuitOtherAll(IntGroup stayViewGroup, bool destroy = false)
+        {
+            _module.QuitOtherAll(stayViewGroup, destroy);
+        }
+
+        /// <summary>
+        /// 退出其他全部视图
+        /// </summary>
+        /// <param name="stayViewId">保留的视图</param>
+        /// <param name="destroy">是否销毁</param>
+        public void QuitOtherAll(int stayViewId, bool destroy = false)
+        {
+            _module.QuitOtherAll(stayViewId, destroy);
+        }
+
+        /// <summary>
         /// 弹出视图
         /// 回到上一级视图
         /// </summary>

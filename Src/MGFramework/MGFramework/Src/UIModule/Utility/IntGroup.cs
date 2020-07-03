@@ -70,6 +70,28 @@ public struct IntGroup : IEquatable<IntGroup>
     }
 
     /// <summary>
+    /// 包含
+    /// </summary>
+    public bool Contains(int intVal)
+    {
+        bool result = false;
+
+        if (_ints != null)
+        {
+            for (int i = 0; i < _ints.Length; i++)
+            {
+                if (_ints[i] == intVal)
+                {
+                    result = true;
+                    break;
+                }
+            }
+        }
+
+        return result;
+    }
+
+    /// <summary>
     /// 获取
     /// </summary>
     public static IntGroup Get(params int[] args)
