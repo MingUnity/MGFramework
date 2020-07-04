@@ -14,7 +14,7 @@
             存储池
             </summary>
         </member>
-        <member name="M:MGFramework.Args.ArgSystem`1.Get(System.Int32,`0@)">
+        <member name="M:MGFramework.Args.ArgSystem`1.Get(System.Int32)">
             <summary>
             获取数据
             </summary>

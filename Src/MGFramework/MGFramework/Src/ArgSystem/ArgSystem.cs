@@ -16,23 +16,18 @@ namespace MGFramework.Args
         /// <summary>
         /// 获取数据
         /// </summary>
-        public static bool Get(int argId, out T arg)
+        public static T Get(int argId)
         {
-            bool result = false;
-
             Func<T> func = _pool.GetValueAnyway(argId);
 
             if (func != null)
             {
-                arg = func.Invoke();
-                result = true;
+                return func.Invoke();
             }
             else
             {
-                arg = default(T);
+                return default(T);
             }
-
-            return result;
         }
 
         /// <summary>
