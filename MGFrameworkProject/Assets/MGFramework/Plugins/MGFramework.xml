@@ -4,6 +4,36 @@
         <name>MGFramework</name>
     </assembly>
     <members>
+        <member name="T:MGFramework.Args.ArgSystem`1">
+            <summary>
+            参数存取系统
+            </summary>
+        </member>
+        <member name="F:MGFramework.Args.ArgSystem`1._pool">
+            <summary>
+            存储池
+            </summary>
+        </member>
+        <member name="M:MGFramework.Args.ArgSystem`1.Get(System.Int32,`0@)">
+            <summary>
+            获取数据
+            </summary>
+        </member>
+        <member name="M:MGFramework.Args.ArgSystem`1.Set(System.Int32,System.Func{`0})">
+            <summary>
+            预存数据
+            </summary>
+        </member>
+        <member name="M:MGFramework.Args.ArgSystem`1.Remove(System.Int32)">
+            <summary>
+            移除
+            </summary>
+        </member>
+        <member name="M:MGFramework.Args.ArgSystem`1.Clear">
+            <summary>
+            清除所有
+            </summary>
+        </member>
         <member name="T:MGFramework.EventModule.CommonCEventArgs`1">
             <summary>
             通用事件参数
@@ -1173,7 +1203,7 @@
         </member>
         <member name="M:MGFramework.UIModule.SliderEx.SetValueWithoutNotify(System.Single)">
             <summary>
-            设置值且不抛出事件
+            设置值 且不抛事件
             </summary>
         </member>
         <member name="T:MGFramework.UIModule.SpriteContainer">

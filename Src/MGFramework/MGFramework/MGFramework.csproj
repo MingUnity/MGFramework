@@ -53,6 +53,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Src\ArgSystem\ArgSystem.cs" />
     <Compile Include="Src\EventModule\Args\CommonCEventArgs.cs" />
     <Compile Include="Src\EventModule\Args\CommonSEventArgs.cs" />
     <Compile Include="Src\EventModule\Args\Extends.cs" />
@@ -146,7 +147,6 @@
     <Compile Include="Src\Utility\Singleton.cs" />
     <Compile Include="Src\Utility\TaskManager.cs" />
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>copy /Y "$(TargetDir)$(ProjectName).dll" "$(SolutionDir)..\..\MGFrameworkProject\Assets\MGFramework\Plugins\"
