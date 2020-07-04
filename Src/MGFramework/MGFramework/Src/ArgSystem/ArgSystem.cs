@@ -54,4 +54,38 @@ namespace MGFramework.Args
             _pool.Clear();
         }
     }
+
+    public static class ArgSystem<Param, Result> where Param : struct where Result : struct
+    {
+        private static Dictionary<int, Func<Param, Result>> _pool = new Dictionary<int, Func<Param, Result>>();
+
+        public static Result Get(int argId, Param param)
+        {
+            Func<Param, Result> func = _pool.GetValueAnyway(argId);
+
+            if (func != null)
+            {
+                return func.Invoke(param);
+            }
+            else
+            {
+                return default(Result);
+            }
+        }
+
+        public static void Set(int argId, Func<Param, Result> argFuc)
+        {
+            _pool[argId] = argFuc;
+        }
+
+        public static void Remove(int argId)
+        {
+            _pool.Remove(argId);
+        }
+
+        public static void Clear()
+        {
+            _pool.Clear();
+        }
+    }
 }
