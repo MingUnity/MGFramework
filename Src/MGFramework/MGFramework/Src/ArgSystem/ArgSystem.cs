@@ -8,34 +8,82 @@ namespace MGFramework.Args
     /// </summary>
     public static class ArgSystem<T> where T : struct
     {
+        private class FuncHandle
+        {
+            public int Priority { get; private set; }
+            public Func<T> Func { get; private set; }
+
+            public FuncHandle(int priority, Func<T> func)
+            {
+                Priority = priority;
+                Func = func;
+            }
+        }
+
+        private class FuncHandleComparer : IComparer<FuncHandle>
+        {
+            public int Compare(FuncHandle x, FuncHandle y)
+            {
+                if (x != null && y != null)
+                {
+                    return y.Priority > x.Priority ? -1 : 1;
+                }
+
+                return 0;
+            }
+        }
+
         /// <summary>
         /// 存储池
         /// </summary>
-        private static Dictionary<int, Func<T>> _pool = new Dictionary<int, Func<T>>();
+        private static Dictionary<int, List<FuncHandle>> _pool = new Dictionary<int, List<FuncHandle>>();
+
+        /// <summary>
+        /// 优先级比较
+        /// </summary>
+        private readonly static FuncHandleComparer _comparer = new FuncHandleComparer();
 
         /// <summary>
         /// 获取数据
         /// </summary>
+        /// <param name="argId">参数id</param>
         public static T Get(int argId)
         {
-            Func<T> func = _pool.GetValueAnyway(argId);
+            List<FuncHandle> funcs = _pool.GetValueAnyway(argId);
 
-            if (func != null)
+            if (funcs != null && funcs.Count > 0)
             {
-                return func.Invoke();
+                FuncHandle highest = funcs[funcs.Count - 1];
+
+                if (highest?.Func != null)
+                {
+                    return highest.Func.Invoke();
+                }
             }
-            else
-            {
-                return default(T);
-            }
+
+            return default(T);
         }
 
         /// <summary>
         /// 预存数据
         /// </summary>
-        public static void Set(int argId, Func<T> argFunc)
+        /// <param name="argId">参数id</param>
+        /// <param name="argFunc">获取参数委托</param>
+        /// <param name="priority">优先级</param>
+        public static void Set(int argId, Func<T> argFunc, int priority = 0)
         {
-            _pool[argId] = argFunc;
+            List<FuncHandle> funcs = _pool.GetValueAnyway(argId);
+
+            if (funcs == null)
+            {
+                funcs = new List<FuncHandle>();
+            }
+
+            funcs.Add(new FuncHandle(priority, argFunc));
+
+            Sort(funcs);
+
+            _pool[argId] = funcs;
         }
 
         /// <summary>
@@ -53,29 +101,78 @@ namespace MGFramework.Args
         {
             _pool.Clear();
         }
+
+        /// <summary>
+        /// 排序
+        /// </summary>
+        private static void Sort(List<FuncHandle> funcHandles)
+        {
+            funcHandles?.Sort(_comparer);
+        }
     }
 
     public static class ArgSystem<Param, Result> where Param : struct where Result : struct
     {
-        private static Dictionary<int, Func<Param, Result>> _pool = new Dictionary<int, Func<Param, Result>>();
-
-        public static Result Get(int argId, Param param)
+        private class FuncHandle
         {
-            Func<Param, Result> func = _pool.GetValueAnyway(argId);
+            public int Priority { get; private set; }
+            public Func<Param, Result> Func { get; private set; }
 
-            if (func != null)
+            public FuncHandle(int priority, Func<Param, Result> func)
             {
-                return func.Invoke(param);
-            }
-            else
-            {
-                return default(Result);
+                Priority = priority;
+                Func = func;
             }
         }
 
-        public static void Set(int argId, Func<Param, Result> argFuc)
+        private class FuncHandleComparer : IComparer<FuncHandle>
         {
-            _pool[argId] = argFuc;
+            public int Compare(FuncHandle x, FuncHandle y)
+            {
+                if (x != null && y != null)
+                {
+                    return y.Priority > x.Priority ? -1 : 1;
+                }
+
+                return 0;
+            }
+        }
+
+        private static Dictionary<int, List<FuncHandle>> _pool = new Dictionary<int, List<FuncHandle>>();
+
+        private readonly static FuncHandleComparer _comparer = new FuncHandleComparer();
+
+        public static Result Get(int argId, Param param)
+        {
+            List<FuncHandle> funcs = _pool.GetValueAnyway(argId);
+
+            if (funcs != null && funcs.Count > 0)
+            {
+                FuncHandle highest = funcs[funcs.Count - 1];
+
+                if (highest?.Func != null)
+                {
+                    return highest.Func.Invoke(param);
+                }
+            }
+
+            return default(Result);
+        }
+
+        public static void Set(int argId, Func<Param, Result> argFunc, int priority = 0)
+        {
+            List<FuncHandle> funcs = _pool.GetValueAnyway(argId);
+
+            if (funcs == null)
+            {
+                funcs = new List<FuncHandle>();
+            }
+
+            funcs.Add(new FuncHandle(priority, argFunc));
+
+            Sort(funcs);
+
+            _pool[argId] = funcs;
         }
 
         public static void Remove(int argId)
@@ -86,6 +183,14 @@ namespace MGFramework.Args
         public static void Clear()
         {
             _pool.Clear();
+        }
+
+        /// <summary>
+        /// 排序
+        /// </summary>
+        private static void Sort(List<FuncHandle> funcHandles)
+        {
+            funcHandles?.Sort(_comparer);
         }
     }
 }
