@@ -14,15 +14,24 @@
             存储池
             </summary>
         </member>
+        <member name="F:MGFramework.Args.ArgSystem`1._comparer">
+            <summary>
+            优先级比较
+            </summary>
+        </member>
         <member name="M:MGFramework.Args.ArgSystem`1.Get(System.Int32)">
             <summary>
             获取数据
             </summary>
+            <param name="argId">参数id</param>
         </member>
-        <member name="M:MGFramework.Args.ArgSystem`1.Set(System.Int32,System.Func{`0})">
+        <member name="M:MGFramework.Args.ArgSystem`1.Set(System.Int32,System.Func{`0},System.Int32)">
             <summary>
             预存数据
             </summary>
+            <param name="argId">参数id</param>
+            <param name="argFunc">获取参数委托</param>
+            <param name="priority">优先级</param>
         </member>
         <member name="M:MGFramework.Args.ArgSystem`1.Remove(System.Int32)">
             <summary>
@@ -32,6 +41,16 @@
         <member name="M:MGFramework.Args.ArgSystem`1.Clear">
             <summary>
             清除所有
+            </summary>
+        </member>
+        <member name="M:MGFramework.Args.ArgSystem`1.Sort(System.Collections.Generic.List{MGFramework.Args.ArgSystem{`0}.FuncHandle})">
+            <summary>
+            排序
+            </summary>
+        </member>
+        <member name="M:MGFramework.Args.ArgSystem`2.Sort(System.Collections.Generic.List{MGFramework.Args.ArgSystem{`0,`1}.FuncHandle})">
+            <summary>
+            排序
             </summary>
         </member>
         <member name="T:MGFramework.EventModule.CommonCEventArgs`1">
