@@ -16,6 +16,8 @@ namespace MGFramework.UIModule
         void Quit(int viewId, bool leaveStack = false, Action callback = null, bool destroy = false);
         void Quit(IntGroup viewGroup, bool leaveStack = false, Action callback = null, bool destroy = false);
         void QuitAll(bool destroy = false);
+        void QuitAll(int stayStackViewId, bool destroy = false);
+        void QuitAll(IntGroup stayStackViewGroup, bool destroy = false);
         void QuitOtherAll(IntGroup stayViewGroup, bool destroy = false);
         void QuitOtherAll(int stayViewId, bool destroy = false);
         void ResetStack();

@@ -202,5 +202,25 @@ namespace MGFramework.UIModule
         {
             _module.Preload(viewGroup);
         }
+
+        /// <summary>
+        /// 退出全部
+        /// </summary>
+        /// <param name="stayStackViewId">保持在堆栈内的视图id</param>
+        /// <param name="destroy">是否销毁</param>
+        public void QuitAll(int stayStackViewId, bool destroy = false)
+        {
+            _module.QuitAll(stayStackViewId, destroy);  
+        }
+
+        /// <summary>
+        /// 退出全部
+        /// </summary>
+        /// <param name="stayStackViewGroup">保持在堆栈内的视图组</param>
+        /// <param name="destroy">是否销毁</param>
+        public void QuitAll(IntGroup stayStackViewGroup, bool destroy = false)
+        {
+            _module.QuitAll(stayStackViewGroup, destroy);
+        }
     }
 }
