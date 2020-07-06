@@ -1746,6 +1746,20 @@
             预加载
             </summary>
         </member>
+        <member name="M:MGFramework.UIModule.PopUIModule.QuitAll(System.Int32,System.Boolean)">
+            <summary>
+            退出全部
+            </summary>
+            <param name="stayStackViewId">保持在堆栈内的视图id</param>
+            <param name="destroy">是否销毁</param>
+        </member>
+        <member name="M:MGFramework.UIModule.PopUIModule.QuitAll(IntGroup,System.Boolean)">
+            <summary>
+            退出全部
+            </summary>
+            <param name="stayStackViewGroup">保持在堆栈内的视图组</param>
+            <param name="destroy">是否销毁</param>
+        </member>
         <member name="T:MGFramework.UIModule.PopUIModule.ViewState">
             <summary>
             视图状态
@@ -1869,6 +1883,20 @@
             <summary>
             预加载
             </summary>
+        </member>
+        <member name="M:MGFramework.UIModule.UIManager.QuitAll(System.Int32,System.Boolean)">
+            <summary>
+            退出全部
+            </summary>
+            <param name="stayStackViewId">保持在堆栈内的视图id</param>
+            <param name="destroy">是否销毁</param>
+        </member>
+        <member name="M:MGFramework.UIModule.UIManager.QuitAll(IntGroup,System.Boolean)">
+            <summary>
+            退出全部
+            </summary>
+            <param name="stayStackViewGroup">保持在堆栈内的视图组</param>
+            <param name="destroy">是否销毁</param>
         </member>
         <member name="T:MGFramework.UIModule.UIModule">
             <summary>
