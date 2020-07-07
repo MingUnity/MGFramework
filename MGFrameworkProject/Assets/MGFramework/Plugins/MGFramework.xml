@@ -53,6 +53,21 @@
             排序
             </summary>
         </member>
+        <member name="T:MGFramework.Command.ICommand">
+            <summary>
+            命令抽象接口
+            </summary>
+        </member>
+        <member name="M:MGFramework.Command.ICommand.Execute">
+            <summary>
+            执行
+            </summary>
+        </member>
+        <member name="M:MGFramework.Command.ICommand.Undo">
+            <summary>
+            撤销
+            </summary>
+        </member>
         <member name="T:MGFramework.EventModule.CommonCEventArgs`1">
             <summary>
             通用事件参数
