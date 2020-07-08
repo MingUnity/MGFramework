@@ -157,7 +157,6 @@ namespace MGFramework
             if (res == null)
             {
                 Debug.LogErrorFormat("<Ming> ## Uni Error ## Cls:Container Func:Resolve Type:{0}{1} Info:Unregistered", type, !string.IsNullOrEmpty(name) ? $" Name:{name}" : string.Empty);
-                throw new InvalidOperationException();
             }
 
             return res;
