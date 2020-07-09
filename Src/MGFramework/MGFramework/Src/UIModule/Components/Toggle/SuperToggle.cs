@@ -87,7 +87,7 @@ namespace MGFramework.UIModule
         protected override void DoStateTransition(SelectionState state, bool instant)
         {
             base.DoStateTransition(state, instant);
-            
+
             if (isOn || graphicItems == null || graphicItems.Length <= 0)
             {
                 return;
@@ -161,13 +161,10 @@ namespace MGFramework.UIModule
 
                     if (item != null)
                     {
-                        if (value)
-                        {
-                            ColorBlock targetClrBlock = item.useGeneral ? generalColor : item.color;
-                            Color targetClr = value ? (item.useGeneral ? generalIsOnColor : item.isOnColor) : targetClrBlock.normalColor;
+                        ColorBlock targetClrBlock = item.useGeneral ? generalColor : item.color;
+                        Color targetClr = value ? (item.useGeneral ? generalIsOnColor : item.isOnColor) : targetClrBlock.normalColor;
 
-                            item.graphic?.CrossFadeColor(targetClr, targetClrBlock.fadeDuration, true, true);
-                        }
+                        item.graphic?.CrossFadeColor(targetClr, targetClrBlock.fadeDuration, true, true);
                     }
                 }
             }
