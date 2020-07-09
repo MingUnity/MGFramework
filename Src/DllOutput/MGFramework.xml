@@ -472,6 +472,43 @@
             移除
             </summary>
         </member>
+        <member name="T:MGFramework.RefreshPoolObjectHandler`2">
+            <summary>
+            根据新数据 刷新池对象处理
+            </summary>
+            <typeparam name="T">节点</typeparam>
+            <typeparam name="V">数据</typeparam>
+        </member>
+        <member name="T:MGFramework.RefreshPoolObjectHandler`2.IParser">
+            <summary>
+            数据解析
+            </summary>
+        </member>
+        <member name="M:MGFramework.RefreshPoolObjectHandler`2.IParser.Parse(`0,`1)">
+            <summary>
+            解析
+            </summary>
+        </member>
+        <member name="F:MGFramework.RefreshPoolObjectHandler`2._pool">
+            <summary>
+            对象池
+            </summary>
+        </member>
+        <member name="F:MGFramework.RefreshPoolObjectHandler`2._lifeNodes">
+            <summary>
+            存在的节点列表
+            </summary>
+        </member>
+        <member name="F:MGFramework.RefreshPoolObjectHandler`2._parser">
+            <summary>
+            数据解析器
+            </summary>
+        </member>
+        <member name="M:MGFramework.RefreshPoolObjectHandler`2.Refresh(`1[])">
+            <summary>
+            刷新
+            </summary>
+        </member>
         <member name="T:MGFramework.ResourceModule.AssetBundles.AssetBundleLoader">
             <summary>
             AB包加载
