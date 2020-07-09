@@ -53,6 +53,41 @@
             排序
             </summary>
         </member>
+        <member name="T:MGFramework.ArgSystem.IArgPicker`1">
+            <summary>
+            数据获取抽象接口
+            </summary>
+        </member>
+        <member name="M:MGFramework.ArgSystem.IArgPicker`1.Get">
+            <summary>
+            获取数据
+            </summary>
+        </member>
+        <member name="T:MGFramework.ArgSystem.IArgPicker`2">
+            <summary>
+            数据获取抽象接口
+            </summary>
+            <typeparam name="Param">参数类型</typeparam>
+            <typeparam name="Result">返回结果类型</typeparam>
+        </member>
+        <member name="M:MGFramework.ArgSystem.IArgPicker`2.Get(`0)">
+            <summary>
+            获取数据
+            </summary>
+        </member>
+        <member name="T:MGFramework.ArgSystem.IArgPicker`3">
+            <summary>
+            数据获取抽象接口
+            </summary>
+            <typeparam name="ParamA">参数1类型</typeparam>
+            <typeparam name="ParamB">参数2类型</typeparam>
+            <typeparam name="Result">返回结果类型</typeparam>
+        </member>
+        <member name="M:MGFramework.ArgSystem.IArgPicker`3.Get(`0,`1)">
+            <summary>
+            获取数据
+            </summary>
+        </member>
         <member name="T:MGFramework.Command.ICommand">
             <summary>
             命令抽象接口

@@ -54,6 +54,7 @@
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Src\ArgSystem\ArgSystem.cs" />
+    <Compile Include="Src\ArgSystem\IArgPicker.cs" />
     <Compile Include="Src\Command\ICommand.cs" />
     <Compile Include="Src\EventModule\Args\CommonCEventArgs.cs" />
     <Compile Include="Src\EventModule\Args\CommonSEventArgs.cs" />
