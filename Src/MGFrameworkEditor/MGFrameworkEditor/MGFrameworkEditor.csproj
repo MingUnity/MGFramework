@@ -73,7 +73,9 @@
     <Compile Include="Src\ResourceModule\AssetBundleSettingView.cs" />
     <Compile Include="Src\ResourceModule\EditorResManager.cs" />
     <Compile Include="Src\UIModule\ExtendCompl\ButtonExEditor.cs" />
+    <Compile Include="Src\UIModule\ExtendCompl\SuperButtonEditor.cs" />
     <Compile Include="Src\UIModule\ExtendCompl\SuperScrollViewEditor.cs" />
+    <Compile Include="Src\UIModule\ExtendCompl\SuperToggleEditor.cs" />
     <Compile Include="Src\UIModule\ExtendCompl\ToggleExEditor.cs" />
     <Compile Include="Src\UIModule\MVPTools\CreateMVPModel.cs" />
     <Compile Include="Src\UIModule\MVPTools\CreateMVPView.cs" />

@@ -93,14 +93,7 @@ namespace MGFramework.UIModule
                 }
             }
         }
-
-        protected override void OnDestroy()
-        {
-            base.OnDestroy();
-
-            onValueChanged.RemoveListener(OnValueChanged);
-        }
-
+        
         private void OnValueChanged(bool value)
         {
             if (text != null)

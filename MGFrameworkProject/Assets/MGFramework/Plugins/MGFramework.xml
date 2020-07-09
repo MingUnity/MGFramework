@@ -1158,6 +1158,71 @@
             缓存碰撞数组
             </summary>
         </member>
+        <member name="T:MGFramework.UIModule.ButtonEx">
+            <summary>
+            UGUI按钮扩展
+            </summary>
+        </member>
+        <member name="F:MGFramework.UIModule.ButtonEx.text">
+            <summary>
+            文本
+            </summary>
+        </member>
+        <member name="F:MGFramework.UIModule.ButtonEx.normalTextColor">
+            <summary>
+            普通态 文本颜色
+            </summary>
+        </member>
+        <member name="F:MGFramework.UIModule.ButtonEx.highlightedTextColor">
+            <summary>
+            高亮态 文本颜色
+            </summary>
+        </member>
+        <member name="F:MGFramework.UIModule.ButtonEx.pressedTextColor">
+            <summary>
+            点击态 文本颜色
+            </summary>
+        </member>
+        <member name="F:MGFramework.UIModule.ButtonEx.disabledTextColor">
+            <summary>
+            禁用态 文本颜色
+            </summary>
+        </member>
+        <member name="T:MGFramework.UIModule.SuperButton.Item">
+            <summary>
+            图形元素
+            </summary>
+        </member>
+        <member name="F:MGFramework.UIModule.SuperButton.Item.graphic">
+            <summary>
+            图形对象
+            </summary>
+        </member>
+        <member name="F:MGFramework.UIModule.SuperButton.Item.useGeneral">
+            <summary>
+            使用通用颜色变化
+            </summary>
+        </member>
+        <member name="F:MGFramework.UIModule.SuperButton.Item.color">
+            <summary>
+            三态颜色
+            </summary>
+        </member>
+        <member name="F:MGFramework.UIModule.SuperButton.graphicItems">
+            <summary>
+            图形集合
+            </summary>
+        </member>
+        <member name="F:MGFramework.UIModule.SuperButton.generalColor">
+            <summary>
+            通用颜色
+            </summary>
+        </member>
+        <member name="P:MGFramework.UIModule.SuperButton.DefaultColor">
+            <summary>
+            默认颜色
+            </summary>
+        </member>
         <member name="T:MGFramework.UIModule.RoundedRect">
             <summary>
             圆角矩形
@@ -1661,6 +1726,86 @@
             转化数据索引到位置
             </summary>
         </member>
+        <member name="T:MGFramework.UIModule.SuperToggle.Item">
+            <summary>
+            图形元素
+            </summary>
+        </member>
+        <member name="F:MGFramework.UIModule.SuperToggle.Item.graphic">
+            <summary>
+            图形对象
+            </summary>
+        </member>
+        <member name="F:MGFramework.UIModule.SuperToggle.Item.useGeneral">
+            <summary>
+            使用通用颜色变化
+            </summary>
+        </member>
+        <member name="F:MGFramework.UIModule.SuperToggle.Item.isOnColor">
+            <summary>
+            选中颜色
+            </summary>
+        </member>
+        <member name="F:MGFramework.UIModule.SuperToggle.Item.color">
+            <summary>
+            三态颜色
+            </summary>
+        </member>
+        <member name="F:MGFramework.UIModule.SuperToggle.graphicItems">
+            <summary>
+            图形集合
+            </summary>
+        </member>
+        <member name="F:MGFramework.UIModule.SuperToggle.generalIsOnColor">
+            <summary>
+            选中态图形颜色
+            </summary>
+        </member>
+        <member name="F:MGFramework.UIModule.SuperToggle.generalColor">
+            <summary>
+            通用颜色
+            </summary>
+        </member>
+        <member name="P:MGFramework.UIModule.SuperToggle.DefaultColor">
+            <summary>
+            默认颜色
+            </summary>
+        </member>
+        <member name="T:MGFramework.UIModule.ToggleEx">
+            <summary>
+            Toggle扩展
+            </summary>
+        </member>
+        <member name="F:MGFramework.UIModule.ToggleEx.text">
+            <summary> 
+            文本
+            </summary>
+        </member>
+        <member name="F:MGFramework.UIModule.ToggleEx.normalTextColor">
+            <summary>
+            普通态 文本颜色
+            </summary>
+        </member>
+        <member name="F:MGFramework.UIModule.ToggleEx.highlightedTextColor">
+            <summary>
+            悬浮态 文本颜色
+            </summary>
+        </member>
+        <member name="F:MGFramework.UIModule.ToggleEx.pressedTextColor">
+            <summary>
+            点击态 文本颜色
+            </summary>
+        </member>
+        <member name="F:MGFramework.UIModule.ToggleEx.disabledTextColor">
+            <summary>
+            禁用态 文本颜色
+            </summary>
+        </member>
+        <member name="F:MGFramework.UIModule.ToggleEx.isOnTextColor">
+            <summary>
+            选中态 文本颜色
+            </summary>
+        </member>
         <member name="T:MGFramework.UIModule.IUIModule">
             <summary>
             UI模块
@@ -2018,36 +2163,6 @@
             失焦
             </summary>
         </member>
-        <member name="T:MGFramework.UIModule.ButtonEx">
-            <summary>
-            UGUI按钮扩展
-            </summary>
-        </member>
-        <member name="F:MGFramework.UIModule.ButtonEx.text">
-            <summary>
-            文本
-            </summary>
-        </member>
-        <member name="F:MGFramework.UIModule.ButtonEx.normalTextColor">
-            <summary>
-            普通态 文本颜色
-            </summary>
-        </member>
-        <member name="F:MGFramework.UIModule.ButtonEx.highlightedTextColor">
-            <summary>
-            高亮态 文本颜色
-            </summary>
-        </member>
-        <member name="F:MGFramework.UIModule.ButtonEx.pressedTextColor">
-            <summary>
-            点击态 文本颜色
-            </summary>
-        </member>
-        <member name="F:MGFramework.UIModule.ButtonEx.disabledTextColor">
-            <summary>
-            禁用态 文本颜色
-            </summary>
-        </member>
         <member name="T:MGFramework.UIModule.CircleLayoutGroup">
             <summary>
             圆形布局
@@ -2072,41 +2187,6 @@
             <summary>
             空图
             仅用于拦截事件 不渲染
-            </summary>
-        </member>
-        <member name="T:MGFramework.UIModule.ToggleEx">
-            <summary>
-            Toggle扩展
-            </summary>
-        </member>
-        <member name="F:MGFramework.UIModule.ToggleEx.text">
-            <summary> 
-            文本
-            </summary>
-        </member>
-        <member name="F:MGFramework.UIModule.ToggleEx.normalTextColor">
-            <summary>
-            普通态 文本颜色
-            </summary>
-        </member>
-        <member name="F:MGFramework.UIModule.ToggleEx.highlightedTextColor">
-            <summary>
-            悬浮态 文本颜色
-            </summary>
-        </member>
-        <member name="F:MGFramework.UIModule.ToggleEx.pressedTextColor">
-            <summary>
-            点击态 文本颜色
-            </summary>
-        </member>
-        <member name="F:MGFramework.UIModule.ToggleEx.disabledTextColor">
-            <summary>
-            禁用态 文本颜色
-            </summary>
-        </member>
-        <member name="F:MGFramework.UIModule.ToggleEx.isOnTextColor">
-            <summary>
-            选中态 文本颜色
             </summary>
         </member>
         <member name="T:MGFramework.UIModule.GradientMeshEffect">
