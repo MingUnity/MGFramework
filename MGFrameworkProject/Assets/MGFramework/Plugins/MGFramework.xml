@@ -1255,6 +1255,36 @@
             根据索引取对应图片
             </summary>
         </member>
+        <member name="T:MGFramework.UIModule.SpriteTable">
+            <summary>
+            精灵图片键值集合
+            </summary>
+        </member>
+        <member name="T:MGFramework.UIModule.SpriteTable.Item">
+            <summary>
+            元素
+            </summary>
+        </member>
+        <member name="F:MGFramework.UIModule.SpriteTable.Item.key">
+            <summary>
+            键
+            </summary>
+        </member>
+        <member name="F:MGFramework.UIModule.SpriteTable.Item.sprite">
+            <summary>
+            图片对象
+            </summary>
+        </member>
+        <member name="F:MGFramework.UIModule.SpriteTable._keyValueSprites">
+            <summary>
+            图片集合
+            </summary>
+        </member>
+        <member name="M:MGFramework.UIModule.SpriteTable.Get(System.String)">
+            <summary>
+            根据索引取对应图片
+            </summary>
+        </member>
         <member name="T:MGFramework.UIModule.ISuperNodeFactory">
             <summary>
             滚动列表节点工厂

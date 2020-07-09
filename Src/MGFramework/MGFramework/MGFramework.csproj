@@ -103,7 +103,8 @@
     <Compile Include="Src\InputModule\Raycaster\SuperGraphicRaycaster.cs" />
     <Compile Include="Src\InputModule\Raycaster\SuperPhysicsRaycaster.cs" />
     <Compile Include="Src\UIModule\Components\SliderEx.cs" />
-    <Compile Include="Src\UIModule\Components\SpriteContainer.cs" />
+    <Compile Include="Src\UIModule\Components\SpriteContainer\SpriteContainer.cs" />
+    <Compile Include="Src\UIModule\Components\SpriteContainer\SpriteTable.cs" />
     <Compile Include="Src\UIModule\Components\SuperScrollView\ISuperNodeFactory.cs" />
     <Compile Include="Src\UIModule\Components\SuperScrollView\ISuperScrollNode.cs" />
     <Compile Include="Src\UIModule\Components\SuperScrollView\ISuperScrollNodeData.cs" />
