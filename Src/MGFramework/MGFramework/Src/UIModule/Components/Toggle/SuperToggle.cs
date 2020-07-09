@@ -87,8 +87,8 @@ namespace MGFramework.UIModule
         protected override void DoStateTransition(SelectionState state, bool instant)
         {
             base.DoStateTransition(state, instant);
-
-            if (graphicItems == null || graphicItems.Length <= 0)
+            
+            if (isOn || graphicItems == null || graphicItems.Length <= 0)
             {
                 return;
             }
