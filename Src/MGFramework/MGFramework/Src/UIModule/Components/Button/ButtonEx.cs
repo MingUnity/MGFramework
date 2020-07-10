@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 namespace MGFramework.UIModule
@@ -6,7 +8,7 @@ namespace MGFramework.UIModule
     /// <summary>
     /// UGUI按钮扩展
     /// </summary>
-    [AddComponentMenu("MGFramework/ButtonEx")]
+    [Obsolete("Please use SuperButton instead")]
     public class ButtonEx : Button
     {
         /// <summary>

@@ -1,5 +1,6 @@
 ﻿using System;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 namespace MGFramework.UIModule
@@ -82,8 +83,6 @@ namespace MGFramework.UIModule
             base.OnDisable();
 
             onValueChanged.RemoveListener(OnValueChanged);
-
-            OnPointerExit(null);
         }
 
         protected override void DoStateTransition(SelectionState state, bool instant)
@@ -170,6 +169,12 @@ namespace MGFramework.UIModule
                     }
                 }
             }
+        }
+
+        public override void OnPointerExit(PointerEventData eventData)
+        {
+            UpdateSelectionState(eventData);
+            base.OnPointerExit(eventData);
         }
     }
 }

@@ -70,7 +70,7 @@ namespace MGFramework.UIModule
             {
                 return;
             }
-
+            
             switch (state)
             {
                 case SelectionState.Normal:
@@ -89,13 +89,6 @@ namespace MGFramework.UIModule
                     ProcessDisabled();
                     break;
             }
-        }
-
-        protected override void OnDisable()
-        {
-            base.OnDisable();
-
-            OnPointerExit(null);
         }
 
         private void ProcessDisabled()
@@ -134,6 +127,12 @@ namespace MGFramework.UIModule
                     callback?.Invoke(item.graphic, item.useGeneral ? generalColor : item.color);
                 }
             }
+        }
+
+        public override void OnPointerExit(PointerEventData eventData)
+        {
+            UpdateSelectionState(eventData);
+            base.OnPointerExit(eventData);
         }
     }
 }

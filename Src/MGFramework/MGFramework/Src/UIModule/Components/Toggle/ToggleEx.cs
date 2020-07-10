@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 namespace MGFramework.UIModule
@@ -6,7 +8,7 @@ namespace MGFramework.UIModule
     /// <summary>
     /// Toggle扩展
     /// </summary>
-    [AddComponentMenu("MGFramework/ToggleEx")] 
+    [Obsolete("Please use SuperToggle instead")]
     public class ToggleEx : Toggle
     {
         /// <summary> 
@@ -38,7 +40,7 @@ namespace MGFramework.UIModule
         /// 选中态 文本颜色
         /// </summary>
         public Color isOnTextColor = Color.white;
-        
+
         protected override void OnEnable()
         {
             base.OnEnable();
@@ -93,7 +95,7 @@ namespace MGFramework.UIModule
                 }
             }
         }
-        
+
         private void OnValueChanged(bool value)
         {
             if (text != null)
