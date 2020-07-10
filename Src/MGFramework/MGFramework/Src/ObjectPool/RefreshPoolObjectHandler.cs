@@ -43,7 +43,7 @@ namespace MGFramework
         }
 
         /// <summary>
-        /// 刷新
+        /// 刷新所有
         /// </summary>
         public void Refresh(V[] datas)
         {
@@ -59,7 +59,7 @@ namespace MGFramework
 
                 //需要新增的节点数
                 int readyToAddCount = datas.Length - lifeCount;
-                
+
                 if (readyToAddCount >= 0)
                 {
                     //已存在直接解析数据赋值
@@ -97,6 +97,20 @@ namespace MGFramework
                 _lifeNodes.ForEach(node => _pool.Remove(node));
                 _lifeNodes.Clear();
             }
+        }
+
+        /// <summary>
+        /// 刷新指定数据
+        /// </summary>
+        public void Refresh(int index, V data)
+        {
+            if (_lifeNodes == null)
+            {
+                return;
+            }
+            
+            T node = _lifeNodes.GetValueAnyway(index);
+            _parser?.Parse(node, data);
         }
     }
 }

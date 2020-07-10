@@ -506,7 +506,12 @@
         </member>
         <member name="M:MGFramework.RefreshPoolObjectHandler`2.Refresh(`1[])">
             <summary>
-            刷新
+            刷新所有
+            </summary>
+        </member>
+        <member name="M:MGFramework.RefreshPoolObjectHandler`2.Refresh(System.Int32,`1)">
+            <summary>
+            刷新指定数据
             </summary>
         </member>
         <member name="T:MGFramework.ResourceModule.AssetBundles.AssetBundleLoader">
