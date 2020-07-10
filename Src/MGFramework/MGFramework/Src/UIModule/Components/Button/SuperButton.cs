@@ -131,8 +131,8 @@ namespace MGFramework.UIModule
 
         public override void OnPointerExit(PointerEventData eventData)
         {
-            UpdateSelectionState(eventData);
             base.OnPointerExit(eventData);
+            UpdateSelectionState(eventData);
         }
     }
 }
