@@ -91,6 +91,13 @@ namespace MGFramework.UIModule
             }
         }
 
+        protected override void OnDisable()
+        {
+            base.OnDisable();
+
+            OnPointerExit(null);
+        }
+
         private void ProcessDisabled()
         {
             ForEachGraphicColor((g, clr) => CrossFadeGraphicColor(g, clr.disabledColor, clr.fadeDuration));

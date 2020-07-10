@@ -82,6 +82,8 @@ namespace MGFramework.UIModule
             base.OnDisable();
 
             onValueChanged.RemoveListener(OnValueChanged);
+
+            OnPointerExit(null);
         }
 
         protected override void DoStateTransition(SelectionState state, bool instant)
