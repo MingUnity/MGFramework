@@ -3091,16 +3091,7 @@
         <member name="P:MGFramework.MonoSingleton`1.Instance">
             <summary>
             单例对象 
-            如果没有找到场景中的对象则创建
             </summary>
-        </member>
-        <member name="M:MGFramework.MonoSingleton`1.GetInstance(System.Boolean)">
-            <summary>
-            单例对象
-            根据入参判断 如果没有找到场景中的对象，是否创建新对象
-            </summary>
-            <param name="createIfNotExists">如果不存在是否创建新对象</param>
-            <returns></returns>
         </member>
         <member name="T:MGFramework.EngineDir">
             <summary>

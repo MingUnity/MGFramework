@@ -147,10 +147,10 @@
     <Compile Include="Src\Utility\EventTriggerExtends.cs" />
     <Compile Include="Src\Utility\Loom.cs" />
     <Compile Include="Src\Utility\MathHelper.cs" />
-    <Compile Include="Src\Utility\MonoSingleton.cs" />
+    <Compile Include="Src\Utility\Singleton\MonoSingleton.cs" />
     <Compile Include="Src\Utility\EngineDir.cs" />
     <Compile Include="Src\Utility\SerializeUtility.cs" />
-    <Compile Include="Src\Utility\Singleton.cs" />
+    <Compile Include="Src\Utility\Singleton\Singleton.cs" />
     <Compile Include="Src\Utility\TaskManager.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
