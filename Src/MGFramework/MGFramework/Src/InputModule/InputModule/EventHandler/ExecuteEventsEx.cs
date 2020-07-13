@@ -5,22 +5,22 @@ namespace MGFramework.InputModule
 {
     internal class ExecuteEventsEx
     {
-        private static readonly EventFunction<IFocusHandler> _focusHandler = Execute;
+        private static readonly EventFunction<IFocusHandler> _focusHandler = ExecuteFocus;
 
-        public static void Execute(IFocusHandler handler, BaseEventData eventData)
+        public static void ExecuteFocus(IFocusHandler handler, BaseEventData eventData)
         {
             handler.OnFocus(eventData as PointerEventData);
         }
 
-        private static readonly EventFunction<IUnFocusHandler> _unFocusHandler = Execute;
+        private static readonly EventFunction<IFocusHandler> _unFocusHandler = ExecuteUnFocus;
 
-        public static void Execute(IUnFocusHandler handler, BaseEventData eventData)
+        public static void ExecuteUnFocus(IFocusHandler handler, BaseEventData eventData)
         {
-            handler.OnUnFoucs(eventData as PointerEventData);
+            handler.OnUnFocus(eventData as PointerEventData);
         }
 
         public static EventFunction<IFocusHandler> FocusHandler => _focusHandler;
 
-        public static EventFunction<IUnFocusHandler> UnFocusHandler => _unFocusHandler;
+        public static EventFunction<IFocusHandler> UnFocusHandler => _unFocusHandler;
     }
 }

@@ -382,10 +382,15 @@
         </member>
         <member name="T:MGFramework.InputModule.IFocusHandler">
             <summary>
+            焦点处理
+            </summary>
+        </member>
+        <member name="M:MGFramework.InputModule.IFocusHandler.OnFocus(UnityEngine.EventSystems.PointerEventData)">
+            <summary>
             聚焦
             </summary>
         </member>
-        <member name="T:MGFramework.InputModule.IUnFocusHandler">
+        <member name="M:MGFramework.InputModule.IFocusHandler.OnUnFocus(UnityEngine.EventSystems.PointerEventData)">
             <summary>
             失焦
             </summary>
