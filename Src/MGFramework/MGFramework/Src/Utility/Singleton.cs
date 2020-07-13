@@ -5,7 +5,7 @@ namespace MGFramework
     /// <summary>
     /// 单例
     /// </summary>
-    public abstract class Singleton<T> where T : class
+    public abstract class Singleton<T> where T : Singleton<T>
     {
         private static T _instance;
 
