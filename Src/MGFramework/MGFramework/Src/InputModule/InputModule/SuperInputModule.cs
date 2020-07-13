@@ -93,6 +93,8 @@ namespace MGFramework.InputModule
 
             if (pressed)
             {
+                ModifyFocus(pointerEventData);
+
                 pointerEventData.eligibleForClick = true;
                 pointerEventData.delta = Vector2.zero;
                 pointerEventData.dragging = false;
@@ -101,7 +103,7 @@ namespace MGFramework.InputModule
                 pointerEventData.pointerPressRaycast = pointerEventData.pointerCurrentRaycast;
 
                 DeselectIfSelectionChanged(curObject, pointerEventData);
-
+                
                 var newPressed = ExecuteEvents.ExecuteHierarchy(curObject, pointerEventData, ExecuteEvents.pointerDownHandler);
 
                 if (newPressed == null)
@@ -173,6 +175,24 @@ namespace MGFramework.InputModule
                     HandlePointerExitAndEnter(pointerEventData, null);
                     HandlePointerExitAndEnter(pointerEventData, curObject);
                 }
+            }
+        }
+
+        /// <summary>
+        /// 改变焦点
+        /// </summary>
+        private void ModifyFocus(PointerEventData pointerEventData)
+        {
+            GameObject prevObject = pointerEventData.pointerPressRaycast.gameObject;
+            GameObject curObject = pointerEventData.pointerCurrentRaycast.gameObject;
+
+            if (prevObject != curObject)
+            {
+                GameObject unFocusHandler = ExecuteEvents.GetEventHandler<IUnFocusHandler>(prevObject);
+                GameObject focusHandler = ExecuteEvents.GetEventHandler<IFocusHandler>(curObject);
+
+                ExecuteEvents.Execute(unFocusHandler, pointerEventData, ExecuteEventsEx.UnFocusHandler);
+                ExecuteEvents.Execute(focusHandler, pointerEventData, ExecuteEventsEx.FocusHandler);
             }
         }
 

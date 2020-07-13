@@ -380,6 +380,337 @@
             跳转状态
             </summary>
         </member>
+        <member name="T:MGFramework.InputModule.IFocusHandler">
+            <summary>
+            聚焦
+            </summary>
+        </member>
+        <member name="T:MGFramework.InputModule.IUnFocusHandler">
+            <summary>
+            失焦
+            </summary>
+        </member>
+        <member name="T:MGFramework.InputModule.MobileGraphicRaycaster">
+            <summary>
+            A derived BaseRaycaster to raycast against Graphic elements.
+            Ming Modify 优化GraphicRayCaster，用于移动端节省时耗
+            1、修改部分常用变量的取值逻辑
+            2、去除不常用的2 3D物体遮挡逻辑
+            3、去除多屏适配，移动端默认单屏
+            4、去除忽略翻转判断，默认可响应翻转
+            </summary>
+        </member>
+        <member name="P:MGFramework.InputModule.MobileGraphicRaycaster.sortOrderPriority">
+            <summary>
+            Priority of the raycaster based upon sort order.
+            </summary>
+            <returns>
+            The sortOrder priority.
+            </returns>
+        </member>
+        <member name="P:MGFramework.InputModule.MobileGraphicRaycaster.renderOrderPriority">
+            <summary>
+            Priority of the raycaster based upon render order.
+            </summary>
+            <returns>
+            The renderOrder priority.
+            </returns>
+        </member>
+        <member name="P:MGFramework.InputModule.MobileGraphicRaycaster.eventCamera">
+            <summary>
+            The camera that will generate rays for this raycaster.
+            </summary>
+            <returns>
+            - Null if Camera mode is ScreenSpaceOverlay or ScreenSpaceCamera and has no camera.
+            - canvas.worldCanvas if not null
+            - Camera.main.
+            - Ming Modify 只在初始化的时候赋值，节省获取Camera.main的时耗，提供一个刷新方法以供动态改变摄像机
+            </returns>
+        </member>
+        <member name="M:MGFramework.InputModule.MobileGraphicRaycaster.Refresh">
+            <summary>
+            刷新参数
+            </summary>
+        </member>
+        <member name="M:MGFramework.InputModule.MobileGraphicRaycaster.Raycast(UnityEngine.EventSystems.PointerEventData,System.Collections.Generic.List{UnityEngine.EventSystems.RaycastResult})">
+            <summary>
+            Perform the raycast against the list of graphics associated with the Canvas.
+            </summary>
+            <param name="eventData">Current event data</param>
+            <param name="resultAppendList">List of hit objects to append new results to.</param>
+        </member>
+        <member name="M:MGFramework.InputModule.MobileGraphicRaycaster.Raycast(UnityEngine.Canvas,UnityEngine.Camera,UnityEngine.Vector2,System.Collections.Generic.IList{UnityEngine.UI.Graphic},UnityEngine.Ray,System.Single@)">
+            <summary>
+            Ming Modify
+            1、返回最上层图形
+            </summary>
+        </member>
+        <member name="T:MGFramework.InputModule.ICustomRay">
+            <summary>
+            自定义射线
+            </summary>
+        </member>
+        <member name="P:MGFramework.InputModule.ICustomRay.Priority">
+            <summary>
+            优先级
+            </summary>
+        </member>
+        <member name="P:MGFramework.InputModule.ICustomRay.Ray">
+            <summary>
+            射线
+            </summary>
+        </member>
+        <member name="T:MGFramework.InputModule.MonoForwardRay">
+            <summary>
+            前向射线
+            </summary>
+        </member>
+        <member name="F:MGFramework.InputModule.MonoForwardRay._trans">
+            <summary>
+            当前摄像机Transform的缓存
+            </summary>
+        </member>
+        <member name="F:MGFramework.InputModule.MonoForwardRay._cacheRay">
+            <summary>
+            缓存射线
+            </summary>
+        </member>
+        <member name="F:MGFramework.InputModule.MonoForwardRay._priority">
+            <summary>
+            优先级
+            </summary>
+        </member>
+        <member name="P:MGFramework.InputModule.MonoForwardRay.Priority">
+            <summary>
+            优先级
+            </summary>
+        </member>
+        <member name="P:MGFramework.InputModule.MonoForwardRay.Ray">
+            <summary>
+            射线
+            </summary>
+        </member>
+        <member name="T:MGFramework.InputModule.RayManager">
+            <summary>
+            射线管理
+            </summary>
+        </member>
+        <member name="F:MGFramework.InputModule.RayManager._rayList">
+            <summary>
+            射线列表
+            </summary>
+        </member>
+        <member name="F:MGFramework.InputModule.RayManager._comparer">
+            <summary>
+            自定义射线优先级比较
+            </summary>
+        </member>
+        <member name="P:MGFramework.InputModule.RayManager.CurrentRay">
+            <summary>
+            当前优先级最高的自定义射线
+            </summary>
+        </member>
+        <member name="M:MGFramework.InputModule.RayManager.AddRay(MGFramework.InputModule.ICustomRay)">
+            <summary>
+            替换自定义射线
+            </summary>
+        </member>
+        <member name="M:MGFramework.InputModule.RayManager.RemoveRay(MGFramework.InputModule.ICustomRay)">
+            <summary>
+            销毁当前自定义射线
+            </summary>
+        </member>
+        <member name="M:MGFramework.InputModule.RayManager.Refresh">
+            <summary>
+            刷新
+            </summary>
+        </member>
+        <member name="M:MGFramework.InputModule.RayManager.Sort">
+            <summary>
+            排序
+            </summary>
+        </member>
+        <member name="T:MGFramework.InputModule.BaseInputKeyHandler">
+            <summary>
+            基于mono的输入处理
+            </summary>
+        </member>
+        <member name="M:MGFramework.InputModule.BaseInputKeyHandler.InputUpdate(System.Boolean@,System.Boolean@)">
+            <summary>
+            输入更新
+            </summary>
+        </member>
+        <member name="T:MGFramework.InputModule.IInputKeyHandler">
+            <summary>
+            输入键处理
+            </summary>
+        </member>
+        <member name="M:MGFramework.InputModule.IInputKeyHandler.InputUpdate(System.Boolean@,System.Boolean@)">
+            <summary>
+            输入更新
+            </summary>
+        </member>
+        <member name="T:MGFramework.InputModule.InputManager">
+            <summary>
+            输入管理
+            </summary>
+        </member>
+        <member name="F:MGFramework.InputModule.InputManager._inputKeyHandlerList">
+            <summary>
+            输入键处理器
+            </summary>
+        </member>
+        <member name="M:MGFramework.InputModule.InputManager.Add(MGFramework.InputModule.IInputKeyHandler)">
+            <summary>
+            添加
+            </summary>
+        </member>
+        <member name="M:MGFramework.InputModule.InputManager.Remove(MGFramework.InputModule.IInputKeyHandler)">
+            <summary>
+            移除
+            </summary>
+        </member>
+        <member name="M:MGFramework.InputModule.InputManager.InputUpdate(System.Boolean@,System.Boolean@)">
+            <summary>
+            输入更新
+            </summary>
+        </member>
+        <member name="T:MGFramework.InputModule.SuperPointerListener">
+            <summary>
+            指针模块事件监听
+            </summary>
+        </member>
+        <member name="T:MGFramework.InputModule.SuperInputModule">
+            <summary>
+            通用输入模块
+            </summary>
+        </member>
+        <member name="F:MGFramework.InputModule.SuperInputModule._pointerEventData">
+            <summary>
+            当前pointerEventData
+            </summary>
+        </member>
+        <member name="F:MGFramework.InputModule.SuperInputModule.useCustomRay">
+            <summary>
+            使用自定义射线
+            </summary>
+        </member>
+        <member name="M:MGFramework.InputModule.SuperInputModule.DispatchTrigger(UnityEngine.EventSystems.PointerEventData)">
+            <summary>
+            交互输入响应处理
+            </summary>
+        </member>
+        <member name="M:MGFramework.InputModule.SuperInputModule.ProcessPress(UnityEngine.EventSystems.PointerEventData,System.Boolean,System.Boolean)">
+            <summary>
+            处理点击
+            </summary>
+        </member>
+        <member name="M:MGFramework.InputModule.SuperInputModule.ModifyFocus(UnityEngine.EventSystems.PointerEventData)">
+            <summary>
+            改变焦点
+            </summary>
+        </member>
+        <member name="M:MGFramework.InputModule.SuperInputModule.DispatchPointerHover(UnityEngine.EventSystems.PointerEventData,UnityEngine.GameObject)">
+            <summary>
+            指针悬浮处理
+            </summary>
+        </member>
+        <member name="M:MGFramework.InputModule.SuperInputModule.CastRay(UnityEngine.EventSystems.PointerEventData)">
+            <summary>
+            射线检测
+            </summary>
+        </member>
+        <member name="M:MGFramework.InputModule.SuperInputModule.GetInteractive(UnityEngine.GameObject)">
+            <summary>
+            获取可交互性
+            </summary>
+            <param name="obj"></param>
+            <returns></returns>
+        </member>
+        <member name="T:MGFramework.InputModule.UnityInputKeyHandler">
+            <summary>
+            unity输入处理
+            </summary>
+        </member>
+        <member name="M:MGFramework.InputModule.UnityInputKeyHandler.InputUpdate(System.Boolean@,System.Boolean@)">
+            <summary>
+            输入更新
+            </summary>
+        </member>
+        <member name="M:MGFramework.InputModule.UnityInputKeyHandler.GetFirstTouchPhase(UnityEngine.TouchPhase@)">
+            <summary>
+            获取第一个手指触碰的phase
+            </summary>
+        </member>
+        <member name="T:MGFramework.InputModule.SuperGraphicRaycaster">
+            <summary>
+            自定义UI Raycaster
+            </summary>
+        </member>
+        <member name="F:MGFramework.InputModule.SuperGraphicRaycaster._canvas">
+            <summary>
+            画布
+            </summary>
+        </member>
+        <member name="F:MGFramework.InputModule.SuperGraphicRaycaster._raycastResults">
+            <summary>
+            射线检测结果列表
+            </summary>
+        </member>
+        <member name="P:MGFramework.InputModule.SuperGraphicRaycaster.sortOrderPriority">
+            <summary>
+            Priority of the raycaster based upon sort order.
+            </summary>
+            <returns>
+            The sortOrder priority.
+            </returns>
+        </member>
+        <member name="P:MGFramework.InputModule.SuperGraphicRaycaster.renderOrderPriority">
+            <summary>
+            Priority of the raycaster based upon render order.
+            </summary>
+            <returns>
+            The renderOrder priority.
+            </returns>
+        </member>
+        <member name="P:MGFramework.InputModule.SuperGraphicRaycaster.eventCamera">
+            <summary>
+            The camera that will generate rays for this raycaster.
+            </summary>
+            <returns>
+            - Null if Camera mode is ScreenSpaceOverlay or ScreenSpaceCamera and has no camera.
+            - canvas.worldCanvas if not null
+            - Camera.main.
+            </returns>
+        </member>
+        <member name="M:MGFramework.InputModule.SuperGraphicRaycaster.Raycast(UnityEngine.EventSystems.PointerEventData,System.Collections.Generic.List{UnityEngine.EventSystems.RaycastResult})">
+            <summary>
+            Perform the raycast against the list of graphics associated with the Canvas.
+            </summary>
+            <param name="eventData">Current event data</param>
+            <param name="resultAppendList">List of hit objects to append new results to.</param>
+        </member>
+        <member name="M:MGFramework.InputModule.SuperGraphicRaycaster.Raycast(UnityEngine.Canvas,UnityEngine.Camera,UnityEngine.Vector2,System.Collections.Generic.IList{UnityEngine.UI.Graphic},UnityEngine.Ray,System.Single@)">
+            <summary>
+            Ming Modify
+            1、返回最上层图形
+            </summary>
+        </member>
+        <member name="M:MGFramework.InputModule.SuperGraphicRaycaster.GetEventPosition(UnityEngine.Ray,UnityEngine.Camera,UnityEngine.EventSystems.PointerEventData)">
+            <summary>
+            获取事件位置
+            </summary>
+        </member>
+        <member name="T:MGFramework.InputModule.SuperPhysicsRaycaster">
+            <summary>
+            物理射线检测
+            </summary>
+        </member>
+        <member name="F:MGFramework.InputModule.SuperPhysicsRaycaster._hits">
+            <summary>
+            缓存碰撞数组
+            </summary>
+        </member>
         <member name="T:MGFramework.IPoolObject">
             <summary>
             对象池中的对象
@@ -882,322 +1213,6 @@
         <member name="P:MGFramework.ResourceModule.ResLoadParam.Default">
             <summary>
             默认
-            </summary>
-        </member>
-        <member name="T:MGFramework.InputModule.MobileGraphicRaycaster">
-            <summary>
-            A derived BaseRaycaster to raycast against Graphic elements.
-            Ming Modify 优化GraphicRayCaster，用于移动端节省时耗
-            1、修改部分常用变量的取值逻辑
-            2、去除不常用的2 3D物体遮挡逻辑
-            3、去除多屏适配，移动端默认单屏
-            4、去除忽略翻转判断，默认可响应翻转
-            </summary>
-        </member>
-        <member name="P:MGFramework.InputModule.MobileGraphicRaycaster.sortOrderPriority">
-            <summary>
-            Priority of the raycaster based upon sort order.
-            </summary>
-            <returns>
-            The sortOrder priority.
-            </returns>
-        </member>
-        <member name="P:MGFramework.InputModule.MobileGraphicRaycaster.renderOrderPriority">
-            <summary>
-            Priority of the raycaster based upon render order.
-            </summary>
-            <returns>
-            The renderOrder priority.
-            </returns>
-        </member>
-        <member name="P:MGFramework.InputModule.MobileGraphicRaycaster.eventCamera">
-            <summary>
-            The camera that will generate rays for this raycaster.
-            </summary>
-            <returns>
-            - Null if Camera mode is ScreenSpaceOverlay or ScreenSpaceCamera and has no camera.
-            - canvas.worldCanvas if not null
-            - Camera.main.
-            - Ming Modify 只在初始化的时候赋值，节省获取Camera.main的时耗，提供一个刷新方法以供动态改变摄像机
-            </returns>
-        </member>
-        <member name="M:MGFramework.InputModule.MobileGraphicRaycaster.Refresh">
-            <summary>
-            刷新参数
-            </summary>
-        </member>
-        <member name="M:MGFramework.InputModule.MobileGraphicRaycaster.Raycast(UnityEngine.EventSystems.PointerEventData,System.Collections.Generic.List{UnityEngine.EventSystems.RaycastResult})">
-            <summary>
-            Perform the raycast against the list of graphics associated with the Canvas.
-            </summary>
-            <param name="eventData">Current event data</param>
-            <param name="resultAppendList">List of hit objects to append new results to.</param>
-        </member>
-        <member name="M:MGFramework.InputModule.MobileGraphicRaycaster.Raycast(UnityEngine.Canvas,UnityEngine.Camera,UnityEngine.Vector2,System.Collections.Generic.IList{UnityEngine.UI.Graphic},UnityEngine.Ray,System.Single@)">
-            <summary>
-            Ming Modify
-            1、返回最上层图形
-            </summary>
-        </member>
-        <member name="T:MGFramework.InputModule.ICustomRay">
-            <summary>
-            自定义射线
-            </summary>
-        </member>
-        <member name="P:MGFramework.InputModule.ICustomRay.Priority">
-            <summary>
-            优先级
-            </summary>
-        </member>
-        <member name="P:MGFramework.InputModule.ICustomRay.Ray">
-            <summary>
-            射线
-            </summary>
-        </member>
-        <member name="T:MGFramework.InputModule.MonoForwardRay">
-            <summary>
-            前向射线
-            </summary>
-        </member>
-        <member name="F:MGFramework.InputModule.MonoForwardRay._trans">
-            <summary>
-            当前摄像机Transform的缓存
-            </summary>
-        </member>
-        <member name="F:MGFramework.InputModule.MonoForwardRay._cacheRay">
-            <summary>
-            缓存射线
-            </summary>
-        </member>
-        <member name="F:MGFramework.InputModule.MonoForwardRay._priority">
-            <summary>
-            优先级
-            </summary>
-        </member>
-        <member name="P:MGFramework.InputModule.MonoForwardRay.Priority">
-            <summary>
-            优先级
-            </summary>
-        </member>
-        <member name="P:MGFramework.InputModule.MonoForwardRay.Ray">
-            <summary>
-            射线
-            </summary>
-        </member>
-        <member name="T:MGFramework.InputModule.RayManager">
-            <summary>
-            射线管理
-            </summary>
-        </member>
-        <member name="F:MGFramework.InputModule.RayManager._rayList">
-            <summary>
-            射线列表
-            </summary>
-        </member>
-        <member name="F:MGFramework.InputModule.RayManager._comparer">
-            <summary>
-            自定义射线优先级比较
-            </summary>
-        </member>
-        <member name="P:MGFramework.InputModule.RayManager.CurrentRay">
-            <summary>
-            当前优先级最高的自定义射线
-            </summary>
-        </member>
-        <member name="M:MGFramework.InputModule.RayManager.AddRay(MGFramework.InputModule.ICustomRay)">
-            <summary>
-            替换自定义射线
-            </summary>
-        </member>
-        <member name="M:MGFramework.InputModule.RayManager.RemoveRay(MGFramework.InputModule.ICustomRay)">
-            <summary>
-            销毁当前自定义射线
-            </summary>
-        </member>
-        <member name="M:MGFramework.InputModule.RayManager.Refresh">
-            <summary>
-            刷新
-            </summary>
-        </member>
-        <member name="M:MGFramework.InputModule.RayManager.Sort">
-            <summary>
-            排序
-            </summary>
-        </member>
-        <member name="T:MGFramework.InputModule.BaseInputKeyHandler">
-            <summary>
-            基于mono的输入处理
-            </summary>
-        </member>
-        <member name="M:MGFramework.InputModule.BaseInputKeyHandler.InputUpdate(System.Boolean@,System.Boolean@)">
-            <summary>
-            输入更新
-            </summary>
-        </member>
-        <member name="T:MGFramework.InputModule.IInputKeyHandler">
-            <summary>
-            输入键处理
-            </summary>
-        </member>
-        <member name="M:MGFramework.InputModule.IInputKeyHandler.InputUpdate(System.Boolean@,System.Boolean@)">
-            <summary>
-            输入更新
-            </summary>
-        </member>
-        <member name="T:MGFramework.InputModule.InputManager">
-            <summary>
-            输入管理
-            </summary>
-        </member>
-        <member name="F:MGFramework.InputModule.InputManager._inputKeyHandlerList">
-            <summary>
-            输入键处理器
-            </summary>
-        </member>
-        <member name="M:MGFramework.InputModule.InputManager.Add(MGFramework.InputModule.IInputKeyHandler)">
-            <summary>
-            添加
-            </summary>
-        </member>
-        <member name="M:MGFramework.InputModule.InputManager.Remove(MGFramework.InputModule.IInputKeyHandler)">
-            <summary>
-            移除
-            </summary>
-        </member>
-        <member name="M:MGFramework.InputModule.InputManager.InputUpdate(System.Boolean@,System.Boolean@)">
-            <summary>
-            输入更新
-            </summary>
-        </member>
-        <member name="T:MGFramework.InputModule.SuperPointerListener">
-            <summary>
-            指针模块事件监听
-            </summary>
-        </member>
-        <member name="T:MGFramework.InputModule.SuperInputModule">
-            <summary>
-            通用输入模块
-            </summary>
-        </member>
-        <member name="F:MGFramework.InputModule.SuperInputModule._pointerEventData">
-            <summary>
-            当前pointerEventData
-            </summary>
-        </member>
-        <member name="F:MGFramework.InputModule.SuperInputModule.useCustomRay">
-            <summary>
-            使用自定义射线
-            </summary>
-        </member>
-        <member name="M:MGFramework.InputModule.SuperInputModule.DispatchTrigger(UnityEngine.EventSystems.PointerEventData)">
-            <summary>
-            交互输入响应处理
-            </summary>
-        </member>
-        <member name="M:MGFramework.InputModule.SuperInputModule.ProcessPress(UnityEngine.EventSystems.PointerEventData,System.Boolean,System.Boolean)">
-            <summary>
-            处理点击
-            </summary>
-        </member>
-        <member name="M:MGFramework.InputModule.SuperInputModule.DispatchPointerHover(UnityEngine.EventSystems.PointerEventData,UnityEngine.GameObject)">
-            <summary>
-            指针悬浮处理
-            </summary>
-        </member>
-        <member name="M:MGFramework.InputModule.SuperInputModule.CastRay(UnityEngine.EventSystems.PointerEventData)">
-            <summary>
-            射线检测
-            </summary>
-        </member>
-        <member name="M:MGFramework.InputModule.SuperInputModule.GetInteractive(UnityEngine.GameObject)">
-            <summary>
-            获取可交互性
-            </summary>
-            <param name="obj"></param>
-            <returns></returns>
-        </member>
-        <member name="T:MGFramework.InputModule.UnityInputKeyHandler">
-            <summary>
-            unity输入处理
-            </summary>
-        </member>
-        <member name="M:MGFramework.InputModule.UnityInputKeyHandler.InputUpdate(System.Boolean@,System.Boolean@)">
-            <summary>
-            输入更新
-            </summary>
-        </member>
-        <member name="M:MGFramework.InputModule.UnityInputKeyHandler.GetFirstTouchPhase(UnityEngine.TouchPhase@)">
-            <summary>
-            获取第一个手指触碰的phase
-            </summary>
-        </member>
-        <member name="T:MGFramework.InputModule.SuperGraphicRaycaster">
-            <summary>
-            自定义UI Raycaster
-            </summary>
-        </member>
-        <member name="F:MGFramework.InputModule.SuperGraphicRaycaster._canvas">
-            <summary>
-            画布
-            </summary>
-        </member>
-        <member name="F:MGFramework.InputModule.SuperGraphicRaycaster._raycastResults">
-            <summary>
-            射线检测结果列表
-            </summary>
-        </member>
-        <member name="P:MGFramework.InputModule.SuperGraphicRaycaster.sortOrderPriority">
-            <summary>
-            Priority of the raycaster based upon sort order.
-            </summary>
-            <returns>
-            The sortOrder priority.
-            </returns>
-        </member>
-        <member name="P:MGFramework.InputModule.SuperGraphicRaycaster.renderOrderPriority">
-            <summary>
-            Priority of the raycaster based upon render order.
-            </summary>
-            <returns>
-            The renderOrder priority.
-            </returns>
-        </member>
-        <member name="P:MGFramework.InputModule.SuperGraphicRaycaster.eventCamera">
-            <summary>
-            The camera that will generate rays for this raycaster.
-            </summary>
-            <returns>
-            - Null if Camera mode is ScreenSpaceOverlay or ScreenSpaceCamera and has no camera.
-            - canvas.worldCanvas if not null
-            - Camera.main.
-            </returns>
-        </member>
-        <member name="M:MGFramework.InputModule.SuperGraphicRaycaster.Raycast(UnityEngine.EventSystems.PointerEventData,System.Collections.Generic.List{UnityEngine.EventSystems.RaycastResult})">
-            <summary>
-            Perform the raycast against the list of graphics associated with the Canvas.
-            </summary>
-            <param name="eventData">Current event data</param>
-            <param name="resultAppendList">List of hit objects to append new results to.</param>
-        </member>
-        <member name="M:MGFramework.InputModule.SuperGraphicRaycaster.Raycast(UnityEngine.Canvas,UnityEngine.Camera,UnityEngine.Vector2,System.Collections.Generic.IList{UnityEngine.UI.Graphic},UnityEngine.Ray,System.Single@)">
-            <summary>
-            Ming Modify
-            1、返回最上层图形
-            </summary>
-        </member>
-        <member name="M:MGFramework.InputModule.SuperGraphicRaycaster.GetEventPosition(UnityEngine.Ray,UnityEngine.Camera,UnityEngine.EventSystems.PointerEventData)">
-            <summary>
-            获取事件位置
-            </summary>
-        </member>
-        <member name="T:MGFramework.InputModule.SuperPhysicsRaycaster">
-            <summary>
-            物理射线检测
-            </summary>
-        </member>
-        <member name="F:MGFramework.InputModule.SuperPhysicsRaycaster._hits">
-            <summary>
-            缓存碰撞数组
             </summary>
         </member>
         <member name="T:MGFramework.UIModule.ButtonEx">

@@ -70,6 +70,9 @@
     <Compile Include="Src\FSMSystem\Domain\AnyState.cs" />
     <Compile Include="Src\FSMSystem\Domain\FSMState.cs" />
     <Compile Include="Src\FSMSystem\Domain\FSMSystem.cs" />
+    <Compile Include="Src\InputModule\InputModule\EventHandler\ExecuteEventsEx.cs" />
+    <Compile Include="Src\InputModule\InputModule\EventHandler\IFocusHandler.cs" />
+    <Compile Include="Src\InputModule\InputModule\EventHandler\IUnFocusHandler.cs" />
     <Compile Include="Src\ObjectPool\IPoolObject.cs" />
     <Compile Include="Src\ObjectPool\BasicPoolObject.cs" />
     <Compile Include="Src\ObjectPool\ObjectPool.cs" />
