@@ -60,7 +60,7 @@ public struct IntGroup : IEquatable<IntGroup>
         }
     }
 
-    public IntGroup(params int[] args)
+    private IntGroup(params int[] args)
     {
         if (args == null)
         {
