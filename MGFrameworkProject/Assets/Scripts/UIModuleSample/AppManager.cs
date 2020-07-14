@@ -17,7 +17,7 @@ public class AppManager : MonoBehaviour
         UIManager.Instance.OnViewQuitStartEvent += Instance_OnViewQuitStartEvent;
         UIManager.Instance.OnViewQuitCompletedEvent += Instance_OnViewQuitCompletedEvent;
 
-        UIManager.Instance.Enter(ViewId.SampleAView, true);
+        UIManager.Instance.Enter(ViewId.SampleAView);
     }
 
     private void Instance_OnViewEnterStartEvent(int viewId)

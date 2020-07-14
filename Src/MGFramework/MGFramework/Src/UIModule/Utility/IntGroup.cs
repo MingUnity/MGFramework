@@ -1,5 +1,6 @@
 ﻿using MGFramework;
 using System;
+using System.Collections.Generic;
 
 /// <summary>
 /// int组
@@ -97,6 +98,33 @@ public struct IntGroup : IEquatable<IntGroup>
     public static IntGroup Get(params int[] args)
     {
         return new IntGroup(args);
+    }
+
+    /// <summary>
+    /// 合并
+    /// </summary>
+    public static IntGroup Combine(params IntGroup[] args)
+    {
+        IntGroup result = IntGroup.Empty;
+
+        List<int> groups = new List<int>();
+
+        if (args != null)
+        {
+            for (int i = 0; i < args.Length; i++)
+            {
+                IntGroup group = args[i];
+                
+                for (int j = 0; j < group.Count; j++)
+                {
+                    groups.Add(group[j]);
+                }
+            }
+
+            result = IntGroup.Get(groups.ToArray());
+        }
+
+        return result;
     }
 
     public static bool operator ==(IntGroup groupA, IntGroup groupB)

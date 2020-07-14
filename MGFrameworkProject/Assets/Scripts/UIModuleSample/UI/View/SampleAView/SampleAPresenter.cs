@@ -20,7 +20,7 @@ public class SampleAPresenter : PresenterBase<ISampleAView>, ISampleAPresenter
         _bModel.Count = count;
 
         UIManager.Instance.Quit(ViewId.SampleAView);
-        UIManager.Instance.Enter(ViewId.SampleBView, true);
+        UIManager.Instance.Enter(ViewId.SampleBView, EnterOptions.PushStack | EnterOptions.CombineStackTop);
     }
 
     public override void OnShowStart()

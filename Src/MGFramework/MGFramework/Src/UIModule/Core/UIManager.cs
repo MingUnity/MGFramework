@@ -79,46 +79,44 @@ namespace MGFramework.UIModule
         /// 进入视图
         /// </summary>
         /// <param name="viewId">视图id</param>
-        /// <param name="pushStack">是否入视图栈</param>
+        /// <param name="options">选项</param>
         /// <param name="callback">进入完成回调</param>
-        public void Enter(int viewId, bool pushStack = true, Action callback = null)
+        public void Enter(int viewId, EnterOptions options = EnterOptions.PushStack, Action callback = null)
         {
-            _module.Enter(viewId, pushStack, callback);
+            _module.Enter(viewId, options, callback);
         }
 
         /// <summary>
         /// 进入视图
         /// </summary>
         /// <param name="viewGroup">视图组</param>
-        /// <param name="pushStack">是否入视图栈</param>
+        /// <param name="options">选项</param>
         /// <param name="callback">进入完成回调</param>
-        public void Enter(IntGroup viewGroup, bool pushStack = true, Action callback = null)
+        public void Enter(IntGroup viewGroup, EnterOptions options = EnterOptions.PushStack, Action callback = null)
         {
-            _module.Enter(viewGroup, pushStack, callback);
+            _module.Enter(viewGroup, options, callback);
         }
 
         /// <summary>
         /// 退出视图
         /// </summary>
         /// <param name="viewId">视图id</param>
-        /// <param name="leaveStack">是否出视图栈</param>
+        /// <param name="options">选项</param>
         /// <param name="callback">退出完成回调</param>
-        /// <param name="destroy">是否销毁视图</param>
-        public void Quit(int viewId, bool leaveStack = false, Action callback = null, bool destroy = false)
+        public void Quit(int viewId, QuitOptions options = QuitOptions.None, Action callback = null)
         {
-            _module.Quit(viewId, leaveStack, callback, destroy);
+            _module.Quit(viewId, options, callback);
         }
 
         /// <summary>
         /// 退出视图
         /// </summary>
         /// <param name="viewGroup">视图组</param>
-        /// <param name="leaveStack">出视图栈</param>
+        /// <param name="options">选项</param>
         /// <param name="callback">完成回调</param>
-        /// <param name="destroy">销毁</param>
-        public void Quit(IntGroup viewGroup, bool leaveStack = false, Action callback = null, bool destroy = false)
+        public void Quit(IntGroup viewGroup, QuitOptions options = QuitOptions.None, Action callback = null)
         {
-            _module.Quit(viewGroup, leaveStack, callback, destroy);
+            _module.Quit(viewGroup, options, callback);
         }
 
         /// <summary>
@@ -142,30 +140,30 @@ namespace MGFramework.UIModule
         /// <summary>
         /// 退出所有视图
         /// </summary>
-        /// <param name="destroy">是否销毁</param>
-        public void QuitAll(bool destroy = false)
+        /// <param name="options">选项</param>
+        public void QuitAll(QuitOptions options = QuitOptions.LeaveStack)
         {
-            _module.QuitAll(destroy);
+            _module.QuitAll(options);
         }
 
         /// <summary>
         /// 退出其他全部视图
         /// </summary>
         /// <param name="stayViewGroup">保留的视图组</param>
-        /// <param name="destroy">是否销毁</param>
-        public void QuitOtherAll(IntGroup stayViewGroup, bool destroy = false)
+        /// <param name="options">选项</param>
+        public void QuitOtherAll(IntGroup stayViewGroup, QuitOptions options = QuitOptions.LeaveStack)
         {
-            _module.QuitOtherAll(stayViewGroup, destroy);
+            _module.QuitOtherAll(stayViewGroup, options);
         }
 
         /// <summary>
         /// 退出其他全部视图
         /// </summary>
         /// <param name="stayViewId">保留的视图</param>
-        /// <param name="destroy">是否销毁</param>
-        public void QuitOtherAll(int stayViewId, bool destroy = false)
+        /// <param name="options">选项</param>
+        public void QuitOtherAll(int stayViewId, QuitOptions options = QuitOptions.LeaveStack)
         {
-            _module.QuitOtherAll(stayViewId, destroy);
+            _module.QuitOtherAll(stayViewId, options);
         }
 
         /// <summary>
@@ -201,26 +199,6 @@ namespace MGFramework.UIModule
         public void Preload(IntGroup viewGroup)
         {
             _module.Preload(viewGroup);
-        }
-
-        /// <summary>
-        /// 退出全部
-        /// </summary>
-        /// <param name="stayStackViewId">保持在堆栈内的视图id</param>
-        /// <param name="destroy">是否销毁</param>
-        public void QuitAll(int stayStackViewId, bool destroy = false)
-        {
-            _module.QuitAll(stayStackViewId, destroy);  
-        }
-
-        /// <summary>
-        /// 退出全部
-        /// </summary>
-        /// <param name="stayStackViewGroup">保持在堆栈内的视图组</param>
-        /// <param name="destroy">是否销毁</param>
-        public void QuitAll(IntGroup stayStackViewGroup, bool destroy = false)
-        {
-            _module.QuitAll(stayStackViewGroup, destroy);
         }
     }
 }

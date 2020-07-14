@@ -9,6 +9,17 @@ namespace MGFramework.UIModule
     /// </summary>
     public sealed class PopUIModule : IPopUIModule
     {
+        /// <summary>
+        /// 视图状态
+        /// </summary>
+        private struct ViewState
+        {
+            /// <summary>
+            /// 激活
+            /// </summary>
+            public bool active;
+        }
+
         private IUIModule _uiModule;
 
         /// <summary>
@@ -58,7 +69,7 @@ namespace MGFramework.UIModule
         /// <param name="viewId">视图id</param>
         /// <param name="pushStack">是否入视图栈</param>
         /// <param name="callback">进入完成回调</param>
-        public void Enter(int viewId, bool pushStack = true, Action callback = null)
+        public void Enter(int viewId, EnterOptions options = EnterOptions.PushStack, Action callback = null)
         {
             ViewState state;
 
@@ -66,43 +77,13 @@ namespace MGFramework.UIModule
 
             if (!state.active)
             {
-                try
-                {
-                    OnViewEnterStartEvent?.Invoke(viewId);
-                }
-                catch (Exception e)
-                {
-                    Debug.LogException(e);
-                }
+                OnViewEnterStartEvent?.Invoke(viewId);
 
                 _uiModule?.Enter(viewId, () =>
                 {
-                    try
-                    {
-                        callback?.Invoke();
-                    }
-                    catch (Exception e)
-                    {
-                        Debug.LogException(e);
-                    }
-
-                    try
-                    {
-                        _uiModule?.Focus(viewId);
-                    }
-                    catch (Exception e)
-                    {
-                        Debug.LogException(e);
-                    }
-
-                    try
-                    {
-                        OnViewEnterCompletedEvent?.Invoke(viewId);
-                    }
-                    catch (Exception e)
-                    {
-                        Debug.LogException(e);
-                    }
+                    callback?.Invoke();
+                    _uiModule?.Focus(viewId);
+                    OnViewEnterCompletedEvent?.Invoke(viewId);
                 });
 
                 state.active = true;
@@ -111,20 +92,11 @@ namespace MGFramework.UIModule
             }
             else
             {
-                try
-                {
-                    _uiModule?.Focus(viewId);
-                }
-                catch (Exception e)
-                {
-                    Debug.LogException(e);
-                }
+                _uiModule?.Focus(viewId);
+                callback?.Invoke();
             }
 
-            if (pushStack)
-            {
-                _viewStack.Push(IntGroup.Get(viewId));
-            }
+            ProcessEnterOptions(IntGroup.Get(viewId), options);
         }
 
         /// <summary>
@@ -133,14 +105,14 @@ namespace MGFramework.UIModule
         /// <param name="viewGroup">视图组</param>
         /// <param name="pushStack">是否入视图栈</param>
         /// <param name="callback">进入完成回调</param>
-        public void Enter(IntGroup viewGroup, bool pushStack = true, Action callback = null)
+        public void Enter(IntGroup viewGroup, EnterOptions options = EnterOptions.PushStack, Action callback = null)
         {
             int all = viewGroup.Count;
             int done = 0;
 
             for (int i = 0; i < all; i++)
             {
-                Enter(viewGroup[i], false, () =>
+                Enter(viewGroup[i], EnterOptionsFilter(EnterOptions.CombineStackTop | EnterOptions.PushStack, options), () =>
                 {
                     done++;
                     if (done >= all)
@@ -150,10 +122,7 @@ namespace MGFramework.UIModule
                 });
             }
 
-            if (pushStack)
-            {
-                _viewStack.Push(viewGroup);
-            }
+            ProcessEnterOptions(viewGroup, options);
         }
 
         /// <summary>
@@ -163,7 +132,7 @@ namespace MGFramework.UIModule
         /// <param name="leaveStack">是否出视图栈</param>
         /// <param name="callback">退出完成回调</param>
         /// <param name="destroy">是否销毁视图</param>
-        public void Quit(int viewId, bool leaveStack = false, Action callback = null, bool destroy = false)
+        public void Quit(int viewId, QuitOptions options = QuitOptions.None, Action callback = null)
         {
             ViewState state;
 
@@ -171,55 +140,31 @@ namespace MGFramework.UIModule
             {
                 if (state.active)
                 {
-                    try
-                    {
-                        OnViewQuitStartEvent?.Invoke(viewId);
-                    }
-                    catch (Exception e)
-                    {
-                        Debug.LogException(e);
-                    }
+                    OnViewQuitStartEvent?.Invoke(viewId);
 
                     _uiModule?.Quit(viewId, () =>
                     {
-                        try
-                        {
-                            callback?.Invoke();
-                        }
-                        catch (Exception e)
-                        {
-                            Debug.LogException(e);
-                        }
+                        callback?.Invoke();
+                        _uiModule?.UnFocus(viewId);
+                        OnViewQuitCompletedEvent?.Invoke(viewId);
 
-                        try
-                        {
-                            _uiModule?.UnFocus(viewId);
-                        }
-                        catch (Exception e)
-                        {
-                            Debug.LogException(e);
-                        }
-
-                        try
-                        {
-                            OnViewQuitCompletedEvent?.Invoke(viewId);
-                        }
-                        catch (Exception e)
-                        {
-                            Debug.LogException(e);
-                        }
-                    }, destroy);
+                    }, options.HasFlag(QuitOptions.Destroy));
 
                     state.active = false;
 
                     _viewDic[viewId] = state;
                 }
+                else
+                {
+                    callback?.Invoke();
+                }
+            }
+            else
+            {
+                callback?.Invoke();
             }
 
-            if (leaveStack)
-            {
-                _viewStack.Delete(IntGroup.Get(viewId));
-            }
+            ProcessQuitOptions(IntGroup.Get(viewId), options);
         }
 
         /// <summary>
@@ -229,27 +174,24 @@ namespace MGFramework.UIModule
         /// <param name="leaveStack">出视图栈</param>
         /// <param name="callback">完成回调</param>
         /// <param name="destroy">销毁</param>
-        public void Quit(IntGroup viewGroup, bool leaveStack = false, Action callback = null, bool destroy = false)
+        public void Quit(IntGroup viewGroup, QuitOptions options = QuitOptions.None, Action callback = null)
         {
             int all = viewGroup.Count;
             int done = 0;
 
             for (int i = 0; i < all; i++)
             {
-                Quit(viewGroup[i], false, () =>
+                Quit(viewGroup[i], QuitOptionsFilter(QuitOptions.LeaveStack, options), () =>
                 {
                     done++;
                     if (done >= all)
                     {
                         callback?.Invoke();
                     }
-                }, destroy);
+                });
             }
 
-            if (leaveStack)
-            {
-                _viewStack.Delete(viewGroup);
-            }
+            ProcessQuitOptions(viewGroup, options);
         }
 
         /// <summary>
@@ -258,14 +200,7 @@ namespace MGFramework.UIModule
         /// <param name="viewId">视图id</param>
         public void UnFocus(int viewId)
         {
-            try
-            {
-                _uiModule?.UnFocus(viewId);
-            }
-            catch (Exception e)
-            {
-                Debug.LogException(e);
-            }
+            _uiModule?.UnFocus(viewId);
         }
 
         /// <summary>
@@ -284,7 +219,7 @@ namespace MGFramework.UIModule
         /// 退出所有视图
         /// </summary>
         /// <param name="destroy">是否销毁</param>
-        public void QuitAll(bool destroy = false)
+        public void QuitAll(QuitOptions options = QuitOptions.LeaveStack)
         {
             _tempQuitList.Clear();
 
@@ -295,11 +230,14 @@ namespace MGFramework.UIModule
 
             for (int i = 0; i < _tempQuitList.Count; i++)
             {
-                Quit(_tempQuitList[i], false, null, destroy);
+                Quit(_tempQuitList[i], QuitOptionsFilter(QuitOptions.LeaveStack, options), null);
             }
 
-            _viewDic.Clear();
-            ResetStack();
+            if (options.HasFlag(QuitOptions.LeaveStack))
+            {
+                _viewDic.Clear();
+                ResetStack();
+            }
         }
 
         /// <summary>
@@ -307,7 +245,7 @@ namespace MGFramework.UIModule
         /// </summary>
         /// <param name="stayViewGroup">保留的视图组</param>
         /// <param name="destroy">是否销毁</param>
-        public void QuitOtherAll(IntGroup stayViewGroup, bool destroy = false)
+        public void QuitOtherAll(IntGroup stayViewGroup, QuitOptions options = QuitOptions.LeaveStack)
         {
             _tempQuitList.Clear();
 
@@ -321,7 +259,7 @@ namespace MGFramework.UIModule
 
             for (int i = 0; i < _tempQuitList.Count; i++)
             {
-                Quit(_tempQuitList[i], true, null, destroy);
+                Quit(_tempQuitList[i], options, null);
             }
         }
 
@@ -330,7 +268,7 @@ namespace MGFramework.UIModule
         /// </summary>
         /// <param name="stayViewId">保留的视图</param>
         /// <param name="destroy">是否销毁</param>
-        public void QuitOtherAll(int stayViewId, bool destroy = false)
+        public void QuitOtherAll(int stayViewId, QuitOptions options = QuitOptions.LeaveStack)
         {
             _tempQuitList.Clear();
 
@@ -344,7 +282,7 @@ namespace MGFramework.UIModule
 
             for (int i = 0; i < _tempQuitList.Count; i++)
             {
-                Quit(_tempQuitList[i], true, null, destroy);
+                Quit(_tempQuitList[i], options, null);
             }
         }
 
@@ -379,17 +317,23 @@ namespace MGFramework.UIModule
                         }
                     }
 
-                    if (curActive)
+                    if (curActive) //栈顶界面有显示的，则出栈并隐藏 显示上一级界面
                     {
                         if (_viewStack.Pop(out curId) && _viewStack.Peek(out dstId))
                         {
                             res = true;
 
-                            Quit(curId, false, () =>
-                            {
-                                Enter(dstId, false, callback);
-                            });
+                            Quit(curId, QuitOptions.None, () =>
+                           {
+                               Enter(dstId, EnterOptions.None, callback);
+                           });
                         }
+                    }
+                    else //栈顶界面无显示，则显示栈顶界面
+                    {
+                        res = true;
+
+                        Enter(curId, EnterOptions.None, callback);
                     }
                 }
             }
@@ -433,62 +377,127 @@ namespace MGFramework.UIModule
         }
 
         /// <summary>
-        /// 退出全部
+        /// 处理进入选项
         /// </summary>
-        /// <param name="stayStackViewId">保持在堆栈内的视图id</param>
-        /// <param name="destroy">是否销毁</param>
-        public void QuitAll(int stayStackViewId, bool destroy = false)
+        private void ProcessEnterOptions(IntGroup viewGroup, EnterOptions options)
         {
-            _tempQuitList.Clear();
-
-            foreach (int id in _viewDic.Keys)
+            if (options.HasFlag(EnterOptions.PushStack) && !options.HasFlag(EnterOptions.CombineStackTop))
             {
-                _tempQuitList.Add(id);
+                ProcessPushStack(viewGroup);
             }
-
-            for (int i = 0; i < _tempQuitList.Count; i++)
+            else if (options.HasFlag(EnterOptions.PushStack) && options.HasFlag(EnterOptions.CombineStackTop))
             {
-                int id = _tempQuitList[i];
-
-                bool leaveStack = id != stayStackViewId;
-
-                Quit(id, leaveStack, null, destroy);
+                ProcessPushCombineStackTop(viewGroup);
+            }
+            else if (!options.HasFlag(EnterOptions.PushStack) && options.HasFlag(EnterOptions.CombineStackTop))
+            {
+                ProcessCombineStackTop(viewGroup);
             }
         }
 
         /// <summary>
-        /// 退出全部
+        /// 合并栈顶
         /// </summary>
-        /// <param name="stayStackViewGroup">保持在堆栈内的视图组</param>
-        /// <param name="destroy">是否销毁</param>
-        public void QuitAll(IntGroup stayStackViewGroup, bool destroy = false)
+        private void ProcessCombineStackTop(IntGroup viewGroup)
         {
-            _tempQuitList.Clear();
+            IntGroup top = IntGroup.Empty;
 
-            foreach (int id in _viewDic.Keys)
+            if (_viewStack.Pop(out top))
             {
-                _tempQuitList.Add(id);
+                IntGroup newTop = IntGroup.Combine(top, viewGroup);
+                _viewStack.Push(newTop);
             }
-
-            for (int i = 0; i < _tempQuitList.Count; i++)
+            else
             {
-                int id = _tempQuitList[i];
-
-                bool leaveStack = !stayStackViewGroup.Contains(id);
-
-                Quit(id, leaveStack, null, destroy);
+                _viewStack.Push(viewGroup);
             }
         }
 
         /// <summary>
-        /// 视图状态
+        /// 合并栈顶并入栈
         /// </summary>
-        private struct ViewState
+        private void ProcessPushCombineStackTop(IntGroup viewGroup)
         {
-            /// <summary>
-            /// 激活
-            /// </summary>
-            public bool active;
+            IntGroup top = IntGroup.Empty;
+
+            if (_viewStack.Peek(out top))
+            {
+                IntGroup newTop = IntGroup.Combine(top, viewGroup);
+                _viewStack.Push(newTop);
+            }
+            else
+            {
+                _viewStack.Push(viewGroup);
+            }
+        }
+
+        /// <summary>
+        /// 处理入栈
+        /// </summary>
+        private void ProcessPushStack(IntGroup viewGroup)
+        {
+            _viewStack.Push(viewGroup);
+        }
+
+        /// <summary>
+        /// 处理退出选项
+        /// </summary>
+        private void ProcessQuitOptions(IntGroup viewGroup, QuitOptions options)
+        {
+            if (options.HasFlag(QuitOptions.LeaveStack))
+            {
+                ProcessLeaveStack(viewGroup);
+            }
+        }
+
+        /// <summary>
+        /// 处理出栈
+        /// </summary>
+        private void ProcessLeaveStack(IntGroup viewGroup)
+        {
+            _viewStack.Delete(viewGroup);
+        }
+
+        /// <summary>
+        /// 退出选项过滤器
+        /// </summary>
+        private QuitOptions QuitOptionsFilter(QuitOptions filter, QuitOptions src)
+        {
+            QuitOptions output = QuitOptions.None;
+
+            Array enumArr = Enum.GetValues(typeof(QuitOptions));
+
+            for (int i = 0; i < enumArr.Length; i++)
+            {
+                QuitOptions option = (QuitOptions)enumArr.GetValue(i);
+                if (src.HasFlag(option) && !filter.HasFlag(option))
+                {
+                    output |= option;
+                }
+            }
+
+            return output;
+        }
+
+        /// <summary>
+        /// 进入选项过滤器
+        /// </summary>
+        private EnterOptions EnterOptionsFilter(EnterOptions filter, EnterOptions src)
+        {
+            EnterOptions output = EnterOptions.None;
+
+            Array enumArr = Enum.GetValues(typeof(EnterOptions));
+
+            for (int i = 0; i < enumArr.Length; i++)
+            {
+                EnterOptions option = (EnterOptions)enumArr.GetValue(i);
+                if (src.HasFlag(option) && !filter.HasFlag(option))
+                {
+                    output |= option;
+                }
+            }
+
+            return output;
         }
     }
 }
