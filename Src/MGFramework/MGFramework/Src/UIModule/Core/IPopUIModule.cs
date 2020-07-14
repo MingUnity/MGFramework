@@ -15,7 +15,9 @@ namespace MGFramework.UIModule
         bool Pop(Action callback = null);
         void Quit(int viewId, QuitOptions options = QuitOptions.None, Action callback = null);
         void Quit(IntGroup viewGroup, QuitOptions options = QuitOptions.None, Action callback = null);
-        void QuitAll(QuitOptions options = QuitOptions.None);
+        void QuitAll(bool destroy = false);
+        void QuitAll(int stayStackId, bool destroy = false);
+        void QuitAll(IntGroup stayStackId, bool destroy = false);
         void QuitOtherAll(IntGroup stayViewGroup, QuitOptions options = QuitOptions.None);
         void QuitOtherAll(int stayViewId, QuitOptions options = QuitOptions.None);
         void ResetStack();

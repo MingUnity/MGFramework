@@ -140,10 +140,29 @@ namespace MGFramework.UIModule
         /// <summary>
         /// 退出所有视图
         /// </summary>
-        /// <param name="options">选项</param>
-        public void QuitAll(QuitOptions options = QuitOptions.None)
+        public void QuitAll(bool destory = false)
         {
-            _module.QuitAll(options);
+            _module.QuitAll(destory);
+        }
+
+        /// <summary>
+        /// 退出所有视图
+        /// </summary>
+        /// <param name="stayStackId">保持在堆栈内的视图id</param>
+        /// <param name="destroy">是否销毁</param>
+        public void QuitAll(int stayStackId, bool destroy = false)
+        {
+            _module.QuitAll(stayStackId, destroy);
+        }
+
+        /// <summary>
+        /// 退出所有视图
+        /// </summary>
+        /// <param name="stayStackGroup">保持在堆栈内的视图组</param>
+        /// <param name="destroy">是否销毁</param>
+        public void QuitAll(IntGroup stayStackGroup, bool destroy = false)
+        {
+            _module.QuitAll(stayStackGroup, destroy);
         }
 
         /// <summary>

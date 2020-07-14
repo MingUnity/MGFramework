@@ -2038,11 +2038,25 @@
             </summary>
             <param name="viewGroup">视图组</param>
         </member>
-        <member name="M:MGFramework.UIModule.PopUIModule.QuitAll(MGFramework.UIModule.QuitOptions)">
+        <member name="M:MGFramework.UIModule.PopUIModule.QuitAll(System.Boolean)">
             <summary>
             退出所有视图
             </summary>
-            <param name="options">选项</param>
+            <param name="destroy">销毁</param>
+        </member>
+        <member name="M:MGFramework.UIModule.PopUIModule.QuitAll(System.Int32,System.Boolean)">
+            <summary>
+            退出全部
+            </summary>
+            <param name="stayStackViewId">保持在堆栈内的视图id</param>
+            <param name="destroy">是否销毁</param>
+        </member>
+        <member name="M:MGFramework.UIModule.PopUIModule.QuitAll(IntGroup,System.Boolean)">
+            <summary>
+            退出全部
+            </summary>
+            <param name="stayStackViewGroup">保持在堆栈内的视图组</param>
+            <param name="destroy">是否销毁</param>
         </member>
         <member name="M:MGFramework.UIModule.PopUIModule.QuitOtherAll(IntGroup,MGFramework.UIModule.QuitOptions)">
             <summary>
@@ -2121,6 +2135,11 @@
             进入选项过滤器
             </summary>
         </member>
+        <member name="M:MGFramework.UIModule.PopUIModule.ToOptions(System.Boolean,System.Boolean)">
+            <summary>
+            转化选项
+            </summary>
+        </member>
         <member name="T:MGFramework.UIModule.UIManager">
             <summary>
             UI管理
@@ -2190,11 +2209,24 @@
             </summary>
             <param name="viewGroup">视图组</param>
         </member>
-        <member name="M:MGFramework.UIModule.UIManager.QuitAll(MGFramework.UIModule.QuitOptions)">
+        <member name="M:MGFramework.UIModule.UIManager.QuitAll(System.Boolean)">
             <summary>
             退出所有视图
             </summary>
-            <param name="options">选项</param>
+        </member>
+        <member name="M:MGFramework.UIModule.UIManager.QuitAll(System.Int32,System.Boolean)">
+            <summary>
+            退出所有视图
+            </summary>
+            <param name="stayStackId">保持在堆栈内的视图id</param>
+            <param name="destroy">是否销毁</param>
+        </member>
+        <member name="M:MGFramework.UIModule.UIManager.QuitAll(IntGroup,System.Boolean)">
+            <summary>
+            退出所有视图
+            </summary>
+            <param name="stayStackGroup">保持在堆栈内的视图组</param>
+            <param name="destroy">是否销毁</param>
         </member>
         <member name="M:MGFramework.UIModule.UIManager.QuitOtherAll(IntGroup,MGFramework.UIModule.QuitOptions)">
             <summary>
