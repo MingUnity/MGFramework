@@ -81,7 +81,7 @@ namespace MGFramework.UIModule
         /// <param name="viewId">视图id</param>
         /// <param name="options">选项</param>
         /// <param name="callback">进入完成回调</param>
-        public void Enter(int viewId, EnterOptions options = EnterOptions.PushStack, Action callback = null)
+        public void Enter(int viewId, EnterOptions options = EnterOptions.None, Action callback = null)
         {
             _module.Enter(viewId, options, callback);
         }
@@ -92,7 +92,7 @@ namespace MGFramework.UIModule
         /// <param name="viewGroup">视图组</param>
         /// <param name="options">选项</param>
         /// <param name="callback">进入完成回调</param>
-        public void Enter(IntGroup viewGroup, EnterOptions options = EnterOptions.PushStack, Action callback = null)
+        public void Enter(IntGroup viewGroup, EnterOptions options = EnterOptions.None, Action callback = null)
         {
             _module.Enter(viewGroup, options, callback);
         }
@@ -141,7 +141,7 @@ namespace MGFramework.UIModule
         /// 退出所有视图
         /// </summary>
         /// <param name="options">选项</param>
-        public void QuitAll(QuitOptions options = QuitOptions.LeaveStack)
+        public void QuitAll(QuitOptions options = QuitOptions.None)
         {
             _module.QuitAll(options);
         }
@@ -151,7 +151,7 @@ namespace MGFramework.UIModule
         /// </summary>
         /// <param name="stayViewGroup">保留的视图组</param>
         /// <param name="options">选项</param>
-        public void QuitOtherAll(IntGroup stayViewGroup, QuitOptions options = QuitOptions.LeaveStack)
+        public void QuitOtherAll(IntGroup stayViewGroup, QuitOptions options = QuitOptions.None)
         {
             _module.QuitOtherAll(stayViewGroup, options);
         }
@@ -161,7 +161,7 @@ namespace MGFramework.UIModule
         /// </summary>
         /// <param name="stayViewId">保留的视图</param>
         /// <param name="options">选项</param>
-        public void QuitOtherAll(int stayViewId, QuitOptions options = QuitOptions.LeaveStack)
+        public void QuitOtherAll(int stayViewId, QuitOptions options = QuitOptions.None)
         {
             _module.QuitOtherAll(stayViewId, options);
         }

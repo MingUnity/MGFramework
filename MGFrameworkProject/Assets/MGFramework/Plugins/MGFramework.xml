@@ -1999,7 +1999,7 @@
             进入视图
             </summary>
             <param name="viewId">视图id</param>
-            <param name="pushStack">是否入视图栈</param>
+            <param name="options">选项</param>
             <param name="callback">进入完成回调</param>
         </member>
         <member name="M:MGFramework.UIModule.PopUIModule.Enter(IntGroup,MGFramework.UIModule.EnterOptions,System.Action)">
@@ -2007,7 +2007,7 @@
             进入视图
             </summary>
             <param name="viewGroup">视图组</param>
-            <param name="pushStack">是否入视图栈</param>
+            <param name="options">选项</param>
             <param name="callback">进入完成回调</param>
         </member>
         <member name="M:MGFramework.UIModule.PopUIModule.Quit(System.Int32,MGFramework.UIModule.QuitOptions,System.Action)">
@@ -2015,18 +2015,16 @@
             退出视图
             </summary>
             <param name="viewId">视图id</param>
-            <param name="leaveStack">是否出视图栈</param>
+            <param name="options">选项</param>
             <param name="callback">退出完成回调</param>
-            <param name="destroy">是否销毁视图</param>
         </member>
         <member name="M:MGFramework.UIModule.PopUIModule.Quit(IntGroup,MGFramework.UIModule.QuitOptions,System.Action)">
             <summary>
             退出视图
             </summary>
             <param name="viewGroup">视图组</param>
-            <param name="leaveStack">出视图栈</param>
+            <param name="options">选项</param>
             <param name="callback">完成回调</param>
-            <param name="destroy">销毁</param>
         </member>
         <member name="M:MGFramework.UIModule.PopUIModule.UnFocus(System.Int32)">
             <summary>
@@ -2044,21 +2042,21 @@
             <summary>
             退出所有视图
             </summary>
-            <param name="destroy">是否销毁</param>
+            <param name="options">选项</param>
         </member>
         <member name="M:MGFramework.UIModule.PopUIModule.QuitOtherAll(IntGroup,MGFramework.UIModule.QuitOptions)">
             <summary>
             退出其他全部视图
             </summary>
             <param name="stayViewGroup">保留的视图组</param>
-            <param name="destroy">是否销毁</param>
+            <param name="options">选项</param>
         </member>
         <member name="M:MGFramework.UIModule.PopUIModule.QuitOtherAll(System.Int32,MGFramework.UIModule.QuitOptions)">
             <summary>
             退出其他全部视图
             </summary>
             <param name="stayViewId">保留的视图</param>
-            <param name="destroy">是否销毁</param>
+            <param name="options">选项</param>
         </member>
         <member name="M:MGFramework.UIModule.PopUIModule.Pop(System.Action)">
             <summary>
