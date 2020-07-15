@@ -117,6 +117,7 @@
     <Compile Include="Src\UIModule\Components\SuperScrollView\SuperScrollView.cs" />
     <Compile Include="Src\UIModule\Components\Toggle\SuperToggle.cs" />
     <Compile Include="Src\UIModule\Components\Toggle\ToggleEx.cs" />
+    <Compile Include="Src\UIModule\Components\SpriteAnimation.cs" />
     <Compile Include="Src\UIModule\Core\IPopUIModule.cs" />
     <Compile Include="Src\UIModule\Core\IUIModule.cs" />
     <Compile Include="Src\UIModule\Core\PopUIModule.cs" />
