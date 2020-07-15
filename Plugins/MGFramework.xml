@@ -1868,6 +1868,46 @@
             选中态 文本颜色
             </summary>
         </member>
+        <member name="T:MGFramework.UIModule.SpriteAnimation">
+            <summary>
+            图片动画
+            </summary>
+        </member>
+        <member name="P:MGFramework.UIModule.SpriteAnimation.FrameCount">
+            <summary>
+            帧数
+            </summary>
+        </member>
+        <member name="M:MGFramework.UIModule.SpriteAnimation.Play">
+            <summary>
+            播放动画
+            </summary>
+        </member>
+        <member name="M:MGFramework.UIModule.SpriteAnimation.PlayReverse">
+            <summary>
+            倒放
+            </summary>
+        </member>
+        <member name="M:MGFramework.UIModule.SpriteAnimation.Pause">
+            <summary>
+            暂停
+            </summary>
+        </member>
+        <member name="M:MGFramework.UIModule.SpriteAnimation.Resume">
+            <summary>
+            继续
+            </summary>
+        </member>
+        <member name="M:MGFramework.UIModule.SpriteAnimation.Stop">
+            <summary>
+            停止
+            </summary>
+        </member>
+        <member name="M:MGFramework.UIModule.SpriteAnimation.Replay">
+            <summary>
+            重播
+            </summary>
+        </member>
         <member name="T:MGFramework.UIModule.EnterOptions">
             <summary>
             进入视图选项
