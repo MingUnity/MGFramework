@@ -216,8 +216,8 @@ namespace MGFramework.UIModule
         /// <summary>
         /// 退出所有视图
         /// </summary>
-        /// <param name="destroy">销毁</param>
-        public void QuitAll(bool destroy = false)
+        /// <param name="options">选项</param>
+        public void QuitAll(QuitOptions options = QuitOptions.None)
         {
             _tempQuitList.Clear();
 
@@ -228,58 +228,12 @@ namespace MGFramework.UIModule
 
             for (int i = 0; i < _tempQuitList.Count; i++)
             {
-                Quit(_tempQuitList[i], destroy ? QuitOptions.Destroy : QuitOptions.None, null);
+                Quit(_tempQuitList[i], QuitOptionsFilter(QuitOptions.LeaveStack, options), null);
             }
 
-            _viewDic.Clear();
-            ResetStack();
-        }
-
-        /// <summary>
-        /// 退出全部
-        /// </summary>
-        /// <param name="stayStackViewId">保持在堆栈内的视图id</param>
-        /// <param name="destroy">是否销毁</param>
-        public void QuitAll(int stayStackViewId, bool destroy = false)
-        {
-            _tempQuitList.Clear();
-
-            foreach (int id in _viewDic.Keys)
+            if (options.HasFlag(QuitOptions.LeaveStack))
             {
-                _tempQuitList.Add(id);
-            }
-
-            for (int i = 0; i < _tempQuitList.Count; i++)
-            {
-                int id = _tempQuitList[i];
-
-                bool leaveStack = id != stayStackViewId;
-
-                Quit(id, ToOptions(leaveStack, destroy), null);
-            }
-        }
-
-        /// <summary>
-        /// 退出全部
-        /// </summary>
-        /// <param name="stayStackViewGroup">保持在堆栈内的视图组</param>
-        /// <param name="destroy">是否销毁</param>
-        public void QuitAll(IntGroup stayStackViewGroup, bool destroy = false)
-        {
-            _tempQuitList.Clear();
-
-            foreach (int id in _viewDic.Keys)
-            {
-                _tempQuitList.Add(id);
-            }
-
-            for (int i = 0; i < _tempQuitList.Count; i++)
-            {
-                int id = _tempQuitList[i];
-
-                bool leaveStack = !stayStackViewGroup.Contains(id);
-
-                Quit(id, ToOptions(leaveStack, destroy), null);
+                ResetStack();
             }
         }
 
