@@ -506,20 +506,7 @@ namespace MGFramework.UIModule
         /// </summary>
         private QuitOptions QuitOptionsFilter(QuitOptions filter, QuitOptions src)
         {
-            QuitOptions output = QuitOptions.None;
-
-            Array enumArr = Enum.GetValues(typeof(QuitOptions));
-
-            for (int i = 0; i < enumArr.Length; i++)
-            {
-                QuitOptions option = (QuitOptions)enumArr.GetValue(i);
-                if (src.HasFlag(option) && !filter.HasFlag(option))
-                {
-                    output |= option;
-                }
-            }
-
-            return output;
+            return src & (~filter);
         }
 
         /// <summary>
@@ -527,20 +514,7 @@ namespace MGFramework.UIModule
         /// </summary>
         private EnterOptions EnterOptionsFilter(EnterOptions filter, EnterOptions src)
         {
-            EnterOptions output = EnterOptions.None;
-
-            Array enumArr = Enum.GetValues(typeof(EnterOptions));
-
-            for (int i = 0; i < enumArr.Length; i++)
-            {
-                EnterOptions option = (EnterOptions)enumArr.GetValue(i);
-                if (src.HasFlag(option) && !filter.HasFlag(option))
-                {
-                    output |= option;
-                }
-            }
-
-            return output;
+            return src & (~filter);
         }
 
         /// <summary>

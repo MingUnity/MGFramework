@@ -1868,42 +1868,47 @@
             选中态 文本颜色
             </summary>
         </member>
-        <member name="T:MGFramework.UIModule.SpriteAnimation">
+        <member name="T:MGFramework.UIModule.ImageAnimation">
             <summary>
-            图片动画
+            UI图片动画
             </summary>
         </member>
-        <member name="P:MGFramework.UIModule.SpriteAnimation.FrameCount">
+        <member name="P:MGFramework.UIModule.ImageAnimation.FrameCount">
             <summary>
             帧数
             </summary>
         </member>
-        <member name="M:MGFramework.UIModule.SpriteAnimation.Play">
+        <member name="P:MGFramework.UIModule.ImageAnimation.IsPlaying">
+            <summary>
+            播放中标识
+            </summary>
+        </member>
+        <member name="M:MGFramework.UIModule.ImageAnimation.Play">
             <summary>
             播放动画
             </summary>
         </member>
-        <member name="M:MGFramework.UIModule.SpriteAnimation.PlayReverse">
+        <member name="M:MGFramework.UIModule.ImageAnimation.PlayReverse">
             <summary>
             倒放
             </summary>
         </member>
-        <member name="M:MGFramework.UIModule.SpriteAnimation.Pause">
+        <member name="M:MGFramework.UIModule.ImageAnimation.Pause">
             <summary>
             暂停
             </summary>
         </member>
-        <member name="M:MGFramework.UIModule.SpriteAnimation.Resume">
+        <member name="M:MGFramework.UIModule.ImageAnimation.Resume">
             <summary>
             继续
             </summary>
         </member>
-        <member name="M:MGFramework.UIModule.SpriteAnimation.Stop">
+        <member name="M:MGFramework.UIModule.ImageAnimation.Stop">
             <summary>
             停止
             </summary>
         </member>
-        <member name="M:MGFramework.UIModule.SpriteAnimation.Replay">
+        <member name="M:MGFramework.UIModule.ImageAnimation.Replay">
             <summary>
             重播
             </summary>

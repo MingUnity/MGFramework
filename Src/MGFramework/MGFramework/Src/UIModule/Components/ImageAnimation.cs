@@ -6,14 +6,12 @@ using UnityEngine.UI;
 namespace MGFramework.UIModule
 {
     /// <summary>
-    /// 图片动画
+    /// UI图片动画
     /// </summary>
     [RequireComponent(typeof(Image))]
-    public class SpriteAnimation : MonoBehaviour
+    [AddComponentMenu("MGFramework/ImageAnimation")]
+    public class ImageAnimation : MonoBehaviour
     {
-        [SerializeField]
-        private Image _image;
-
         [SerializeField]
         private float _fps = 5;
 
@@ -29,6 +27,7 @@ namespace MGFramework.UIModule
         [SerializeField]
         private bool _loop = false;
 
+        private Image _src;
         private int _curFrame = 0;
         private float _delta = 0;
         private bool _isPlaying = false;
@@ -36,14 +35,18 @@ namespace MGFramework.UIModule
         /// <summary>
         /// 帧数
         /// </summary>
-        public int FrameCount
-        {
-            get
-            {
-                return _spriteFrames.Length;
-            }
-        }
+        public int FrameCount => _spriteFrames.Length;
+
+        /// <summary>
+        /// 播放中标识
+        /// </summary>
+        public bool IsPlaying => _isPlaying;
         
+        private void Awake()
+        {
+            _src = this.GetComponent<Image>();
+        }
+
         private void OnEnable()
         {
             if (_autoPlay)
@@ -65,7 +68,7 @@ namespace MGFramework.UIModule
 
         private void SetSprite(int index)
         {
-            _image.sprite = _spriteFrames[index];
+            _src.sprite = _spriteFrames[index];
         }
 
         /// <summary>
