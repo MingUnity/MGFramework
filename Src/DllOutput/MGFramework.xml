@@ -1290,6 +1290,41 @@
             圆角矩形
             </summary>
         </member>
+        <member name="T:MGFramework.UIModule.RoundedRect.MatRef">
+            <summary>
+            材质引用对象
+            </summary>
+        </member>
+        <member name="T:MGFramework.UIModule.RoundedRect.RoundedPos">
+            <summary>
+            圆角位置
+            </summary>
+        </member>
+        <member name="F:MGFramework.UIModule.RoundedRect.RoundedPos.None">
+            <summary>
+            无圆角
+            </summary>
+        </member>
+        <member name="F:MGFramework.UIModule.RoundedRect.RoundedPos.LeftTop">
+            <summary>
+            左上
+            </summary>
+        </member>
+        <member name="F:MGFramework.UIModule.RoundedRect.RoundedPos.RightTop">
+            <summary>
+            右上
+            </summary>
+        </member>
+        <member name="F:MGFramework.UIModule.RoundedRect.RoundedPos.LeftBottom">
+            <summary>
+            左下
+            </summary>
+        </member>
+        <member name="F:MGFramework.UIModule.RoundedRect.RoundedPos.RightBottom">
+            <summary>
+            右下
+            </summary>
+        </member>
         <member name="F:MGFramework.UIModule.RoundedRect._graphic">
             <summary>
             当前gameobject图形组件
@@ -1332,14 +1367,29 @@
             材质创建标识
             </summary>
         </member>
-        <member name="F:MGFramework.UIModule.RoundedRect._matCache">
-            <summary>
-            材质缓存
-            </summary>
-        </member>
         <member name="F:MGFramework.UIModule.RoundedRect._roundedPos">
             <summary>
             圆角位置
+            </summary>
+        </member>
+        <member name="F:MGFramework.UIModule.RoundedRect._cacheWidth">
+            <summary>
+            缓存宽度
+            </summary>
+        </member>
+        <member name="F:MGFramework.UIModule.RoundedRect._cacheHeight">
+            <summary>
+            缓存高度
+            </summary>
+        </member>
+        <member name="F:MGFramework.UIModule.RoundedRect._cacheParam">
+            <summary>
+            缓存参数
+            </summary>
+        </member>
+        <member name="F:MGFramework.UIModule.RoundedRect._matCache">
+            <summary>
+            材质缓存
             </summary>
         </member>
         <member name="P:MGFramework.UIModule.RoundedRect.RoundedPosition">
@@ -1352,6 +1402,17 @@
             设置圆角矩形shader数据
             </summary>
         </member>
+        <member name="M:MGFramework.UIModule.RoundedRect.Refresh(System.Single,System.Single)">
+            <summary>
+            根据宽高刷新圆角数据
+            </summary>
+        </member>
+        <member name="M:MGFramework.UIModule.RoundedRect.ProcessMaterial(MGFramework.UIModule.RoundedRect.Param,UnityEngine.Material)">
+            <summary>
+            处理材质
+            缓存并赋值
+            </summary>
+        </member>
         <member name="M:MGFramework.UIModule.RoundedRect.CreateMat(System.Single,System.Single)">
             <summary>
             创建材质
@@ -1360,36 +1421,6 @@
         <member name="M:MGFramework.UIModule.RoundedRect.MatSetting(UnityEngine.Material,System.Single,System.Single)">
             <summary>
             材质设置
-            </summary>
-        </member>
-        <member name="T:MGFramework.UIModule.RoundedRect.RoundedPos">
-            <summary>
-            圆角位置
-            </summary>
-        </member>
-        <member name="F:MGFramework.UIModule.RoundedRect.RoundedPos.None">
-            <summary>
-            无圆角
-            </summary>
-        </member>
-        <member name="F:MGFramework.UIModule.RoundedRect.RoundedPos.LeftTop">
-            <summary>
-            左上
-            </summary>
-        </member>
-        <member name="F:MGFramework.UIModule.RoundedRect.RoundedPos.RightTop">
-            <summary>
-            右上
-            </summary>
-        </member>
-        <member name="F:MGFramework.UIModule.RoundedRect.RoundedPos.LeftBottom">
-            <summary>
-            左下
-            </summary>
-        </member>
-        <member name="F:MGFramework.UIModule.RoundedRect.RoundedPos.RightBottom">
-            <summary>
-            右下
             </summary>
         </member>
         <member name="T:MGFramework.UIModule.SliderEx">

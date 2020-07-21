@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 namespace MGFramework.UIModule
@@ -9,12 +10,92 @@ namespace MGFramework.UIModule
     /// <summary>
     /// 圆角矩形
     /// </summary>
-    [ExecuteInEditMode]
+    [ExecuteAlways]
     [DisallowMultipleComponent]
     [AddComponentMenu("MGFramework/RoundedRect")]
     [RequireComponent(typeof(Graphic))]
-    public class RoundedRect : MonoBehaviour
+    public class RoundedRect : UIBehaviour
     {
+        private struct Param
+        {
+            public float width;
+            public float height;
+            public float roundedRadius;
+            public bool leftTop;
+            public bool rightTop;
+            public bool leftBottom;
+            public bool rightButtom;
+
+            public Param(float width, float height, float roundedRadius, bool leftTop = true, bool rightTop = true, bool leftBottom = true, bool rightBottom = true)
+            {
+                this.width = width;
+                this.height = height;
+                this.roundedRadius = roundedRadius;
+                this.leftTop = leftTop;
+                this.rightTop = rightTop;
+                this.leftBottom = leftBottom;
+                this.rightButtom = rightBottom;
+            }
+
+            public bool Equals(Param other)
+            {
+                return width == other.width
+                    && height == other.height
+                    && roundedRadius == other.roundedRadius
+                    && leftTop == other.leftTop
+                    && rightTop == other.rightTop
+                    && leftBottom == other.leftBottom
+                    && rightButtom == other.rightButtom;
+            }
+        }
+
+        /// <summary>
+        /// 材质引用对象
+        /// </summary>
+        private class MatRef
+        {
+            public int count;
+            public Material material;
+
+            public MatRef(int count, Material mat)
+            {
+                this.count = count;
+                this.material = mat;
+            }
+        }
+
+        /// <summary>
+        /// 圆角位置
+        /// </summary>
+        [Flags]
+        public enum RoundedPos
+        {
+            /// <summary>
+            /// 无圆角
+            /// </summary>
+            None = 0,
+
+            /// <summary>
+            /// 左上
+            /// </summary>
+            LeftTop = 1,
+
+            /// <summary>
+            /// 右上
+            /// </summary>
+            RightTop = 2,
+
+            /// <summary>
+            /// 左下
+            /// </summary>
+            LeftBottom = 4,
+
+            /// <summary>
+            /// 右下
+            /// </summary>
+            RightBottom = 8
+        }
+
         /// <summary>
         /// 当前gameobject图形组件
         /// </summary>
@@ -64,14 +145,29 @@ namespace MGFramework.UIModule
         private bool _matCreated = false;
 
         /// <summary>
-        /// 材质缓存
-        /// </summary>
-        private static Dictionary<Param, Material> _matCache = new Dictionary<Param, Material>();
-
-        /// <summary>
         /// 圆角位置
         /// </summary>
         private RoundedPos _roundedPos;
+
+        /// <summary>
+        /// 缓存宽度
+        /// </summary>
+        private float _cacheWidth = 0;
+
+        /// <summary>
+        /// 缓存高度
+        /// </summary>
+        private float _cacheHeight = 0;
+
+        /// <summary>
+        /// 缓存参数
+        /// </summary>
+        private Param _cacheParam;
+
+        /// <summary>
+        /// 材质缓存
+        /// </summary>
+        private static Dictionary<Param, MatRef> _matCache = new Dictionary<Param, MatRef>();
 
         /// <summary>
         /// 圆角位置
@@ -98,32 +194,43 @@ namespace MGFramework.UIModule
             }
         }
 
-        private void Awake()
+        protected override void Awake()
         {
+            base.Awake();
+
             _graphic = this.GetComponent<Graphic>();
-            _graphic?.RegisterDirtyLayoutCallback(Refresh);
         }
 
-        private IEnumerator Start()
+        protected override void OnEnable()
         {
-            Refresh();
-
-            yield return new WaitForEndOfFrame();
+            base.OnEnable();
 
             Refresh();
         }
 
-        private void OnValidate()
+        protected override void OnValidate()
         {
-            if (!Application.isPlaying)
+            base.OnValidate();
+
+            if (_graphic == null)
             {
-                Refresh();
+                return;
             }
+
+            Refresh();
         }
 
-        private void OnDestroy()
+        protected override void OnRectTransformDimensionsChange()
         {
-            _graphic?.UnregisterDirtyLayoutCallback(Refresh);
+            base.OnRectTransformDimensionsChange();
+
+            float width = _graphic.rectTransform.rect.width;
+            float height = _graphic.rectTransform.rect.height;
+
+            if (width != _cacheWidth || height != _cacheHeight)
+            {
+                Refresh(width, height);
+            }
         }
 
         /// <summary>
@@ -131,18 +238,24 @@ namespace MGFramework.UIModule
         /// </summary>
         private void Refresh()
         {
-            if (_graphic == null)
-            {
-                return;
-            }
-
             float width = _graphic.rectTransform.rect.width;
             float height = _graphic.rectTransform.rect.height;
 
-            if (width == 0 || height == 0)
+            Refresh(width, height);
+        }
+
+        /// <summary>
+        /// 根据宽高刷新圆角数据
+        /// </summary>
+        private void Refresh(float width, float height)
+        {
+            if (width <= 0 || height <= 0)
             {
                 return;
             }
+
+            _cacheWidth = width;
+            _cacheHeight = height;
 
             if (!Application.isPlaying)
             {
@@ -173,24 +286,51 @@ namespace MGFramework.UIModule
                 {
                     Param param = new Param(width, height, _roundedPixel, _leftTop, _rightTop, _leftBottom, _rightBottom);
 
-                    Material mat = _matCache.GetValueAnyway(param);
+                    Material mat = _matCache.GetValueAnyway(param)?.material;
 
                     if (mat != null)
                     {
-                        _graphic.material = mat;
+                        ProcessMaterial(param, mat);
                     }
                     else
                     {
                         mat = CreateMat(width, height);
 
-                        if (mat != null)
-                        {
-                            _graphic.material = mat;
-                            _matCache[param] = mat;
-                        }
+                        ProcessMaterial(param, mat);
                     }
                 }
             }
+        }
+
+        /// <summary>
+        /// 处理材质
+        /// 缓存并赋值
+        /// </summary>
+        private void ProcessMaterial(Param newParam, Material mat)
+        {
+            MatRef oldMatRef = _matCache.GetValueAnyway(_cacheParam);
+            MatRef newMatRef = _matCache.GetValueAnyway(newParam);
+            if (newMatRef != null)
+            {
+                newMatRef.count++;
+            }
+            else
+            {
+                newMatRef = new MatRef(1, mat);
+                _matCache[newParam] = newMatRef;
+            }
+
+            if (oldMatRef != null)
+            {
+                if (--oldMatRef.count <= 0)
+                {
+                    _matCache.Remove(_cacheParam);
+                    Destroy(oldMatRef.material);
+                }
+            }
+
+            _cacheParam = newParam;
+            _graphic.material = mat;
         }
 
         /// <summary>
@@ -229,71 +369,6 @@ namespace MGFramework.UIModule
             mat.SetInt("_RightTop", _rightTop ? 1 : 0);
             mat.SetInt("_LeftBottom", _leftBottom ? 1 : 0);
             mat.SetInt("_RightBottom", _rightBottom ? 1 : 0);
-        }
-
-        private struct Param
-        {
-            public float width;
-            public float height;
-            public float roundedRadius;
-            public bool leftTop;
-            public bool rightTop;
-            public bool leftBottom;
-            public bool rightButtom;
-
-            public Param(float width, float height, float roundedRadius, bool leftTop = true, bool rightTop = true, bool leftBottom = true, bool rightBottom = true)
-            {
-                this.width = width;
-                this.height = height;
-                this.roundedRadius = roundedRadius;
-                this.leftTop = leftTop;
-                this.rightTop = rightTop;
-                this.leftBottom = leftBottom;
-                this.rightButtom = rightBottom;
-            }
-
-            public bool Equals(Param other)
-            {
-                return width == other.width
-                    && height == other.height
-                    && roundedRadius == other.roundedRadius
-                    && leftTop == other.leftTop
-                    && rightTop == other.rightTop
-                    && leftBottom == other.leftBottom
-                    && rightButtom == other.rightButtom;
-            }
-        }
-
-        /// <summary>
-        /// 圆角位置
-        /// </summary>
-        [Flags]
-        public enum RoundedPos
-        {
-            /// <summary>
-            /// 无圆角
-            /// </summary>
-            None = 0,
-
-            /// <summary>
-            /// 左上
-            /// </summary>
-            LeftTop = 1,
-
-            /// <summary>
-            /// 右上
-            /// </summary>
-            RightTop = 2,
-
-            /// <summary>
-            /// 左下
-            /// </summary>
-            LeftBottom = 4,
-
-            /// <summary>
-            /// 右下
-            /// </summary>
-            RightBottom = 8
         }
     }
 }
