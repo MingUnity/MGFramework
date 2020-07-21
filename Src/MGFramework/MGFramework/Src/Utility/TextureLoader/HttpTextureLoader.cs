@@ -9,7 +9,7 @@ namespace MGFramework
     /// <summary>
     /// 网络图片加载
     /// </summary>
-    internal class HttpTextureLoader
+    internal class HttpTextureLoader : ICustomTextureLoader
     {
         /// <summary>
         /// 加载中回调集合

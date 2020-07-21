@@ -11,6 +11,6 @@ namespace MGFramework
         /// <summary>
         /// 加载
         /// </summary>
-        void Load(Action<Texture2D> callback);
+        void Load(string key, Action<Texture2D> callback);
     }
 }

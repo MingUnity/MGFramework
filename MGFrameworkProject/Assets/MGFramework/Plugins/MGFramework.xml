@@ -3378,7 +3378,7 @@
             自定义图片加载
             </summary>
         </member>
-        <member name="M:MGFramework.ICustomTextureLoader.Load(System.Action{UnityEngine.Texture2D})">
+        <member name="M:MGFramework.ICustomTextureLoader.Load(System.String,System.Action{UnityEngine.Texture2D})">
             <summary>
             加载
             </summary>
@@ -3611,7 +3611,7 @@
             <param name="callback">完成回调</param>
             <param name="cacheLevel">缓存优先级</param>
         </member>
-        <member name="M:MGFramework.TextureLoader.CustomLoad(System.String,MGFramework.ICustomTextureLoader,System.Action{UnityEngine.Texture2D},MGFramework.CacheLevel)">
+        <member name="M:MGFramework.TextureLoader.Load(System.String,MGFramework.ICustomTextureLoader,System.Action{UnityEngine.Texture2D},MGFramework.CacheLevel)">
             <summary>
             自定义加载图片
             走缓存池

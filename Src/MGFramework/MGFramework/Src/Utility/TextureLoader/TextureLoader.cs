@@ -15,34 +15,27 @@ namespace MGFramework
         /// <summary>
         /// 图片内存池
         /// </summary>
-        private static MemoryTexturePool _memPool;
+        private readonly static MemoryTexturePool _memPool = new MemoryTexturePool();
 
         /// <summary>
         /// 图片本地池
         /// </summary>
-        private static LocalDiskTexturePool _diskPool;
+        private readonly static LocalDiskTexturePool _diskPool = new LocalDiskTexturePool();
 
         /// <summary>
         /// 网络图片加载
         /// </summary>
-        private static HttpTextureLoader _httpLoader;
+        private readonly static HttpTextureLoader _httpLoader = new HttpTextureLoader();
 
         /// <summary>
         /// 异步任务元素集合
         /// </summary>
-        private static Queue<AsyncItem> _asyncTaskItems = new Queue<AsyncItem>();
+        private readonly static Queue<AsyncItem> _asyncTaskItems = new Queue<AsyncItem>();
 
         /// <summary>
         /// 异步任务
         /// </summary>
         private static Task _asyncTask;
-
-        static TextureLoader()
-        {
-            _memPool = new MemoryTexturePool();
-            _diskPool = new LocalDiskTexturePool();
-            _httpLoader = new HttpTextureLoader();
-        }
 
         /// <summary>
         /// 异步加载
@@ -69,38 +62,7 @@ namespace MGFramework
         /// <param name="cacheLevel">缓存优先级</param>
         public static void Load(string url, Action<Texture2D> callback, CacheLevel cacheLevel)
         {
-            if (string.IsNullOrEmpty(url))
-            {
-                callback?.Invoke(null);
-                return;
-            }
-
-            string key = ConvertKey(url);
-
-            Texture2D tex = null;
-
-            if (_memPool.Get(key, out tex))
-            {
-                callback?.Invoke(tex);
-            }
-            else if (_diskPool.Get(key, out tex))
-            {
-                callback?.Invoke(tex);
-                _memPool.Cache(key, tex, cacheLevel);
-            }
-            else
-            {
-                _httpLoader.Load(url, (resTex) =>
-                {
-                    callback?.Invoke(resTex);
-
-                    if (resTex != null)
-                    {
-                        _memPool.Cache(key, resTex, cacheLevel);
-                        _diskPool.Cache(key, resTex, cacheLevel);
-                    }
-                });
-            }
+            Load(url, _httpLoader, callback, cacheLevel);
         }
 
         /// <summary>
@@ -111,7 +73,7 @@ namespace MGFramework
         /// <param name="customLoader">自定义加载器</param>
         /// <param name="callback">图片加载完成回调</param>
         /// <param name="cacheLevel">缓存优先级</param>
-        public static void CustomLoad(string key, ICustomTextureLoader customLoader, Action<Texture2D> callback, CacheLevel cacheLevel)
+        public static void Load(string key, ICustomTextureLoader customLoader, Action<Texture2D> callback, CacheLevel cacheLevel)
         {
             if (string.IsNullOrEmpty(key) || customLoader == null)
             {
@@ -119,29 +81,29 @@ namespace MGFramework
                 return;
             }
 
-            key = ConvertKey(key);
+            string keyword = ConvertKey(key);
 
             Texture2D tex = null;
 
-            if (_memPool.Get(key, out tex))
+            if (_memPool.Get(keyword, out tex))
             {
                 callback?.Invoke(tex);
             }
-            else if (_diskPool.Get(key, out tex))
+            else if (_diskPool.Get(keyword, out tex))
             {
                 callback?.Invoke(tex);
-                _memPool.Cache(key, tex, cacheLevel);
+                _memPool.Cache(keyword, tex, cacheLevel);
             }
             else
             {
-                customLoader.Load((resTex) =>
+                customLoader.Load(key, (resTex) =>
                 {
                     callback?.Invoke(resTex);
 
                     if (resTex != null)
                     {
-                        _memPool.Cache(key, resTex, cacheLevel);
-                        _diskPool.Cache(key, resTex, cacheLevel);
+                        _memPool.Cache(keyword, resTex, cacheLevel);
+                        _diskPool.Cache(keyword, resTex, cacheLevel);
                     }
                 });
             }
