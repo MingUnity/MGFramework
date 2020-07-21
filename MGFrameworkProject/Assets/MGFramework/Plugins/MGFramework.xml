@@ -3231,6 +3231,16 @@
             <param name="planeNormal">垂直于平面的的向量</param>
             <param name="planePoint">平面上的任意一点</param>
         </member>
+        <member name="T:MGFramework.MD5">
+            <summary>
+            MD5码工具
+            </summary>
+        </member>
+        <member name="M:MGFramework.MD5.Get(System.String)">
+            <summary>
+            获取
+            </summary>
+        </member>
         <member name="T:MGFramework.MonoSingleton`1">
             <summary>
             Mono单例
@@ -3319,6 +3329,355 @@
             <summary>
             任务队列
             在某个时间点最多只有一个协程在执行，先加入队列中的先执行，后加入的后执行
+            </summary>
+        </member>
+        <member name="T:MGFramework.CacheLevel">
+            <summary>
+            缓存驻留优先级
+            缓存优先级越低,在释放内存时被优先清理
+            eg:当同时存在 Cache_0 Cache_5 Cache_10的缓存,此时需要清理缓存,优先清理Cache_0,其次清理Cache_5,然后是Cache_10
+            </summary>
+        </member>
+        <member name="F:MGFramework.CacheLevel.Cache_0">
+            <summary>
+            低优先级
+            </summary>
+        </member>
+        <member name="F:MGFramework.CacheLevel.Cache_5">
+            <summary>
+            中优先级
+            </summary>
+        </member>
+        <member name="F:MGFramework.CacheLevel.Cache_10">
+            <summary>
+            高优先级
+            </summary>
+        </member>
+        <member name="T:MGFramework.HttpTextureLoader">
+            <summary>
+            网络图片加载
+            </summary>
+        </member>
+        <member name="F:MGFramework.HttpTextureLoader._loadingDic">
+            <summary>
+            加载中回调集合
+            </summary>
+        </member>
+        <member name="M:MGFramework.HttpTextureLoader.Load(System.String,System.Action{UnityEngine.Texture2D})">
+            <summary>
+            按图片URL直接加载图片
+            </summary>
+        </member>
+        <member name="M:MGFramework.HttpTextureLoader.LoadImage(System.String,System.Action{UnityEngine.Texture2D})">
+            <summary>
+            加载图片
+            </summary>
+        </member>
+        <member name="T:MGFramework.ICustomTextureLoader">
+            <summary>
+            自定义图片加载
+            </summary>
+        </member>
+        <member name="M:MGFramework.ICustomTextureLoader.Load(System.Action{UnityEngine.Texture2D})">
+            <summary>
+            加载
+            </summary>
+        </member>
+        <member name="T:MGFramework.LocalDiskTexturePool">
+            <summary>
+            图片本地缓存池
+            </summary>
+        </member>
+        <member name="F:MGFramework.LocalDiskTexturePool._pool">
+            <summary>
+            本地缓存池
+            </summary>
+        </member>
+        <member name="M:MGFramework.LocalDiskTexturePool.Cache(System.String,UnityEngine.Texture2D,MGFramework.CacheLevel)">
+            <summary>
+            设置缓存
+            </summary>
+        </member>
+        <member name="M:MGFramework.LocalDiskTexturePool.Get(System.String,UnityEngine.Texture2D@)">
+            <summary>
+            获取缓存
+            </summary>
+        </member>
+        <member name="M:MGFramework.LocalDiskTexturePool.SetMaxCacheMemory(System.Int64)">
+            <summary>
+            设置最大缓存量
+            </summary>
+        </member>
+        <member name="M:MGFramework.LocalDiskTexturePool.SetCacheDir(System.String)">
+            <summary>
+            设置缓存目录
+            </summary>
+        </member>
+        <member name="M:MGFramework.LocalDiskTexturePool.GenerateByteData(UnityEngine.Texture2D,System.Byte[]@,System.Byte[]@)">
+            <summary>
+            构建数据
+            0 1 2 3 位 为宽
+            4 5 6 7 位 为高
+            8 位 为Format
+            </summary>
+        </member>
+        <member name="M:MGFramework.LocalDiskTexturePool.ReadByteData(System.Byte[],System.Byte[])">
+            <summary>
+            读数据
+            </summary>
+        </member>
+        <member name="T:MGFramework.MemoryTexturePool">
+            <summary>
+            图片内存池
+            </summary>
+        </member>
+        <member name="F:MGFramework.MemoryTexturePool._maxSize">
+            <summary>
+            最大存储量
+            </summary>
+        </member>
+        <member name="F:MGFramework.MemoryTexturePool._pool">
+            <summary>
+            缓存池
+            </summary>
+        </member>
+        <member name="F:MGFramework.MemoryTexturePool._keys">
+            <summary>
+            数据键队列
+            </summary>
+        </member>
+        <member name="F:MGFramework.MemoryTexturePool._cacheSize">
+            <summary>
+            缓存量
+            </summary>
+        </member>
+        <member name="M:MGFramework.MemoryTexturePool.Cache(System.String,UnityEngine.Texture2D,MGFramework.CacheLevel)">
+            <summary>
+            缓存
+            </summary>
+        </member>
+        <member name="M:MGFramework.MemoryTexturePool.Get(System.String,UnityEngine.Texture2D@)">
+            <summary>
+            获取图片
+            </summary>
+        </member>
+        <member name="M:MGFramework.MemoryTexturePool.SetMaxCacheMemory(System.Int64)">
+            <summary>
+            设置最大缓存内存
+            </summary>
+        </member>
+        <member name="T:MGFramework.LocalDiskCachePool">
+            <summary>
+            本地硬盘缓存池
+            </summary>
+        </member>
+        <member name="F:MGFramework.LocalDiskCachePool._maxMemory">
+            <summary>
+            最大缓存量
+            </summary>
+        </member>
+        <member name="F:MGFramework.LocalDiskCachePool._cacheDirs">
+            <summary>
+            缓存目录
+            </summary>
+        </member>
+        <member name="F:MGFramework.LocalDiskCachePool._cacheFileInfos">
+            <summary>
+            缓存文件信息列表
+            </summary>
+        </member>
+        <member name="F:MGFramework.LocalDiskCachePool._locker">
+            <summary>
+            线程锁
+            </summary>
+        </member>
+        <member name="F:MGFramework.LocalDiskCachePool._cacheRootDir">
+            <summary>
+            缓存根目录
+            </summary>
+        </member>
+        <member name="P:MGFramework.LocalDiskCachePool.MaxCacheMemory">
+            <summary>
+            最大缓存量
+            </summary>
+        </member>
+        <member name="P:MGFramework.LocalDiskCachePool.CacheDir">
+            <summary>
+            缓存目录
+            </summary>
+        </member>
+        <member name="M:MGFramework.LocalDiskCachePool.Set(System.String,System.Byte[],MGFramework.CacheLevel)">
+            <summary>
+            设置缓存
+            </summary>
+            <param name="key">唯一标识</param>
+            <param name="data">缓存数据</param>
+            <param name="cacheLevel">缓存优先级</param>
+        </member>
+        <member name="M:MGFramework.LocalDiskCachePool.Set(System.String,System.Byte[],System.Byte[],MGFramework.CacheLevel)">
+            <summary>
+            设置缓存
+            </summary>
+            <param name="key">唯一标识</param>
+            <param name="head">缓存数据头</param>
+            <param name="data">缓存数据</param>
+            <param name="cacheLevel">缓存优先级</param>
+        </member>
+        <member name="M:MGFramework.LocalDiskCachePool.Get(System.String,System.Byte[]@)">
+            <summary>
+            获取缓存
+            </summary>
+            <param name="key">唯一标识</param>
+            <param name="data">缓存数据</param>
+            <returns>是否存在缓存</returns>
+        </member>
+        <member name="M:MGFramework.LocalDiskCachePool.Get(System.String,System.Int32,System.Byte[]@,System.Byte[]@)">
+            <summary>
+            获取缓存
+            </summary>
+            <param name="key">唯一标识</param>
+            <param name="headLength">缓存头的长度</param>
+            <param name="head">缓存数据头</param>
+            <param name="data">缓存数据</param>
+            <returns>是否存在缓存</returns>
+        </member>
+        <member name="M:MGFramework.LocalDiskCachePool.ClearAll">
+            <summary>
+            清理所有
+            </summary>
+        </member>
+        <member name="M:MGFramework.LocalDiskCachePool.AnalyzeAllCacheInfo">
+            <summary>
+            获取所有缓存信息
+            FileInfo按照缓存优先级从低到高排列
+            </summary>
+        </member>
+        <member name="M:MGFramework.LocalDiskCachePool.AnalyzeDirInfo(System.String,System.Int64@,System.IO.FileInfo[]@)">
+            <summary>
+            获取文件夹大小
+            </summary>
+            <param name="dir">文件夹路径</param>
+            <param name="size">文件夹大小</param>
+            <param name="files">子文件集合</param>
+        </member>
+        <member name="M:MGFramework.LocalDiskCachePool.CheckCache">
+            <summary>
+            检查是否超出缓存上限
+            </summary>
+        </member>
+        <member name="T:MGFramework.TextureLoader">
+            <summary>
+            图片加载
+            </summary>
+        </member>
+        <member name="F:MGFramework.TextureLoader._memPool">
+            <summary>
+            图片内存池
+            </summary>
+        </member>
+        <member name="F:MGFramework.TextureLoader._diskPool">
+            <summary>
+            图片本地池
+            </summary>
+        </member>
+        <member name="F:MGFramework.TextureLoader._httpLoader">
+            <summary>
+            网络图片加载
+            </summary>
+        </member>
+        <member name="F:MGFramework.TextureLoader._asyncTaskItems">
+            <summary>
+            异步任务元素集合
+            </summary>
+        </member>
+        <member name="F:MGFramework.TextureLoader._asyncTask">
+            <summary>
+            异步任务
+            </summary>
+        </member>
+        <member name="M:MGFramework.TextureLoader.Load(System.String,System.Action{UnityEngine.Texture2D})">
+            <summary>
+            异步加载
+            无缓存机制
+            </summary>
+        </member>
+        <member name="M:MGFramework.TextureLoader.Load(System.String,System.Action{UnityEngine.Texture2D},MGFramework.CacheLevel)">
+            <summary>
+            加载
+            若已被缓存 则加载缓存
+            若未被缓存 则走网络请求
+            </summary>
+            <param name="url">图片路径</param>
+            <param name="callback">完成回调</param>
+            <param name="cacheLevel">缓存优先级</param>
+        </member>
+        <member name="M:MGFramework.TextureLoader.CustomLoad(System.String,MGFramework.ICustomTextureLoader,System.Action{UnityEngine.Texture2D},MGFramework.CacheLevel)">
+            <summary>
+            自定义加载图片
+            走缓存池
+            </summary>
+            <param name="key">缓存键,若为空则取消加载</param>
+            <param name="customLoader">自定义加载器</param>
+            <param name="callback">图片加载完成回调</param>
+            <param name="cacheLevel">缓存优先级</param>
+        </member>
+        <member name="M:MGFramework.TextureLoader.Preload(System.String,MGFramework.CacheLevel)">
+            <summary>
+            预加载
+            进缓存池
+            </summary>
+            <param name="url">图片路径</param>
+            <param name="cacheLevel">缓存优先级</param>
+        </member>
+        <member name="M:MGFramework.TextureLoader.Preload``1(``0[],System.Func{``0,System.String},MGFramework.CacheLevel)">
+            <summary>
+            批量预加载
+            进缓存池
+            </summary>
+            <typeparam name="T">实体对象</typeparam>
+            <param name="array">对象集合</param>
+            <param name="urlGetter">获取url方法</param>
+            <param name="cacheLevel">缓存优先级</param>
+        </member>
+        <member name="M:MGFramework.TextureLoader.LoadByTask(System.String,System.Action{UnityEngine.Texture2D},MGFramework.CacheLevel)">
+            <summary>
+            加入异步加载任务队列
+            每帧加载一个资源
+            </summary>
+        </member>
+        <member name="M:MGFramework.TextureLoader.SetLocalDiskMaxCacheMemory(System.Int64)">
+            <summary>
+            设置本地缓存池最大缓存量
+            </summary>
+        </member>
+        <member name="M:MGFramework.TextureLoader.SetLocalDiskCacheDir(System.String)">
+            <summary>
+            设置本地缓存池缓存目录
+            </summary>
+        </member>
+        <member name="M:MGFramework.TextureLoader.SetMemoryMaxCacheMemory(System.Int64)">
+            <summary>
+            设置内存缓存池最大缓存量
+            </summary>
+        </member>
+        <member name="M:MGFramework.TextureLoader.AsyncTask">
+            <summary>
+            异步任务
+            </summary>
+        </member>
+        <member name="M:MGFramework.TextureLoader.PreloadPerFrame(System.String[],MGFramework.CacheLevel)">
+            <summary>
+            分帧预加载图片
+            </summary>
+        </member>
+        <member name="M:MGFramework.TextureLoader.ConvertKey(System.String)">
+            <summary>
+            转化成key
+            </summary>
+        </member>
+        <member name="T:MGFramework.TextureLoader.AsyncItem">
+            <summary>
+            异步元素
             </summary>
         </member>
         <member name="T:IntGroup">
