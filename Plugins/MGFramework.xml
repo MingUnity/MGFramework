@@ -1423,6 +1423,11 @@
             材质设置
             </summary>
         </member>
+        <member name="M:MGFramework.UIModule.RoundedRect.SetupGraphic">
+            <summary>
+            装载图形对象
+            </summary>
+        </member>
         <member name="T:MGFramework.UIModule.SliderEx">
             <summary>
             Slider扩展
