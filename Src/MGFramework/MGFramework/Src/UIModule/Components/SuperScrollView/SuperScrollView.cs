@@ -545,6 +545,36 @@ namespace MGFramework.UIModule
             }
         }
 
+        public override void OnDrag(PointerEventData eventData)
+        {
+            if (!_interactive)
+            {
+                return;
+            }
+
+            base.OnDrag(eventData);
+        }
+
+        public override void OnInitializePotentialDrag(PointerEventData eventData)
+        {
+            if (!_interactive)
+            {
+                return;
+            }
+
+            base.OnInitializePotentialDrag(eventData);
+        }
+
+        public override void OnScroll(PointerEventData data)
+        {
+            if (!_interactive)
+            {
+                return;
+            }
+
+            base.OnScroll(data);
+        }
+
         #endregion
 
         #region Public Func

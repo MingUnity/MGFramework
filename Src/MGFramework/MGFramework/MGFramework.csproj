@@ -19,7 +19,7 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>..\..\DllOutput\</OutputPath>
+    <OutputPath>..\..\..\MGFrameworkProject\Assets\MGFramework\Plugins\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -145,10 +145,10 @@
     <Compile Include="Src\UIModule\View\ViewGroup.cs" />
     <Compile Include="Src\Utility\Bezier.cs" />
     <Compile Include="Src\Utility\BindProperty.cs" />
-    <Compile Include="Src\Utility\CollectionsExtends.cs" />
+    <Compile Include="Src\Utility\Extends\CollectionsExtends.cs" />
     <Compile Include="Src\Utility\IOC\AutoBuildAttribute.cs" />
     <Compile Include="Src\Utility\IOC\Container.cs" />
-    <Compile Include="Src\Utility\EventTriggerExtends.cs" />
+    <Compile Include="Src\Utility\Extends\EventTriggerExtends.cs" />
     <Compile Include="Src\Utility\Loom.cs" />
     <Compile Include="Src\Utility\MathHelper.cs" />
     <Compile Include="Src\Utility\MD5.cs" />
