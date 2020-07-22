@@ -1503,11 +1503,6 @@
             滚动节点
             </summary>
         </member>
-        <member name="M:MGFramework.UIModule.ISuperScrollNode.Refresh(MGFramework.UIModule.ISuperScrollNodeData)">
-            <summary>
-            更新数据
-            </summary>
-        </member>
         <member name="T:MGFramework.UIModule.ISuperScrollNodeData">
             <summary>
             滚动列表节点数据
@@ -1654,6 +1649,16 @@
             垂直滚动
             </summary>
         </member>
+        <member name="T:MGFramework.UIModule.SuperScrollView.INodeParser">
+            <summary>
+            节点数据解析接口 
+            </summary>
+        </member>
+        <member name="M:MGFramework.UIModule.SuperScrollView.INodeParser.Parse(MGFramework.UIModule.ISuperScrollNode,MGFramework.UIModule.ISuperScrollNodeData)">
+            <summary>
+            解析
+            </summary>
+        </member>
         <member name="F:MGFramework.UIModule.SuperScrollView._datas">
             <summary>
             节点数据
@@ -1682,6 +1687,11 @@
         <member name="F:MGFramework.UIModule.SuperScrollView._factory">
             <summary>
             节点工厂
+            </summary>
+        </member>
+        <member name="F:MGFramework.UIModule.SuperScrollView._nodeParser">
+            <summary>
+            节点解析器
             </summary>
         </member>
         <member name="F:MGFramework.UIModule.SuperScrollView._scrollHandler">
@@ -1754,11 +1764,6 @@
             当前页码
             </summary>
         </member>
-        <member name="P:MGFramework.UIModule.SuperScrollView.CurNode">
-            <summary>
-            当前页的节点对象
-            </summary>
-        </member>
         <member name="E:MGFramework.UIModule.SuperScrollView.OnSwipeCompletedEvent">
             <summary>
             划动完成事件
@@ -1774,7 +1779,7 @@
             极限划动事件
             </summary>
         </member>
-        <member name="M:MGFramework.UIModule.SuperScrollView.Generate(MGFramework.UIModule.ISuperScrollNodeData[],MGFramework.UIModule.ISuperNodeFactory)">
+        <member name="M:MGFramework.UIModule.SuperScrollView.Generate(MGFramework.UIModule.ISuperScrollNodeData[],MGFramework.UIModule.ISuperNodeFactory,MGFramework.UIModule.SuperScrollView.INodeParser)">
             <summary>
             构建
             </summary>
@@ -3036,6 +3041,37 @@
             二次贝塞尔公式
             </summary>
             <returns></returns>
+        </member>
+        <member name="T:MGFramework.BindProperty`1">
+            <summary>
+            绑定属性
+            </summary>
+        </member>
+        <member name="P:MGFramework.BindProperty`1.Value">
+            <summary>
+            值
+            </summary>
+        </member>
+        <member name="M:MGFramework.BindProperty`1.Bind(System.Action{`0})">
+            <summary>
+            绑定
+            </summary>
+        </member>
+        <member name="M:MGFramework.BindProperty`1.UnBind">
+            <summary>
+            解绑
+            </summary>
+        </member>
+        <member name="M:MGFramework.BindProperty`1.SetWithoutNotify(`0)">
+            <summary>
+            设置值
+            无事件抛出
+            </summary>
+        </member>
+        <member name="M:MGFramework.BindProperty`1.Get(`0)">
+            <summary>
+            获取绑定属性
+            </summary>
         </member>
         <member name="T:MGFramework.CollectionsExtends">
             <summary>

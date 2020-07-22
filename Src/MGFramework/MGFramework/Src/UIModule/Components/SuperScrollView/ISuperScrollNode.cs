@@ -5,9 +5,5 @@
     /// </summary>
     public interface ISuperScrollNode
     {
-        /// <summary>
-        /// 更新数据
-        /// </summary>
-        void Refresh(ISuperScrollNodeData data);
     }
 }

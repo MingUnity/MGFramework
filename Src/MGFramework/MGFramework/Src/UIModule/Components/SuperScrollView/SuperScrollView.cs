@@ -256,6 +256,21 @@ namespace MGFramework.UIModule
 
         #endregion
 
+        #region External Interface
+
+        /// <summary>
+        /// 节点数据解析接口 
+        /// </summary>
+        public interface INodeParser
+        {
+            /// <summary>
+            /// 解析
+            /// </summary>
+            void Parse(ISuperScrollNode node, ISuperScrollNodeData data);
+        }
+
+        #endregion
+
         #region Private Variable
 
         /// <summary>
@@ -289,6 +304,11 @@ namespace MGFramework.UIModule
         /// 节点工厂
         /// </summary>
         private ISuperNodeFactory _factory;
+
+        /// <summary>
+        /// 节点解析器
+        /// </summary>
+        private INodeParser _nodeParser;
 
         /// <summary>
         /// 滚动处理
@@ -389,11 +409,6 @@ namespace MGFramework.UIModule
         /// 当前页码
         /// </summary>
         public int CurPageIndex => _curPageIndex;
-
-        /// <summary>
-        /// 当前页的节点对象
-        /// </summary>
-        public ISuperScrollNode CurNode => _nodes.GetValueAnyway(ConvertDataIndexToViewIndex(_curPageIndex));
 
         /// <summary>
         /// 划动完成事件
@@ -537,7 +552,7 @@ namespace MGFramework.UIModule
         /// <summary>
         /// 构建
         /// </summary>
-        public void Generate(ISuperScrollNodeData[] datas, ISuperNodeFactory nodeFactory)
+        public void Generate(ISuperScrollNodeData[] datas, ISuperNodeFactory nodeFactory, INodeParser parser)
         {
             if (nodeFactory == null)
             {
@@ -546,6 +561,7 @@ namespace MGFramework.UIModule
 
             this._datas = datas;
             this._factory = nodeFactory;
+            this._nodeParser = parser;
 
             if (_datas != null)
             {
@@ -587,7 +603,7 @@ namespace MGFramework.UIModule
 
             int viewIndex = ConvertDataIndexToViewIndex(index);
 
-            _nodes.GetValueAnyway(viewIndex)?.Refresh(data);
+            _nodeParser?.Parse(_nodes.GetValueAnyway(viewIndex), data);
         }
 
         /// <summary>
@@ -692,7 +708,7 @@ namespace MGFramework.UIModule
             {
                 int realIndex = ConvertViewIndexToDataIndex(i);
 
-                _nodes.GetValueAnyway(i)?.Refresh(_datas?.GetValueAnyway(realIndex));
+                _nodeParser?.Parse(_nodes.GetValueAnyway(i), _datas?.GetValueAnyway(realIndex));
             }
         }
 
