@@ -1718,6 +1718,11 @@
             当前页码
             </summary>
         </member>
+        <member name="P:MGFramework.UIModule.SuperScrollView.CurNode">
+            <summary>
+            当前页的节点对象
+            </summary>
+        </member>
         <member name="E:MGFramework.UIModule.SuperScrollView.OnSwipeCompletedEvent">
             <summary>
             划动完成事件
