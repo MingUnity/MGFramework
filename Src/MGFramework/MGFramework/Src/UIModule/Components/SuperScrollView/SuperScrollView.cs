@@ -283,7 +283,7 @@ namespace MGFramework.UIModule
         /// <summary>
         /// 已实例化节点列表
         /// </summary>
-        private List<ISuperScrollNode> _nodes = new List<ISuperScrollNode>(3);
+        private readonly List<ISuperScrollNode> _nodes = new List<ISuperScrollNode>(3);
 
         /// <summary>
         /// 节点工厂
@@ -391,6 +391,11 @@ namespace MGFramework.UIModule
         public int CurPageIndex => _curPageIndex;
 
         /// <summary>
+        /// 当前页的节点对象
+        /// </summary>
+        public ISuperScrollNode CurNode => _nodes.GetValueAnyway(ConvertDataIndexToViewIndex(_curPageIndex));
+
+        /// <summary>
         /// 划动完成事件
         /// </summary>
         public event Action<Dir> OnSwipeCompletedEvent;
@@ -412,6 +417,11 @@ namespace MGFramework.UIModule
         protected override void Awake()
         {
             base.Awake();
+
+            if (Application.isEditor)
+            {
+                return;
+            }
 
             switch (_scrollStatus)
             {
