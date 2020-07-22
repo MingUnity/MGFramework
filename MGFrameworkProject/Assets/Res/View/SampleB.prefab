@@ -1024,6 +1024,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _roundedPixel: 50
+  _leftTop: 1
+  _rightTop: 1
+  _leftBottom: 1
+  _rightBottom: 1
+  _static: 1
 --- !u!1 &8387011963717867407
 GameObject:
   m_ObjectHideFlags: 0
