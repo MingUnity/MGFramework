@@ -528,6 +528,7 @@ namespace MGFramework.UIModule
                         {
                             ScrollTo(targetPageIndex, _autoSwipeDuration, () =>
                             {
+                                RefreshAll();
                                 OnSwipeCompletedEvent?.Invoke(_scrollHandler.GetPosDir(deltaPos));
                             }, null);
                         }
@@ -621,7 +622,7 @@ namespace MGFramework.UIModule
                 _curPageIndex = 0;
             }
 
-            Refresh();
+            RefreshAll();
         }
 
         /// <summary>
@@ -649,7 +650,7 @@ namespace MGFramework.UIModule
 
             ScrollTo(_curPageIndex + 1, time, () =>
             {
-                Refresh();
+                RefreshAll();
                 onCompleted?.Invoke();
             }, onScrolling);
         }
@@ -667,7 +668,7 @@ namespace MGFramework.UIModule
 
             ScrollTo(_curPageIndex - 1, time, () =>
             {
-                Refresh();
+                RefreshAll();
                 onCompleted?.Invoke();
             }, onScrolling);
         }
@@ -677,10 +678,10 @@ namespace MGFramework.UIModule
         /// </summary>
         public void JumpTo(int index)
         {
-            if (index >= 0 && index < PageCount)
+            if (index >= 0 && index < PageCount && _curPageIndex != index)
             {
                 _curPageIndex = index;
-                Refresh();
+                RefreshAll();
             }
         }
 
@@ -710,36 +711,26 @@ namespace MGFramework.UIModule
         }
 
         /// <summary>
-        /// 刷新
+        /// 刷新所有数据 
         /// </summary>
-        private void Refresh()
+        private void RefreshAll()
         {
+            RefreshPosition();
             int realCount = RealCount;
-
-            switch (realCount)
-            {
-                case 0:
-                    return;
-
-                case 1:
-                    SetNormalizedPosition(0);
-                    break;
-
-                case 2:
-                    SetNormalizedPosition(_curPageIndex);
-                    break;
-
-                case 3:
-                    SetNormalizedPosition(_curPageIndex == 0 ? 0 : _curPageIndex == PageCount - 1 ? 1 : 0.5f);
-                    break;
-            }
-
             for (int i = 0; i < realCount; i++)
             {
                 int realIndex = ConvertViewIndexToDataIndex(i);
 
                 _nodeParser?.Parse(_nodes.GetValueAnyway(i), _datas?.GetValueAnyway(realIndex));
             }
+        }
+
+        /// <summary>
+        /// 一步切换前提下刷新数据
+        /// </summary>
+        private void RefreshByOneStep()
+        {
+           
         }
 
         /// <summary>
@@ -842,6 +833,32 @@ namespace MGFramework.UIModule
 
                 default:
                     return 0;
+            }
+        }
+
+        /// <summary>
+        /// 刷新位置
+        /// </summary>
+        private void RefreshPosition()
+        {
+            int realCount = RealCount;
+
+            switch (realCount)
+            {
+                case 0:
+                    return;
+
+                case 1:
+                    SetNormalizedPosition(0);
+                    break;
+
+                case 2:
+                    SetNormalizedPosition(_curPageIndex);
+                    break;
+
+                case 3:
+                    SetNormalizedPosition(_curPageIndex == 0 ? 0 : _curPageIndex == PageCount - 1 ? 1 : 0.5f);
+                    break;
             }
         }
 

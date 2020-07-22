@@ -1,4 +1,6 @@
-﻿namespace MGFramework.UIModule
+﻿using UnityEngine;
+
+namespace MGFramework.UIModule
 {
     /// <summary>
     /// 滚动节点

@@ -1809,9 +1809,14 @@
             滚动至指定索引
             </summary>
         </member>
-        <member name="M:MGFramework.UIModule.SuperScrollView.Refresh">
+        <member name="M:MGFramework.UIModule.SuperScrollView.RefreshAll">
             <summary>
-            刷新
+            刷新所有数据 
+            </summary>
+        </member>
+        <member name="M:MGFramework.UIModule.SuperScrollView.RefreshByOneStep">
+            <summary>
+            一步切换前提下刷新数据
             </summary>
         </member>
         <member name="M:MGFramework.UIModule.SuperScrollView.SetNormalizedPosition(System.Single)">
@@ -1832,6 +1837,11 @@
         <member name="M:MGFramework.UIModule.SuperScrollView.GetNormalizedPosition(System.Int32)">
             <summary>
             转化数据索引到位置
+            </summary>
+        </member>
+        <member name="M:MGFramework.UIModule.SuperScrollView.RefreshPosition">
+            <summary>
+            刷新位置
             </summary>
         </member>
         <member name="T:MGFramework.UIModule.SuperToggle.Item">
