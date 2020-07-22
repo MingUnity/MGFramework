@@ -11,14 +11,22 @@ public class MGFrameworkExporter
     public static void Export()
     {
         RemoveUnusedAssets();
-        string assetPath = "Assets/MGFramework";
-        string packageName = "MGFramework.unitypackage";
         string outputDir = Path.Combine(Application.dataPath, "../../Output");
         if (!Directory.Exists(outputDir))
         {
             Directory.CreateDirectory(outputDir);
         }
+
+        //Export MGFramework
+        string assetPath = "Assets/MGFramework";
+        string packageName = "MGFramework.unitypackage";
         AssetDatabase.ExportPackage(assetPath, Path.Combine(outputDir, packageName), ExportPackageOptions.Recurse);
+
+        //Export Sample
+        assetPath = "Assets";
+        packageName = "MGFrameworkSample.unitypackage";
+        AssetDatabase.ExportPackage(assetPath, Path.Combine(outputDir, packageName), ExportPackageOptions.Recurse);
+
         Application.OpenURL(outputDir);
     }
 
