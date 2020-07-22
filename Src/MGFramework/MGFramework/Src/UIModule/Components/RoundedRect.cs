@@ -198,7 +198,7 @@ namespace MGFramework.UIModule
         {
             base.Awake();
 
-            _graphic = this.GetComponent<Graphic>();
+            SetupGraphic();
         }
 
         protected override void OnEnable()
@@ -212,11 +212,7 @@ namespace MGFramework.UIModule
         {
             base.OnValidate();
 
-            if (_graphic == null)
-            {
-                return;
-            }
-
+            SetupGraphic();
             Refresh();
         }
 
@@ -224,6 +220,7 @@ namespace MGFramework.UIModule
         {
             base.OnRectTransformDimensionsChange();
 
+            SetupGraphic();
             float width = _graphic.rectTransform.rect.width;
             float height = _graphic.rectTransform.rect.height;
 
@@ -369,6 +366,17 @@ namespace MGFramework.UIModule
             mat.SetInt("_RightTop", _rightTop ? 1 : 0);
             mat.SetInt("_LeftBottom", _leftBottom ? 1 : 0);
             mat.SetInt("_RightBottom", _rightBottom ? 1 : 0);
+        }
+
+        /// <summary>
+        /// 装载图形对象
+        /// </summary>
+        private void SetupGraphic()
+        {
+            if(_graphic==null)
+            {
+                _graphic = this.GetComponent<Graphic>();
+            }
         }
     }
 }
