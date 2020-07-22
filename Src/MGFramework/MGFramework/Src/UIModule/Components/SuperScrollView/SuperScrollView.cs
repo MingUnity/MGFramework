@@ -418,7 +418,7 @@ namespace MGFramework.UIModule
         {
             base.Awake();
 
-            if (Application.isEditor)
+            if (!Application.isPlaying)
             {
                 return;
             }
