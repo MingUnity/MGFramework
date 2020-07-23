@@ -37,7 +37,7 @@ namespace MGFramework.UIModule
         /// <summary>
         /// 出栈
         /// </summary>
-        public bool Pop(out T item) 
+        public bool Pop(out T item)
         {
             bool result = false;
 
@@ -84,6 +84,14 @@ namespace MGFramework.UIModule
         public void Delete(T item)
         {
             _list.Remove(item);
+        }
+
+        /// <summary>
+        /// 包含
+        /// </summary>
+        public bool Contains(T item)
+        {
+            return _list.Contains(item);
         }
 
         /// <summary>

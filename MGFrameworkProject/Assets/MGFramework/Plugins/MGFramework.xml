@@ -2846,6 +2846,11 @@
             删除
             </summary>
         </member>
+        <member name="M:MGFramework.UIModule.SpecialStack`1.Contains(`0)">
+            <summary>
+            包含
+            </summary>
+        </member>
         <member name="M:MGFramework.UIModule.SpecialStack`1.Clear">
             <summary>
             清理

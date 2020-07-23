@@ -256,7 +256,20 @@ namespace MGFramework.UIModule
 
             for (int i = 0; i < _tempQuitList.Count; i++)
             {
-                Quit(_tempQuitList[i], options, null);
+                Quit(_tempQuitList[i], QuitOptionsFilter(QuitOptions.LeaveStack, options), null);
+            }
+
+            if (options.HasFlag(QuitOptions.LeaveStack))
+            {
+                if (_viewStack.Contains(stayViewGroup))
+                {
+                    _viewStack.Clear();
+                    _viewStack.Push(stayViewGroup);
+                }
+                else
+                {
+                    _viewStack.Clear();
+                }
             }
         }
 
@@ -279,7 +292,21 @@ namespace MGFramework.UIModule
 
             for (int i = 0; i < _tempQuitList.Count; i++)
             {
-                Quit(_tempQuitList[i], options, null);
+                Quit(_tempQuitList[i], QuitOptionsFilter(QuitOptions.LeaveStack, options), null);
+            }
+
+            if (options.HasFlag(QuitOptions.LeaveStack))
+            {
+                IntGroup stay = IntGroup.Get(stayViewId);
+                if (_viewStack.Contains(stay))
+                {
+                    _viewStack.Clear();
+                    _viewStack.Push(stay);
+                }
+                else
+                {
+                    _viewStack.Clear();
+                }
             }
         }
 
