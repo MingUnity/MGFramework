@@ -595,33 +595,30 @@ namespace MGFramework.UIModule
             this._factory = nodeFactory;
             this._nodeParser = parser;
 
-            if (_datas != null)
+            int realCount = RealCount;
+            int nodeCount = _nodes.Count;
+
+            int readyToAdd = realCount - nodeCount;
+
+            //节点多还少补
+            if (readyToAdd >= 0)
             {
-                int realCount = RealCount;
-                int nodeCount = _nodes.Count;
-
-                int readyToAdd = realCount - nodeCount;
-
-                //节点多还少补
-                if (readyToAdd >= 0)
+                for (int i = nodeCount; i < realCount; i++)
                 {
-                    for (int i = nodeCount; i < realCount; i++)
-                    {
-                        ISuperScrollNode node = _factory.Create();
-                        _nodes.Add(node);
-                    }
+                    ISuperScrollNode node = _factory.Create();
+                    _nodes.Add(node);
                 }
-                else
-                {
-                    for (int i = nodeCount - 1; i >= realCount; i--)
-                    {
-                        _factory.Recycle(_nodes[i]);
-                        _nodes.RemoveAt(i);
-                    }
-                }
-
-                _curPageIndex = 0;
             }
+            else
+            {
+                for (int i = nodeCount - 1; i >= realCount; i--)
+                {
+                    _factory.Recycle(_nodes[i]);
+                    _nodes.RemoveAt(i);
+                }
+            }
+
+            _curPageIndex = 0;
 
             RefreshAll();
         }
@@ -723,7 +720,6 @@ namespace MGFramework.UIModule
                 int realIndex = ConvertViewIndexToDataIndex(i);
 
                 ISuperScrollNode node = _nodes.GetValueAnyway(i);
-                node?.ResetAsyncData();
 
                 _nodeParser?.Parse(node, _datas?.GetValueAnyway(realIndex));
             }
