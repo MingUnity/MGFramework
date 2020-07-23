@@ -1523,26 +1523,6 @@
             滚动列表节点数据
             </summary>
         </member>
-        <member name="P:MGFramework.UIModule.SuperScrollNodeBase.Root">
-            <summary>
-            根节点
-            </summary>
-        </member>
-        <member name="M:MGFramework.UIModule.SuperScrollNodeBase.ResetAsyncData">
-            <summary>
-            重置需要异步加载的数据
-            </summary>
-        </member>
-        <member name="M:MGFramework.UIModule.SuperScrollNodeBase.TurnFirst">
-            <summary>
-            移至首节点
-            </summary>
-        </member>
-        <member name="M:MGFramework.UIModule.SuperScrollNodeBase.TurnLast">
-            <summary>
-            移至尾节点
-            </summary>
-        </member>
         <member name="T:MGFramework.UIModule.SuperScrollView">
             <summary>
             优化版滚动列表
