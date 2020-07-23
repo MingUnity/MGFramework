@@ -1503,6 +1503,21 @@
             滚动节点
             </summary>
         </member>
+        <member name="M:MGFramework.UIModule.ISuperScrollNode.TurnLast">
+            <summary>
+            移至尾节点
+            </summary>
+        </member>
+        <member name="M:MGFramework.UIModule.ISuperScrollNode.TurnFirst">
+            <summary>
+            移至首节点
+            </summary>
+        </member>
+        <member name="M:MGFramework.UIModule.ISuperScrollNode.ResetAsyncData">
+            <summary>
+            重置需要异步加载的数据
+            </summary>
+        </member>
         <member name="T:MGFramework.UIModule.ISuperScrollNodeData">
             <summary>
             滚动列表节点数据
@@ -1814,10 +1829,11 @@
             刷新所有数据 
             </summary>
         </member>
-        <member name="M:MGFramework.UIModule.SuperScrollView.RefreshByOneStep">
+        <member name="M:MGFramework.UIModule.SuperScrollView.RefreshByOneStep(System.Boolean)">
             <summary>
             一步切换前提下刷新数据
             </summary>
+            <param name="forward">前进标识</param>
         </member>
         <member name="M:MGFramework.UIModule.SuperScrollView.SetNormalizedPosition(System.Single)">
             <summary>
@@ -1842,6 +1858,20 @@
         <member name="M:MGFramework.UIModule.SuperScrollView.RefreshPosition">
             <summary>
             刷新位置
+            </summary>
+        </member>
+        <member name="M:MGFramework.UIModule.SuperScrollView.MoveNodeForward">
+            <summary>
+            向前移动节点
+            若为左右则为 向右
+            若为上下则为 向下
+            </summary>
+        </member>
+        <member name="M:MGFramework.UIModule.SuperScrollView.MoveNodeBackward">
+            <summary>
+            向后移动节点
+            若为左右则为 向左
+            若为上下则为 向上
             </summary>
         </member>
         <member name="T:MGFramework.UIModule.SuperToggle.Item">
