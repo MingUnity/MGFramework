@@ -30,7 +30,8 @@ public class Scroll : MonoBehaviour
 
         public void Recycle(ISuperScrollNode node)
         {
-            
+            ScrollNode n = node as ScrollNode;
+            n.Active = false;
         }
     }
 
@@ -54,5 +55,18 @@ public class Scroll : MonoBehaviour
         Transform template = this.transform.Find("Viewport/Content/Template");
         template.gameObject.SetActive(false);
         _scroll.Generate(datas, new Factory(template), new Parser());
+    }
+
+    private void Update()
+    {
+        if(Input.GetKeyDown(KeyCode.LeftArrow))
+        {
+            _scroll.ScrollLast();
+        }
+
+        if (Input.GetKeyDown(KeyCode.RightArrow))
+        {
+            _scroll.ScrollNext();
+        }
     }
 }

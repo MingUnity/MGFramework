@@ -2,7 +2,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ScrollNode : ISuperScrollNode
+public class ScrollNode : SuperScrollNodeBase
 {
     private RawImage _img;
 
@@ -11,7 +11,25 @@ public class ScrollNode : ISuperScrollNode
         _img = root.GetComponent<RawImage>();
     }
 
-    public string TexKey { set => ResourcesTextureLoader.Load(value, (tex) => _img.texture = tex); }
+    public override void ResetAsyncData()
+    {
+        TexKey = null;
+    }
 
-    public Transform Root => _img.transform;
+    public string TexKey
+    {
+        set
+        {
+            if(string.IsNullOrEmpty(value))
+            {
+                _img.texture = null;
+                return;
+            }
+            
+            ResourcesTextureLoader.Load(value, (tex) => _img.texture = tex);
+        }
+    }
+    public bool Active { get => _img.gameObject.activeSelf; set => _img.gameObject.SetActive(value); }
+
+    protected override Transform Root => _img.transform;
 }

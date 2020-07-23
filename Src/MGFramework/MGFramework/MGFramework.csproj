@@ -114,6 +114,7 @@
     <Compile Include="Src\UIModule\Components\SuperScrollView\ISuperNodeFactory.cs" />
     <Compile Include="Src\UIModule\Components\SuperScrollView\ISuperScrollNode.cs" />
     <Compile Include="Src\UIModule\Components\SuperScrollView\ISuperScrollNodeData.cs" />
+    <Compile Include="Src\UIModule\Components\SuperScrollView\SuperScrollNodeBase.cs" />
     <Compile Include="Src\UIModule\Components\SuperScrollView\SuperScrollView.cs" />
     <Compile Include="Src\UIModule\Components\Toggle\SuperToggle.cs" />
     <Compile Include="Src\UIModule\Components\Toggle\ToggleEx.cs" />

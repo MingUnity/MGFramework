@@ -395,7 +395,6 @@ namespace MGFramework.UIModule
                 return res;
             }
         }
-
         #endregion
 
         #region Property/Event
@@ -526,9 +525,11 @@ namespace MGFramework.UIModule
                     {
                         if (deltaTime <= _swipeDirectTimeThreshold || Mathf.Abs(deltaPos) >= _slowSwipeThreshold)
                         {
+                            bool forward = targetPageIndex - _curPageIndex > 0;
+
                             ScrollTo(targetPageIndex, _autoSwipeDuration, () =>
                             {
-                                RefreshAll();
+                                RefreshByOneStep(forward);
                                 OnSwipeCompletedEvent?.Invoke(_scrollHandler.GetPosDir(deltaPos));
                             }, null);
                         }
@@ -650,7 +651,7 @@ namespace MGFramework.UIModule
 
             ScrollTo(_curPageIndex + 1, time, () =>
             {
-                RefreshAll();
+                RefreshByOneStep(true);
                 onCompleted?.Invoke();
             }, onScrolling);
         }
@@ -668,7 +669,7 @@ namespace MGFramework.UIModule
 
             ScrollTo(_curPageIndex - 1, time, () =>
             {
-                RefreshAll();
+                RefreshByOneStep(false);
                 onCompleted?.Invoke();
             }, onScrolling);
         }
@@ -721,16 +722,43 @@ namespace MGFramework.UIModule
             {
                 int realIndex = ConvertViewIndexToDataIndex(i);
 
-                _nodeParser?.Parse(_nodes.GetValueAnyway(i), _datas?.GetValueAnyway(realIndex));
+                ISuperScrollNode node = _nodes.GetValueAnyway(i);
+                node?.ResetAsyncData();
+
+                _nodeParser?.Parse(node, _datas?.GetValueAnyway(realIndex));
             }
         }
 
         /// <summary>
         /// 一步切换前提下刷新数据
         /// </summary>
-        private void RefreshByOneStep()
+        /// <param name="forward">前进标识</param>
+        private void RefreshByOneStep(bool forward)
         {
-           
+            int pageCount = PageCount;
+
+            if (forward)
+            {
+                if (_curPageIndex > 1 && _curPageIndex < pageCount - 1)
+                {
+                    ISuperScrollNode node = MoveNodeForward();
+                    int viewIndex = _nodes.Count - 1;
+                    int dataIndex = ConvertViewIndexToDataIndex(viewIndex);
+                    _nodeParser.Parse(node, _datas.GetValueAnyway(dataIndex));
+                }
+            }
+            else
+            {
+                if (_curPageIndex < pageCount - 2 && _curPageIndex > 0)
+                {
+                    ISuperScrollNode node = MoveNodeBackward();
+                    int viewIndex = 0;
+                    int dataIndex = ConvertViewIndexToDataIndex(viewIndex);
+                    _nodeParser.Parse(node, _datas.GetValueAnyway(dataIndex));
+                }
+            }
+
+            RefreshPosition();
         }
 
         /// <summary>
@@ -845,9 +873,6 @@ namespace MGFramework.UIModule
 
             switch (realCount)
             {
-                case 0:
-                    return;
-
                 case 1:
                     SetNormalizedPosition(0);
                     break;
@@ -860,6 +885,46 @@ namespace MGFramework.UIModule
                     SetNormalizedPosition(_curPageIndex == 0 ? 0 : _curPageIndex == PageCount - 1 ? 1 : 0.5f);
                     break;
             }
+        }
+
+        /// <summary>
+        /// 向前移动节点
+        /// 若为左右则为 向右
+        /// 若为上下则为 向下
+        /// </summary>
+        private ISuperScrollNode MoveNodeForward()
+        {
+            ISuperScrollNode firstNode = _nodes.GetValueAnyway(0);
+
+            if (firstNode != null)
+            {
+                firstNode.ResetAsyncData();
+                firstNode.TurnLast();
+                _nodes.RemoveAt(0);
+                _nodes.Add(firstNode);
+            }
+
+            return firstNode;
+        }
+
+        /// <summary>
+        /// 向后移动节点
+        /// 若为左右则为 向左
+        /// 若为上下则为 向上
+        /// </summary>
+        private ISuperScrollNode MoveNodeBackward()
+        {
+            ISuperScrollNode lastNode = _nodes.GetValueAnyway(_nodes.Count - 1);
+
+            if (lastNode != null)
+            {
+                lastNode.ResetAsyncData();
+                lastNode.TurnFirst();
+                _nodes.RemoveAt(_nodes.Count - 1);
+                _nodes.Insert(0, lastNode);
+            }
+
+            return lastNode;
         }
 
         #endregion
