@@ -16,8 +16,8 @@ namespace MGFramework.UIModule
         void Quit(int viewId, QuitOptions options = QuitOptions.None, Action callback = null);
         void Quit(IntGroup viewGroup, QuitOptions options = QuitOptions.None, Action callback = null);
         void QuitAll(QuitOptions options = QuitOptions.None);
-        void QuitOtherAll(IntGroup stayViewGroup, QuitOptions options = QuitOptions.None);
-        void QuitOtherAll(int stayViewId, QuitOptions options = QuitOptions.None);
+        void QuitAll(IntGroup stayViewGroup, QuitOptions options = QuitOptions.None, StayOptions stayOptions = StayOptions.None);
+        void QuitAll(int stayViewId, QuitOptions options = QuitOptions.None, StayOptions stayOptions = StayOptions.None);
         void ResetStack();
         void Preload(int viewId);
         void Preload(IntGroup viewGroup);
@@ -44,7 +44,7 @@ namespace MGFramework.UIModule
         /// <summary>
         /// 合并栈顶
         /// </summary>
-        CombineStackTop = 2,
+        CombineStackTop = 2
     }
 
     /// <summary>
@@ -67,5 +67,27 @@ namespace MGFramework.UIModule
         /// 销毁
         /// </summary>
         Destroy = 2
+    }
+
+    /// <summary>
+    /// 驻留选项
+    /// </summary>
+    [Flags]
+    public enum StayOptions
+    {
+        /// <summary>
+        /// 无
+        /// </summary>
+        None = 0,
+
+        /// <summary>
+        /// 入栈
+        /// </summary>
+        PushStack = 1,
+
+        /// <summary>
+        /// 合并栈顶
+        /// </summary>
+        CombineStackTop = 2
     }
 }

@@ -2039,6 +2039,26 @@
             销毁
             </summary>
         </member>
+        <member name="T:MGFramework.UIModule.StayOptions">
+            <summary>
+            驻留选项
+            </summary>
+        </member>
+        <member name="F:MGFramework.UIModule.StayOptions.None">
+            <summary>
+            无
+            </summary>
+        </member>
+        <member name="F:MGFramework.UIModule.StayOptions.PushStack">
+            <summary>
+            入栈
+            </summary>
+        </member>
+        <member name="F:MGFramework.UIModule.StayOptions.CombineStackTop">
+            <summary>
+            合并栈顶
+            </summary>
+        </member>
         <member name="T:MGFramework.UIModule.IUIModule">
             <summary>
             UI模块
@@ -2175,19 +2195,23 @@
             </summary>
             <param name="options">选项</param>
         </member>
-        <member name="M:MGFramework.UIModule.PopUIModule.QuitOtherAll(IntGroup,MGFramework.UIModule.QuitOptions)">
+        <member name="M:MGFramework.UIModule.PopUIModule.QuitAll(IntGroup,MGFramework.UIModule.QuitOptions,MGFramework.UIModule.StayOptions)">
             <summary>
-            退出其他全部视图
+            退出所有视图
+            会有部分视图驻留
             </summary>
-            <param name="stayViewGroup">保留的视图组</param>
-            <param name="options">选项</param>
+            <param name="stayViewGroup">驻留视图组</param>
+            <param name="options">退出的视图选项</param>
+            <param name="stayOptions">驻留的视图选项</param>
         </member>
-        <member name="M:MGFramework.UIModule.PopUIModule.QuitOtherAll(System.Int32,MGFramework.UIModule.QuitOptions)">
+        <member name="M:MGFramework.UIModule.PopUIModule.QuitAll(System.Int32,MGFramework.UIModule.QuitOptions,MGFramework.UIModule.StayOptions)">
             <summary>
-            退出其他全部视图
+            退出所有视图
+            会有部分视图驻留
             </summary>
-            <param name="stayViewId">保留的视图</param>
-            <param name="options">选项</param>
+            <param name="stayViewId">驻留视图</param>
+            <param name="options">退出的视图选项</param>
+            <param name="stayOptions">驻留的视图选项</param>
         </member>
         <member name="M:MGFramework.UIModule.PopUIModule.Pop(System.Action)">
             <summary>
@@ -2215,6 +2239,11 @@
         <member name="M:MGFramework.UIModule.PopUIModule.ProcessEnterOptions(IntGroup,MGFramework.UIModule.EnterOptions)">
             <summary>
             处理进入选项
+            </summary>
+        </member>
+        <member name="M:MGFramework.UIModule.PopUIModule.ProcessStayOptions(IntGroup,MGFramework.UIModule.StayOptions)">
+            <summary>
+            处理驻留选项
             </summary>
         </member>
         <member name="M:MGFramework.UIModule.PopUIModule.ProcessCombineStackTop(IntGroup)">
@@ -2331,19 +2360,23 @@
             退出所有视图
             </summary>
         </member>
-        <member name="M:MGFramework.UIModule.UIManager.QuitOtherAll(IntGroup,MGFramework.UIModule.QuitOptions)">
+        <member name="M:MGFramework.UIModule.UIManager.QuitAll(IntGroup,MGFramework.UIModule.QuitOptions,MGFramework.UIModule.StayOptions)">
             <summary>
-            退出其他全部视图
+            退出所有视图
+            会有部分视图驻留
             </summary>
-            <param name="stayViewGroup">保留的视图组</param>
-            <param name="options">选项</param>
+            <param name="stayViewGroup">驻留视图组</param>
+            <param name="options">退出的视图选项</param>
+            <param name="stayOptions">驻留的视图选项</param>
         </member>
-        <member name="M:MGFramework.UIModule.UIManager.QuitOtherAll(System.Int32,MGFramework.UIModule.QuitOptions)">
+        <member name="M:MGFramework.UIModule.UIManager.QuitAll(System.Int32,MGFramework.UIModule.QuitOptions,MGFramework.UIModule.StayOptions)">
             <summary>
-            退出其他全部视图
+            退出所有视图
+            会有部分视图驻留
             </summary>
-            <param name="stayViewId">保留的视图</param>
-            <param name="options">选项</param>
+            <param name="stayViewId">驻留视图</param>
+            <param name="options">退出的视图选项</param>
+            <param name="stayOptions">驻留的视图选项</param>
         </member>
         <member name="M:MGFramework.UIModule.UIManager.Pop(System.Action)">
             <summary>
@@ -3774,6 +3807,11 @@
         <member name="T:IntGroup">
             <summary>
             int组
+            </summary>
+        </member>
+        <member name="F:IntGroup._tempMathList">
+            <summary>
+            临时数学计算使用列表
             </summary>
         </member>
         <member name="F:IntGroup._ints">

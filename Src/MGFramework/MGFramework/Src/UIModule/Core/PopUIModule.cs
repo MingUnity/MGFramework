@@ -71,8 +71,9 @@ namespace MGFramework.UIModule
         /// <param name="callback">进入完成回调</param>
         public void Enter(int viewId, EnterOptions options = EnterOptions.None, Action callback = null)
         {
-            ViewState state;
+            ProcessEnterOptions(IntGroup.Get(viewId), options);
 
+            ViewState state;
             _viewDic.TryGetValue(viewId, out state);
 
             if (!state.active)
@@ -95,8 +96,6 @@ namespace MGFramework.UIModule
                 _uiModule?.Focus(viewId);
                 callback?.Invoke();
             }
-
-            ProcessEnterOptions(IntGroup.Get(viewId), options);
         }
 
         /// <summary>
@@ -107,6 +106,8 @@ namespace MGFramework.UIModule
         /// <param name="callback">进入完成回调</param>
         public void Enter(IntGroup viewGroup, EnterOptions options = EnterOptions.None, Action callback = null)
         {
+            ProcessEnterOptions(viewGroup, options);
+
             int all = viewGroup.Count;
             int done = 0;
 
@@ -121,8 +122,6 @@ namespace MGFramework.UIModule
                     }
                 });
             }
-
-            ProcessEnterOptions(viewGroup, options);
         }
 
         /// <summary>
@@ -238,11 +237,13 @@ namespace MGFramework.UIModule
         }
 
         /// <summary>
-        /// 退出其他全部视图
+        /// 退出所有视图
+        /// 会有部分视图驻留
         /// </summary>
-        /// <param name="stayViewGroup">保留的视图组</param>
-        /// <param name="options">选项</param>
-        public void QuitOtherAll(IntGroup stayViewGroup, QuitOptions options = QuitOptions.None)
+        /// <param name="stayViewGroup">驻留视图组</param>
+        /// <param name="options">退出的视图选项</param>
+        /// <param name="stayOptions">驻留的视图选项</param>
+        public void QuitAll(IntGroup stayViewGroup, QuitOptions options = QuitOptions.None, StayOptions stayOptions = StayOptions.None)
         {
             _tempQuitList.Clear();
 
@@ -261,53 +262,22 @@ namespace MGFramework.UIModule
 
             if (options.HasFlag(QuitOptions.LeaveStack))
             {
-                if (_viewStack.Contains(stayViewGroup))
-                {
-                    _viewStack.Clear();
-                    _viewStack.Push(stayViewGroup);
-                }
-                else
-                {
-                    _viewStack.Clear();
-                }
+                ResetStack();
             }
+
+            ProcessStayOptions(stayViewGroup, stayOptions);
         }
-
+        
         /// <summary>
-        /// 退出其他全部视图
+        /// 退出所有视图
+        /// 会有部分视图驻留
         /// </summary>
-        /// <param name="stayViewId">保留的视图</param>
-        /// <param name="options">选项</param>
-        public void QuitOtherAll(int stayViewId, QuitOptions options = QuitOptions.None)
+        /// <param name="stayViewId">驻留视图</param>
+        /// <param name="options">退出的视图选项</param>
+        /// <param name="stayOptions">驻留的视图选项</param>
+        public void QuitAll(int stayViewId, QuitOptions options = QuitOptions.None, StayOptions stayOptions = StayOptions.None)
         {
-            _tempQuitList.Clear();
-
-            foreach (int id in _viewDic.Keys)
-            {
-                if (stayViewId != id)
-                {
-                    _tempQuitList.Add(id);
-                }
-            }
-
-            for (int i = 0; i < _tempQuitList.Count; i++)
-            {
-                Quit(_tempQuitList[i], QuitOptionsFilter(QuitOptions.LeaveStack, options), null);
-            }
-
-            if (options.HasFlag(QuitOptions.LeaveStack))
-            {
-                IntGroup stay = IntGroup.Get(stayViewId);
-                if (_viewStack.Contains(stay))
-                {
-                    _viewStack.Clear();
-                    _viewStack.Push(stay);
-                }
-                else
-                {
-                    _viewStack.Clear();
-                }
-            }
+            QuitAll(IntGroup.Get(stayViewId), options, stayOptions);
         }
 
         /// <summary>
@@ -347,7 +317,9 @@ namespace MGFramework.UIModule
                         {
                             res = true;
 
-                            Quit(curId, QuitOptions.None, () =>
+                            IntGroup toQuit = curId - dstId;
+
+                            Quit(toQuit, QuitOptions.None, () =>
                            {
                                Enter(dstId, EnterOptions.None, callback);
                            });
@@ -414,6 +386,25 @@ namespace MGFramework.UIModule
                 ProcessPushCombineStackTop(viewGroup);
             }
             else if (!options.HasFlag(EnterOptions.PushStack) && options.HasFlag(EnterOptions.CombineStackTop))
+            {
+                ProcessCombineStackTop(viewGroup);
+            }
+        }
+
+        /// <summary>
+        /// 处理驻留选项
+        /// </summary>
+        private void ProcessStayOptions(IntGroup viewGroup, StayOptions options)
+        {
+            if (options.HasFlag(StayOptions.PushStack) && !options.HasFlag(StayOptions.CombineStackTop))
+            {
+                ProcessPushStack(viewGroup);
+            }
+            else if (options.HasFlag(StayOptions.PushStack) && options.HasFlag(StayOptions.CombineStackTop))
+            {
+                ProcessPushCombineStackTop(viewGroup);
+            }
+            else if (!options.HasFlag(StayOptions.PushStack) && options.HasFlag(StayOptions.CombineStackTop))
             {
                 ProcessCombineStackTop(viewGroup);
             }

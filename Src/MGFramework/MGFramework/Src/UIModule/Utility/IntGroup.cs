@@ -8,6 +8,11 @@ using System.Collections.Generic;
 public struct IntGroup : IEquatable<IntGroup>
 {
     /// <summary>
+    /// 临时数学计算使用列表
+    /// </summary>
+    private static readonly List<int> _tempMathList = new List<int>();
+
+    /// <summary>
     /// 整形数组
     /// </summary>
     private int[] _ints;
@@ -105,23 +110,23 @@ public struct IntGroup : IEquatable<IntGroup>
     /// </summary>
     public static IntGroup Combine(params IntGroup[] args)
     {
+        _tempMathList.Clear();
+
         IntGroup result = IntGroup.Empty;
-
-        List<int> groups = new List<int>();
-
+        
         if (args != null)
         {
             for (int i = 0; i < args.Length; i++)
             {
                 IntGroup group = args[i];
-                
+
                 for (int j = 0; j < group.Count; j++)
                 {
-                    groups.Add(group[j]);
+                    _tempMathList.Add(group[j]);
                 }
             }
 
-            result = IntGroup.Get(groups.ToArray());
+            result = IntGroup.Get(_tempMathList.ToArray());
         }
 
         return result;
@@ -135,6 +140,25 @@ public struct IntGroup : IEquatable<IntGroup>
     public static bool operator !=(IntGroup groupA, IntGroup groupB)
     {
         return !groupA.Equals(groupB);
+    }
+
+    public static IntGroup operator -(IntGroup groupA, IntGroup groupB)
+    {
+        _tempMathList.Clear();
+
+        int[] intsA = groupA._ints;
+        
+        for (int i = 0; i < intsA.Length; i++)
+        {
+            int aInt = intsA[i];
+            
+            if (!groupB.Contains(aInt))
+            {
+                _tempMathList.Add(aInt);
+            }
+        }
+
+        return IntGroup.Get(_tempMathList.ToArray());
     }
 
     public override bool Equals(object obj)

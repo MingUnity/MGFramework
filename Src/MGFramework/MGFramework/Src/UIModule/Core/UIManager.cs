@@ -144,24 +144,29 @@ namespace MGFramework.UIModule
         {
             _module.QuitAll(options);
         }
+
         /// <summary>
-        /// 退出其他全部视图
+        /// 退出所有视图
+        /// 会有部分视图驻留
         /// </summary>
-        /// <param name="stayViewGroup">保留的视图组</param>
-        /// <param name="options">选项</param>
-        public void QuitOtherAll(IntGroup stayViewGroup, QuitOptions options = QuitOptions.None)
+        /// <param name="stayViewGroup">驻留视图组</param>
+        /// <param name="options">退出的视图选项</param>
+        /// <param name="stayOptions">驻留的视图选项</param>
+        public void QuitAll(IntGroup stayViewGroup, QuitOptions options = QuitOptions.None, StayOptions stayOptions = StayOptions.None)
         {
-            _module.QuitOtherAll(stayViewGroup, options);
+            _module.QuitAll(stayViewGroup, options, stayOptions);
         }
 
         /// <summary>
-        /// 退出其他全部视图
+        /// 退出所有视图
+        /// 会有部分视图驻留
         /// </summary>
-        /// <param name="stayViewId">保留的视图</param>
-        /// <param name="options">选项</param>
-        public void QuitOtherAll(int stayViewId, QuitOptions options = QuitOptions.None)
+        /// <param name="stayViewId">驻留视图</param>
+        /// <param name="options">退出的视图选项</param>
+        /// <param name="stayOptions">驻留的视图选项</param>
+        public void QuitAll(int stayViewId, QuitOptions options = QuitOptions.None, StayOptions stayOptions = StayOptions.None)
         {
-            _module.QuitOtherAll(stayViewId, options);
+            _module.QuitAll(stayViewId, options, stayOptions);
         }
 
         /// <summary>
