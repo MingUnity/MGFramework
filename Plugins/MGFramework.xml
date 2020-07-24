@@ -990,11 +990,6 @@
             清单加载标识
             </summary>
         </member>
-        <member name="F:MGFramework.ResourceModule.AssetBundles.DepAssetBundleLoader._coreManifestDir">
-            <summary>
-            清单目录
-            </summary>
-        </member>
         <member name="M:MGFramework.ResourceModule.AssetBundles.DepAssetBundleLoader.LoadDepAssetBundle(System.String)">
             <summary>
             加载依赖AB包
@@ -1209,14 +1204,20 @@
             通过资源信息创建对象
             </summary>
         </member>
+        <member name="M:MGFramework.ResourceModule.ResLoaderExtends.GetObjAsyncByResInfo(MGFramework.ResourceModule.IResLoader,System.Action{System.String,System.String,UnityEngine.GameObject},MGFramework.ResourceModule.ResLoadParam)">
+            <summary>
+            通过资源信息创建对象
+            强制异步
+            </summary>
+        </member>
         <member name="M:MGFramework.ResourceModule.ResLoaderExtends.ParseResInfo(MGFramework.ResourceModule.IResLoader,System.String@,System.String@,System.Boolean@,MGFramework.ResourceModule.ResLoadParam)">
             <summary>
             解析资源信息
             </summary>
         </member>
-        <member name="M:MGFramework.ResourceModule.ResLoaderExtends.GenerateDefaultResInfo(MGFramework.ResourceModule.IResLoader,System.String@,System.String@)">
+        <member name="M:MGFramework.ResourceModule.ResLoaderExtends.ParseAsyncResInfo(MGFramework.ResourceModule.IResLoader,System.String@,System.String@,MGFramework.ResourceModule.ResLoadParam)">
             <summary>
-            生成默认资源信息
+            解析基于异步的资源信息
             </summary>
         </member>
         <member name="T:MGFramework.ResourceModule.ResLoadParam">
@@ -2953,6 +2954,11 @@
             创建
             </summary>
         </member>
+        <member name="M:MGFramework.UIModule.IView.Preload(System.Action)">
+            <summary>
+            预加载
+            </summary>
+        </member>
         <member name="M:MGFramework.UIModule.IView.Show(System.Action)">
             <summary>
             显示
@@ -3026,6 +3032,11 @@
             创建
             </summary>
         </member>
+        <member name="M:MGFramework.UIModule.ViewBase`1.Preload(System.Action)">
+            <summary>
+            预加载
+            </summary>
+        </member>
         <member name="M:MGFramework.UIModule.ViewBase`1.Show(System.Action)">
             <summary>
             显示
@@ -3080,6 +3091,11 @@
         <member name="M:MGFramework.UIModule.ViewBase`1.GenerateDefaultParentInfo(MGFramework.UIModule.FindType@,System.String@)">
             <summary>
             构建默认信息
+            </summary>
+        </member>
+        <member name="M:MGFramework.UIModule.ViewBase`1.OnGetResInfoCompleted(System.String,System.String,UnityEngine.GameObject,System.Action)">
+            <summary>
+            获取资源信息完成
             </summary>
         </member>
         <member name="T:MGFramework.UIModule.ViewGroup">
