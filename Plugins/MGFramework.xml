@@ -840,6 +840,20 @@
             数据解析器
             </summary>
         </member>
+        <member name="F:MGFramework.RefreshPoolObjectHandler`2._optimize">
+            <summary>
+            优化标识
+            </summary>
+        </member>
+        <member name="M:MGFramework.RefreshPoolObjectHandler`2.#ctor(MGFramework.ObjectPool{`0},System.Collections.Generic.List{`0},MGFramework.RefreshPoolObjectHandler{`0,`1}.IParser,System.Boolean)">
+            <summary>
+            构造函数
+            </summary>
+            <param name="pool">对象池</param>
+            <param name="lifeNodes">可见节点</param>
+            <param name="parser">数据解析</param>
+            <param name="optimize">是否采用优化策略(分帧加载元素)</param>
+        </member>
         <member name="M:MGFramework.RefreshPoolObjectHandler`2.Refresh(`1[])">
             <summary>
             刷新所有
@@ -848,6 +862,11 @@
         <member name="M:MGFramework.RefreshPoolObjectHandler`2.Refresh(System.Int32,`1)">
             <summary>
             刷新指定数据
+            </summary>
+        </member>
+        <member name="M:MGFramework.RefreshPoolObjectHandler`2.CreateWithPerFrame(System.Int32,`1[])">
+            <summary>
+            分帧加载
             </summary>
         </member>
         <member name="T:MGFramework.ResourceModule.AssetBundles.AssetBundleLoader">
