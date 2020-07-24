@@ -359,6 +359,10 @@ namespace MGFramework.UIModule
         /// 滚动任务
         /// </summary>
         private ScrollTask _scrollTask;
+        
+        #endregion
+
+        #region Property/Event
 
         /// <summary>
         /// 总页数
@@ -395,9 +399,6 @@ namespace MGFramework.UIModule
                 return res;
             }
         }
-        #endregion
-
-        #region Property/Event
 
         /// <summary>
         /// 可交互性

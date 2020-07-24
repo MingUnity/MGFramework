@@ -60,7 +60,7 @@ namespace MGFramework
         /// <param name="url">图片路径</param>
         /// <param name="callback">完成回调</param>
         /// <param name="cacheLevel">缓存优先级</param>
-        public static void Load(string url, Action<Texture2D> callback, CacheLevel cacheLevel= CacheLevel.Cache_0)
+        public static void Load(string url, Action<Texture2D> callback, CacheLevel cacheLevel = CacheLevel.Cache_0)
         {
             Load(url, _httpLoader, callback, cacheLevel);
         }

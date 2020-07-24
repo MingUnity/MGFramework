@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 
 namespace MGFramework
 {
@@ -35,11 +37,24 @@ namespace MGFramework
         /// </summary>
         private IParser _parser;
 
-        public RefreshPoolObjectHandler(ObjectPool<T> pool, List<T> lifeNodes, IParser parser)
+        /// <summary>
+        /// 优化标识
+        /// </summary>
+        private bool _optimize = false;
+
+        /// <summary>
+        /// 构造函数
+        /// </summary>
+        /// <param name="pool">对象池</param>
+        /// <param name="lifeNodes">可见节点</param>
+        /// <param name="parser">数据解析</param>
+        /// <param name="optimize">是否采用优化策略(分帧加载元素)</param>
+        public RefreshPoolObjectHandler(ObjectPool<T> pool, List<T> lifeNodes, IParser parser, bool optimize = false)
         {
             this._pool = pool;
             this._lifeNodes = lifeNodes;
             this._parser = parser;
+            this._optimize = optimize;
         }
 
         /// <summary>
@@ -69,11 +84,18 @@ namespace MGFramework
                     }
 
                     //需补的 创建节点并解析赋值
-                    for (int i = lifeCount; i < datas.Length; i++)
+                    if (_optimize)
                     {
-                        T node = _pool.Get();
-                        _parser.Parse(node, datas[i]);
-                        _lifeNodes.Add(node);
+                        Task.CreateTask(CreateWithPerFrame(lifeCount,datas));
+                    }
+                    else
+                    {
+                        for (int i = lifeCount; i < datas.Length; i++)
+                        {
+                            T node = _pool.Get();
+                            _parser.Parse(node, datas[i]);
+                            _lifeNodes.Add(node);
+                        }
                     }
                 }
                 else
@@ -98,7 +120,7 @@ namespace MGFramework
                 _lifeNodes.Clear();
             }
         }
-
+        
         /// <summary>
         /// 刷新指定数据
         /// </summary>
@@ -108,9 +130,24 @@ namespace MGFramework
             {
                 return;
             }
-            
+
             T node = _lifeNodes.GetValueAnyway(index);
             _parser?.Parse(node, data);
+        }
+
+        /// <summary>
+        /// 分帧加载
+        /// </summary>
+        private IEnumerator CreateWithPerFrame(int start,V[] datas)
+        {
+            for (int i = start; i < datas.Length; i++)
+            {
+                T node = _pool.Get();
+                _parser.Parse(node, datas[i]);
+                _lifeNodes.Add(node);
+
+                yield return null;
+            }
         }
     }
 }

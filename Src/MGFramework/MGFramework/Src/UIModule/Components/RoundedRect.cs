@@ -211,8 +211,7 @@ namespace MGFramework.UIModule
         protected override void OnValidate()
         {
             base.OnValidate();
-
-            SetupGraphic();
+            
             Refresh();
         }
 
@@ -235,6 +234,8 @@ namespace MGFramework.UIModule
         /// </summary>
         private void Refresh()
         {
+            SetupGraphic();
+
             float width = _graphic.rectTransform.rect.width;
             float height = _graphic.rectTransform.rect.height;
 
@@ -373,7 +374,7 @@ namespace MGFramework.UIModule
         /// </summary>
         private void SetupGraphic()
         {
-            if(_graphic==null)
+            if (_graphic == null)
             {
                 _graphic = this.GetComponent<Graphic>();
             }
