@@ -72,7 +72,7 @@ namespace MGFramework.UIModule
             {
                 view = Container.Resolve<IView>(viewId);
 
-                view?.Create(() =>
+                view?.Preload(() =>
                 {
                     this[viewId] = view;
 

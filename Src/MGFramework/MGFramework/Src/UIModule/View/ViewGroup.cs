@@ -203,5 +203,14 @@ namespace MGFramework.UIModule
                 _subViews[i]?.UnFocus();
             }
         }
+
+        public void Preload(Action callback = null)
+        {
+            for (int i = 0; i < _subViews.Count; i++)
+            {
+                _subViews[i]?.Preload();
+            }
+
+        }
     }
 }

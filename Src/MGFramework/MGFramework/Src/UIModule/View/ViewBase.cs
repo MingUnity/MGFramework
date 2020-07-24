@@ -114,44 +114,24 @@ namespace MGFramework.UIModule
 
             this.GetObjByResInfo((abPath, assetName, obj) =>
             {
-                if (obj != null)
-                {
-                    Transform parent = ParseParentAttr();
+                OnGetResInfoCompleted(abPath, assetName, obj, callback);
+            }, UISetting.DefaultAssetLoadParam);
+        }
 
-                    _root = GameObject.Instantiate(obj, parent).GetComponent<RectTransform>();
+        /// <summary>
+        /// 预加载
+        /// </summary>
+        public void Preload(Action callback = null)
+        {
+            if (_created)
+            {
+                callback?.Invoke();
+                return;
+            }
 
-                    if (_root != null)
-                    {
-                        _rootCanvas = _root.GetComponent<CanvasGroup>();
-
-                        if (_rootCanvas == null)
-                        {
-                            _rootCanvas = _root.gameObject.AddComponent<CanvasGroup>();
-                        }
-
-                        OnCreate();
-
-                        _created = true;
-
-                        _presenter?.OnCreateCompleted();
-                    }
-                    else
-                    {
-                        Debug.LogError($"<Ming> ## Uni Error ## Cls:{this.GetType().Name} Func:Create Info:Instantiate failed !");
-
-                        throw new Exception($"<Ming> ## Uni Exception ## Cls:{this.GetType().Name} Func:Create Info:Instantiate failed !");
-                    }
-
-                    callback?.Invoke();
-                }
-                else
-                {
-                    Debug.LogError($"<Ming> ## Uni Error ## Cls:{this.GetType().Name} Func:Create Info:Load res failed !");
-
-                    throw new Exception($"<Ming> ## Uni Exception ## Cls:{this.GetType().Name} Func:Create Info:Load res failed !");
-                }
-
-                AssetBundleLoader?.Unload(abPath, false);
+            this.GetObjAsyncByResInfo((abPath, assetName, obj) =>
+            {
+                OnGetResInfoCompleted(abPath, assetName, obj, callback);
             }, UISetting.DefaultAssetLoadParam);
         }
 
@@ -191,7 +171,6 @@ namespace MGFramework.UIModule
         /// </summary>
         public void Focus()
         {
-            _rootCanvas.interactable = true;
             _presenter?.OnFocus();
         }
 
@@ -200,7 +179,6 @@ namespace MGFramework.UIModule
         /// </summary>
         public void UnFocus()
         {
-            _rootCanvas.interactable = false;
             _presenter?.OnUnFocus();
         }
 
@@ -305,6 +283,47 @@ namespace MGFramework.UIModule
                 type = FindType.FindWithName;
                 param = "Canvas";
             }
+        }
+
+        /// <summary>
+        /// 获取资源信息完成
+        /// </summary>
+        private void OnGetResInfoCompleted(string abPath, string assetName, GameObject obj, Action callback)
+        {
+            if (obj != null)
+            {
+                Transform parent = ParseParentAttr();
+
+                _root = GameObject.Instantiate(obj, parent).GetComponent<RectTransform>();
+
+                if (_root != null)
+                {
+                    _rootCanvas = _root.GetComponent<CanvasGroup>();
+
+                    if (_rootCanvas == null)
+                    {
+                        _rootCanvas = _root.gameObject.AddComponent<CanvasGroup>();
+                    }
+
+                    OnCreate();
+
+                    _created = true;
+
+                    _presenter?.OnCreateCompleted();
+                }
+                else
+                {
+                    throw new Exception($"<Ming> ## Uni Exception ## Cls:{this.GetType().Name} Func:Create Info:Instantiate failed !");
+                }
+
+                callback?.Invoke();
+            }
+            else
+            {
+                throw new Exception($"<Ming> ## Uni Exception ## Cls:{this.GetType().Name} Func:Create Info:Load res failed !");
+            }
+
+            AssetBundleLoader?.Unload(abPath, false);
         }
     }
 }

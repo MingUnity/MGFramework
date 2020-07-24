@@ -21,12 +21,7 @@ namespace MGFramework.ResourceModule.AssetBundles
         /// 清单加载标识
         /// </summary>
         private bool _manifestLoaded = false;
-
-        /// <summary>
-        /// 清单目录
-        /// </summary>
-        private string _coreManifestDir = string.Empty;
-
+        
         public DepAssetBundleLoader()
         {
             _loader = new AssetBundleLoader();
@@ -43,8 +38,6 @@ namespace MGFramework.ResourceModule.AssetBundles
 
             if (_coreManifest != null)
             {
-                _coreManifestDir = Path.GetDirectoryName(abPath);
-
                 _manifestLoaded = true;
             }
         }
@@ -56,9 +49,7 @@ namespace MGFramework.ResourceModule.AssetBundles
                 if (manifest != null)
                 {
                     _coreManifest = manifest;
-
-                    _coreManifestDir = Path.GetDirectoryName(abPath);
-
+                    
                     _manifestLoaded = true;
 
                     callback?.Invoke();
@@ -126,6 +117,7 @@ namespace MGFramework.ResourceModule.AssetBundles
             if (_manifestLoaded)
             {
                 string abName = Path.GetFileName(abPath);
+                string abDir = Path.GetDirectoryName(abPath);
 
                 string[] deps = _coreManifest.GetAllDependencies(abName);
 
@@ -135,7 +127,7 @@ namespace MGFramework.ResourceModule.AssetBundles
                     {
                         string depAbName = deps[i];
 
-                        string depAbPath = Path.Combine(_coreManifestDir, depAbName);
+                        string depAbPath = Path.Combine(abDir, depAbName);
 
                         LoadDepAssetBundle(depAbName);
 
@@ -153,6 +145,7 @@ namespace MGFramework.ResourceModule.AssetBundles
             if (_manifestLoaded)
             {
                 string abName = Path.GetFileName(abPath);
+                string abDir = Path.GetDirectoryName(abPath);
 
                 string[] deps = _coreManifest.GetAllDependencies(abName);
 
@@ -170,9 +163,9 @@ namespace MGFramework.ResourceModule.AssetBundles
                     {
                         string depAbName = deps[i];
 
-                        string depAbPath = Path.Combine(_coreManifestDir, depAbName);
+                        string depAbPath = Path.Combine(abDir, depAbName);
 
-                        int tempIndex = i;
+                        int index = i;
 
                         LoadDepAssetBundleAsync(depAbName, () =>
                         {
@@ -186,13 +179,13 @@ namespace MGFramework.ResourceModule.AssetBundles
                                 }
                             }, (progress) =>
                             {
-                                loadProgressArr[tempIndex] = progress;
+                                loadProgressArr[index] = progress;
 
                                 progressCallback?.Invoke(Average(loadProgressArr) * 0.5f + 0.5f);
                             });
                         }, (progress) =>
                          {
-                             depProgressArr[tempIndex] = progress;
+                             depProgressArr[index] = progress;
 
                              progressCallback?.Invoke(Average(depProgressArr) * 0.5f);
                          });

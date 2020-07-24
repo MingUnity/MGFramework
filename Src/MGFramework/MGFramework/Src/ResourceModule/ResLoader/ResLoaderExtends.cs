@@ -8,7 +8,7 @@ namespace MGFramework.ResourceModule
         /// <summary>
         /// 通过资源信息创建对象
         /// </summary>
-        public static void GetObjByResInfo(this IResLoader resLoader, Action<string, string, GameObject> callback = null, ResLoadParam defaultParam = null)
+        public static void GetObjByResInfo(this IResLoader resLoader, Action<string, string, GameObject> callback, ResLoadParam defaultParam = null)
         {
             GameObject obj = null;
             bool async = false;
@@ -36,41 +36,67 @@ namespace MGFramework.ResourceModule
         }
 
         /// <summary>
+        /// 通过资源信息创建对象
+        /// 强制异步
+        /// </summary>
+        public static void GetObjAsyncByResInfo(this IResLoader resLoader, Action<string, string, GameObject> callback, ResLoadParam defaultParam = null)
+        {
+            string abPath = string.Empty;
+            string assetName = string.Empty;
+
+            if (resLoader != null)
+            {
+                ParseAsyncResInfo(resLoader, ref abPath, ref assetName, defaultParam);
+
+                resLoader.AssetBundleLoader?.GetAssetAsync(abPath, assetName, (GameObject assetObj) => callback?.Invoke(abPath, assetName, assetObj));
+            }
+        }
+
+        /// <summary>
         /// 解析资源信息
         /// </summary>
         private static void ParseResInfo(IResLoader resLoader, ref string abPath, ref string assetName, ref bool async, ResLoadParam defaultParam = null)
         {
             AssetLocation location = AssetLocation.StreamingAssets;
 
-            if (defaultParam != null)
-            {
-                async = defaultParam.async;
-                location = defaultParam.location;
-            }
+            ParseResLoadParam(defaultParam, ref location, ref async);
 
-            Type type = resLoader.GetType();
-
-            object[] attributes = type.GetCustomAttributes(typeof(ResInfoAttribute), true);
-
-            if (attributes != null)
-            {
-                foreach (ResInfoAttribute attr in attributes)
-                {
-                    if (attr != null)
-                    {
-                        abPath = attr.abPath;
-
-                        assetName = attr.assetName;
-
-                        async = attr.async;
-
-                        location = attr.location;
-                    }
-                }
-            }
+            ParseResInfoAttribute(resLoader, ref abPath, ref assetName, ref async, ref location);
 
             GenerateDefaultResInfo(resLoader, ref abPath, ref assetName);
 
+            GenerateAbPath(location, ref abPath, async);
+        }
+
+        /// <summary>
+        /// 解析基于异步的资源信息
+        /// </summary>
+        private static void ParseAsyncResInfo(IResLoader resLoader, ref string abPath, ref string assetName, ResLoadParam defaultParam = null)
+        {
+            bool async = true;
+
+            AssetLocation location = AssetLocation.StreamingAssets;
+
+            ParseResLoadParam(defaultParam, ref location, ref async);
+
+            ParseResInfoAttribute(resLoader, ref abPath, ref assetName, ref async, ref location);
+
+            GenerateDefaultResInfo(resLoader, ref abPath, ref assetName);
+
+            GenerateAbPath(location, ref abPath, true);
+        }
+
+        private static void ParseResLoadParam(ResLoadParam param, ref AssetLocation location, ref bool async)
+        {
+            if (param != null)
+            {
+                async = param.async;
+                location = param.location;
+            }
+        }
+
+        private static void GenerateAbPath(AssetLocation location, ref string abPath, bool async)
+        {
             switch (location)
             {
                 case AssetLocation.StreamingAssets:
@@ -116,9 +142,30 @@ namespace MGFramework.ResourceModule
             }
         }
 
-        /// <summary>
-        /// 生成默认资源信息
-        /// </summary>
+        private static void ParseResInfoAttribute(IResLoader resLoader, ref string abPath, ref string assetName, ref bool async, ref AssetLocation location)
+        {
+            Type type = resLoader.GetType();
+
+            object[] attributes = type.GetCustomAttributes(typeof(ResInfoAttribute), true);
+
+            if (attributes != null)
+            {
+                foreach (ResInfoAttribute attr in attributes)
+                {
+                    if (attr != null)
+                    {
+                        abPath = attr.abPath;
+
+                        assetName = attr.assetName;
+
+                        async = attr.async;
+
+                        location = attr.location;
+                    }
+                }
+            }
+        }
+
         private static void GenerateDefaultResInfo(IResLoader resLoader, ref string abPath, ref string assetName)
         {
             if (string.IsNullOrEmpty(abPath))

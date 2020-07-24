@@ -23,6 +23,11 @@ namespace MGFramework.UIModule
         void Create(Action callback = null);
 
         /// <summary>
+        /// 预加载
+        /// </summary>
+        void Preload(Action callback = null);
+
+        /// <summary>
         /// 显示
         /// </summary>
         void Show(Action callback = null);
