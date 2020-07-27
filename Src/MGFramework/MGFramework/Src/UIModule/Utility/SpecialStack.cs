@@ -14,6 +14,21 @@ namespace MGFramework.UIModule
         private List<T> _list = new List<T>();
 
         /// <summary>
+        /// 根据索引存取值
+        /// </summary>
+        public T this[int index]
+        {
+            get
+            {
+                return _list.GetValueAnyway(index);
+            }
+            set
+            {
+                _list.TrySetValue(index, value);
+            }
+        }
+
+        /// <summary>
         /// 数量
         /// </summary>
         public int Count

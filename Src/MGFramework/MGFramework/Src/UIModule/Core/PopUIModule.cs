@@ -267,7 +267,7 @@ namespace MGFramework.UIModule
 
             ProcessStayOptions(stayViewGroup, stayOptions);
         }
-        
+
         /// <summary>
         /// 退出所有视图
         /// 会有部分视图驻留
@@ -471,6 +471,15 @@ namespace MGFramework.UIModule
         private void ProcessLeaveStack(IntGroup viewGroup)
         {
             _viewStack.Delete(viewGroup);
+
+            for (int i = 0; i < _viewStack.Count; i++)
+            {
+                IntGroup view = _viewStack[i];
+
+                IntGroup resultView = view - viewGroup;
+
+                _viewStack[i] = resultView;
+            }
         }
 
         /// <summary>
