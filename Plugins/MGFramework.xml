@@ -2109,7 +2109,7 @@
             退出全部
             </summary>
         </member>
-        <member name="M:MGFramework.UIModule.IUIModule.Preload(System.Int32)">
+        <member name="M:MGFramework.UIModule.IUIModule.Preload(System.Int32,System.Boolean)">
             <summary>
             预加载
             </summary>
@@ -2246,12 +2246,12 @@
             清空视图栈
             </summary>
         </member>
-        <member name="M:MGFramework.UIModule.PopUIModule.Preload(System.Int32)">
+        <member name="M:MGFramework.UIModule.PopUIModule.Preload(System.Int32,System.Boolean)">
             <summary>
             预加载
             </summary>
         </member>
-        <member name="M:MGFramework.UIModule.PopUIModule.Preload(IntGroup)">
+        <member name="M:MGFramework.UIModule.PopUIModule.Preload(IntGroup,System.Boolean)">
             <summary>
             预加载
             </summary>
@@ -2411,15 +2411,19 @@
             清空视图栈
             </summary>
         </member>
-        <member name="M:MGFramework.UIModule.UIManager.Preload(System.Int32)">
+        <member name="M:MGFramework.UIModule.UIManager.Preload(System.Int32,System.Boolean)">
             <summary>
             预加载
             </summary>
+            <param name="viewId">视图id</param>
+            <param name="instantiate">创建界面实体标识</param>
         </member>
-        <member name="M:MGFramework.UIModule.UIManager.Preload(IntGroup)">
+        <member name="M:MGFramework.UIModule.UIManager.Preload(IntGroup,System.Boolean)">
             <summary>
             预加载
             </summary>
+            <param name="viewGroup">视图组</param>
+            <param name="instantiate">创建界面实体标识</param>
         </member>
         <member name="T:MGFramework.UIModule.UIModule">
             <summary>
@@ -2441,7 +2445,7 @@
             聚焦
             </summary>
         </member>
-        <member name="M:MGFramework.UIModule.UIModule.Preload(System.Int32)">
+        <member name="M:MGFramework.UIModule.UIModule.Preload(System.Int32,System.Boolean)">
             <summary>
             预加载
             </summary>
@@ -2959,7 +2963,7 @@
             创建
             </summary>
         </member>
-        <member name="M:MGFramework.UIModule.IView.Preload(System.Action)">
+        <member name="M:MGFramework.UIModule.IView.Preload(System.Action,System.Boolean)">
             <summary>
             预加载
             </summary>
@@ -3037,10 +3041,12 @@
             创建
             </summary>
         </member>
-        <member name="M:MGFramework.UIModule.ViewBase`1.Preload(System.Action)">
+        <member name="M:MGFramework.UIModule.ViewBase`1.Preload(System.Action,System.Boolean)">
             <summary>
             预加载
             </summary>
+            <param name="callback">回调</param>
+            <param name="instantiate">是否创建实体</param>
         </member>
         <member name="M:MGFramework.UIModule.ViewBase`1.Show(System.Action)">
             <summary>
