@@ -454,9 +454,14 @@ namespace MGFramework.UIModule
             _slowSwipeThreshold = _scrollHandler.MainSideLength * _slowSwipeThresholdRatio;
             _limitThreshold = _scrollHandler.MainSideLength * _limitThresholdRatio;
         }
-
-        private void Update()
+        
+        protected override void LateUpdate()
         {
+            if (_interactive)
+            {
+                base.LateUpdate();
+            }
+
             if (!_scrollTask.move)
             {
                 return;
