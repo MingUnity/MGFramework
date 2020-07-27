@@ -121,17 +121,23 @@ namespace MGFramework.UIModule
         /// <summary>
         /// 预加载
         /// </summary>
-        public void Preload(Action callback = null)
+        /// <param name="callback">回调</param>
+        /// <param name="instantiate">是否创建实体</param>
+        public void Preload(Action callback = null, bool instantiate = true)
         {
             if (_created)
             {
-                callback?.Invoke();
                 return;
             }
 
             this.GetObjAsyncByResInfo((abPath, assetName, obj) =>
             {
-                OnGetResInfoCompleted(abPath, assetName, obj, callback);
+                if (instantiate)
+                {
+                    OnGetResInfoCompleted(abPath, assetName, obj, () => Active = false);
+                }
+
+                callback?.Invoke();
             }, UISetting.DefaultAssetLoadParam);
         }
 

@@ -191,17 +191,21 @@ namespace MGFramework.UIModule
         /// <summary>
         /// 预加载
         /// </summary>
-        public void Preload(int viewId)
+        /// <param name="viewId">视图id</param>
+        /// <param name="instantiate">创建界面实体标识</param>
+        public void Preload(int viewId, bool instantiate = true)
         {
-            _module.Preload(viewId);
+            _module.Preload(viewId, instantiate);
         }
 
         /// <summary>
         /// 预加载
         /// </summary>
-        public void Preload(IntGroup viewGroup)
+        /// <param name="viewGroup">视图组</param>
+        /// <param name="instantiate">创建界面实体标识</param>
+        public void Preload(IntGroup viewGroup, bool instantiate = true)
         {
-            _module.Preload(viewGroup);
+            _module.Preload(viewGroup, instantiate);
         }
     }
 }

@@ -204,13 +204,21 @@ namespace MGFramework.UIModule
             }
         }
 
-        public void Preload(Action callback = null)
+        public void Preload(Action callback = null, bool instantiate = true)
         {
+            int done = 0;
+            int all = _subViews.Count;
+
             for (int i = 0; i < _subViews.Count; i++)
             {
-                _subViews[i]?.Preload();
+                _subViews[i]?.Preload(() =>
+                {
+                    if (++done >= all)
+                    {
+                        callback?.Invoke();
+                    }
+                }, instantiate);
             }
-
         }
     }
 }

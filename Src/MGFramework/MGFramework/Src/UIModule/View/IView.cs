@@ -25,7 +25,7 @@ namespace MGFramework.UIModule
         /// <summary>
         /// 预加载
         /// </summary>
-        void Preload(Action callback = null);
+        void Preload(Action callback = null, bool instantiate = true);
 
         /// <summary>
         /// 显示

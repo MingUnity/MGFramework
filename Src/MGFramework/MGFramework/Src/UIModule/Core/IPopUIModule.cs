@@ -19,8 +19,8 @@ namespace MGFramework.UIModule
         void QuitAll(IntGroup stayViewGroup, QuitOptions options = QuitOptions.None, StayOptions stayOptions = StayOptions.None);
         void QuitAll(int stayViewId, QuitOptions options = QuitOptions.None, StayOptions stayOptions = StayOptions.None);
         void ResetStack();
-        void Preload(int viewId);
-        void Preload(IntGroup viewGroup);
+        void Preload(int viewId, bool instantiate = true);
+        void Preload(IntGroup viewGroup, bool instantiate = true);
         void UnFocus(int viewId);
         void UnFocus(IntGroup viewGroup);
     }

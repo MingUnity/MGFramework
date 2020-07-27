@@ -64,7 +64,7 @@ namespace MGFramework.UIModule
         /// <summary>
         /// 预加载
         /// </summary>
-        public void Preload(int viewId)
+        public void Preload(int viewId, bool instantiate = true)
         {
             IView view = this[viewId];
 
@@ -74,10 +74,12 @@ namespace MGFramework.UIModule
 
                 view?.Preload(() =>
                 {
-                    this[viewId] = view;
-
-                    view.Active = false;
-                });
+                    if (instantiate)
+                    {
+                        this[viewId] = view;
+                        view.Active = false;
+                    }
+                }, instantiate);
             }
         }
 

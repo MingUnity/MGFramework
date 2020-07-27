@@ -35,6 +35,6 @@ namespace MGFramework.UIModule
         /// <summary>
         /// 预加载
         /// </summary>
-        void Preload(int viewId);
+        void Preload(int viewId, bool instantiate = true);
     }
 }

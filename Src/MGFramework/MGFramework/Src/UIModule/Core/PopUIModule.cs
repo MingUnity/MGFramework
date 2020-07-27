@@ -348,11 +348,11 @@ namespace MGFramework.UIModule
         /// <summary>
         /// 预加载
         /// </summary>
-        public void Preload(int viewId)
+        public void Preload(int viewId, bool instantiate = true)
         {
             if (!_viewDic.ContainsKey(viewId))
             {
-                _uiModule.Preload(viewId);
+                _uiModule.Preload(viewId, instantiate);
 
                 _viewDic[viewId] = new ViewState()
                 {
@@ -364,11 +364,11 @@ namespace MGFramework.UIModule
         /// <summary>
         /// 预加载
         /// </summary>
-        public void Preload(IntGroup viewGroup)
+        public void Preload(IntGroup viewGroup, bool instantiate = true)
         {
             for (int i = 0; i < viewGroup.Count; i++)
             {
-                Preload(viewGroup[i]);
+                Preload(viewGroup[i],instantiate);
             }
         }
 
