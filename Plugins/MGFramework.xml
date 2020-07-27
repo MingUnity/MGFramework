@@ -2873,6 +2873,11 @@
             列表
             </summary>
         </member>
+        <member name="P:MGFramework.UIModule.SpecialStack`1.Item(System.Int32)">
+            <summary>
+            根据索引存取值
+            </summary>
+        </member>
         <member name="P:MGFramework.UIModule.SpecialStack`1.Count">
             <summary>
             数量
