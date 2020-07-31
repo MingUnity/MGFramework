@@ -625,12 +625,10 @@
             射线检测
             </summary>
         </member>
-        <member name="M:MGFramework.InputModule.SuperInputModule.GetInteractive(UnityEngine.GameObject)">
+        <member name="M:MGFramework.InputModule.SuperInputModule.GetInteractiveObj(UnityEngine.GameObject)">
             <summary>
-            获取可交互性
+            获取可交互性对象
             </summary>
-            <param name="obj"></param>
-            <returns></returns>
         </member>
         <member name="T:MGFramework.InputModule.UnityInputKeyHandler">
             <summary>
