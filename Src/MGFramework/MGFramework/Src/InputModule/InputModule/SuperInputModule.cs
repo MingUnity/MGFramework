@@ -71,16 +71,16 @@ namespace MGFramework.InputModule
             ProcessMove(eventData);
             ProcessDrag(eventData);
 
-            bool interactive = GetInteractive(eventData.pointerCurrentRaycast.gameObject);
+            GameObject interactiveObj = GetInteractiveObj(eventData.pointerCurrentRaycast.gameObject);
 
             if (triggerDown)
             {
-                SuperPointerListener.InvokePointerDown(eventData.pointerCurrentRaycast, interactive);
+                SuperPointerListener.InvokePointerDown(eventData.pointerCurrentRaycast, interactiveObj);
             }
 
             if (triggerUp)
             {
-                SuperPointerListener.InvokePointerUp(eventData.pointerCurrentRaycast, interactive);
+                SuperPointerListener.InvokePointerUp(eventData.pointerCurrentRaycast, interactiveObj);
             }
         }
 
@@ -188,7 +188,7 @@ namespace MGFramework.InputModule
 
             GameObject prevFocusHandler = ExecuteEvents.GetEventHandler<IFocusHandler>(prevObject);
             GameObject curFocusHandler = ExecuteEvents.GetEventHandler<IFocusHandler>(curObject);
-            
+
             if (prevFocusHandler != curFocusHandler)
             {
                 ExecuteEvents.Execute(prevFocusHandler, pointerEventData, ExecuteEventsEx.UnFocusHandler);
@@ -203,11 +203,11 @@ namespace MGFramework.InputModule
         {
             GameObject curObject = eventData.pointerCurrentRaycast.gameObject;
 
-            bool interactive = GetInteractive(curObject);
+            GameObject interactiveObj = GetInteractiveObj(curObject);
 
             if (curObject != null && curObject == prevObject)
             {
-                SuperPointerListener.InvokePointerHover(eventData.pointerCurrentRaycast, interactive);
+                SuperPointerListener.InvokePointerHover(eventData.pointerCurrentRaycast, interactiveObj);
             }
             else
             {
@@ -215,7 +215,7 @@ namespace MGFramework.InputModule
 
                 if (curObject != null)
                 {
-                    SuperPointerListener.InvokePointerEnter(eventData.pointerCurrentRaycast, interactive);
+                    SuperPointerListener.InvokePointerEnter(eventData.pointerCurrentRaycast, interactiveObj);
                 }
             }
         }
@@ -241,14 +241,14 @@ namespace MGFramework.InputModule
         }
 
         /// <summary>
-        /// 获取可交互性
+        /// 获取可交互性对象
         /// </summary>
-        /// <param name="obj"></param>
-        /// <returns></returns>
-        private bool GetInteractive(GameObject obj)
+        private GameObject GetInteractiveObj(GameObject obj)
         {
-            return ExecuteEvents.GetEventHandler<IPointerClickHandler>(obj) != null
-                || ExecuteEvents.GetEventHandler<IDragHandler>(obj) != null;
+            GameObject dragObj = ExecuteEvents.GetEventHandler<IDragHandler>(obj);
+            GameObject clickObj = ExecuteEvents.GetEventHandler<IPointerClickHandler>(obj);
+
+            return clickObj ? clickObj : dragObj ? dragObj : null;
         }
     }
 }
