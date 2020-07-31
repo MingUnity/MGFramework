@@ -47,6 +47,7 @@ namespace MGFramework
         protected virtual void Awake()
         {
             _instance = this as T;
+            DontDestroyOnLoad(this);
         }
 
         protected virtual void OnDestroy()
