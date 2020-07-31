@@ -1779,6 +1779,11 @@
             滚动任务
             </summary>
         </member>
+        <member name="F:MGFramework.UIModule.SuperScrollView._displayCount">
+            <summary>
+            展示节点数量
+            </summary>
+        </member>
         <member name="P:MGFramework.UIModule.SuperScrollView.PageCount">
             <summary>
             总页数
@@ -1819,9 +1824,39 @@
             构建
             </summary>
         </member>
+        <member name="M:MGFramework.UIModule.SuperScrollView.Generate(MGFramework.UIModule.ISuperScrollNodeData[],MGFramework.UIModule.ISuperNodeFactory,MGFramework.UIModule.SuperScrollView.INodeParser,System.Int32)">
+            <summary>
+            构建
+            </summary>
+            <param name="datas">数据</param>
+            <param name="nodeFactory">节点工厂</param>
+            <param name="parser">节点数据解析</param>
+            <param name="displayCount">预展示节点数 仅支持奇数</param>
+        </member>
+        <member name="M:MGFramework.UIModule.SuperScrollView.RefreshNodes(MGFramework.UIModule.ISuperScrollNodeData[])">
+            <summary>
+            刷新所有节点数据
+            </summary>
+            <param name="datas">刷新的数据</param>
+        </member>
+        <member name="M:MGFramework.UIModule.SuperScrollView.AppendNodeDatas(MGFramework.UIModule.ISuperScrollNodeData[])">
+            <summary>
+            新增节点数据
+            </summary>
+        </member>
+        <member name="M:MGFramework.UIModule.SuperScrollView.InsertNodeDatas(System.Int32,MGFramework.UIModule.ISuperScrollNodeData[])">
+            <summary>
+            插入节点数据
+            </summary>
+        </member>
         <member name="M:MGFramework.UIModule.SuperScrollView.RefreshNode(System.Int32,MGFramework.UIModule.ISuperScrollNodeData)">
             <summary>
             更新节点
+            </summary>
+        </member>
+        <member name="M:MGFramework.UIModule.SuperScrollView.ClearNodes">
+            <summary>
+            清除节点
             </summary>
         </member>
         <member name="M:MGFramework.UIModule.SuperScrollView.ScrollNext(System.Single,System.Action,System.Action{System.Single})">
