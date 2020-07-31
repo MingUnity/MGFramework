@@ -843,6 +843,11 @@
             优化标识
             </summary>
         </member>
+        <member name="F:MGFramework.RefreshPoolObjectHandler`2._refreshTask">
+            <summary>
+            异步刷新任务
+            </summary>
+        </member>
         <member name="M:MGFramework.RefreshPoolObjectHandler`2.#ctor(MGFramework.ObjectPool{`0},System.Collections.Generic.List{`0},MGFramework.RefreshPoolObjectHandler{`0,`1}.IParser,System.Boolean)">
             <summary>
             构造函数
@@ -1852,7 +1857,7 @@
             更新节点
             </summary>
         </member>
-        <member name="M:MGFramework.UIModule.SuperScrollView.ClearNodes">
+        <member name="M:MGFramework.UIModule.SuperScrollView.ClearAll">
             <summary>
             清除节点
             </summary>
@@ -1925,6 +1930,11 @@
             向后移动节点
             若为左右则为 向左
             若为上下则为 向上
+            </summary>
+        </member>
+        <member name="M:MGFramework.UIModule.SuperScrollView.InitNodes">
+            <summary>
+            初始化节点
             </summary>
         </member>
         <member name="T:MGFramework.UIModule.SuperToggle.Item">
