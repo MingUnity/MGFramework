@@ -113,7 +113,7 @@ public struct IntGroup : IEquatable<IntGroup>
         _tempMathList.Clear();
 
         IntGroup result = IntGroup.Empty;
-        
+
         if (args != null)
         {
             for (int i = 0; i < args.Length; i++)
@@ -122,7 +122,11 @@ public struct IntGroup : IEquatable<IntGroup>
 
                 for (int j = 0; j < group.Count; j++)
                 {
-                    _tempMathList.Add(group[j]);
+                    int val = group[j];
+                    if (!_tempMathList.Contains(val))
+                    {
+                        _tempMathList.Add(val);
+                    }
                 }
             }
 
@@ -147,11 +151,11 @@ public struct IntGroup : IEquatable<IntGroup>
         _tempMathList.Clear();
 
         int[] intsA = groupA._ints;
-        
+
         for (int i = 0; i < intsA.Length; i++)
         {
             int aInt = intsA[i];
-            
+
             if (!groupB.Contains(aInt))
             {
                 _tempMathList.Add(aInt);
