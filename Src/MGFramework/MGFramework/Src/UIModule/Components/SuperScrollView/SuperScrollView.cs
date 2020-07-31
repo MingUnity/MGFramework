@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -623,28 +624,7 @@ namespace MGFramework.UIModule
             this._factory = nodeFactory;
             this._nodeParser = parser;
 
-            int realCount = RealCount;
-            int nodeCount = _nodes.Count;
-
-            int readyToAdd = realCount - nodeCount;
-
-            //节点多还少补
-            if (readyToAdd >= 0)
-            {
-                for (int i = nodeCount; i < realCount; i++)
-                {
-                    ISuperScrollNode node = _factory.Create();
-                    _nodes.Add(node);
-                }
-            }
-            else
-            {
-                for (int i = nodeCount - 1; i >= realCount; i--)
-                {
-                    _factory.Recycle(_nodes[i]);
-                    _nodes.RemoveAt(i);
-                }
-            }
+            InitNodes();
 
             _curPageIndex = 0;
 
@@ -658,6 +638,7 @@ namespace MGFramework.UIModule
         public void RefreshNodes(ISuperScrollNodeData[] datas)
         {
             _datas = datas;
+            InitNodes();
             RefreshAll();
         }
 
@@ -674,8 +655,8 @@ namespace MGFramework.UIModule
             ISuperScrollNodeData[] output = new ISuperScrollNodeData[_datas.Length + datas.Length];
             Array.Copy(_datas, output, _datas.Length);
             Array.Copy(datas, 0, output, _datas.Length, datas.Length);
-            _datas = output;
-            RefreshAll();
+
+            RefreshNodes(output);
         }
 
         /// <summary>
@@ -690,8 +671,8 @@ namespace MGFramework.UIModule
 
             List<ISuperScrollNodeData> output = new List<ISuperScrollNodeData>(_datas);
             output.InsertRange(index, datas);
-            _datas = output.ToArray();
-            RefreshAll();
+
+            RefreshNodes(output.ToArray());
         }
 
         /// <summary>
@@ -709,7 +690,7 @@ namespace MGFramework.UIModule
         /// <summary>
         /// 清除节点
         /// </summary>
-        public void ClearNodes()
+        public void ClearAll()
         {
             _nodes.ForEach(node => _factory.Recycle(node));
             _nodes.Clear();
@@ -793,7 +774,6 @@ namespace MGFramework.UIModule
         /// </summary>
         private void RefreshAll()
         {
-            RefreshPosition();
             int realCount = RealCount;
             for (int i = 0; i < realCount; i++)
             {
@@ -803,6 +783,8 @@ namespace MGFramework.UIModule
 
                 _nodeParser?.Parse(node, _datas?.GetValueAnyway(realIndex));
             }
+
+            RefreshPosition();
         }
 
         /// <summary>
@@ -812,10 +794,11 @@ namespace MGFramework.UIModule
         private void RefreshByOneStep(bool forward)
         {
             int pageCount = PageCount;
+            int realCount = RealCount;
 
             if (forward)
             {
-                if (_curPageIndex > _displayCount / 2 && _curPageIndex < pageCount - _displayCount / 2)
+                if (_curPageIndex > realCount / 2 && _curPageIndex < pageCount - realCount / 2)
                 {
                     ISuperScrollNode node = MoveNodeForward();
                     int viewIndex = _nodes.Count - 1;
@@ -825,7 +808,7 @@ namespace MGFramework.UIModule
             }
             else
             {
-                if (_curPageIndex < pageCount - _displayCount / 2 - 1 && _curPageIndex > _displayCount / 2 - 1)
+                if (_curPageIndex < pageCount - realCount / 2 - 1 && _curPageIndex > realCount / 2 - 1)
                 {
                     ISuperScrollNode node = MoveNodeBackward();
                     int viewIndex = 0;
@@ -862,19 +845,19 @@ namespace MGFramework.UIModule
                     return dataIndex == 0 ? 0 : dataIndex == 1 ? 1 : -1;
             }
 
-            if (_curPageIndex <= _displayCount / 2 - 1)
+            if (_curPageIndex <= realCount / 2 - 1)
             {
                 return dataIndex;
             }
 
-            if (_curPageIndex > _displayCount / 2 - 1 && _curPageIndex < PageCount - _displayCount / 2)
+            if (_curPageIndex > realCount / 2 - 1 && _curPageIndex < PageCount - realCount / 2)
             {
-                return dataIndex + _displayCount / 2 - _curPageIndex;
+                return dataIndex + realCount / 2 - _curPageIndex;
             }
 
-            if (_curPageIndex >= PageCount - _displayCount / 2)
+            if (_curPageIndex >= PageCount - realCount / 2)
             {
-                return dataIndex + _displayCount - PageCount;
+                return dataIndex + realCount - PageCount;
             }
 
             return -1;
@@ -897,19 +880,19 @@ namespace MGFramework.UIModule
                     return viewIndex == 0 ? 0 : viewIndex == 1 ? 1 : -1;
             }
 
-            if (_curPageIndex <= _displayCount / 2 - 1)
+            if (_curPageIndex <= realCount / 2 - 1)
             {
                 return viewIndex;
             }
 
-            if (_curPageIndex > _displayCount / 2 - 1 && _curPageIndex < PageCount - _displayCount / 2)
+            if (_curPageIndex > realCount / 2 - 1 && _curPageIndex < PageCount - realCount / 2)
             {
-                return viewIndex + _curPageIndex - _displayCount / 2;
+                return viewIndex + _curPageIndex - realCount / 2;
             }
 
-            if (_curPageIndex >= PageCount - _displayCount / 2)
+            if (_curPageIndex >= PageCount - realCount / 2)
             {
-                return viewIndex + +PageCount - _displayCount;
+                return viewIndex + +PageCount - realCount;
             }
 
             return -1;
@@ -950,7 +933,7 @@ namespace MGFramework.UIModule
                     break;
 
                 default:
-                    SetNormalizedPosition(_curPageIndex < _displayCount / 2 || _curPageIndex > PageCount - _displayCount / 2 - 1 ? GetNormalizedPosition(_curPageIndex) : 0.5f);
+                    SetNormalizedPosition(_curPageIndex < realCount / 2 || _curPageIndex > PageCount - realCount / 2 - 1 ? GetNormalizedPosition(_curPageIndex) : 0.5f);
                     break;
             }
         }
@@ -993,6 +976,35 @@ namespace MGFramework.UIModule
             }
 
             return lastNode;
+        }
+
+        /// <summary>
+        /// 初始化节点
+        /// </summary>
+        private void InitNodes()
+        {
+            int realCount = RealCount;
+            int nodeCount = _nodes.Count;
+
+            int readyToAdd = realCount - nodeCount;
+
+            //节点多还少补
+            if (readyToAdd >= 0)
+            {
+                for (int i = nodeCount; i < realCount; i++)
+                {
+                    ISuperScrollNode node = _factory.Create();
+                    _nodes.Add(node);
+                }
+            }
+            else
+            {
+                for (int i = nodeCount - 1; i >= realCount; i--)
+                {
+                    _factory.Recycle(_nodes[i]);
+                    _nodes.RemoveAt(i);
+                }
+            }
         }
 
         #endregion

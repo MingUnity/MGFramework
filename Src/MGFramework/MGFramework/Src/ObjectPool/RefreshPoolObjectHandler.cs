@@ -43,6 +43,11 @@ namespace MGFramework
         private bool _optimize = false;
 
         /// <summary>
+        /// 异步刷新任务
+        /// </summary>
+        private Task _refreshTask;
+
+        /// <summary>
         /// 构造函数
         /// </summary>
         /// <param name="pool">对象池</param>
@@ -69,6 +74,8 @@ namespace MGFramework
 
             if (datas != null)
             {
+                _refreshTask?.Stop();
+
                 //仍存在的节点数量
                 int lifeCount = _lifeNodes.Count;
 
@@ -86,7 +93,7 @@ namespace MGFramework
                     //需补的 创建节点并解析赋值
                     if (_optimize)
                     {
-                        Task.CreateTask(CreateWithPerFrame(lifeCount,datas));
+                        _refreshTask = Task.CreateTask(CreateWithPerFrame(lifeCount, datas));
                     }
                     else
                     {
@@ -120,7 +127,7 @@ namespace MGFramework
                 _lifeNodes.Clear();
             }
         }
-        
+
         /// <summary>
         /// 刷新指定数据
         /// </summary>
@@ -138,7 +145,7 @@ namespace MGFramework
         /// <summary>
         /// 分帧加载
         /// </summary>
-        private IEnumerator CreateWithPerFrame(int start,V[] datas)
+        private IEnumerator CreateWithPerFrame(int start, V[] datas)
         {
             for (int i = start; i < datas.Length; i++)
             {
