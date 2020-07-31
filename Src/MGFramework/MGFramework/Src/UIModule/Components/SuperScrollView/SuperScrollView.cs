@@ -359,7 +359,12 @@ namespace MGFramework.UIModule
         /// 滚动任务
         /// </summary>
         private ScrollTask _scrollTask;
-        
+
+        /// <summary>
+        /// 展示节点数量
+        /// </summary>
+        private int _displayCount = 3;
+
         #endregion
 
         #region Property/Event
@@ -393,7 +398,7 @@ namespace MGFramework.UIModule
 
                 if (_datas != null)
                 {
-                    res = _datas.Length > 3 ? 3 : _datas.Length;
+                    res = _datas.Length > _displayCount ? _displayCount : _datas.Length;
                 }
 
                 return res;
@@ -454,7 +459,7 @@ namespace MGFramework.UIModule
             _slowSwipeThreshold = _scrollHandler.MainSideLength * _slowSwipeThresholdRatio;
             _limitThreshold = _scrollHandler.MainSideLength * _limitThresholdRatio;
         }
-        
+
         protected override void LateUpdate()
         {
             if (_interactive)
@@ -474,8 +479,6 @@ namespace MGFramework.UIModule
             if (Mathf.Approximately(_scrollTask.target, curPos))
             {
                 _scrollHandler.NormalizedPosition = _scrollTask.target;
-
-                _scrollTask.onScrolling?.Invoke(1);
                 _scrollTask.onCompleted?.Invoke();
 
                 _scrollTask.Reset();
@@ -592,11 +595,30 @@ namespace MGFramework.UIModule
         /// </summary>
         public void Generate(ISuperScrollNodeData[] datas, ISuperNodeFactory nodeFactory, INodeParser parser)
         {
+            Generate(datas, nodeFactory, parser, 3);
+        }
+
+        /// <summary>
+        /// 构建
+        /// </summary>
+        /// <param name="datas">数据</param>
+        /// <param name="nodeFactory">节点工厂</param>
+        /// <param name="parser">节点数据解析</param>
+        /// <param name="displayCount">预展示节点数 仅支持奇数</param>
+        public void Generate(ISuperScrollNodeData[] datas, ISuperNodeFactory nodeFactory, INodeParser parser, int displayCount)
+        {
+            if (displayCount % 2 == 0)
+            {
+                Debug.LogError("<Ming> ## Uni Error ## Cls:SuperScrollView Func:Generate Info:Only odd support");
+                throw new InvalidOperationException();
+            }
+
             if (nodeFactory == null)
             {
                 throw new ArgumentNullException();
             }
 
+            this._displayCount = displayCount;
             this._datas = datas;
             this._factory = nodeFactory;
             this._nodeParser = parser;
@@ -630,6 +652,49 @@ namespace MGFramework.UIModule
         }
 
         /// <summary>
+        /// 刷新所有节点数据
+        /// </summary>
+        /// <param name="datas">刷新的数据</param>
+        public void RefreshNodes(ISuperScrollNodeData[] datas)
+        {
+            _datas = datas;
+            RefreshAll();
+        }
+
+        /// <summary>
+        /// 新增节点数据
+        /// </summary>
+        public void AppendNodeDatas(ISuperScrollNodeData[] datas)
+        {
+            if (datas == null || _datas == null)
+            {
+                return;
+            }
+
+            ISuperScrollNodeData[] output = new ISuperScrollNodeData[_datas.Length + datas.Length];
+            Array.Copy(_datas, output, _datas.Length);
+            Array.Copy(datas, 0, output, _datas.Length, datas.Length);
+            _datas = output;
+            RefreshAll();
+        }
+
+        /// <summary>
+        /// 插入节点数据
+        /// </summary>
+        public void InsertNodeDatas(int index, ISuperScrollNodeData[] datas)
+        {
+            if (datas == null || _datas == null)
+            {
+                return;
+            }
+
+            List<ISuperScrollNodeData> output = new List<ISuperScrollNodeData>(_datas);
+            output.InsertRange(index, datas);
+            _datas = output.ToArray();
+            RefreshAll();
+        }
+
+        /// <summary>
         /// 更新节点
         /// </summary>
         public void RefreshNode(int index, ISuperScrollNodeData data)
@@ -639,6 +704,15 @@ namespace MGFramework.UIModule
             int viewIndex = ConvertDataIndexToViewIndex(index);
 
             _nodeParser?.Parse(_nodes.GetValueAnyway(viewIndex), data);
+        }
+
+        /// <summary>
+        /// 清除节点
+        /// </summary>
+        public void ClearNodes()
+        {
+            _nodes.ForEach(node => _factory.Recycle(node));
+            _nodes.Clear();
         }
 
         /// <summary>
@@ -741,7 +815,7 @@ namespace MGFramework.UIModule
 
             if (forward)
             {
-                if (_curPageIndex > 1 && _curPageIndex < pageCount - 1)
+                if (_curPageIndex > _displayCount / 2 && _curPageIndex < pageCount - _displayCount / 2)
                 {
                     ISuperScrollNode node = MoveNodeForward();
                     int viewIndex = _nodes.Count - 1;
@@ -751,7 +825,7 @@ namespace MGFramework.UIModule
             }
             else
             {
-                if (_curPageIndex < pageCount - 2 && _curPageIndex > 0)
+                if (_curPageIndex < pageCount - _displayCount / 2 - 1 && _curPageIndex > _displayCount / 2 - 1)
                 {
                     ISuperScrollNode node = MoveNodeBackward();
                     int viewIndex = 0;
@@ -788,19 +862,19 @@ namespace MGFramework.UIModule
                     return dataIndex == 0 ? 0 : dataIndex == 1 ? 1 : -1;
             }
 
-            if (_curPageIndex == 0)
+            if (_curPageIndex <= _displayCount / 2 - 1)
             {
                 return dataIndex;
             }
 
-            if (_curPageIndex > 0 && _curPageIndex < PageCount - 1)
+            if (_curPageIndex > _displayCount / 2 - 1 && _curPageIndex < PageCount - _displayCount / 2)
             {
-                return dataIndex + 1 - _curPageIndex;
+                return dataIndex + _displayCount / 2 - _curPageIndex;
             }
 
-            if (_curPageIndex == PageCount - 1)
+            if (_curPageIndex >= PageCount - _displayCount / 2)
             {
-                return dataIndex + 2 - _curPageIndex;
+                return dataIndex + _displayCount - PageCount;
             }
 
             return -1;
@@ -823,19 +897,19 @@ namespace MGFramework.UIModule
                     return viewIndex == 0 ? 0 : viewIndex == 1 ? 1 : -1;
             }
 
-            if (_curPageIndex == 0)
+            if (_curPageIndex <= _displayCount / 2 - 1)
             {
                 return viewIndex;
             }
 
-            if (_curPageIndex > 0 && _curPageIndex < PageCount - 1)
+            if (_curPageIndex > _displayCount / 2 - 1 && _curPageIndex < PageCount - _displayCount / 2)
             {
-                return viewIndex + _curPageIndex - 1;
+                return viewIndex + _curPageIndex - _displayCount / 2;
             }
 
-            if (_curPageIndex == PageCount - 1)
+            if (_curPageIndex >= PageCount - _displayCount / 2)
             {
-                return viewIndex + _curPageIndex - 2;
+                return viewIndex + +PageCount - _displayCount;
             }
 
             return -1;
@@ -848,22 +922,14 @@ namespace MGFramework.UIModule
         {
             int realCount = RealCount;
 
-            switch (realCount)
+            int viewIndex = ConvertDataIndexToViewIndex(dataIndex);
+
+            if (realCount <= 1)
             {
-                case 0:
-                case 1:
-                    return 0;
-
-                case 2:
-                    return dataIndex;
-
-                case 3:
-                    int viewIndex = ConvertDataIndexToViewIndex(dataIndex);
-                    return viewIndex == 0 ? 0 : viewIndex == 2 ? 1 : 0.5f;
-
-                default:
-                    return 0;
+                return 0;
             }
+
+            return viewIndex * 1.0f / (realCount - 1);
         }
 
         /// <summary>
@@ -883,8 +949,8 @@ namespace MGFramework.UIModule
                     SetNormalizedPosition(_curPageIndex);
                     break;
 
-                case 3:
-                    SetNormalizedPosition(_curPageIndex == 0 ? 0 : _curPageIndex == PageCount - 1 ? 1 : 0.5f);
+                default:
+                    SetNormalizedPosition(_curPageIndex < _displayCount / 2 || _curPageIndex > PageCount - _displayCount / 2 - 1 ? GetNormalizedPosition(_curPageIndex) : 0.5f);
                     break;
             }
         }

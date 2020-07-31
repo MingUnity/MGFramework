@@ -37,11 +37,16 @@ public class Scroll : MonoBehaviour
 
     private SuperScrollView _scroll;
 
-    private ScrollData[] datas = new ScrollData[4]
+    //黑红白蓝白红黑蓝
+    private ScrollData[] datas = new ScrollData[8]
     {
          new ScrollData(){  path = BindProperty<string>.Get("black")},
          new ScrollData(){  path =BindProperty<string>.Get( "red")},
          new ScrollData(){  path = BindProperty<string>.Get("white")},
+         new ScrollData(){  path = BindProperty<string>.Get("blue")},
+         new ScrollData(){  path = BindProperty<string>.Get("white")},
+         new ScrollData(){  path = BindProperty<string>.Get("red")},
+         new ScrollData(){  path = BindProperty<string>.Get("black")},
          new ScrollData(){  path = BindProperty<string>.Get("blue")}
     };
 
@@ -54,7 +59,7 @@ public class Scroll : MonoBehaviour
     {
         Transform template = this.transform.Find("Viewport/Content/Template");
         template.gameObject.SetActive(false);
-        _scroll.Generate(datas, new Factory(template), new Parser());
+        _scroll.Generate(datas, new Factory(template), new Parser(),5);
     }
 
     private void Update()
