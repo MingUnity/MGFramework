@@ -136,7 +136,6 @@ namespace MGFramework
             Texture2D tex = new Texture2D(width, height, textureFormat, false);
             tex.LoadRawTextureData(data);
             tex.Apply();
-
             return tex;
         }
     }
