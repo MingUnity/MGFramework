@@ -24,7 +24,7 @@ namespace MGFramework.UIModule
             public bool leftTop;
             public bool rightTop;
             public bool leftBottom;
-            public bool rightButtom;
+            public bool rightBottom;
 
             public Param(float width, float height, float roundedRadius, bool leftTop = true, bool rightTop = true, bool leftBottom = true, bool rightBottom = true)
             {
@@ -34,7 +34,7 @@ namespace MGFramework.UIModule
                 this.leftTop = leftTop;
                 this.rightTop = rightTop;
                 this.leftBottom = leftBottom;
-                this.rightButtom = rightBottom;
+                this.rightBottom = rightBottom;
             }
 
             public bool Equals(Param other)
@@ -45,7 +45,7 @@ namespace MGFramework.UIModule
                     && leftTop == other.leftTop
                     && rightTop == other.rightTop
                     && leftBottom == other.leftBottom
-                    && rightButtom == other.rightButtom;
+                    && rightBottom == other.rightBottom;
             }
         }
 
@@ -168,7 +168,7 @@ namespace MGFramework.UIModule
         /// 材质缓存
         /// </summary>
         private static Dictionary<Param, MatRef> _matCache = new Dictionary<Param, MatRef>();
-
+        
         /// <summary>
         /// 圆角位置
         /// </summary>
@@ -208,13 +208,6 @@ namespace MGFramework.UIModule
             Refresh();
         }
 
-        protected override void OnValidate()
-        {
-            base.OnValidate();
-            
-            Refresh();
-        }
-
         protected override void OnRectTransformDimensionsChange()
         {
             base.OnRectTransformDimensionsChange();
@@ -228,11 +221,11 @@ namespace MGFramework.UIModule
                 Refresh(width, height);
             }
         }
-
+        
         /// <summary>
         /// 设置圆角矩形shader数据
         /// </summary>
-        private void Refresh()
+        public void Refresh()
         {
             SetupGraphic();
 

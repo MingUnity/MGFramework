@@ -73,6 +73,8 @@
     <Compile Include="Src\ResourceModule\AssetBundleSettingView.cs" />
     <Compile Include="Src\ResourceModule\EditorResManager.cs" />
     <Compile Include="Src\UIModule\ExtendCompl\ButtonExEditor.cs" />
+    <Compile Include="Src\UIModule\ExtendCompl\CircleLayoutGroupEditor.cs" />
+    <Compile Include="Src\UIModule\ExtendCompl\RoundedRectEditor.cs" />
     <Compile Include="Src\UIModule\ExtendCompl\SuperButtonEditor.cs" />
     <Compile Include="Src\UIModule\ExtendCompl\SuperScrollViewEditor.cs" />
     <Compile Include="Src\UIModule\ExtendCompl\SuperToggleEditor.cs" />

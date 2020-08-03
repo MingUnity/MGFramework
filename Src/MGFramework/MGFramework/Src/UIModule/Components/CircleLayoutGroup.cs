@@ -22,7 +22,7 @@ namespace MGFramework.UIModule
         /// <summary>
         /// 子节点
         /// </summary>
-        private List<RectTransform> _children = new List<RectTransform>();
+        private readonly List<RectTransform> _children = new List<RectTransform>();
 
         /// <summary>
         /// 半径
@@ -53,12 +53,7 @@ namespace MGFramework.UIModule
         {
             _tracker.Clear();
         }
-
-        private void OnValidate()
-        {
-            Refresh();
-        }
-
+        
         private IEnumerator OnTransformChildrenChanged()
         {
             yield return null;
@@ -69,7 +64,7 @@ namespace MGFramework.UIModule
         /// <summary>
         /// 刷新
         /// </summary>
-        private void Refresh()
+        public void Refresh()
         {
             _children.Clear();
             _tracker.Clear();
