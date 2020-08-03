@@ -151,6 +151,16 @@ namespace MGFramework
         /// </summary>
         public static void LoadByTask(string url, Action<Texture2D> callback, CacheLevel cacheLevel = CacheLevel.Cache_0)
         {
+            LoadByTask(url, _httpLoader, callback, cacheLevel);
+        }
+
+        /// <summary>
+        /// 异步加载任务队列
+        /// 分帧加载
+        /// 自定义图片加载
+        /// </summary>
+        public static void LoadByTask(string key, ICustomTextureLoader customLoader, Action<Texture2D> callback, CacheLevel cacheLevel = CacheLevel.Cache_0)
+        {
             if (_asyncTask == null)
             {
                 _asyncTask = Task.CreateTask(AsyncTask());
@@ -158,9 +168,10 @@ namespace MGFramework
 
             _asyncTaskItems.Enqueue(new AsyncItem()
             {
-                url = url,
+                key = key,
                 callback = callback,
-                cacheLevel = cacheLevel
+                cacheLevel = cacheLevel,
+                customLoader = customLoader
             });
         }
 
@@ -205,7 +216,7 @@ namespace MGFramework
 
                     if (item != null)
                     {
-                        Load(item.url, item.callback, item.cacheLevel);
+                        Load(item.key, item.customLoader, item.callback, item.cacheLevel);
                     }
                 }
                 else
@@ -250,9 +261,10 @@ namespace MGFramework
         /// </summary>
         private class AsyncItem
         {
-            public string url;
+            public string key;
             public Action<Texture2D> callback;
             public CacheLevel cacheLevel;
+            public ICustomTextureLoader customLoader;
         }
     }
 }
