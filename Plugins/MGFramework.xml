@@ -3858,6 +3858,13 @@
             每帧加载一个资源
             </summary>
         </member>
+        <member name="M:MGFramework.TextureLoader.LoadByTask(System.String,MGFramework.ICustomTextureLoader,System.Action{UnityEngine.Texture2D},MGFramework.CacheLevel)">
+            <summary>
+            异步加载任务队列
+            分帧加载
+            自定义图片加载
+            </summary>
+        </member>
         <member name="M:MGFramework.TextureLoader.SetLocalDiskMaxCacheMemory(System.Int64)">
             <summary>
             设置本地缓存池最大缓存量
