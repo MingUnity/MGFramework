@@ -3272,6 +3272,11 @@
             若不存在返回默认
             </summary>
         </member>
+        <member name="M:MGFramework.CollectionsExtends.Combine``1(``0[],``0[])">
+            <summary>
+            合并数组
+            </summary>
+        </member>
         <member name="T:MGFramework.AutoBuildAttribute">
             <summary>
             自动实例化接口

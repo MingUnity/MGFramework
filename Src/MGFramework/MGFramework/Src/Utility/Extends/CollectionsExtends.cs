@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace MGFramework
 {
@@ -77,6 +78,29 @@ namespace MGFramework
             dic.TryGetValue(key, out val);
 
             return val;
+        }
+
+        /// <summary>
+        /// 合并数组
+        /// </summary>
+        public static T[] Combine<T>(this T[] src, T[] target)
+        {
+            if (src == null)
+            {
+                return target;
+            }
+
+            if (target == null)
+            {
+                return src;
+            }
+
+            T[] result = new T[src.Length + target.Length];
+
+            Array.Copy(src, result, src.Length);
+            Array.Copy(target, 0, result, src.Length, target.Length);
+
+            return result;
         }
     }
 }
