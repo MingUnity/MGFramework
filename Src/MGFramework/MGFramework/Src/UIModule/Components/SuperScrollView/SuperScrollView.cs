@@ -587,6 +587,35 @@ namespace MGFramework.UIModule
             base.OnScroll(data);
         }
 
+        protected override void SetNormalizedPosition(float value, int axis)
+        {
+            if (_interactive)
+            {
+                base.SetNormalizedPosition(value, axis);
+                return;
+            }
+
+            //EnsureLayoutHasRebuilt();
+            UpdateBounds();
+            // How much the content is larger than the view.
+            float hiddenLength = content.rect.size[axis] - viewport.rect.size[axis];
+            // Where the position of the lower left corner of the content bounds should be, in the space of the view.
+            float contentBoundsMinPosition = (viewport.rect.center - viewport.rect.size * 0.5f)[axis] - value * hiddenLength;
+            // The new content localPosition, in the space of the view.
+            float newLocalPosition = content.localPosition[axis] + contentBoundsMinPosition - m_ContentBounds.min[axis];
+
+            Vector3 localPosition = content.localPosition;
+            if (Mathf.Abs(localPosition[axis] - newLocalPosition) > 0.01f)
+            {
+                localPosition[axis] = newLocalPosition;
+                content.localPosition = localPosition;
+                Vector2 v = velocity;
+                v[axis] = 0;
+                velocity = v;
+                UpdateBounds();
+            }
+        }
+
         #endregion
 
         #region Public Func
