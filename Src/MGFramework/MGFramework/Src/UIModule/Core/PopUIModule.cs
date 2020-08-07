@@ -78,17 +78,17 @@ namespace MGFramework.UIModule
 
             if (!state.active)
             {
-                OnViewEnterStartEvent?.Invoke(viewId);
+                state.active = true;
 
+                OnViewEnterStartEvent?.Invoke(viewId);
+                
                 _uiModule?.Enter(viewId, () =>
                 {
                     callback?.Invoke();
                     _uiModule?.Focus(viewId);
                     OnViewEnterCompletedEvent?.Invoke(viewId);
                 });
-
-                state.active = true;
-
+                
                 _viewDic[viewId] = state;
             }
             else
@@ -138,6 +138,8 @@ namespace MGFramework.UIModule
             {
                 if (state.active)
                 {
+                    state.active = false;
+
                     OnViewQuitStartEvent?.Invoke(viewId);
 
                     _uiModule?.Quit(viewId, () =>
@@ -147,9 +149,7 @@ namespace MGFramework.UIModule
                         OnViewQuitCompletedEvent?.Invoke(viewId);
 
                     }, options.HasFlag(QuitOptions.Destroy));
-
-                    state.active = false;
-
+                    
                     _viewDic[viewId] = state;
                 }
                 else
