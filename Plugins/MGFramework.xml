@@ -1962,6 +1962,11 @@
             三态颜色
             </summary>
         </member>
+        <member name="F:MGFramework.UIModule.SuperToggle._defaultEvent">
+            <summary>
+            默认事件
+            </summary>
+        </member>
         <member name="F:MGFramework.UIModule.SuperToggle.graphicItems">
             <summary>
             图形集合
@@ -1980,6 +1985,11 @@
         <member name="P:MGFramework.UIModule.SuperToggle.DefaultColor">
             <summary>
             默认颜色
+            </summary>
+        </member>
+        <member name="M:MGFramework.UIModule.SuperToggle.SetIsOnWithoutNotify(System.Boolean)">
+            <summary>
+            不抛事件 设置isOn
             </summary>
         </member>
         <member name="T:MGFramework.UIModule.ToggleEx">
