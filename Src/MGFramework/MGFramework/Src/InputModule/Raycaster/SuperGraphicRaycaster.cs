@@ -81,7 +81,7 @@ namespace MGFramework.InputModule
                 {
                     result = _canvas.worldCamera != null ? _canvas.worldCamera : Camera.main;
                 }
-                
+
                 return result;
             }
         }
@@ -138,12 +138,7 @@ namespace MGFramework.InputModule
             if (pos.x < 0f || pos.x > 1f || pos.y < 0f || pos.y > 1f)
                 return;
 
-            Ray ray = new Ray();
-
-            if (cacheCamera != null)
-            {
-                ray = cacheCamera.ScreenPointToRay(eventPosition);
-            }
+            Ray ray = cacheCamera.ScreenPointToRay(eventPosition);
 
             _raycastResults.Clear();
 
@@ -196,7 +191,7 @@ namespace MGFramework.InputModule
 
                 if (depth == -1 || !graphic.raycastTarget || graphic.canvasRenderer.cull)
                     continue;
-
+                
                 if (!RectTransformUtility.RectangleContainsScreenPoint(graphic.rectTransform, pointerPosition, eventCamera))
                     continue;
 

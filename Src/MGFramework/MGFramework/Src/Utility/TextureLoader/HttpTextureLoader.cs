@@ -57,6 +57,7 @@ namespace MGFramework
             if (request.isDone && string.IsNullOrEmpty(request.error))
             {
                 Texture2D tex = DownloadHandlerTexture.GetContent(request);
+                
                 callback?.Invoke(tex);
             }
             else

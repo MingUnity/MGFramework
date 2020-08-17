@@ -36,6 +36,11 @@ namespace MGFramework.UIModule
         }
 
         /// <summary>
+        /// 默认事件
+        /// </summary>
+        private readonly ToggleEvent _defaultEvent = new ToggleEvent();
+
+        /// <summary>
         /// 图形集合
         /// </summary>
         public Item[] graphicItems = new Item[1];
@@ -69,20 +74,33 @@ namespace MGFramework.UIModule
             }
         }
 
+        /// <summary>
+        /// 不抛事件 设置isOn
+        /// </summary>
+        public void SetIsOnWithoutNotify(bool value)
+        {
+            ToggleEvent cacheEvent = onValueChanged;
+            onValueChanged = _defaultEvent;
+            isOn = value;
+            onValueChanged = cacheEvent;
+        }
+
         protected override void OnEnable()
         {
             base.OnEnable();
 
             OnValueChanged(isOn);
 
+            _defaultEvent.AddListener(OnValueChanged);
             onValueChanged.AddListener(OnValueChanged);
         }
-
+        
         protected override void OnDisable()
         {
             base.OnDisable();
 
             onValueChanged.RemoveListener(OnValueChanged);
+            _defaultEvent.RemoveListener(OnValueChanged);
         }
 
         protected override void DoStateTransition(SelectionState state, bool instant)
