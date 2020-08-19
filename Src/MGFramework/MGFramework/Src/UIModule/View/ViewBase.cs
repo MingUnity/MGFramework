@@ -57,7 +57,7 @@ namespace MGFramework.UIModule
         /// <summary>
         /// 激活
         /// </summary>
-        public bool Active
+        public virtual bool Active
         {
             get
             {

@@ -59,7 +59,7 @@ public class Scroll : MonoBehaviour
     {
         Transform template = this.transform.Find("Viewport/Content/Template");
         template.gameObject.SetActive(false);
-        _scroll.Generate(datas, new Factory(template), new Parser(),5);
+        _scroll.RefreshNodes(datas, new Factory(template), new Parser(),5);
     }
 
     private void Update()

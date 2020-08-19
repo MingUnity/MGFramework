@@ -621,25 +621,17 @@ namespace MGFramework.UIModule
         #region Public Func
 
         /// <summary>
-        /// 构建
-        /// </summary>
-        public void Generate(ISuperScrollNodeData[] datas, ISuperNodeFactory nodeFactory, INodeParser parser)
-        {
-            Generate(datas, nodeFactory, parser, 3);
-        }
-
-        /// <summary>
-        /// 构建
+        /// 刷新节点
         /// </summary>
         /// <param name="datas">数据</param>
         /// <param name="nodeFactory">节点工厂</param>
         /// <param name="parser">节点数据解析</param>
         /// <param name="displayCount">预展示节点数 仅支持奇数</param>
-        public void Generate(ISuperScrollNodeData[] datas, ISuperNodeFactory nodeFactory, INodeParser parser, int displayCount)
+        public void RefreshNodes(ISuperScrollNodeData[] datas, ISuperNodeFactory nodeFactory, INodeParser parser, int displayCount)
         {
             if (displayCount % 2 == 0)
             {
-                Debug.LogError("<Ming> ## Uni Error ## Cls:SuperScrollView Func:Generate Info:Only odd support");
+                Debug.LogError("<Ming> ## Uni Error ## Cls:SuperScrollView Func:RefreshNodes Info:Only odd displayCount support");
                 throw new InvalidOperationException();
             }
 
@@ -654,54 +646,23 @@ namespace MGFramework.UIModule
             this._nodeParser = parser;
 
             InitNodes();
-
-            _curPageIndex = 0;
-
             RefreshAll();
         }
 
         /// <summary>
-        /// 刷新所有节点数据
+        /// 刷新节点
         /// </summary>
-        /// <param name="datas">刷新的数据</param>
+        public void RefreshNodes(ISuperScrollNodeData[] datas, ISuperNodeFactory nodeFactory, INodeParser parser)
+        {
+            RefreshNodes(datas, nodeFactory, parser, 3);
+        }
+
+        /// <summary>
+        /// 刷新节点
+        /// </summary>
         public void RefreshNodes(ISuperScrollNodeData[] datas)
         {
-            _datas = datas;
-            InitNodes();
-            RefreshAll();
-        }
-
-        /// <summary>
-        /// 新增节点数据
-        /// </summary>
-        public void AppendNodeDatas(ISuperScrollNodeData[] datas)
-        {
-            if (datas == null || _datas == null)
-            {
-                return;
-            }
-
-            ISuperScrollNodeData[] output = new ISuperScrollNodeData[_datas.Length + datas.Length];
-            Array.Copy(_datas, output, _datas.Length);
-            Array.Copy(datas, 0, output, _datas.Length, datas.Length);
-
-            RefreshNodes(output);
-        }
-
-        /// <summary>
-        /// 插入节点数据
-        /// </summary>
-        public void InsertNodeDatas(int index, ISuperScrollNodeData[] datas)
-        {
-            if (datas == null || _datas == null)
-            {
-                return;
-            }
-
-            List<ISuperScrollNodeData> output = new List<ISuperScrollNodeData>(_datas);
-            output.InsertRange(index, datas);
-
-            RefreshNodes(output.ToArray());
+            RefreshNodes(datas, _factory, _nodeParser, _displayCount);
         }
 
         /// <summary>
@@ -766,7 +727,7 @@ namespace MGFramework.UIModule
         /// </summary>
         public void JumpTo(int index)
         {
-            if (index >= 0 && index < PageCount && _curPageIndex != index)
+            if (index >= 0 && index < PageCount)
             {
                 _curPageIndex = index;
                 RefreshAll();
@@ -804,6 +765,7 @@ namespace MGFramework.UIModule
         private void RefreshAll()
         {
             int realCount = RealCount;
+            
             for (int i = 0; i < realCount; i++)
             {
                 int realIndex = ConvertViewIndexToDataIndex(i);
