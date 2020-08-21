@@ -211,7 +211,10 @@ namespace MGFramework.InputModule
             }
             else
             {
-                SuperPointerListener.InvokePointerExit(prevObject);
+                if (prevObject != null)
+                {
+                    SuperPointerListener.InvokePointerExit(prevObject);
+                }
 
                 if (curObject != null)
                 {
