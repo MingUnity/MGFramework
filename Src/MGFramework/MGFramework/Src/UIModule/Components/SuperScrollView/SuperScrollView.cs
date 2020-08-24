@@ -366,6 +366,12 @@ namespace MGFramework.UIModule
         /// </summary>
         private int _displayCount = 3;
 
+        /// <summary>
+        /// 上一次真实数量
+        /// 位置设置使用
+        /// </summary>
+        private int _prevRealCountForPosition = 0;
+
         #endregion
 
         #region Property/Event
@@ -597,11 +603,11 @@ namespace MGFramework.UIModule
 
             //EnsureLayoutHasRebuilt();
             UpdateBounds();
-            // How much the content is larger than the view.
+            //How much the content is larger than the view.
             float hiddenLength = content.rect.size[axis] - viewport.rect.size[axis];
-            // Where the position of the lower left corner of the content bounds should be, in the space of the view.
+            //Where the position of the lower left corner of the content bounds should be, in the space of the view.
             float contentBoundsMinPosition = (viewport.rect.center - viewport.rect.size * 0.5f)[axis] - value * hiddenLength;
-            // The new content localPosition, in the space of the view.
+            //The new content localPosition, in the space of the view.
             float newLocalPosition = content.localPosition[axis] + contentBoundsMinPosition - m_ContentBounds.min[axis];
 
             Vector3 localPosition = content.localPosition;
@@ -765,7 +771,7 @@ namespace MGFramework.UIModule
         private void RefreshAll()
         {
             int realCount = RealCount;
-            
+
             for (int i = 0; i < realCount; i++)
             {
                 int realIndex = ConvertViewIndexToDataIndex(i);
@@ -912,6 +918,12 @@ namespace MGFramework.UIModule
         private void RefreshPosition()
         {
             int realCount = RealCount;
+
+            if (realCount != _prevRealCountForPosition)
+            {
+                LayoutRebuilder.ForceRebuildLayoutImmediate(content);
+                _prevRealCountForPosition = realCount;
+            }
 
             switch (realCount)
             {

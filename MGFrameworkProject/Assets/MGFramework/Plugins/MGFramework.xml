@@ -1787,6 +1787,12 @@
             展示节点数量
             </summary>
         </member>
+        <member name="F:MGFramework.UIModule.SuperScrollView._prevRealCountForPosition">
+            <summary>
+            上一次真实数量
+            位置设置使用
+            </summary>
+        </member>
         <member name="P:MGFramework.UIModule.SuperScrollView.PageCount">
             <summary>
             总页数
