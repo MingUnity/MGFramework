@@ -600,6 +600,11 @@
             使用自定义射线
             </summary>
         </member>
+        <member name="P:MGFramework.InputModule.SuperInputModule.EnabledDrag">
+            <summary>
+            启用拖拽
+            </summary>
+        </member>
         <member name="M:MGFramework.InputModule.SuperInputModule.DispatchTrigger(UnityEngine.EventSystems.PointerEventData)">
             <summary>
             交互输入响应处理

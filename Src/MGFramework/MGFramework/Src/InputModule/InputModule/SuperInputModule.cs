@@ -19,6 +19,11 @@ namespace MGFramework.InputModule
         /// </summary>
         public bool useCustomRay = true;
 
+        /// <summary>
+        /// 启用拖拽
+        /// </summary>
+        public static bool EnabledDrag { get; set; }
+
         public override void Process()
         {
             if (useCustomRay)
@@ -69,7 +74,11 @@ namespace MGFramework.InputModule
 
             ProcessPress(eventData, triggerDown, triggerUp);
             ProcessMove(eventData);
-            ProcessDrag(eventData);
+
+            if (EnabledDrag)
+            {
+                ProcessDrag(eventData);
+            }
 
             GameObject interactiveObj = GetInteractiveObj(eventData.pointerCurrentRaycast.gameObject);
 
