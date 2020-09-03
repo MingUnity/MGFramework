@@ -7,7 +7,7 @@ namespace MGFramework.EventModule
     /// </summary>
     public class EventHub : IEventHub
     {
-        private Dictionary<int, List<IEventListener>> _eventDic = new Dictionary<int, List<IEventListener>>();
+        private readonly Dictionary<int, List<IEventListener>> _eventDic = new Dictionary<int, List<IEventListener>>();
 
         /// <summary>
         /// 添加监听
@@ -64,7 +64,9 @@ namespace MGFramework.EventModule
 
             if (listeners != null)
             {
-                for (int i = 0; i < listeners.Count; i++)
+                int count = listeners.Count;
+
+                for (int i = count - 1; i >= 0; i--)
                 {
                     IEventListener listener = listeners[i];
 
