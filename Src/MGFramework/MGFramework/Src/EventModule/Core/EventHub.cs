@@ -47,9 +47,10 @@ namespace MGFramework.EventModule
 
             _eventDic?.TryGetValue(eventId, out listeners);
 
-            if (listeners != null && listeners.Contains(listener))
+            if (listeners != null)
             {
-                listeners.Remove(listener);
+                int index = listeners.FindIndex(val => val == listener);
+                listeners.TrySetValue(index, null);
             }
         }
 
@@ -64,13 +65,18 @@ namespace MGFramework.EventModule
 
             if (listeners != null)
             {
-                int count = listeners.Count;
-
-                for (int i = count - 1; i >= 0; i--)
+                for (int i = listeners.Count - 1; i >= 0; i--)
                 {
                     IEventListener listener = listeners[i];
 
-                    listener?.HandleEvent(eventId, args);
+                    if (listener != null)
+                    {
+                        listener.HandleEvent(eventId, args);
+                    }
+                    else
+                    {
+                        listeners.RemoveAt(i);
+                    }
                 }
             }
         }
