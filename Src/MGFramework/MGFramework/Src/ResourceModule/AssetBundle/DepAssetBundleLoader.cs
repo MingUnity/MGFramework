@@ -129,7 +129,7 @@ namespace MGFramework.ResourceModule.AssetBundles
 
                         string depAbPath = Path.Combine(abDir, depAbName);
 
-                        LoadDepAssetBundle(depAbName);
+                        LoadDepAssetBundle(depAbPath);
 
                         _loader.LoadAssetBundle(depAbPath);
                     }
@@ -167,7 +167,7 @@ namespace MGFramework.ResourceModule.AssetBundles
 
                         int index = i;
 
-                        LoadDepAssetBundleAsync(depAbName, () =>
+                        LoadDepAssetBundleAsync(depAbPath, () =>
                         {
                             _loader.LoadAssetBundleAsync(depAbPath, (ab) =>
                             {

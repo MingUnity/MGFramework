@@ -19,7 +19,7 @@ namespace MGFramework.ResourceModule
         }
 
         public DepResModule(string manifestAssetBundlePath)
-        {
+        { 
             SetupLoader();
 
             LoadManifestAssetBundle(manifestAssetBundlePath);
