@@ -3219,6 +3219,13 @@
             </summary>
             <returns></returns>
         </member>
+        <member name="M:MGFramework.Bezier.Caculate(UnityEngine.Vector3[],System.Int32)">
+            <summary>
+            绘制n阶贝塞尔曲线路径
+            </summary>
+            <param name="poss">控制点数组</param>
+            <param name="precision">输出数量</param>
+        </member>
         <member name="T:MGFramework.BindProperty`1">
             <summary>
             绑定属性
