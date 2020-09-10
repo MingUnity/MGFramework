@@ -635,6 +635,11 @@
             获取可交互性对象
             </summary>
         </member>
+        <member name="M:MGFramework.InputModule.SuperInputModule.ProcessDrag(UnityEngine.EventSystems.PointerEventData)">
+            <summary>
+            Process the drag for the current frame with the given pointer event.
+            </summary>
+        </member>
         <member name="T:MGFramework.InputModule.UnityInputKeyHandler">
             <summary>
             unity输入处理
@@ -3638,6 +3643,11 @@
             获取缓存
             </summary>
         </member>
+        <member name="M:MGFramework.LocalDiskTexturePool.Clear">
+            <summary>
+            清理
+            </summary>
+        </member>
         <member name="M:MGFramework.LocalDiskTexturePool.SetMaxCacheMemory(System.Int64)">
             <summary>
             设置最大缓存量
@@ -3696,6 +3706,11 @@
             获取图片
             </summary>
         </member>
+        <member name="M:MGFramework.MemoryTexturePool.Clear">
+            <summary>
+            清理所有
+            </summary>
+        </member>
         <member name="M:MGFramework.MemoryTexturePool.SetMaxCacheMemory(System.Int64)">
             <summary>
             设置最大缓存内存
@@ -3721,14 +3736,29 @@
             缓存文件信息列表
             </summary>
         </member>
-        <member name="F:MGFramework.LocalDiskCachePool._locker">
+        <member name="F:MGFramework.LocalDiskCachePool._taskQueue">
             <summary>
-            线程锁
+            线程任务队列
             </summary>
         </member>
         <member name="F:MGFramework.LocalDiskCachePool._cacheRootDir">
             <summary>
             缓存根目录
+            </summary>
+        </member>
+        <member name="F:MGFramework.LocalDiskCachePool._dirty">
+            <summary>
+            缓存过数据
+            </summary>
+        </member>
+        <member name="F:MGFramework.LocalDiskCachePool._dirtyTimer">
+            <summary>
+            清理脏数据计时器
+            </summary>
+        </member>
+        <member name="F:MGFramework.LocalDiskCachePool._clearDirtyInterval">
+            <summary>
+            清理数据间隔
             </summary>
         </member>
         <member name="P:MGFramework.LocalDiskCachePool.MaxCacheMemory">
@@ -3798,6 +3828,11 @@
         <member name="M:MGFramework.LocalDiskCachePool.CheckCache">
             <summary>
             检查是否超出缓存上限
+            </summary>
+        </member>
+        <member name="M:MGFramework.LocalDiskCachePool.ThreadTask">
+            <summary>
+            线程任务
             </summary>
         </member>
         <member name="T:MGFramework.TextureLoader">
@@ -3900,6 +3935,11 @@
         <member name="M:MGFramework.TextureLoader.SetMemoryMaxCacheMemory(System.Int64)">
             <summary>
             设置内存缓存池最大缓存量
+            </summary>
+        </member>
+        <member name="M:MGFramework.TextureLoader.ClearAllCache">
+            <summary>
+            清理所有缓存
             </summary>
         </member>
         <member name="M:MGFramework.TextureLoader.AsyncTask">
