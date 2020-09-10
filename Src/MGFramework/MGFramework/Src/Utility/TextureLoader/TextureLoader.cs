@@ -200,6 +200,15 @@ namespace MGFramework
         }
 
         /// <summary>
+        /// 清理所有缓存
+        /// </summary>
+        public static void ClearAllCache()
+        {
+            _memPool.Clear();
+            _diskPool.Clear();
+        }
+
+        /// <summary>
         /// 异步任务
         /// </summary>
         private static IEnumerator AsyncTask()

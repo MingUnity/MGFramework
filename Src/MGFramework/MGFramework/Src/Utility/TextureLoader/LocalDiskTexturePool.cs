@@ -58,6 +58,14 @@ namespace MGFramework
         }
 
         /// <summary>
+        /// 清理
+        /// </summary>
+        public void Clear()
+        {
+            _pool.ClearAll();
+        }
+
+        /// <summary>
         /// 设置最大缓存量
         /// </summary>
         public void SetMaxCacheMemory(long maxMemory)

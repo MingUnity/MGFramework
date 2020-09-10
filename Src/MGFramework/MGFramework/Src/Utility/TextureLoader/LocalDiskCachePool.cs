@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Threading;
 using UnityEngine;
 
 namespace MGFramework
@@ -24,17 +25,32 @@ namespace MGFramework
         /// <summary>
         /// 缓存文件信息列表
         /// </summary>
-        private readonly Dictionary<byte, FileInfo[]> _cacheFileInfos=new Dictionary<byte, FileInfo[]>();
+        private readonly Dictionary<byte, FileInfo[]> _cacheFileInfos = new Dictionary<byte, FileInfo[]>();
 
         /// <summary>
-        /// 线程锁
+        /// 线程任务队列
         /// </summary>
-        private readonly object _locker = new object();
+        private readonly Queue<Action> _taskQueue = new Queue<Action>();
 
         /// <summary>
         /// 缓存根目录
         /// </summary>
         private string _cacheRootDir;
+
+        /// <summary>
+        /// 缓存过数据
+        /// </summary>
+        private bool _dirty = false;
+
+        /// <summary>
+        /// 清理脏数据计时器
+        /// </summary>
+        private float _dirtyTimer = 0;
+
+        /// <summary>
+        /// 清理数据间隔
+        /// </summary>
+        private readonly float _clearDirtyInterval = 10f;
 
         /// <summary>
         /// 最大缓存量
@@ -59,6 +75,8 @@ namespace MGFramework
             {
                 _cacheDirs[i] = Path.Combine(cacheDir, cacheNames[i]);
             }
+
+            Loom.RunAsync(ThreadTask);
         }
 
         /// <summary>
@@ -74,30 +92,20 @@ namespace MGFramework
                 return;
             }
 
-            Loom.RunAsync(() =>
+            _taskQueue.Enqueue(() =>
             {
-                lock (_locker)
+                string dir = _cacheDirs.GetValueAnyway((byte)cacheLevel);
+
+                if (!Directory.Exists(dir))
                 {
-                    try
-                    {
-                        string dir = _cacheDirs.GetValueAnyway((byte)cacheLevel);
-
-                        if (!Directory.Exists(dir))
-                        {
-                            Directory.CreateDirectory(dir);
-                        }
-
-                        string path = Path.Combine(dir, key);
-
-                        File.WriteAllBytes(path, data);
-
-                        CheckCache();
-                    }
-                    catch (Exception e)
-                    {
-                        Debug.LogException(e);
-                    }
+                    Directory.CreateDirectory(dir);
                 }
+
+                string path = Path.Combine(dir, key);
+
+                File.WriteAllBytes(path, data);
+
+                _dirty = true;
             });
         }
 
@@ -115,35 +123,25 @@ namespace MGFramework
                 return;
             }
 
-            Loom.RunAsync(() =>
+            _taskQueue.Enqueue(() =>
             {
-                lock (_locker)
+                string dir = _cacheDirs.GetValueAnyway((byte)cacheLevel);
+
+                if (!Directory.Exists(dir))
                 {
-                    try
-                    {
-                        string dir = _cacheDirs.GetValueAnyway((byte)cacheLevel);
-
-                        if (!Directory.Exists(dir))
-                        {
-                            Directory.CreateDirectory(dir);
-                        }
-
-                        string path = Path.Combine(dir, key);
-
-                        using (FileStream fileStream = new FileStream(path, FileMode.Create, FileAccess.Write))
-                        {
-                            fileStream.Write(head, 0, head.Length);
-                            fileStream.Seek(head.Length, SeekOrigin.Begin);
-                            fileStream.Write(data, 0, data.Length);
-                        }
-
-                        CheckCache();
-                    }
-                    catch (Exception e)
-                    {
-                        Debug.LogException(e);
-                    }
+                    Directory.CreateDirectory(dir);
                 }
+
+                string path = Path.Combine(dir, key);
+
+                using (FileStream fileStream = new FileStream(path, FileMode.Create, FileAccess.Write))
+                {
+                    fileStream.Write(head, 0, head.Length);
+                    fileStream.Seek(head.Length, SeekOrigin.Begin);
+                    fileStream.Write(data, 0, data.Length);
+                }
+
+                _dirty = true;
             });
         }
 
@@ -234,22 +232,14 @@ namespace MGFramework
         /// </summary>
         public void ClearAll()
         {
-            Loom.RunAsync(() =>
+            _taskQueue.Enqueue(() =>
             {
-                lock (_locker)
+                if (Directory.Exists(_cacheRootDir))
                 {
-                    try
-                    {
-                        if (Directory.Exists(_cacheRootDir))
-                        {
-                            Directory.Delete(_cacheRootDir, true);
-                        }
-                    }
-                    catch (Exception e)
-                    {
-                        Debug.LogException(e);
-                    }
+                    Directory.Delete(_cacheRootDir, true);
                 }
+
+                _cacheFileInfos.Clear();
             });
         }
 
@@ -307,43 +297,83 @@ namespace MGFramework
         /// </summary>
         private void CheckCache()
         {
-            long size = AnalyzeAllCacheInfo();
-
-            if (size > _maxMemory)
+            try
             {
-                bool breakFlag = false;
-
-                for (byte i = 0; i < _cacheFileInfos.Count; i++)
+                long size = AnalyzeAllCacheInfo();
+                
+                if (size > _maxMemory)
                 {
-                    FileInfo[] files = _cacheFileInfos.GetValueAnyway(i);
+                    bool breakFlag = false;
 
-                    if (files != null)
+                    for (byte i = 0; i < _cacheFileInfos.Count; i++)
                     {
-                        Array.Sort(files, (x, y) => x.LastWriteTime > y.LastWriteTime ? 1 : x.LastWriteTime < y.LastWriteTime ? -1 : 0);
+                        FileInfo[] files = _cacheFileInfos.GetValueAnyway(i);
 
-                        for (int j = 0; j < files.Length; j++)
+                        if (files != null)
                         {
-                            FileInfo file = files[j];
+                            Array.Sort(files, (x, y) => x.LastWriteTime > y.LastWriteTime ? 1 : x.LastWriteTime < y.LastWriteTime ? -1 : 0);
 
-                            long fileSize = file.Length;
-
-                            file.Delete();
-
-                            size -= fileSize;
-
-                            if (size <= _maxMemory * 0.5f)   //预留最大内存一半的闲置位
+                            for (int j = 0; j < files.Length; j++)
                             {
-                                breakFlag = true;
-                                break;
+                                FileInfo file = files[j];
+
+                                long fileSize = file.Length;
+
+                                file.Delete();
+
+                                size -= fileSize;
+
+                                if (size <= _maxMemory * 0.5f)   //预留最大内存一半的闲置位
+                                {
+                                    breakFlag = true;
+                                    break;
+                                }
                             }
                         }
-                    }
 
-                    if (breakFlag)
-                    {
-                        break;
+                        if (breakFlag)
+                        {
+                            break;
+                        }
                     }
                 }
+            }
+            catch (Exception e)
+            {
+                Debug.LogException(e);
+            }
+        }
+
+        /// <summary>
+        /// 线程任务
+        /// </summary>
+        private void ThreadTask()
+        {
+            while (true)
+            {
+                while (_taskQueue.Count > 0)
+                {
+                    try
+                    {
+                        Action task = _taskQueue.Dequeue();
+                        task?.Invoke();
+                    }
+                    catch (Exception e)
+                    {
+                        Debug.LogException(e);
+                    }
+                }
+
+                if (_dirty && _dirtyTimer >= _clearDirtyInterval)
+                {
+                    CheckCache();
+                    _dirty = false;
+                    _dirtyTimer = 0;
+                }
+
+                Thread.Sleep(20);
+
+                _dirtyTimer += 0.02f;
             }
         }
     }

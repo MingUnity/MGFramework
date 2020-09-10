@@ -57,7 +57,7 @@ namespace MGFramework
             }
 
             long texSize = tex.width * tex.height * 4;
-
+            
             if (_cacheSize + texSize > _maxSize)  //超内存，清理
             {
                 long target = _maxSize / 2;
@@ -93,7 +93,6 @@ namespace MGFramework
                     if (end)
                     {
                         Resources.UnloadUnusedAssets();
-
                         break;
                     }
                 }
@@ -113,6 +112,17 @@ namespace MGFramework
             _pool.TryGetValue(key, out tex);
             tex?.Apply();
             return tex != null;
+        }
+
+        /// <summary>
+        /// 清理所有
+        /// </summary>
+        public void Clear()
+        {
+            _pool.Clear();
+            _keys.Clear();
+            _cacheSize = 0;
+            Resources.UnloadUnusedAssets();
         }
 
         /// <summary>
