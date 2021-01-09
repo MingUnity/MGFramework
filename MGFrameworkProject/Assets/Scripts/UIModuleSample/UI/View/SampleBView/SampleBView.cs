@@ -10,7 +10,7 @@ using MGFramework.ResourceModule;
 public class SampleBView : ViewBase<ISampleBPresenter>, ISampleBView
 {
     private Text _txtTitle;
-    private ObjectPool<IBNode> _pool;
+    private IocObjectPool<IBNode> _pool;
     private List<IBNode> _nodes = new List<IBNode>();
     private BNodeData[] _cache;
 
@@ -53,7 +53,7 @@ public class SampleBView : ViewBase<ISampleBPresenter>, ISampleBView
         _txtTitle = _root.Find<Text>("TxtTitle");
 
         Transform template = _root.Find("PnlItem/Template");
-        _pool = new ObjectPool<IBNode>(template);
+        _pool = new IocObjectPool<IBNode>(template);
 
         _root.Find<Button>("BtnUpdate").AddClickListener(_presenter.OnUpdate);
         _root.Find<Button>("BtnClear").AddClickListener(_presenter.OnClear);
