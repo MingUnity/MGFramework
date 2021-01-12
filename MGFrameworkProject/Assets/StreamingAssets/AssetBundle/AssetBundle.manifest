@@ -1,13 +1,13 @@
 ManifestFileVersion: 0
-CRC: 1411853832
+CRC: 2329338719
 AssetBundleManifest:
   AssetBundleInfos:
     Info_0:
-      Name: emptyview.assetbundle
+      Name: sampleaview.assetbundle
       Dependencies: {}
     Info_1:
-      Name: b.ab
+      Name: emptyview.assetbundle
       Dependencies: {}
     Info_2:
-      Name: sampleaview.assetbundle
+      Name: b.ab
       Dependencies: {}
