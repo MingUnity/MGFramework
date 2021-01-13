@@ -18,17 +18,7 @@ namespace MGFramework
 
         private static bool _initDone;
 
-        private static Loom _current;
-
-        public static Loom Current
-        {
-            get
-            {
-                Initialize();
-
-                return _current;
-            }
-        }
+        private static Loom _instance;
 
         /// <summary>
         /// 初始化
@@ -37,18 +27,13 @@ namespace MGFramework
         {
             if (!_initDone)
             {
-                if (!Application.isPlaying)
-                {
-                    return;
-                }
-
                 _initDone = true;
 
                 GameObject g = new GameObject("Loom");
 
                 DontDestroyOnLoad(g);
 
-                _current = g.AddComponent<Loom>();
+                _instance = g.AddComponent<Loom>();
             }
 
         }
@@ -76,24 +61,23 @@ namespace MGFramework
 
         public static void QueueOnMainThread(Action action, float time)
         {
+            if (!_initDone)
+            {
+                return;
+            }
+
             if (time != 0)
             {
-                if (Current != null)
+                lock (_instance._delayed)
                 {
-                    lock (Current._delayed)
-                    {
-                        Current._delayed.Add(new DelayedQueueItem { time = Time.time + time, action = action });
-                    }
+                    _instance._delayed.Add(new DelayedQueueItem { time = Time.time + time, action = action });
                 }
             }
             else
             {
-                if (Current != null)
+                lock (_instance._actions)
                 {
-                    lock (Current._actions)
-                    {
-                        Current._actions.Add(action);
-                    }
+                    _instance._actions.Add(action);
                 }
             }
         }
@@ -127,17 +111,14 @@ namespace MGFramework
             }
 
         }
-
-        void OnDisable()
+        
+        private void Update()
         {
-            if (_current == this)
+            if (!_initDone)
             {
-                _current = null;
+                return;
             }
-        }
 
-        void Update()
-        {
             if (_actions.Count > 0)
             {
                 lock (_actions)
@@ -184,6 +165,14 @@ namespace MGFramework
                 {
                     _currentDelayed.Clear();
                 }
+            }
+        }
+
+        private void OnDestroy()
+        {
+            if (_instance == this)
+            {
+                _instance = null;
             }
         }
     }
