@@ -1,4 +1,4 @@
-﻿using MGFramework.Event;
+﻿using MGFramework;
 using System;
 using System.Collections;
 using System.Collections.Generic;

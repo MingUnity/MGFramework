@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace MGFramework.Event
+namespace MGFramework
 {
     /// <summary>
     /// 事件管理
@@ -133,7 +133,7 @@ namespace MGFramework.Event
                 int listCount = list.Count;
                 for (int i = 0; i < listCount; i++)
                 {
-                    if (listener == list[i].listener)
+                    if (listener == list[i]?.listener)
                     {
                         list[i] = null;
                         break;
