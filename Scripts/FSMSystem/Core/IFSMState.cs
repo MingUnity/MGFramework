@@ -8,7 +8,7 @@
         /// <summary>
         /// 获取目标状态
         /// </summary>
-        IFSMState this[int transition] { get; set; }
+        IFSMState this[string trigger] { get; set; }
 
         /// <summary>
         /// 进入

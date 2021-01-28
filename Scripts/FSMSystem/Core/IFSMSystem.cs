@@ -16,9 +16,9 @@
         void AddState(IFSMState state, bool isDefault = false);
 
         /// <summary>
-        /// 设置过渡
+        /// 设置触发器以过渡状态
         /// </summary>
-        void SetTransition(int transition, params object[] keys);
+        void SetTrigger(string trigger, params object[] keys);
 
         /// <summary>
         /// 跳转默认状态
