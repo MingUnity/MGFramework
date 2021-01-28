@@ -7,18 +7,18 @@ namespace MGFramework.FSM
     /// </summary>
     public abstract class FSMState : IFSMState
     {
-        private Dictionary<int, IFSMState> _transitionDic = new Dictionary<int, IFSMState>();
+        private Dictionary<string, IFSMState> _transitionDic = new Dictionary<string, IFSMState>();
 
         /// <summary>
         /// 获取目标状态
         /// </summary>
-        public IFSMState this[int transition]
+        public IFSMState this[string trigger]
         {
             get
             {
                 IFSMState res = null;
 
-                _transitionDic?.TryGetValue(transition, out res);
+                _transitionDic?.TryGetValue(trigger, out res);
 
                 return res;
             }
@@ -26,7 +26,7 @@ namespace MGFramework.FSM
             {
                 if (_transitionDic != null)
                 {
-                    _transitionDic[transition] = value;
+                    _transitionDic[trigger] = value;
                 }
             }
         }

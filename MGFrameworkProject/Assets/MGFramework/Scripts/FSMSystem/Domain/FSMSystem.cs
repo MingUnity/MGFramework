@@ -61,15 +61,15 @@ namespace MGFramework.FSM
         }
 
         /// <summary>
-        /// 设置过渡
+        /// 设置触发器以过渡状态
         /// </summary>
-        public void SetTransition(int transition, params object[] keys)
+        public void SetTrigger(string trigger, params object[] keys)
         {
-            IFSMState targetState = _anyState[transition];
+            IFSMState targetState = _anyState[trigger];
 
             if (targetState == null && _curState != null)
             {
-                targetState = _curState[transition];
+                targetState = _curState[trigger];
             }
 
             TurnState(_curState, targetState, keys);
