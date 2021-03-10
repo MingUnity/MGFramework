@@ -7,5 +7,5 @@ public interface ISampleBView : IView
 
     string Title { get; set; }
 
-    void RefreshNode(int index, BNodeData data);
+    //void RefreshNode(int index, BNodeData data);
 }

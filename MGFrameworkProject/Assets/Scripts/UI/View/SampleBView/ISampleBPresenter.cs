@@ -8,6 +8,6 @@ public interface ISampleBPresenter : IPresenter
 
     void OnBack();
 
-    void OnItem(int index);
+    //void OnItem(int index);
 }
 

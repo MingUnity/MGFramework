@@ -35,7 +35,7 @@ public class SampleBView : ViewBase<ISampleBPresenter>, ISampleBView
                     int index = i;
 
                     IBNode node = CreateNode(value[i]);
-                    node.OnClick = () => _presenter.OnItem(index);
+                    //node.OnClick = () => _presenter.OnItem(index);
 
                     _nodes.Add(node);
                 }
@@ -43,17 +43,17 @@ public class SampleBView : ViewBase<ISampleBPresenter>, ISampleBView
         }
     }
 
-    public void RefreshNode(int index, BNodeData data)
-    {
-        ParseNodeData(_nodes.GetValueAnyway(index), data);
-    }
+    //public void RefreshNode(int index, BNodeData data)
+    //{
+    //    ParseNodeData(_nodes.GetValueAnyway(index), data);
+    //}
 
     protected override void OnCreate()
     {
         _txtTitle = _root.Find<Text>("TxtTitle");
 
         Transform template = _root.Find("PnlItem/Template");
-        _pool = new IocObjectPool<IBNode>(template);
+        _pool = new IocObjectPool<IBNode>(template, template.parent);
 
         _root.Find<Button>("BtnUpdate").AddClickListener(_presenter.OnUpdate);
         _root.Find<Button>("BtnClear").AddClickListener(_presenter.OnClear);
@@ -76,6 +76,7 @@ public class SampleBView : ViewBase<ISampleBPresenter>, ISampleBView
             return;
         }
 
-        node.Name = data.name;
+        data.name.Bind(val => node.Name = val);
+        data.onClick.Bind(val => node.OnClick = val);
     }
 }

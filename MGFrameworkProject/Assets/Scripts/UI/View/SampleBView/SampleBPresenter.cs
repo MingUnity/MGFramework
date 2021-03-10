@@ -32,9 +32,9 @@ public class SampleBPresenter : PresenterBase<ISampleBView>, ISampleBPresenter
 
         if (item != null && data != null)
         {
-            data.name = item.nickName;
+            data.name.Value = item.nickName;
 
-            _view.RefreshNode(index, data);
+            //_view.RefreshNode(index, data);
         }
     }
 
@@ -61,9 +61,11 @@ public class SampleBPresenter : PresenterBase<ISampleBView>, ISampleBPresenter
 
         for (int i = 0; i < items.Length; i++)
         {
+            int index = i;
             datas[i] = new BNodeData()
             {
-                name = items[i].index.ToString()
+                name = BindProperty<string>.Get(items[i].index.ToString()),
+                onClick = BindProperty<Action>.Get(() => OnItem(index))
             };
         }
 
