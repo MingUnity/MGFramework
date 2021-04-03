@@ -5,14 +5,14 @@ using UnityEngine;
 namespace MGFramework
 {
     /// <summary>
-    /// 基于预制体对象池
+    /// 通用对象池
     /// </summary>
-    public class PrefabObjectPool<T> : IObjectPool<T> where T : IPoolObject
+    public class GeneralObjectPool<T> : IObjectPool<T> where T : IPoolObject, new()
     {
         /// <summary>
-        /// 预制体
+        /// 模板
         /// </summary>
-        private Transform _prefab;
+        private Transform _template;
 
         /// <summary>
         /// 父节点
@@ -24,15 +24,20 @@ namespace MGFramework
         /// </summary>
         private Stack<T> _stack = new Stack<T>();
 
-        public PrefabObjectPool(Transform prefab, Transform parent = null)
+        public GeneralObjectPool(Transform template, Transform parent = null, bool isPrefab = true)
         {
-            if (prefab == null)
+            if (template == null)
             {
-                throw new ArgumentNullException("<Ming> ## Uni Exception ## Cls:PrefabObjectPool Func:Constructor Info:Prefab can't be null");
+                throw new ArgumentNullException("<Ming> ## Uni Exception ## Cls:GeneralObjectPool Func:Constructor Info:Template can't be null");
             }
 
-            this._prefab = prefab;
+            this._template = template;
             this._parent = parent;
+
+            if (!isPrefab)
+            {
+                template.gameObject.SetActive(false);
+            }
         }
 
         /// <summary>
@@ -48,9 +53,9 @@ namespace MGFramework
             }
             else
             {
-                t = System.Activator.CreateInstance<T>();
+                t = new T();
 
-                t.Create(Transform.Instantiate<Transform>(_prefab));
+                t.Create(Transform.Instantiate<Transform>(_template));
             }
 
             t.Active = true;

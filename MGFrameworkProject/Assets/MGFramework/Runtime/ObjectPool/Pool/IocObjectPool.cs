@@ -30,7 +30,7 @@ namespace MGFramework
         /// </summary>
         private Stack<T> _stack = new Stack<T>();
 
-        public IocObjectPool(Transform template, Transform parent = null, string name = null)
+        public IocObjectPool(Transform template, Transform parent = null, bool isPrefab = true, string name = null)
         {
             if (template == null)
             {
@@ -41,7 +41,10 @@ namespace MGFramework
             this._name = name;
             this._parent = parent;
 
-            _template.gameObject.SetActive(false);
+            if (!isPrefab)
+            {
+                _template.gameObject.SetActive(false);
+            }
         }
 
         /// <summary>

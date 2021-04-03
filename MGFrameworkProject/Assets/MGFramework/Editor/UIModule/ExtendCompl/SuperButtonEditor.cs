@@ -80,7 +80,7 @@ namespace MGFrameworkEditor.UIModule
             {
                 SerializedProperty useGeneralProperty = property.FindPropertyRelative("useGeneral");
 
-                return useGeneralProperty.boolValue ? 3 * EditorGUIUtility.singleLineHeight + 5 : 180;
+                return useGeneralProperty.boolValue ? 3 * EditorGUIUtility.singleLineHeight + 5 : 220;
             }
         }
         
