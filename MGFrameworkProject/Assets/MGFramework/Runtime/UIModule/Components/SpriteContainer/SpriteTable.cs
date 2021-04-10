@@ -32,6 +32,11 @@ namespace MGFramework.UIModule
         private Item[] _keyValueSprites;
 
         /// <summary>
+        /// 数量
+        /// </summary>
+        public int Count => _keyValueSprites == null ? 0 : _keyValueSprites.Length;
+
+        /// <summary>
         /// 根据索引取对应图片
         /// </summary>
         public Sprite Get(string key)

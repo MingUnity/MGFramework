@@ -21,7 +21,12 @@ namespace MGFramework.ResourceModule.AssetBundles
         /// 清单加载标识
         /// </summary>
         private bool _manifestLoaded = false;
-        
+
+        /// <summary>
+        /// ab包根目录
+        /// </summary>
+        private string _abRoot;
+
         public DepAssetBundleLoader()
         {
             _loader = new AssetBundleLoader();
@@ -34,6 +39,7 @@ namespace MGFramework.ResourceModule.AssetBundles
 
         public void LoadManifestAssetBundle(string abPath)
         {
+            SetupAbRoot(abPath);
             _coreManifest = _loader.GetAsset<AssetBundleManifest>(abPath, "AssetBundleManifest");
 
             if (_coreManifest != null)
@@ -44,19 +50,20 @@ namespace MGFramework.ResourceModule.AssetBundles
 
         public void LoadManifestAssetBundleAsync(string abPath, Action callback = null, Action<float> progressCallback = null)
         {
+            SetupAbRoot(abPath);
             _loader.GetAssetAsync<AssetBundleManifest>(abPath, "AssetBundleManifest", (manifest) =>
             {
                 if (manifest != null)
                 {
                     _coreManifest = manifest;
-                    
+
                     _manifestLoaded = true;
 
                     callback?.Invoke();
                 }
             }, progressCallback);
         }
-
+        
         public T GetAsset<T>(string abPath, string assetName) where T : UnityEngine.Object
         {
             LoadDepAssetBundle(abPath);
@@ -116,8 +123,7 @@ namespace MGFramework.ResourceModule.AssetBundles
         {
             if (_manifestLoaded)
             {
-                string abName = Path.GetFileName(abPath);
-                string abDir = Path.GetDirectoryName(abPath);
+                string abName = abPath.Replace(_abRoot, string.Empty);
 
                 string[] deps = _coreManifest.GetAllDependencies(abName);
 
@@ -127,7 +133,7 @@ namespace MGFramework.ResourceModule.AssetBundles
                     {
                         string depAbName = deps[i];
 
-                        string depAbPath = Path.Combine(abDir, depAbName);
+                        string depAbPath = Path.Combine(_abRoot, depAbName);
 
                         LoadDepAssetBundle(depAbPath);
 
@@ -144,8 +150,7 @@ namespace MGFramework.ResourceModule.AssetBundles
         {
             if (_manifestLoaded)
             {
-                string abName = Path.GetFileName(abPath);
-                string abDir = Path.GetDirectoryName(abPath);
+                string abName = abPath.Replace(_abRoot, string.Empty);
 
                 string[] deps = _coreManifest.GetAllDependencies(abName);
 
@@ -163,7 +168,7 @@ namespace MGFramework.ResourceModule.AssetBundles
                     {
                         string depAbName = deps[i];
 
-                        string depAbPath = Path.Combine(abDir, depAbName);
+                        string depAbPath = Path.Combine(_abRoot, depAbName);
 
                         int index = i;
 
@@ -226,6 +231,11 @@ namespace MGFramework.ResourceModule.AssetBundles
             }
 
             return result;
+        }
+
+        private void SetupAbRoot(string abPath)
+        {
+            _abRoot = $"{Path.GetDirectoryName(abPath)}/".Replace('\\', '/');
         }
     }
 }
