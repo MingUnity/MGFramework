@@ -52,6 +52,11 @@ namespace MGFramework.UIModule
         /// </summary>
         private float _timer = 0;
 
+        /// <summary>
+        /// 正向播放
+        /// </summary>
+        private bool _forward;
+
         private void Awake()
         {
             _effect = this.GetComponent<GradientMeshEffect>();
@@ -61,13 +66,38 @@ namespace MGFramework.UIModule
         }
 
         /// <summary>
-        /// 开始动画
+        /// 正向播放
         /// </summary>
-        public void StartAnim()
+        public void PlayForward()
         {
+            _forward = true;
             _working = true;
+            _timer = 0;
+        }
+
+        /// <summary>
+        /// 逆向播放
+        /// </summary>
+        public void PlayBackward()
+        {
+            _forward = false;
+            _working = true;
+            _timer = 0;
+        }
+
+        /// <summary>
+        /// 结束播放
+        /// </summary>
+        public void StopPlay()
+        {
+            _working = false;
 
             _timer = 0;
+
+            _effect.topColor = _oriTopColor;
+            _effect.bottomColor = _oriBottomColor;
+
+            _effect.Apply();
         }
 
         private void Update()
@@ -77,33 +107,24 @@ namespace MGFramework.UIModule
                 return;
             }
 
+            Color oriTop = _forward ? _oriTopColor : _dstTopColor;
+            Color oriBottom = _forward ? _oriBottomColor : _dstBottomColor;
+
+            Color dstTop = _forward ? _dstTopColor : _oriTopColor;
+            Color dstBottom = _forward ? _dstBottomColor : _oriBottomColor;
+
             _timer += Time.deltaTime;
 
             if (_timer >= _duration)
             {
-                _effect.bottomColor = _dstBottomColor;
-                _effect.topColor = _dstTopColor;
+                _effect.bottomColor = dstBottom;
+                _effect.topColor = dstTop;
             }
             else
             {
-                _effect.topColor = Color.Lerp(_oriTopColor, _dstTopColor, _timer / _duration);
-                _effect.bottomColor = Color.Lerp(_oriBottomColor, _dstBottomColor, _timer / _duration);
+                _effect.topColor = Color.Lerp(oriTop, dstTop, _timer / _duration);
+                _effect.bottomColor = Color.Lerp(oriBottom, dstBottom, _timer / _duration);
             }
-
-            _effect.Apply();
-        }
-
-        /// <summary>
-        /// 结束动画
-        /// </summary>
-        public void StopAnim()
-        {
-            _working = false;
-
-            _timer = 0;
-
-            _effect.topColor = _oriTopColor;
-            _effect.bottomColor = _oriBottomColor;
 
             _effect.Apply();
         }
