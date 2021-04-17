@@ -123,7 +123,7 @@ namespace MGFramework.ResourceModule.AssetBundles
         {
             if (_manifestLoaded)
             {
-                string abName = abPath.Replace(_abRoot, string.Empty);
+                string abName = abPath.Replace('\\', '/').Replace(_abRoot, string.Empty);
 
                 string[] deps = _coreManifest.GetAllDependencies(abName);
 
@@ -150,7 +150,7 @@ namespace MGFramework.ResourceModule.AssetBundles
         {
             if (_manifestLoaded)
             {
-                string abName = abPath.Replace(_abRoot, string.Empty);
+                string abName = abPath.Replace('\\', '/').Replace(_abRoot, string.Empty);
 
                 string[] deps = _coreManifest.GetAllDependencies(abName);
 
